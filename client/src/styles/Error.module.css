@@ -1,0 +1,46 @@
+/* ------------------------------------------------------------------------------------ div items > */
+.flexBox {
+    display: flex;
+    justify-content: center;
+}
+.mainItem {
+    width: fit-content;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* ------------------------------------------------------------------------------------ button items > */
+.blueButton, .greenButton, .purpleButton, .goldButton, .blueButtonMarginLeft, .blueButtonMarginTop {
+    color: whitesmoke;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    cursor: pointer;
+    text-decoration: none;
+}
+.blueButton, .greenButton, .purpleButton, .goldButton, .blueButtonMarginLeft, .blueButtonMarginTop {
+    font-weight: bold;
+    font-size: 130%;
+    height: 40px;
+    padding: 10px 20px;
+}
+.blueButton, .blueButtonMarginLeft, .blueButtonMarginTop {
+    background-color: #178FEB;
+}
+.blueButtonMarginTop {
+    margin-top: 20px;
+}
+/* ------------------------------------------------------------------------------------ simple styling items > */
+.heading2 {
+    font-size: 240%;
+    margin-bottom: 30px;
+}
+.whiteText {
+    color: whitesmoke;
+}
+.paragraphTag {
+    font-size: 130%;
+}

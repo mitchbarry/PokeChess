@@ -1,0 +1,108 @@
+body {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: url("../assets/rayquazagif.gif");
+	background-size: cover;
+	z-index: -1;
+}
+
+.form-container {
+	max-width: 400px;
+	margin: 50px auto;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgb(0, 0, 0);
+	background-color: rgba(51, 103, 153, 0.9);
+	color: black;
+}
+
+.form-title {
+	text-align: center;
+	margin-bottom: 20px;
+	color: goldenrod;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 5px;
+	color: #ffffff;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.form-group input,
+.form-group select {
+	width: 100%;
+	padding: 8px 10px;
+	border-radius: 4px;
+	border: 1px solid hsl(358, 85%, 52%);
+	background-color: #ffffff;
+	font-size: 16px;
+	color: #333;
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-submit-btn {
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 4px;
+	background-color: darkslategray;
+	color: #ffffff;
+	font-size: 18px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-submit-btn:hover {
+	background-color: hsl(358, 85%, 62%);
+}
+
+.error-message {
+	color: red;
+	margin-bottom: 10px;
+	text-align: center;
+}
+/* ------------------------------------------------------------------------------------ flash box items > */
+.flashBox, .flashBoxGreen {
+    position: relative;
+    list-style-type: none;
+    font-weight: bold;
+    width: 700px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+.flashBoxLi {
+    font-size: 130%;
+    display: flex;
+    align-items: center;
+}
+.flashBox {
+    color: #752026;
+    background-color: #F7D6D9;
+}
+.flashBoxGreen {
+    color: #267520;
+    background-color: #d9f7d6;
+    position: relative;
+}
+.closeButtonRed, .closeButtonGreen {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    background: transparent;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+}
+.closeButtonGreen {
+    color: #267520;
+}
+.closeButtonRed {
+    color: #752026;
+}

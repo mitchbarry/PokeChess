@@ -1,0 +1,135 @@
+.pokedex-container {
+	display: flex;
+	width: 80%;
+}
+.pokemon-list {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 20px;
+	height: 50vh;/*45% of view's height*/
+	width: 700px;
+	overflow-y: auto;
+	background-color: rgba(51, 103, 153, 0.8);
+	padding: 10px;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+.pokemon-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	cursor: pointer;
+}
+.pokemon-item img {
+	width: 42px;
+	height: 42px;
+}
+.pokemon-name {
+	flex: 1 1 50%;
+	cursor: pointer;
+	margin-bottom: 10px;
+	color: #ffffff;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.pokemon-details {
+	flex-grow: 3;
+	background-color: rgba(51, 103, 153, 0.8);
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+	overflow-y: auto;
+}
+.pokemon-details img {
+	height: 126px;
+	width: 126px;
+	border-radius: 4px;
+}
+.pokemon-details h1,
+.pokemon-details p {
+	color: hsl(52, 100%, 50%);
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.types {
+	padding-bottom: 15px;
+}
+.type {
+	display: inline-block;
+	padding: 5px 10px;
+	margin: 2px;
+	border-radius: 10px;
+	color: white;
+	font-weight: bold;
+	text-transform: capitalize;
+}
+.fairy {
+	background-color: #d685ad;
+}
+.normal {
+	background-color: #a8a77a;
+}
+.fire {
+	background-color: #ee8130;
+}
+.water {
+	background-color: #6390f0;
+}
+.electric {
+	background-color: #f7d02c;
+}
+.grass {
+	background-color: #7ac74c;
+}
+.ice {
+	background-color: #96d9d6;
+}
+.fighting {
+	background-color: #c22e28;
+}
+.poison {
+	background-color: #a33ea1;
+}
+.ground {
+	background-color: #e2bf65;
+}
+.flying {
+	background-color: #a98ff3;
+}
+.psychic {
+	background-color: #f95587;
+}
+.bug {
+	background-color: #a6b91a;
+}
+.rock {
+	background-color: #b6a136;
+}
+.ghost {
+	background-color: #735797;
+}
+.dragon {
+	background-color: #6f35fc;
+}
+.dark {
+	background-color: #705746;
+}
+.steel {
+	background-color: #b7b7ce;
+}
+.rarity1, .rarity2, .rarity3, .rarity4, .rarity5 {
+	font-weight: bold;
+}
+.rarity1 {
+	color: rgba(163, 163, 177, 1);
+}
+.rarity2 {
+	color: rgba(0, 177, 0, 1);
+}
+.rarity3 {
+	color: rgba(0, 153, 255, 1);
+}
+.rarity4 {
+	color: rgba(153, 0, 204, 1);
+}
+.rarity5 {
+	color: rgba(255, 204, 0, 1);
+}
