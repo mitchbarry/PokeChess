@@ -24,7 +24,7 @@ import "./App.css"
 
 function App() {
 
-	const { authToken, loggedUser, updateLoggedUser, updateAuthToken } = useAuth();
+	const { authToken, updateLoggedUser, updateAuthToken } = useAuth();
 
 	const [errors, setErrors] = useState({}); // Moved state inside the component
 

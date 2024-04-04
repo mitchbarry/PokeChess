@@ -1,16 +1,20 @@
-import React from "react"
-import { Nav, Navbar, Container, Button, NavDropdown } from "react-bootstrap"
-import { Link, useNavigate } from "react-router-dom"
+import React from 'react'
+import { Nav, Navbar, Container, Button } from 'react-bootstrap'
+import { Link, useLocation } from 'react-router-dom'
+
+import { useAuth } from "../context/AuthContext"
 import Lobbies from "../assets/fonts/PokeChess.png"
 import PokeDex from "../assets/fonts/Pokedex.png"
-import "../styles/header.css"
-import { useAuth } from "../context/AuthContext"
 
-const Header = ({ message }) => {
+import '../styles/header.css'
 
-	const { authToken,handleLogout } = useAuth()
+const Header = () => {
 
-	return (
+    const location = useLocation();
+
+    const { authToken, loggedUser, handleLogout } = useAuth();
+
+    return (
 		<Container>
 			<Navbar
 				className="mx-auto my-auto border border-warning border-3 rounded-5 d-flex flex-row"
@@ -28,7 +32,7 @@ const Header = ({ message }) => {
 							fontFamily: "cursive",
 						}}
 					>
-						<Link to={"/lobbies/home"} className="text-warning">
+						<Link to={authToken ? "/lobbies/home" : location.pathname === "/register" ? "/register" : "/login"} className="text-warning">
 							<img
 								src={Lobbies}
 								style={{ height: "48px", width: "160px" }}
@@ -48,7 +52,7 @@ const Header = ({ message }) => {
 							}}
 						>
 							<Link
-								to={"/lobbies/new"}
+								to={authToken ? "/lobbies/new" : location.pathname === "/register" ? "/register" : "/login"}
 								className="text-warning gap-2 d-flex flex-row"
 								style={{ textDecoration: "underline" }}
 							>
@@ -73,7 +77,7 @@ const Header = ({ message }) => {
 						</Nav.Item>
 						<Nav.Item className="text-warning mx-auto">
 							<Link
-								to={"/pokedex"}
+								to="/pokedex"
 								className="text-warning d-flex flex-row "
 							>
 								<div className="my-auto">
@@ -105,7 +109,7 @@ const Header = ({ message }) => {
 							}}
 						>
 							<Link
-								to={"/pokenews"}
+								to="/pokenews"
 								className="text-warning d-flex flex-row"
 							>
 								{" "}
@@ -126,22 +130,40 @@ const Header = ({ message }) => {
 							</Link>
 						</Nav.Item>
 						<Nav.Item className="d-flex flex-row  my-auto mx-auto ml-3 col-1 py-1">
-							<Button
-								style={{ fontFamily: "fantasy" }}
-								variant="outline-warning"
-								onClick={handleLogout}
-							>
-								{message
-									? (message = "Login")
-									: (message = "Logout")}
-							</Button>
+                            {authToken ? (
+                                <Button
+                                    style={{ fontFamily: "fantasy" }}
+                                    variant="outline-warning"
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </Button>) : (
+                                location.pathname === "/login" ? (
+                                    <Link to="/register">
+                                        <Button
+                                            style={{ fontFamily: "fantasy" }}
+                                            variant="outline-warning"
+                                        >
+                                            Register
+                                        </Button>
+                                    </Link>
+                                ) : (
+                                    <Link to="/login">
+                                        <Button
+                                            style={{ fontFamily: "fantasy" }}
+                                            variant="outline-warning"
+                                        >
+                                            Login
+                                        </Button>
+                                    </Link>
+                                )
+                            )}
 						</Nav.Item>
 					</Container>
 				</Nav>
 			</Navbar>
 		</Container>
 	)
-
 }
 
 export default Header;
