@@ -1,18 +1,18 @@
-import { Routes, Route } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
-import { useAuth } from "./context/AuthContext"
+import { useAuth } from "./context/AuthContext";
 import AuthService from "./services/AuthService";
 
 import Header from "./components/Header";
-import ErrorNavigator from "./components/ErrorNavigator"
-import LoginNavigator from "./components/LoginNavigator"
-import AlreadyLoggedIn from "./components/AlreadyLoggedIn"
+import ErrorNavigator from "./components/ErrorNavigator";
+import LoginNavigator from "./components/LoginNavigator";
+import AlreadyLoggedIn from "./components/AlreadyLoggedIn";
 
 import RegistrationForm from "./views/RegistrationForm";
-import PokeDex from './views/PokeDex'
-import PokeNews from "./views/PokeNews"
+import PokeDex from './views/PokeDex';
+import PokeNews from "./views/PokeNews";
 import CreateLobby from './views/CreateLobby';
 import UpdateLobby from './views/UpdateLobby';
 import Play from "./views/Play";
@@ -20,8 +20,8 @@ import LobbyHome from './views/LobbyHome';
 import LoginForm from "./views/LoginForm";
 import Error from "./views/Error";
 
-import "bootstrap/dist/css/bootstrap.min.css"
-import "./App.css"
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 const App = () => {
 

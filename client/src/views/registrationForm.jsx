@@ -1,29 +1,50 @@
 import React, { useState,useContext } from "react"
 import { useNavigate } from "react-router-dom"
 
-import AuthContext from "../context/AuthContext"
+import { useAuth } from "../context/AuthContext"
 import AuthService from "../services/AuthService"
+import errorUtilities from '../utilities/error.utilities'
 
-import "../styles/form.css"
+import "../styles/Form.css";
 
-const RegistrationForm = ({loggedUser,setLoggedUser}) => {
-	const [user, setUser] = useState({
-		username: "",
-		favoritePokemon: 0,
-		email: "",
-		password: ""
-	})
+const RegistrationForm = () => {
 
 	const navigate = useNavigate()
 
-	const { handleLogin } = useContext(AuthContext)
+	const { authToken, loggedUser, handleLoginResponse, handleLogout, updateLoggedUser, updateAuthToken, pathParamValidator } = useAuth();
 
-	const handleChange = (e) => {
-		setUser({
-			...user,
-			[e.target.name]: e.target.value,
-		})
-	}
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
+    const [starter, setStarter] = useState(0)
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [errors, setErrors] = useState({})
+    const [showNotification, setShowNotification] = useState(false)
+    const [formErrors, setFormErrors] = useState({
+        username: "",
+        email: "",
+        birthDate: "",
+        password: "",
+        confirmPassword: ""
+    })
+    const [isValidForm, setIsValidForm] = useState(true);
+
+    const handleInput = (e) => {
+        switch(e.target.id) {
+            case "username":
+                return usernameHandler(e);
+            case "email":
+                return emailHandler(e);
+            case "starter":
+                return birthDateHandler(e);
+            case "password":
+                return passwordHandler(e);
+            case "confirmPassword":
+                return confirmPasswordHandler(e);
+            default:
+                return;
+        }
+    };
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -57,7 +78,7 @@ const RegistrationForm = ({loggedUser,setLoggedUser}) => {
 					</div>
 					<div className="form-group">
 						<label htmlFor="favoritePokemon">
-							Favorite Pokémon:
+							Choose your starter:
 						</label>
 						<select
 							id="favoritePokemon"
@@ -66,7 +87,6 @@ const RegistrationForm = ({loggedUser,setLoggedUser}) => {
 							value={user.favoritePokemon ? user.favoritePokemon : ''}
 							onChange={handleChange}
 							required
-							defaultValue=""
 						>
 							<option value="" disabled>
 								-- Select an option --

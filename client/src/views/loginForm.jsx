@@ -1,27 +1,30 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { useAuth } from "../context/AuthContext"
 
+import { useAuth } from "../context/AuthContext"
 import AuthService from "../services/AuthService"
 import errorUtilities from '../utilities/error.utilities'
 
-import "../styles/form.css"
+import "../styles/Form.css";
 
 const LoginForm = () => {
 
 	const navigate = useNavigate()
 
-	const { authToken, loggedUser, handleLoginResponse, handleLogout, updateLoggedUser, updateAuthToken, pathParamValidator } = useAuth();
+	const { handleLoginResponse } = useAuth();
 
-	const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-	const [errors, setErrors] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
-	const [showNotification, setShowNotification] = useState(false);
+	const [errors, setErrors] = useState({});
+    const [showNotification, setShowNotification] = useState(false)
     const [formErrors, setFormErrors] = useState({
         email: "",
         password: ""
-    });
+    })
+	const [focus, setFocus] = useState({
+		email: false,
+		password: false
+	});
 
     const handleInput = (e) => {
         switch(e.target.id) {
@@ -34,7 +37,7 @@ const LoginForm = () => {
         }
     };
 
-	const handleEmail = (e) => {
+    const handleEmail = (e) => {
         const value = e.target.value;
         setFormErrors((prevErrors) => {
             switch (prevErrors.email) {
@@ -49,9 +52,9 @@ const LoginForm = () => {
             }
         })
         setEmail(value);
-    };
+    }
 
-	const handlePassword = (e) => {
+    const handlePassword = (e) => {
         const value = e.target.value;
         setFormErrors((prevErrors) => {
             switch (prevErrors.password) {
@@ -105,41 +108,68 @@ const LoginForm = () => {
             setShowNotification(true);
         }
 		finally {
-			navigate("/lobbies/home")
-			setIsLoading(false)
+			navigate("/lobbies/home");
 		}
     }
 
+	const closeNotification = () => {
+        setShowNotification(false);
+    }
+
+	const handleFocus = (e) => {
+		switch(e.target.id) {
+            case "email":
+                return setFocus({...focus, email: true});
+            case "password":
+                return setFocus({...focus, password: true});
+            default:
+                return;
+        }
+    };
+
+    const handleBlur = (e) => {
+		switch(e.target.id) {
+            case "email":
+				if (!email.trim()) {
+					return setFocus({...focus, email: false});
+				}
+            case "password":
+				if (!password.trim()) {
+					return setFocus({...focus, password: false});
+				}
+            default:
+                return;
+        }
+    };
+
 	return (
-		<>
-			<div className="full-screen-background"></div>
-			<div className="form-container">
-				<h2 className="form-title">Login</h2>
-				<form onSubmit={handleSubmit}>
-					{(Object.keys(errors).length !== 0  && showNotification) && (
-						<ul className={styles.flashBox}>
-							<button className={styles.closeButtonRed} onClick={() => closeNotification()}>x</button>
-							{errors.statusCode && errors.name && (
-								<li className={styles.flashBoxLi}>
-									Error {errors.statusCode}: {errors.name} 
-								</li>
-							)}
-							{errors.message && (
-								<li className={styles.flashBoxLi}>
-									{errors.message}
-								</li>
-							)}
-							{errors.validationErrors && errors.validationErrors.length !== 0 && (
-								Object.keys(errors.validationErrors).map((key, index) => (
-									<li key={index} className={styles.flashBoxLi}>
-										{errors.validationErrors[key]}
-									</li>
-								))
-							)}
-						</ul>
+		<div className="form-container">
+			<h2 className="form-title">Login</h2>
+			{Object.keys(errors).length !== 0 && showNotification && (
+				<ul className="alert alert-danger">
+					<button type="button" className="btn-close close-button-red" aria-label="Close" onClick={closeNotification}></button>
+					{errors.statusCode && errors.name && (
+						<li className="flash-box-li">
+							<b>Error {errors.statusCode}: {errors.name}</b>
+						</li>
 					)}
-					<div className="form-group">
-						<label htmlFor="email">Email:</label>
+					{errors.message && (
+						<li className="flash-box-li">
+							{errors.message}
+						</li>
+					)}
+					{errors.validationErrors && errors.validationErrors.length !== 0 && (
+						errors.validationErrors.map((error, index) => (
+						<li key={index} className="flash-box-li">
+							{error}
+						</li>
+						))
+					)}
+				</ul>
+			)}
+			<form onSubmit={handleSubmit}>
+				<div className="form-group">
+					<div className="input-container">
 						<input
 							type="email"
 							id="email"
@@ -147,11 +177,17 @@ const LoginForm = () => {
 							className="form-control"
 							value={email}
 							onChange={(e) => handleInput(e)}
-							required
+							onFocus={(e) => handleFocus(e)}
+							onBlur={(e) => handleBlur(e)}
 						/>
+						<label htmlFor="email" className={`input-label ${focus.email || email ? 'shrink' : ''}`}>Email</label>
 					</div>
-					<div className="form-group">
-						<label htmlFor="password">Password:</label>
+					{/* {formErrors.email !== "" && ( 
+						<p className="error-text" role="alert">{formErrors.email}TEST</p>
+					})} */}
+				</div>
+				<div className="form-group">
+					<div className="input-container">
 						<input
 							type="password"
 							id="password"
@@ -159,19 +195,17 @@ const LoginForm = () => {
 							className="form-control"
 							value={password}
 							onChange={(e) => handleInput(e)}
-							required
+							onFocus={(e) => handleFocus(e)}
+							onBlur={(e) => handleBlur(e)}
 						/>
+						<label htmlFor="password" className={`input-label ${focus.password || password ? 'shrink' : ''}`}>Password</label>
 					</div>
-					<button
-						type="submit"
-						className="form-submit-btn"
-						disabled={isLoading}
-					>
-						{isLoading ? "Logging in..." : "Login"}
-					</button>
-				</form>
-			</div>
-		</>
+				</div>
+				<button type="submit" className="form-submit-btn">
+					Login
+				</button>
+			</form>
+		</div>
 	)
 }
 
