@@ -15,13 +15,13 @@ const LoginForm = () => {
 
 	const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-	const [errors, setErrors] = useState([])
-	const [isLoading, setIsLoading] = useState(false)
-	const [showNotification, setShowNotification] = useState(false)
+	const [errors, setErrors] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+	const [showNotification, setShowNotification] = useState(false);
     const [formErrors, setFormErrors] = useState({
         email: "",
         password: ""
-    })
+    });
 
     const handleInput = (e) => {
         switch(e.target.id) {
@@ -49,7 +49,7 @@ const LoginForm = () => {
             }
         })
         setEmail(value);
-    }
+    };
 
 	const handlePassword = (e) => {
         const value = e.target.value;

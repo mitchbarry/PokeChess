@@ -1,23 +1,22 @@
 import React, { useState,useContext } from "react"
-import axios from "axios"
 import { useNavigate } from "react-router-dom"
+
 import AuthContext from "../context/AuthContext"
-import "../styles/form.css"
 import AuthService from "../services/AuthService"
 
-function RegistrationForm({loggedUser,setLoggedUser}) {
+import "../styles/form.css"
+
+const RegistrationForm = ({loggedUser,setLoggedUser}) => {
 	const [user, setUser] = useState({
 		username: "",
 		favoritePokemon: 0,
 		email: "",
-		password: "",
+		password: ""
 	})
 
 	const navigate = useNavigate()
 
 	const { handleLogin } = useContext(AuthContext)
-
-
 
 	const handleChange = (e) => {
 		setUser({
@@ -29,12 +28,8 @@ function RegistrationForm({loggedUser,setLoggedUser}) {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		try {
-
-
 			const response = await AuthService.register(user)
 			setLoggedUser({_id:response.user._id})
-
-			
 			handleLogin(response.token,response.user._id)
 			navigate("/lobbies/home")
 		} catch (error) {
@@ -44,7 +39,7 @@ function RegistrationForm({loggedUser,setLoggedUser}) {
 
 	return (
 		<>
-			 <div className="full-screen-background"></div>
+			<div className="full-screen-background"></div>
 			<div className="form-container">
 				<h2 className="form-title">Register</h2>
 				<form onSubmit={handleSubmit}>
@@ -68,19 +63,18 @@ function RegistrationForm({loggedUser,setLoggedUser}) {
 							id="favoritePokemon"
 							name="favoritePokemon"
 							className="form-control"
-							value={user.favoritePokemon}
+							value={user.favoritePokemon ? user.favoritePokemon : ''}
 							onChange={handleChange}
 							required
+							defaultValue=""
 						>
-							<option value="">
-								--Please choose an option--
+							<option value="" disabled>
+								-- Select an option --
 							</option>
-							<option value={4}>Charmander</option>
-							<option value={1}>Bulbasaur</option>
-							<option value={7}>Squirtle</option>
-							<option value={25}>Pikachu</option>
-
-
+							<option value={4} >Charmander</option>
+							<option value={1} >Bulbasaur</option>
+							<option value={7} >Squirtle</option>
+							<option value={25} >Pikachu</option>
 						</select>
 					</div>
 					<div className="form-group">
@@ -113,9 +107,7 @@ function RegistrationForm({loggedUser,setLoggedUser}) {
 				</form>
 			</div>
 		</>
-    
-
 	)
 }
 
-export default RegistrationForm
+export default RegistrationForm;

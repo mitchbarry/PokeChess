@@ -9,16 +9,18 @@ const pokemonService = {
         try {
             const response = await http.get('/pokemon');
             return response.data;
-        } catch (error) {
+        }
+        catch (error) {
             throw error;
         }
     },
 
-    async getSomePokemon(lowLimit, highLimit) {
+    async getSomePokemon(lowLimit, filterType) {
         try {
-            const response = await http.get(`/pokemon/some?lowLimit=${lowLimit}&highLimit=${highLimit}`);
+            const response = await http.get(`/pokemon/some?lowLimit=${lowLimit}&filterType=${filterType}`);
             return response.data;
-        } catch (error) {
+        }
+        catch (error) {
             throw error;
         }
     },
@@ -27,7 +29,8 @@ const pokemonService = {
         try {
             const response = await http.get(`/pokemon/${id}`);
             return response.data;
-        } catch (error) {
+        }
+        catch (error) {
             throw error;
         }
     },
@@ -36,7 +39,8 @@ const pokemonService = {
         try {
             const response = await http.post('/pokemon', pokemon);
             return response.data;
-        } catch (error) {
+        }
+        catch (error) {
             throw error;
         }
     },
@@ -45,7 +49,8 @@ const pokemonService = {
         try {
             const response = await http.put(`/pokemon/${pokemon._id}`, pokemon);
             return response.data;
-        } catch (error) {
+        }
+        catch (error) {
             throw error;
         }
     },
@@ -54,7 +59,8 @@ const pokemonService = {
         try {
             const response = await http.delete(`/pokemon/${id}`);
             return response.data;
-        } catch (error) {
+        }
+        catch (error) {
             throw error;
         }
     },
@@ -62,7 +68,8 @@ const pokemonService = {
     async fetchPokemon() {
         try {
             await http.post('/pokemon/fetch');
-        } catch (error) {
+        }
+        catch (error) {
             throw error;
         }
     },

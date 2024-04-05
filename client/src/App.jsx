@@ -10,8 +10,9 @@ import ErrorNavigator from "./components/ErrorNavigator"
 import LoginNavigator from "./components/LoginNavigator"
 import AlreadyLoggedIn from "./components/AlreadyLoggedIn"
 
-import RegistrationForm from "./views/registrationForm"
+import RegistrationForm from "./views/RegistrationForm";
 import PokeDex from './views/PokeDex'
+import PokeNews from "./views/PokeNews"
 import CreateLobby from './views/CreateLobby';
 import UpdateLobby from './views/UpdateLobby';
 import Play from "./views/Play";
@@ -22,7 +23,7 @@ import Error from "./views/Error";
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./App.css"
 
-function App() {
+const App = () => {
 
 	const { authToken, updateLoggedUser, updateAuthToken } = useAuth();
 
@@ -40,7 +41,6 @@ function App() {
 			}
 		}
 	},[])
-
 	
 	const handleLoginToken = async (cookieToken) => {
 		let userResponse;
@@ -67,6 +67,7 @@ function App() {
 				{/* Non-Auth Routes */}
 				<Route path="/error" element={<Error errors={errors}/>}/>
 				<Route path="/pokedex" element={<PokeDex />} />
+				<Route path="/pokenews" element={<PokeNews/>} />
 
 				{/* Login Routes */}
 				<Route path="/login" element={authToken ? <AlreadyLoggedIn /> : <LoginForm />} />

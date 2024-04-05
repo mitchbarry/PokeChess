@@ -1,0 +1,87 @@
+.title img {
+    width: 35%;
+    height: auto;
+    margin-top: -2%;
+    margin-bottom: -7%;
+}
+
+.title img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+body {
+    height: 100vh;
+}
+
+.poke-twitter-container {
+    background-color: black;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    height: 75vh;
+    border: solid 4px rgb(0,179,179);
+    box-shadow: 3px 3px 20px rgb(0,179,179);
+}
+
+.twitter-timeline {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    height: 80%;
+    width: 100%;
+    border-radius: 15%;
+    padding: 10%;
+}
+
+@media (min-width: 1200px) {
+}
+
+@media (max-width: 1199px) and (min-width: 768px) {
+    .title img {
+        width: 50%;
+    }
+
+    .poke-twitter-container {
+        width: 90%;
+        height: 80vh;
+    }
+
+    .twitter-timeline {
+        padding: 5%;
+    }
+}
+
+@media (max-width: 767px) and (min-width: 576px) {
+    .title img {
+        width: 60%;
+    }
+
+    .poke-twitter-container {
+        width: 95%;
+        height: 85vh;
+    }
+
+    .twitter-timeline {
+        border-radius: 10%;
+    }
+}
+
+@media (max-width: 575px) {
+    .title img {
+        width: 70%;
+    }
+
+    .poke-twitter-container {
+        border-radius: 20px;
+        width: 100%;
+        height: 90vh;
+    }
+
+    .twitter-timeline {
+        padding: 5%;
+    }
+}
