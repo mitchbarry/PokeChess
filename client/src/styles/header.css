@@ -1,10 +1,38 @@
+.container {
+	padding-top: 20px;
+}
 .navbar-container {
+	background: linear-gradient(rgb(0,128,255),rgb(204,34,0));
+	width: 90%;
+	height: 70px;
+}
+.nav-container {
+	width: 100%;
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 }
-
-.navbar-content {
-
-	background-color: rgb(138, 18, 0);
+.pokeChess-img {
+	height: 70px;
+}
+.pokeDex-img {
+	height: 45px;
+}
+.nav-item {
+	font-size: 130%;
+	font-weight: bold;
+	font-family: fantasy;
+}
+.link {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	font-weight: 100;
+}
+.link:hover {
+	color: blue;
+	font-size: 110%;
+}
+.link-icon {
+	height: 20px;
 }

@@ -1,10 +1,12 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Container } from 'react-bootstrap'
 
 import { useAuth } from "../context/AuthContext"
 import AuthService from "../services/AuthService"
 import errorUtilities from '../utilities/error.utilities'
 
+import login from "../assets/fonts/login.png"
 import "../styles/Form.css";
 
 const LoginForm = () => {
@@ -143,70 +145,72 @@ const LoginForm = () => {
     };
 
 	return (
-		<div className="form-container">
-			<h2 className="form-title">Login</h2>
-			{Object.keys(errors).length !== 0 && showNotification && (
-				<ul className="alert alert-danger">
-					<button type="button" className="btn-close close-button-red" aria-label="Close" onClick={closeNotification}></button>
-					{errors.statusCode && errors.name && (
-						<li className="flash-box-li">
-							<b>Error {errors.statusCode}: {errors.name}</b>
-						</li>
-					)}
-					{errors.message && (
-						<li className="flash-box-li">
-							{errors.message}
-						</li>
-					)}
-					{errors.validationErrors && errors.validationErrors.length !== 0 && (
-						errors.validationErrors.map((error, index) => (
-						<li key={index} className="flash-box-li">
-							{error}
-						</li>
-						))
-					)}
-				</ul>
-			)}
-			<form onSubmit={handleSubmit}>
-				<div className="form-group">
-					<div className="input-container">
-						<input
-							type="email"
-							id="email"
-							name="email"
-							className="form-control"
-							value={email}
-							onChange={(e) => handleInput(e)}
-							onFocus={(e) => handleFocus(e)}
-							onBlur={(e) => handleBlur(e)}
-						/>
-						<label htmlFor="email" className={`input-label ${focus.email || email ? 'shrink' : ''}`}>Email</label>
-					</div>
-					{/* {formErrors.email !== "" && ( 
-						<p className="error-text" role="alert">{formErrors.email}TEST</p>
-					})} */}
-				</div>
-				<div className="form-group">
-					<div className="input-container">
-						<input
-							type="password"
-							id="password"
-							name="password"
-							className="form-control"
-							value={password}
-							onChange={(e) => handleInput(e)}
-							onFocus={(e) => handleFocus(e)}
-							onBlur={(e) => handleBlur(e)}
-						/>
-						<label htmlFor="password" className={`input-label ${focus.password || password ? 'shrink' : ''}`}>Password</label>
-					</div>
-				</div>
-				<button type="submit" className="form-submit-btn">
-					Login
-				</button>
-			</form>
-		</div>
+        <Container>
+            <h1 className="form-title">Login</h1>
+            <div className="form-container">
+                {Object.keys(errors).length !== 0 && showNotification && (
+                    <ul className="alert alert-danger">
+                        <button type="button" className="btn-close close-button-red" aria-label="Close" onClick={closeNotification}></button>
+                        {errors.statusCode && errors.name && (
+                            <li className="flash-box-li">
+                                <b>Error {errors.statusCode}: {errors.name}</b>
+                            </li>
+                        )}
+                        {errors.message && (
+                            <li className="flash-box-li">
+                                {errors.message}
+                            </li>
+                        )}
+                        {errors.validationErrors && errors.validationErrors.length !== 0 && (
+                            errors.validationErrors.map((error, index) => (
+                            <li key={index} className="flash-box-li">
+                                {error}
+                            </li>
+                            ))
+                        )}
+                    </ul>
+                )}
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <div className="input-container">
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                className="form-control"
+                                value={email}
+                                onChange={(e) => handleInput(e)}
+                                onFocus={(e) => handleFocus(e)}
+                                onBlur={(e) => handleBlur(e)}
+                            />
+                            <label htmlFor="email" className={`input-label ${focus.email || email ? 'shrink' : ''}`}>Email</label>
+                        </div>
+                        {/* {formErrors.email !== "" && ( 
+                            <p className="error-text" role="alert">{formErrors.email}TEST</p>
+                        })} */}
+                    </div>
+                    <div className="form-group">
+                        <div className="input-container">
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                className="form-control"
+                                value={password}
+                                onChange={(e) => handleInput(e)}
+                                onFocus={(e) => handleFocus(e)}
+                                onBlur={(e) => handleBlur(e)}
+                            />
+                            <label htmlFor="password" className={`input-label ${focus.password || password ? 'shrink' : ''}`}>Password</label>
+                        </div>
+                    </div>
+                    <button type="submit" className="form-submit-btn">
+                        Login
+                    </button>
+                </form>
+            </div>
+        </Container>
 	)
 }
 
-export default LoginForm
+export default LoginForm;

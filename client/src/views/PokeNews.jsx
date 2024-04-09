@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
-import PokeNewsTitle from "../assets/PokeNews.png"
+
+import pokeNews from "../assets/fonts/pokeNews.png"
 import "../styles/pokeNews.css"
 
 const PokeTwitter = () => {
@@ -14,7 +15,7 @@ const PokeTwitter = () => {
 
 	return (
 		<div className="title">
-			<img src={PokeNewsTitle} alt="PokeNews" />
+			<img src={pokeNews} alt="PokeNews" />
 			<div className="poke-twitter-container">
 				<a
 					className="twitter-timeline"
