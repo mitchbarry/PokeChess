@@ -145,8 +145,8 @@ const LoginForm = () => {
     };
 
 	return (
-        <Container>
-            <h1 className="form-title">Login</h1>
+        <Container className="container-main">
+            <img src={login} className="header-img"/>
             <div className="form-container">
                 {Object.keys(errors).length !== 0 && showNotification && (
                     <ul className="alert alert-danger">

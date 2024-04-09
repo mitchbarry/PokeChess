@@ -1,37 +1,77 @@
-.container {
+.container-header {
 	padding-top: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 90px;
+}
+.favicon-img {
+	height: 64px;
+}
+@keyframes wiggle { /* Define the keyframes for the wiggle animation */
+    0%, 100% {
+        transform: translateX(0) rotate(0deg);
+    }
+    25% {
+        transform: translateX(-3px) rotate(-5deg);
+    }
+    50% {
+        transform: translateX(3px) rotate(5deg);
+    }
+    75% {
+        transform: translateX(-3px) rotate(-5deg);
+    }
+}
+.favicon-img:hover { /* Apply animation to Pokeball on hover */
+    animation: wiggle 0.5s ease;
 }
 .navbar-container {
 	background: linear-gradient(rgb(0,128,255),rgb(204,34,0));
+	margin-left: 5px;
 	width: 90%;
 	height: 70px;
 }
 .nav-container {
+	min-width: fit-content;
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 .pokeChess-img {
-	height: 70px;
+	transition: all 0.3s ease;
+	height: 50px;
+}
+.pokeChess-img:hover {
+	height: 55px;
 }
 .pokeDex-img {
 	height: 45px;
 }
-.nav-item {
+.nav-item, .nav-item-20 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	font-size: 130%;
 	font-weight: bold;
 	font-family: fantasy;
+}
+.nav-item {
+	width: fit-content;
+	padding: 0px 5px;
+}
+.nav-item-20 {
+	width: 20%;
 }
 .link {
 	display: flex;
 	align-items: center;
 	text-decoration: none;
 	font-weight: 100;
+	transition: all 0.3s ease;
 }
 .link:hover {
 	color: blue;
-	font-size: 110%;
 }
 .link-icon {
 	height: 20px;

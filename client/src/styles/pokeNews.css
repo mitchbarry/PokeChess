@@ -3,11 +3,11 @@
     height: auto;
     margin-top: -2%;
     margin-bottom: -7%;
+    transition: all 0.3s ease;
 }
 
 .title img:hover {
     transform: scale(1.05);
-    transition: transform 0.3s ease-in-out;
 }
 
 body {

@@ -1,11 +1,19 @@
-.form-title {
-	text-align: center;
-	margin-bottom: 20px;
-	color: goldenrod;
-	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+.container-main {
+	padding: 0;
+	margin-top: calc((100vh - 180px) / 8);
+	min-height: fit-content;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.header-img {
+	height: 90px;
+	margin: 30px 0px 10px;
 }
 .form-container {
-	max-width: 400px;
+	width: 400px;
+	min-width: 200px;
 	margin: 0 auto;
 	padding: 20px;
 	border-radius: 8px;
