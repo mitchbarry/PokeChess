@@ -68,7 +68,11 @@
 	margin-right: 13px;
 }
 .item-button {
+	font-size: 85% !important;
 	border-radius: 5px 30px 30px 5px !important;
+}
+.item-button:hover {
+	color: #3466B0 !important;
 }
 .flexBoxSpaceBetween {
 	width: 100%;
