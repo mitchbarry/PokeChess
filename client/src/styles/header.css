@@ -75,9 +75,12 @@
 	font-size: 85% !important;
 	border-radius: 5px 30px 30px 5px !important;
 	transition: all 0.3s ease !important;
+	color: #FFCC01 !important;
+	border-color: #FFCC01 !important;
 }
 .item-button:hover {
 	color: #3466B0 !important;
+	background-color: #FFCC01 !important;
 }
 .flexBoxSpaceBetween {
 	width: 100%;
