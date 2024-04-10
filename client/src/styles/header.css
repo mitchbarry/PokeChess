@@ -30,6 +30,7 @@
 	margin-left: 5px;
 	width: 90%;
 	height: 70px;
+	border: #FFCC01 solid 3px;
 }
 .nav-container {
 	min-width: fit-content;
@@ -68,8 +69,12 @@
 	margin-right: 13px;
 }
 .item-button {
+	padding-left: 5px auto !important;
+	width: 108px !important;
+	align-items: center !important;
 	font-size: 85% !important;
 	border-radius: 5px 30px 30px 5px !important;
+	transition: all 0.3s ease !important;
 }
 .item-button:hover {
 	color: #3466B0 !important;
@@ -81,15 +86,16 @@
 	align-items: center;
 }
 .link {
+	padding: 10px;
 	display: flex;
 	align-items: center;
 	text-decoration: none;
+}
+.link-text {
+	color: #FFCC01;
 	font-weight: 100;
 	transition: all 0.3s ease;
 }
-.link:hover {
-	color: blue;
-}
-.link-icon {
-	height: 20px;
+.link-hovered {
+	color: #C69500;
 }
