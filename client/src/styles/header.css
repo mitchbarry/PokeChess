@@ -70,19 +70,39 @@
 	width: fit-content;
 	margin-right: 13px;
 }
-.item-button {
+.login-button, .logout-button {
 	padding-left: 5px auto !important;
 	width: 108px !important;
+	display: flex;
+	flex-direction: row;
 	align-items: center !important;
 	font-size: 85% !important;
 	border-radius: 5px 30px 30px 5px !important;
 	transition: all 0.3s ease !important;
+}
+.login-button {
 	color: #FFCC01 !important;
 	border-color: #FFCC01 !important;
+	fill: #FFCC01;
+	stroke: #FFCC01;
 }
-.item-button:hover {
+.login-button:hover {
 	color: #3466B0 !important;
 	background-color: #FFCC01 !important;
+	fill: #3466B0;
+	stroke: #3466B0;
+}
+.logout-button {
+	color: #f57e7e !important;
+	border-color: #f57e7e !important;
+	fill: #f57e7e;
+	stroke: #f57e7e;
+}
+.logout-button:hover {
+	color: #3466B0 !important;
+	background-color: #f57e7e !important;
+	fill: #3466B0;
+	stroke: #3466B0;
 }
 .flexBoxSpaceBetween {
 	height: 100%;
@@ -92,8 +112,6 @@
 	align-items: center;
 }
 .link {
-	height: 60px;
-	padding: 0px 20px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
