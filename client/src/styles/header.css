@@ -31,10 +31,12 @@
 	width: 90%;
 	height: 70px;
 	border: #FFCC01 solid 3px;
+	padding: 0 !important;
 }
 .nav-container {
 	min-width: fit-content;
 	width: 100%;
+	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -83,22 +85,27 @@
 	background-color: #FFCC01 !important;
 }
 .flexBoxSpaceBetween {
+	height: 100%;
 	width: 100%;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 }
 .link {
-	padding: 10px;
+	height: 60px;
+	padding: 0px 20px;
 	display: flex;
+	flex-direction: row;
 	align-items: center;
 	text-decoration: none;
-}
-.link-text {
 	color: #FFCC01;
 	font-weight: 100;
+	fill: #FFCC01;
+	stroke: #FFCC01;
 	transition: all 0.3s ease;
 }
-.link-hovered {
+.link:hover {
 	color: #C69500;
+	fill: #C69500;
+	stroke: #C69500;
 }
