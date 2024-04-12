@@ -84,10 +84,12 @@
     cursor: pointer;
 	color: #752026;
 }
-/* ------------------------------------------------------------------------------------ simple styling items > */
+/* ------------------------------------------------------------------------------------ error styling items > */
+.input-error {
+	border: 1px solid red !important;
+	box-shadow: inset 0 1px 3px rgb(150,0,0, 0.8);
+}
 .error-text {
     color: red;
-    font-weight: bold;
-    height: 15px;
-    margin: 7px 0px 10px;
+	text-shadow: 1px 1px 2px rgb(150,0,0, 0.8);
 }

@@ -1,5 +1,6 @@
-import React, { useState,useContext } from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Container } from 'react-bootstrap'
 
 import { useAuth } from "../context/AuthContext"
 import AuthService from "../services/AuthService"
@@ -23,40 +24,185 @@ const RegistrationForm = () => {
     const [formErrors, setFormErrors] = useState({
         username: "",
         email: "",
-        birthDate: "",
+        starter: "",
         password: "",
         confirmPassword: ""
     })
-    const [isValidForm, setIsValidForm] = useState(true);
 
     const handleInput = (e) => {
         switch(e.target.id) {
             case "username":
-                return usernameHandler(e);
+                return handleUsername(e);
             case "email":
-                return emailHandler(e);
+                return handleEmail(e);
             case "starter":
-                return birthDateHandler(e);
+                return handleStarter(e);
             case "password":
-                return passwordHandler(e);
+                return handlePassword(e);
             case "confirmPassword":
-                return confirmPasswordHandler(e);
+                return handleConfirmPassword(e);
             default:
                 return;
         }
     };
 
-	const handleSubmit = async (e) => {
-		e.preventDefault()
-		try {
-			const response = await AuthService.register(user)
-			setLoggedUser({_id:response.user._id})
-			handleLogin(response.token,response.user._id)
-			navigate("/lobbies/home")
-		} catch (error) {
-			console.error(error.response ? error.response.data : error.message)
-		}
+	const handleUsername = (e) => {
+        const value = e.target.value;
+        setFormErrors((prevErrors) => {
+            switch (prevErrors.username) {
+                case "Username is required!":
+                    if (value) {
+                        return {...prevErrors, username: ""};
+                    }
+                    break;
+                case "Username must be at least 4 characters long!":
+                    if (value.length > 4) {
+                        return {...prevErrors, username: ""};
+                    }
+                    break;
+                case "Username must be less than 25 characters long!":
+                    if (value.length < 25) {
+                        return {...prevErrors, username: ""};
+                    }
+                    break;
+                default:
+                    return prevErrors;
+            }
+        })
+        setUsername(value)
+    }
+
+	const handleEmail = (e) => {
+        const value = e.target.value;
+        setFormErrors((prevErrors) => {
+            switch (prevErrors.email) {
+                case "Email is required!":
+                    if (value) {
+                        return{...prevErrors, email: ""};
+                    }
+                    break;
+                case "Please enter a valid email!":
+                    if (/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value)) {
+                        return{...prevErrors, email: ""};
+                    }
+                    break;
+                default:
+                    return prevErrors;
+            }
+        })
+        setEmail(value);
+    }
+
+	const handleStarter = (e) => {
+		const value = e.target.value;
+		setFormErrors((prevErrors) => ({...prevErrors, starter: ""}))
+		setStarter(value );
 	}
+
+	const handlePassword = (e) => {
+        const value = e.target.value;
+        setFormErrors((prevErrors) => {
+            switch (prevErrors.password) {
+                case "Password is required!":
+                    if (value) {
+                        return {...prevErrors, password: ""};
+                    }
+                    break;
+                case "Password must be at least 6 characters long!":
+                    if (value.length > 6) {
+                        return {...prevErrors, password: ""};
+                    }
+                    break;
+                case "Password must be less than 255 characters long!":
+                    if (value.length > 255) {
+                        return {...prevErrors, password: ""};
+                    }
+                // Optional regex Case here to verify the user password has certain characters or a certain uppercase characters
+                default:
+                    return prevErrors;
+            }
+        })
+        setPassword(value);
+        checkPasswordMatch(value, confirmPassword);
+    }
+
+	const handleConfirmPassword = (e) => {
+        const value = e.target.value;
+        setConfirmPassword(value);
+        checkPasswordMatch(password, value);
+    }
+
+	const checkPasswordMatch = (newPassword, newConfirmPassword) => {
+        let errorMsg = "";
+        if (newConfirmPassword !== newPassword) {
+            errorMsg = "Passwords must match!";
+        }
+        setFormErrors(prevErrors => ({...prevErrors, confirmPassword: errorMsg}));
+    }
+
+	const handleSubmit = (e) => {
+        e.preventDefault();
+        checkForm();
+	}
+
+	const checkForm = () => {
+        const newFormErrors = {...formErrors}
+        if (!username.trim()) { // checks username on submit
+            newFormErrors.username = "Username is required!"
+        }
+        else if (username.trim().length < 4) {
+            newFormErrors.username = "Username must be at least 4 characters long!"
+        }
+        else if (username.trim().length > 25) {
+            newFormErrors.username = "Username must be less than 25 characters long!"
+        }
+        if (!email.trim()) { // checks email on submit
+            newFormErrors.email = "Email is required!"
+        }
+        else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+            newFormErrors.email = "Please enter a valid email!"
+        }
+        if (!password.trim()) { // checks password on submit
+            newFormErrors.password = "Password is required!"
+        }
+        else if (password.trim().length < 6) {
+            newFormErrors.password = "Password must be at least 6 characters long!"
+        }
+        else if (password.trim().length > 255) {
+            newFormErrors.password = "Password must be less than 255 characters long!"
+        }
+        if (Object.keys(newFormErrors).every(key => newFormErrors[key] === "")) {
+            sendRequest();
+        }
+        else {
+            setFormErrors(prevErrors => ({...prevErrors, ...newFormErrors}));
+        }
+    }
+
+	const sendRequest = async () => {
+        try {
+            const response = await AuthService.register({
+                username: username.trim(),
+                email: email.trim(),
+                starter: starter,
+                password: password.trim()
+            });
+            handleLoginResponse(response);
+        }
+        catch (error) {
+            setErrors(errorUtilities.catchError(error));
+            setShowNotification(true);
+        }
+		finally {
+			navigate("/lobbies/home");
+		}
+    }
+
+	const closeNotification = () => {
+        setShowNotification(false);
+    }
+
+	// (Object.keys(formErrors).every(key => formErrors[key] === "") whether submit button is grayed out -> might need to be a useState variable
 
 	return (
 		<>

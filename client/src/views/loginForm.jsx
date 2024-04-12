@@ -20,8 +20,8 @@ const LoginForm = () => {
 	const [errors, setErrors] = useState({});
     const [showNotification, setShowNotification] = useState(false)
     const [formErrors, setFormErrors] = useState({
-        email: "",
-        password: ""
+        email: false,
+        password: false
     })
 	const [focus, setFocus] = useState({
 		email: false,
@@ -41,34 +41,13 @@ const LoginForm = () => {
 
     const handleEmail = (e) => {
         const value = e.target.value;
-        setFormErrors((prevErrors) => {
-            switch (prevErrors.email) {
-                case "Email is required!":
-                case "Please enter a valid email!":
-                    if (value) {
-                        return{...prevErrors, email: ""};
-                    }
-                    break;
-                default:
-                    return prevErrors;
-            }
-        })
+        setFormErrors(prevErrors => ({...prevErrors, email: false}));
         setEmail(value);
     }
 
     const handlePassword = (e) => {
         const value = e.target.value;
-        setFormErrors((prevErrors) => {
-            switch (prevErrors.password) {
-                case "Password is required!":
-                    if (value) {
-                        return {...prevErrors, password: ""};
-                    }
-                    break;
-                default:
-                    return prevErrors;
-            }
-        })
+        setFormErrors(prevErrors => ({...prevErrors, password: false}));
         setPassword(value);
     }
 
@@ -78,26 +57,21 @@ const LoginForm = () => {
     };
 
     const checkForm = () => {
-        const newFormErrors = {...formErrors}
-        if (!email.trim()) { // checks email on submit
-            newFormErrors.email = "Email is required!"
+        const newFormErrors = {...formErrors};
+        if (!email.trim() || !/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+            newFormErrors.email = true;
         }
-        else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
-            newFormErrors.email = "Please enter a valid email!"
+        if (!password.trim()) {
+            newFormErrors.password = true;
         }
-        if (!password.trim()) { // checks password on submit
-            newFormErrors.password = "Password is required!"
-        }
-        if (Object.keys(newFormErrors).every(key => newFormErrors[key] === "")) {
+        if (!Object.values(newFormErrors).includes(true)) {
             sendRequest();
-        }
-        else {
+        } else {
             setFormErrors(prevErrors => ({...prevErrors, ...newFormErrors}));
         }
     }
 
 	const sendRequest = async () => {
-		setIsLoading(true)
         try {
             const response = await AuthService.login({
                 email: email.trim(),
@@ -174,20 +148,17 @@ const LoginForm = () => {
                     <div className="form-group">
                         <div className="input-container">
                             <input
-                                type="email"
+                                type="text"
                                 id="email"
                                 name="email"
-                                className="form-control"
+                                className={"form-control" + (formErrors.email ? " input-error" : "")}
                                 value={email}
                                 onChange={(e) => handleInput(e)}
                                 onFocus={(e) => handleFocus(e)}
                                 onBlur={(e) => handleBlur(e)}
                             />
-                            <label htmlFor="email" className={`input-label ${focus.email || email ? 'shrink' : ''}`}>Email</label>
+                            <label htmlFor="email" className={"input-label" + (focus.email || email ? " shrink" : "") + (formErrors.email ? " error-text" : "")}>Email</label>
                         </div>
-                        {/* {formErrors.email !== "" && ( 
-                            <p className="error-text" role="alert">{formErrors.email}TEST</p>
-                        })} */}
                     </div>
                     <div className="form-group">
                         <div className="input-container">
@@ -195,13 +166,13 @@ const LoginForm = () => {
                                 type="password"
                                 id="password"
                                 name="password"
-                                className="form-control"
+                                className={"form-control" + (formErrors.password ? " input-error" : "")}
                                 value={password}
                                 onChange={(e) => handleInput(e)}
                                 onFocus={(e) => handleFocus(e)}
                                 onBlur={(e) => handleBlur(e)}
                             />
-                            <label htmlFor="password" className={`input-label ${focus.password || password ? 'shrink' : ''}`}>Password</label>
+                            <label htmlFor="password" className={"input-label" + (focus.password || password ? " shrink" : "") + (formErrors.password ? " error-text" : "")}>Password</label>
                         </div>
                     </div>
                     <button type="submit" className="form-submit-btn">
