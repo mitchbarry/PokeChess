@@ -41,7 +41,7 @@
     position: relative;
 }
 .form-control {
-	padding: 20px 12px 6px 12px !important;
+	padding: 20px 44px 6px 12px !important;
 	width: 100%;
 	height: 50px;
 	margin-bottom: 30px;
@@ -68,6 +68,25 @@
     left: 13px;
     font-size: 90%;
     color: #555;
+}
+.password-icon, .password-icon-active {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+	cursor: pointer;
+    transition: all 0.3s ease;
+}
+.password-icon {
+	fill: #cecece;
+	stroke: #cecece;
+}
+.password-icon:hover {
+	fill: #afafaf;
+	stroke: #afafaf;
+}
+.password-icon-active {
+	fill: #afafaf;
+	stroke: #afafaf;
 }
 /* ------------------------------------------------------------------------------------ flash box items > */
 .flash-box-li {
