@@ -17,7 +17,6 @@ const RegistrationForm = () => {
 
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
-    const [starter, setStarter] = useState(0)
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [errors, setErrors] = useState({})
@@ -25,13 +24,14 @@ const RegistrationForm = () => {
     const [formErrors, setFormErrors] = useState({
         username: "",
         email: "",
-        starter: "",
         password: "",
         confirmPassword: ""
     })
 	const [focus, setFocus] = useState({
+		username: false,
 		email: false,
-		password: false
+		password: false,
+		confirmPassword: false
 	});
 
     const handleInput = (e) => {
@@ -40,8 +40,6 @@ const RegistrationForm = () => {
                 return handleUsername(e);
             case "email":
                 return handleEmail(e);
-            case "starter":
-                return handleStarter(e);
             case "password":
                 return handlePassword(e);
             case "confirmPassword":
@@ -97,12 +95,6 @@ const RegistrationForm = () => {
         })
         setEmail(value);
     }
-
-	const handleStarter = (e) => {
-		const value = e.target.value;
-		setFormErrors((prevErrors) => ({...prevErrors, starter: ""}))
-		setStarter(value );
-	}
 
 	const handlePassword = (e) => {
         const value = e.target.value;
@@ -189,7 +181,6 @@ const RegistrationForm = () => {
             const response = await AuthService.register({
                 username: username.trim(),
                 email: email.trim(),
-                starter: starter,
                 password: password.trim()
             });
             handleLoginResponse(response);
@@ -279,64 +270,65 @@ const RegistrationForm = () => {
                 )}
 				<form onSubmit={handleSubmit}>
 					<div className="form-group">
-						<div className="input-container">
-							<input
-								type="text"
-								id="username"
-								name="username"
-								className={"form-control" + (formErrors.username ? " input-error" : "")}
-								value={user.username}
-								onChange={handleChange}
-								required
-							/>
-							<label htmlFor="username" className={"input-label" + (focus.username || username ? " shrink" : "") + (formErrors.username ? " error-text" : "")}>Username</label>
-						</div>
-					</div>
+                        <div className="input-container">
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                className={"form-control" + (formErrors.username ? " input-error" : "")}
+                                value={username}
+                                onChange={(e) => handleInput(e)}
+                                onFocus={(e) => handleFocus(e)}
+                                onBlur={(e) => handleBlur(e)}
+                            />
+                            <label htmlFor="username" className={"input-label" + (focus.username || username ? " shrink" : "") + (formErrors.username ? " error-text" : "")}>Username</label>
+                        </div>
+                    </div>
 					<div className="form-group">
-						<label htmlFor="favoritePokemon">
-							Choose your starter:
-						</label>
-						<select
-							id="favoritePokemon"
-							name="favoritePokemon"
-							className="form-control"
-							value={user.favoritePokemon ? user.favoritePokemon : ''}
-							onChange={handleChange}
-							required
-						>
-							<option value="" disabled>
-								-- Select an option --
-							</option>
-							<option value={4} >Charmander</option>
-							<option value={1} >Bulbasaur</option>
-							<option value={7} >Squirtle</option>
-							<option value={25} >Pikachu</option>
-						</select>
-					</div>
+                        <div className="input-container">
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                className={"form-control" + (formErrors.username ? " input-error" : "")}
+                                value={username}
+                                onChange={(e) => handleInput(e)}
+                                onFocus={(e) => handleFocus(e)}
+                                onBlur={(e) => handleBlur(e)}
+                            />
+                            <label htmlFor="username" className={"input-label" + (focus.username || username ? " shrink" : "") + (formErrors.username ? " error-text" : "")}>Username</label>
+                        </div>
+                    </div>
 					<div className="form-group">
-						<label htmlFor="email">Email:</label>
-						<input
-							type="email"
-							id="email"
-							name="email"
-							className="form-control"
-							value={user.email}
-							onChange={handleChange}
-							required
-						/>
-					</div>
+                        <div className="input-container">
+                            <input
+                                type="password"
+                                id="username"
+                                name="username"
+                                className={"form-control" + (formErrors.username ? " input-error" : "")}
+                                value={username}
+                                onChange={(e) => handleInput(e)}
+                                onFocus={(e) => handleFocus(e)}
+                                onBlur={(e) => handleBlur(e)}
+                            />
+                            <label htmlFor="username" className={"input-label" + (focus.username || username ? " shrink" : "") + (formErrors.username ? " error-text" : "")}>Username</label>
+                        </div>
+                    </div>
 					<div className="form-group">
-						<label htmlFor="password">Password:</label>
-						<input
-							type="password"
-							id="password"
-							name="password"
-							className="form-control"
-							value={user.password}
-							onChange={handleChange}
-							required
-						/>
-					</div>
+                        <div className="input-container">
+                            <input
+                                type="password"
+                                id="username"
+                                name="username"
+                                className={"form-control" + (formErrors.username ? " input-error" : "")}
+                                value={username}
+                                onChange={(e) => handleInput(e)}
+                                onFocus={(e) => handleFocus(e)}
+                                onBlur={(e) => handleBlur(e)}
+                            />
+                            <label htmlFor="username" className={"input-label" + (focus.username || username ? " shrink" : "") + (formErrors.username ? " error-text" : "")}>Username</label>
+                        </div>
+                    </div>
 					<button type="submit" className="form-submit-btn">
 						Register
 					</button>
