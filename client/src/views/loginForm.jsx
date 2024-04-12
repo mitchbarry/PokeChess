@@ -92,31 +92,33 @@ const LoginForm = () => {
         setShowNotification(false);
     }
 
-	const handleFocus = (e) => {
-		switch(e.target.id) {
+    const handleFocus = (e) => {
+        switch(e.target.id) {
             case "email":
-                return setFocus({...focus, email: true});
+                return setFocus(prevFocus => ({...prevFocus, email: true}));
             case "password":
-                return setFocus({...focus, password: true});
+                return setFocus(prevFocus => ({...prevFocus, password: true}));
             default:
                 return;
         }
     };
 
-    const handleBlur = (e) => {
-		switch(e.target.id) {
-            case "email":
-				if (!email.trim()) {
-					return setFocus({...focus, email: false});
-				}
-            case "password":
-				if (!password.trim()) {
-					return setFocus({...focus, password: false});
-				}
-            default:
-                return;
-        }
-    };
+const handleBlur = (e) => {
+    switch(e.target.id) {
+        case "email":
+            if (!email.trim()) {
+                return setFocus(prevFocus => ({...prevFocus, email: false}));
+            }
+            break;
+        case "password":
+            if (!password.trim()) {
+                return setFocus(prevFocus => ({...prevFocus, password: false}));
+            }
+            break;
+        default:
+            return;
+    }
+};
 
 	return (
         <Container className="container-main">

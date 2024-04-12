@@ -6,6 +6,7 @@ import { useAuth } from "../context/AuthContext"
 import AuthService from "../services/AuthService"
 import errorUtilities from '../utilities/error.utilities'
 
+import register from "../assets/fonts/register.png"
 import "../styles/Form.css";
 
 const RegistrationForm = () => {
@@ -28,6 +29,10 @@ const RegistrationForm = () => {
         password: "",
         confirmPassword: ""
     })
+	const [focus, setFocus] = useState({
+		email: false,
+		password: false
+	});
 
     const handleInput = (e) => {
         switch(e.target.id) {
@@ -202,25 +207,90 @@ const RegistrationForm = () => {
         setShowNotification(false);
     }
 
+	const handleFocus = (e) => {
+		switch(e.target.id) {
+			case "username":
+				return setFocus(prevFocus => ({...prevFocus, username: true}));
+			case "email":
+				return setFocus(prevFocus => ({...prevFocus, email: true}));
+			case "password":
+				return setFocus(prevFocus => ({...prevFocus, password: true}));
+			case "confirmPassword":
+				return setFocus(prevFocus => ({...prevFocus, confirmPassword: true}));
+			default:
+				return;
+		}
+	};
+
+	const handleBlur = (e) => {
+		switch(e.target.id) {
+			case "username":
+				if (!username.trim()) {
+					return setFocus(prevFocus => ({...prevFocus, username: false}));
+				}
+				break;
+			case "email":
+				if (!email.trim()) {
+					return setFocus(prevFocus => ({...prevFocus, email: false}));
+				}
+				break;
+			case "password":
+				if (!password.trim()) {
+					return setFocus(prevFocus => ({...prevFocus, password: false}));
+				}
+				break;
+			case "confirmPassword":
+				if (!confirmPassword.trim()) {
+					return setFocus(prevFocus => ({...prevFocus, confirmPassword: false}));
+				}
+				break;
+			default:
+				return;
+		}
+	};
+
 	// (Object.keys(formErrors).every(key => formErrors[key] === "") whether submit button is grayed out -> might need to be a useState variable
 
 	return (
-		<>
-			<div className="full-screen-background"></div>
+		<Container className="container-main">
+			<img src={register} className="header-img"/>
 			<div className="form-container">
-				<h2 className="form-title">Register</h2>
+				{Object.keys(errors).length !== 0 && showNotification && (
+                    <ul className="alert alert-danger">
+                        <button type="button" className="btn-close close-button-red" aria-label="Close" onClick={closeNotification}></button>
+                        {errors.statusCode && errors.name && (
+                            <li className="flash-box-li">
+                                <b>Error {errors.statusCode}: {errors.name}</b>
+                            </li>
+                        )}
+                        {errors.message && (
+                            <li className="flash-box-li">
+                                {errors.message}
+                            </li>
+                        )}
+                        {errors.validationErrors && errors.validationErrors.length !== 0 && (
+                            errors.validationErrors.map((error, index) => (
+                            <li key={index} className="flash-box-li">
+                                {error}
+                            </li>
+                            ))
+                        )}
+                    </ul>
+                )}
 				<form onSubmit={handleSubmit}>
 					<div className="form-group">
-						<label htmlFor="username">Username:</label>
-						<input
-							type="text"
-							id="username"
-							name="username"
-							className="form-control"
-							value={user.username}
-							onChange={handleChange}
-							required
-						/>
+						<div className="input-container">
+							<input
+								type="text"
+								id="username"
+								name="username"
+								className={"form-control" + (formErrors.username ? " input-error" : "")}
+								value={user.username}
+								onChange={handleChange}
+								required
+							/>
+							<label htmlFor="username" className={"input-label" + (focus.username || username ? " shrink" : "") + (formErrors.username ? " error-text" : "")}>Username</label>
+						</div>
 					</div>
 					<div className="form-group">
 						<label htmlFor="favoritePokemon">
@@ -272,7 +342,7 @@ const RegistrationForm = () => {
 					</button>
 				</form>
 			</div>
-		</>
+		</Container>
 	)
 }
 
