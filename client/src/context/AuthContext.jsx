@@ -29,13 +29,16 @@ export const AuthProvider = ({ children }) => {
 	const handleLogout = async () => {
         try {
             await AuthService.logout(/*token*/); // token may be passed through to invalidate it via a blacklist (have not yet implemented)
-			setAuthToken(null);
-			Cookies.remove("authToken");
-			setLoggedUser(null);
         }
         catch (error) {
             console.error("Logout failed:", error);
         }
+		finally {
+			setAuthToken(null);
+			setLoggedUser(null);
+			Cookies.remove("authToken");
+			navigate // !!!!!!!!!!!!!!!!!
+		}
 	}
 
 	const pathParamValidator = (path) => { // this should be included in a otherwise empty useEffect that runs on component mount for components that contain a :id param

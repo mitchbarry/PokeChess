@@ -21,6 +21,15 @@ const AuthService = {
         );
     },
 
+    async logout(){
+        return http.post("/auth/logout")
+            .then(response=>response.data)
+            .catch(error=>{
+                throw error;
+            }
+        );
+    },
+
     async getUserInfo(token){
         return http.get("/auth/login", token)
             .then(response=>response.data)

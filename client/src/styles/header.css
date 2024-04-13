@@ -79,7 +79,7 @@
 	border-radius: 5px 30px 30px 5px !important;
 	transition: all 0.3s ease !important;
 }
-.login-button {
+.login-button, .logout-button {
 	color: #FFCC01 !important;
 	border-color: #FFCC01 !important;
 	fill: #FFCC01;
@@ -91,17 +91,11 @@
 	fill: #3466B0;
 	stroke: #3466B0;
 }
-.logout-button {
-	color: #f57e7e !important;
-	border-color: #f57e7e !important;
-	fill: #f57e7e;
-	stroke: #f57e7e;
-}
 .logout-button:hover {
-	color: #3466B0 !important;
-	background-color: #f57e7e !important;
-	fill: #3466B0;
-	stroke: #3466B0;
+	color: #9A383D !important;
+	background-color: #FFCC01 !important;
+	fill: #9A383D;
+	stroke: #9A383D;
 }
 .flexBoxSpaceBetween {
 	height: 100%;
