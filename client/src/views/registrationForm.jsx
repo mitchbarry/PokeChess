@@ -57,17 +57,23 @@ const RegistrationForm = () => {
                     if (value) {
                         return {...prevErrors, username: ""};
                     }
-                    break;
+					else {
+						return prevErrors;
+					}
                 case "Username must be at least 4 characters long!":
                     if (value.length > 4) {
                         return {...prevErrors, username: ""};
                     }
-                    break;
+					else {
+						return prevErrors;
+					}
                 case "Username must be less than 25 characters long!":
                     if (value.length < 25) {
                         return {...prevErrors, username: ""};
                     }
-                    break;
+					else {
+						return prevErrors;
+					}
                 default:
                     return prevErrors;
             }
@@ -83,12 +89,16 @@ const RegistrationForm = () => {
                     if (value) {
                         return{...prevErrors, email: ""};
                     }
-                    break;
+					else {
+						return prevErrors;
+					}
                 case "Please enter a valid email!":
                     if (/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value)) {
                         return{...prevErrors, email: ""};
                     }
-                    break;
+					else {
+						return prevErrors;
+					}
                 default:
                     return prevErrors;
             }
@@ -104,16 +114,23 @@ const RegistrationForm = () => {
                     if (value) {
                         return {...prevErrors, password: ""};
                     }
-                    break;
+					else {
+						return prevErrors;
+					}
                 case "Password must be at least 6 characters long!":
                     if (value.length > 6) {
                         return {...prevErrors, password: ""};
                     }
-                    break;
+					else {
+						return prevErrors;
+					}
                 case "Password must be less than 255 characters long!":
                     if (value.length > 255) {
                         return {...prevErrors, password: ""};
                     }
+					else {
+						return prevErrors;
+					}
                 // Optional regex Case here to verify the user password has certain characters or a certain uppercase characters
                 default:
                     return prevErrors;
@@ -161,12 +178,18 @@ const RegistrationForm = () => {
         }
         if (!password.trim()) { // checks password on submit
             newFormErrors.password = "Password is required!"
+			newFormErrors.confirmPassword = " "
         }
         else if (password.trim().length < 6) {
             newFormErrors.password = "Password must be at least 6 characters long!"
+			newFormErrors.confirmPassword = " "
         }
         else if (password.trim().length > 255) {
             newFormErrors.password = "Password must be less than 255 characters long!"
+			newFormErrors.confirmPassword = " "
+        }
+		if (!confirmPassword.trim()) { // checks confirmPassword on submit
+            newFormErrors.confirmPassword = " "
         }
         if (Object.keys(newFormErrors).every(key => newFormErrors[key] === "")) {
             sendRequest();
@@ -288,45 +311,45 @@ const RegistrationForm = () => {
                         <div className="input-container">
                             <input
                                 type="text"
-                                id="username"
-                                name="username"
-                                className={"form-control" + (formErrors.username ? " input-error" : "")}
-                                value={username}
+                                id="email"
+                                name="email"
+                                className={"form-control" + (formErrors.email ? " input-error" : "")}
+                                value={email}
                                 onChange={(e) => handleInput(e)}
                                 onFocus={(e) => handleFocus(e)}
                                 onBlur={(e) => handleBlur(e)}
                             />
-                            <label htmlFor="username" className={"input-label" + (focus.username || username ? " shrink" : "") + (formErrors.username ? " error-text" : "")}>Username</label>
+                            <label htmlFor="email" className={"input-label" + (focus.email || email ? " shrink" : "") + (formErrors.email ? " error-text" : "")}>Email</label>
                         </div>
                     </div>
 					<div className="form-group">
                         <div className="input-container">
                             <input
                                 type="password"
-                                id="username"
-                                name="username"
-                                className={"form-control" + (formErrors.username ? " input-error" : "")}
-                                value={username}
+                                id="password"
+                                name="password"
+                                className={"form-control" + (formErrors.password ? " input-error" : "")}
+                                value={password}
                                 onChange={(e) => handleInput(e)}
                                 onFocus={(e) => handleFocus(e)}
                                 onBlur={(e) => handleBlur(e)}
                             />
-                            <label htmlFor="username" className={"input-label" + (focus.username || username ? " shrink" : "") + (formErrors.username ? " error-text" : "")}>Username</label>
+                            <label htmlFor="password" className={"input-label" + (focus.password || password ? " shrink" : "") + (formErrors.password ? " error-text" : "")}>Password</label>
                         </div>
                     </div>
 					<div className="form-group">
                         <div className="input-container">
                             <input
                                 type="password"
-                                id="username"
-                                name="username"
-                                className={"form-control" + (formErrors.username ? " input-error" : "")}
-                                value={username}
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                className={"form-control" + (formErrors.confirmPassword ? " input-error" : "")}
+                                value={confirmPassword}
                                 onChange={(e) => handleInput(e)}
                                 onFocus={(e) => handleFocus(e)}
                                 onBlur={(e) => handleBlur(e)}
                             />
-                            <label htmlFor="username" className={"input-label" + (focus.username || username ? " shrink" : "") + (formErrors.username ? " error-text" : "")}>Username</label>
+                            <label htmlFor="confirmPassword" className={"input-label" + (focus.confirmPassword || confirmPassword ? " shrink" : "") + (formErrors.confirmPassword ? " error-text" : "")}>Confirm password</label>
                         </div>
                     </div>
 					<button type="submit" className="form-submit-btn">

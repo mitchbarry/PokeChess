@@ -41,7 +41,7 @@
     position: relative;
 }
 .form-control {
-	padding: 20px 44px 6px 12px !important;
+	padding: 20px 12px 6px 12px !important;
 	width: 100%;
 	height: 50px;
 	margin-bottom: 30px;
@@ -51,6 +51,9 @@
 	font-size: 50%;
 	color: #333;
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.password-icon-padding {
+	padding: 20px 44px 6px 12px !important;
 }
 .input-label {
     position: absolute;

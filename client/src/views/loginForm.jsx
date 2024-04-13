@@ -173,7 +173,7 @@ const handleBlur = (e) => {
                                 type={showPassword ? "text" : "password"}
                                 id="password"
                                 name="password"
-                                className={"form-control" + (formErrors.password ? " input-error" : "")}
+                                className={"form-control password-icon-padding" + (formErrors.password ? " input-error" : "")}
                                 value={password}
                                 onChange={(e) => handleInput(e)}
                                 onFocus={(e) => handleFocus(e)}
