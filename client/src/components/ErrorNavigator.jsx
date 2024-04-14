@@ -1,9 +1,7 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 
-const ErrorNavigator = ({ error, errors, updateErrors }) => {
-
-    const navigate = useNavigate(); // Obtain navigate function from react-router-dom
+const ErrorNavigator = ({ error, updateErrors }) => {
 
     let tempErrors = {};
 
@@ -24,24 +22,19 @@ const ErrorNavigator = ({ error, errors, updateErrors }) => {
                 validationErrors: {}
             };
         }
-        tempErrors = normalizedError;
+        updateErrors(normalizedError);
         console.error(normalizedError);
-    }, [error]); // Dependency added to useEffect
+    }, [error]);
 
-    useEffect(() => {
-        if (tempErrors.statusCode) {
-            if (tempErrors.statusCode === 404) {
-                navigate("/error")
-                updateErrors(tempErrors);
-            }
-            else if (tempErrors.statusCode === 401) {
-                navigate("/login")
-                updateErrors(tempErrors);
-            }
-        }
-    }, [tempErrors]);
-
-    return null;
+    return (
+        <Route>
+            {error === 401 ? (
+                <Redirect to="/login" />
+            ) : (
+                <Redirect to="/error" errors={tempErrors}/>
+            )}
+        </Route>
+    );
 };
 
 export default ErrorNavigator;

@@ -26,6 +26,21 @@ export const AuthProvider = ({ children }) => {
 		Cookies.set("authToken", response.token, { expires: 7 }); // Set the token as a browser cookie with an expiry time (1 week)
 	}
 
+	const handleLoginToken = async (cookieToken) => {
+		let userResponse;
+		try {
+            userResponse = await AuthService.getUserInfo(cookieToken);
+        }
+        catch (error) {
+            console.error("Login failed:", error); // Handle login error
+            Cookies.remove("authToken");
+        }
+		finally {
+			setAuthToken(newToken); // Set the token and user information in state
+            setLoggedUser(newUser);
+		}
+	}
+
 	const handleLogout = async () => {
         try {
             await AuthService.logout(/*token*/); // token may be passed through to invalidate it via a blacklist (have not yet implemented)
@@ -37,7 +52,6 @@ export const AuthProvider = ({ children }) => {
 			setAuthToken(null);
 			setLoggedUser(null);
 			Cookies.remove("authToken");
-			navigate // !!!!!!!!!!!!!!!!!
 		}
 	}
 
@@ -60,7 +74,7 @@ export const AuthProvider = ({ children }) => {
 	}
 
 	return (
-		<AuthContext.Provider value={{ authToken, loggedUser, handleLoginResponse, handleLogout, updateLoggedUser, updateAuthToken, pathParamValidator }}>
+		<AuthContext.Provider value={{ authToken, loggedUser, handleLoginResponse, handleLogout, updateLoggedUser, updateAuthToken, pathParamValidator, handleLoginToken }}>
 			{children}
 		</AuthContext.Provider>
 	)

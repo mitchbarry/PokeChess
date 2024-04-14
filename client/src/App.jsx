@@ -1,14 +1,11 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 import { useAuth } from "./context/AuthContext";
-import AuthService from "./services/AuthService";
 
 import Header from "./components/Header";
 import ErrorNavigator from "./components/ErrorNavigator";
-import LoginNavigator from "./components/LoginNavigator";
-import AlreadyLoggedIn from "./components/AlreadyLoggedIn";
 
 import RegistrationForm from "./views/RegistrationForm";
 import PokeDex from './views/PokeDex';
@@ -25,9 +22,9 @@ import "./App.css";
 
 const App = () => {
 
-	const { authToken, updateLoggedUser, updateAuthToken } = useAuth();
+	const { authToken, handleLoginToken } = useAuth();
 
-	const [errors, setErrors] = useState({}); // Moved state inside the component
+	const [errors, setErrors] = useState({});
 
 	const updateErrors = (newErrors) => {
 		setErrors(newErrors);
@@ -41,28 +38,13 @@ const App = () => {
 			}
 		}
 	},[])
-	
-	const handleLoginToken = async (cookieToken) => {
-		let userResponse;
-		try {
-            userResponse = await AuthService.getUserInfo(cookieToken);
-        }
-        catch (error) {
-            console.error("Login failed:", error); // Handle login error
-            Cookies.remove("authToken");
-        }
-		finally {
-			updateAuthToken(cookieToken); // Set the token and user information in state
-            updateLoggedUser(userResponse);
-		}
-	}
 
 	return (
 		<>
 			<Header />
 			<Routes>
 				{/* Root Route */}
-				<Route path={"/" || ""} element={authToken ? <AlreadyLoggedIn /> : <LoginNavigator />} />
+				<Route path={"/" || ""} element={Cookies.get("authToken") || authToken ? <Navigate to="/lobbies/home" /> : <Navigate to="/login" />} />
 
 				{/* Non-Auth Routes */}
 				<Route path="/error" element={<Error errors={errors}/>}/>
@@ -70,17 +52,17 @@ const App = () => {
 				<Route path="/pokenews" element={<PokeNews/>} />
 
 				{/* Login Routes */}
-				<Route path="/login" element={authToken ? <AlreadyLoggedIn /> : <LoginForm />} />
-				<Route path="/register" element={authToken ? <AlreadyLoggedIn /> : <RegistrationForm />} />
+				<Route path="/login" element={Cookies.get("authToken") || authToken ? <Navigate to="/lobbies/home" /> : <LoginForm />} />
+				<Route path="/register" element={Cookies.get("authToken") || authToken ? <Navigate to="/lobbies/home" /> : <RegistrationForm />} />
 			
 				{/* Auth Routes */}
-				<Route path="/lobbies/new" element={authToken ? <CreateLobby /> : <ErrorNavigator error={401} updateErrors={updateErrors} errors={errors} />} />
-				<Route path="/lobbies/:id/edit" element={authToken ? <UpdateLobby /> : <ErrorNavigator error={401} updateErrors={updateErrors} errors={errors} />} />
-				<Route path="/lobbies/home" element={authToken ? <LobbyHome /> : <ErrorNavigator error={401} updateErrors={updateErrors} errors={errors} />}/>
-				<Route path="/play/:id" element={authToken ? <Play /> : <ErrorNavigator error={401} updateErrors={updateErrors} errors={errors} />} />
+				<PrivateRoute path="/lobbies/new" element={Cookies.get("authToken") || authToken ? <CreateLobby /> : <ErrorNavigator error={401} updateErrors={updateErrors} />} />
+				<PrivateRoute path="/lobbies/:id/edit" element={Cookies.get("authToken") || authToken ? <UpdateLobby /> : <ErrorNavigator error={401} updateErrors={updateErrors} />} />
+				<PrivateRoute path="/lobbies/home" element={Cookies.get("authToken") || authToken ? <LobbyHome /> : <ErrorNavigator error={401} updateErrors={updateErrors} />} />
+				<PrivateRoute path="/play/:id" element={Cookies.get("authToken") || authToken ? <Play /> : <ErrorNavigator error={401} updateErrors={updateErrors} />} />
 
 				{/* Catch All Route */}
-				<Route path="*" element={<ErrorNavigator error={404} updateErrors={updateErrors} errors={errors}/>} />
+				<Route path="*" element={<ErrorNavigator error={404} updateErrors={updateErrors} />} />
 			</Routes>
 		</>
 	);
