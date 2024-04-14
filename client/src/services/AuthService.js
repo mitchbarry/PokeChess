@@ -15,7 +15,7 @@ const AuthService = {
     async login(user) {
         return http.post("/auth/login", user)
             .then(response => response.data)
-            .catch(error=>{
+            .catch(error => {
                 throw error;
             }
         );
@@ -23,17 +23,22 @@ const AuthService = {
 
     async logout(){
         return http.post("/auth/logout")
-            .then(response=>response.data)
-            .catch(error=>{
+            .then(response => response.data)
+            .catch(error => {
                 throw error;
             }
         );
     },
 
     async getUserInfo(token){
-        return http.get("/auth/login", token)
-            .then(response=>response.data)
-            .catch(error=>{
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}` // Include the token in the Authorization header
+            }
+        };
+        return http.get("/auth/login", config)
+            .then(response => response.data)
+            .catch(error => {
                 throw error;
             }
         );

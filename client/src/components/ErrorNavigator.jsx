@@ -1,9 +1,7 @@
 import { useEffect } from "react";
-import { Outlet, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const ErrorNavigator = ({ error, updateErrors }) => {
-
-    let tempErrors = {};
 
     useEffect(() => {
         let normalizedError = {};
@@ -27,13 +25,13 @@ const ErrorNavigator = ({ error, updateErrors }) => {
     }, [error]);
 
     return (
-        <Route>
+        <>
             {error === 401 ? (
-                <Redirect to="/login" />
+                <Navigate to="/login" />
             ) : (
-                <Redirect to="/error" errors={tempErrors}/>
+                <Navigate to="/error" />
             )}
-        </Route>
+        </>
     );
 };
 

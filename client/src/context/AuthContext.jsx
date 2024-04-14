@@ -26,32 +26,18 @@ export const AuthProvider = ({ children }) => {
 		Cookies.set("authToken", response.token, { expires: 7 }); // Set the token as a browser cookie with an expiry time (1 week)
 	}
 
-	const handleLoginToken = async (cookieToken) => {
+	const handleLoginToken = async () => {
 		let userResponse;
 		try {
-            userResponse = await AuthService.getUserInfo(cookieToken);
+            userResponse = await AuthService.getUserInfo(Cookies.get("authToken"));
         }
         catch (error) {
             console.error("Login failed:", error); // Handle login error
             Cookies.remove("authToken");
         }
 		finally {
-			setAuthToken(newToken); // Set the token and user information in state
-            setLoggedUser(newUser);
-		}
-	}
-
-	const handleLogout = async () => {
-        try {
-            await AuthService.logout(/*token*/); // token may be passed through to invalidate it via a blacklist (have not yet implemented)
-        }
-        catch (error) {
-            console.error("Logout failed:", error);
-        }
-		finally {
-			setAuthToken(null);
-			setLoggedUser(null);
-			Cookies.remove("authToken");
+			setAuthToken(Cookies.get("authToken")); // Set the token and user information in state
+            setLoggedUser(userResponse);
 		}
 	}
 
@@ -74,7 +60,7 @@ export const AuthProvider = ({ children }) => {
 	}
 
 	return (
-		<AuthContext.Provider value={{ authToken, loggedUser, handleLoginResponse, handleLogout, updateLoggedUser, updateAuthToken, pathParamValidator, handleLoginToken }}>
+		<AuthContext.Provider value={{ authToken, loggedUser, handleLoginResponse, updateLoggedUser, updateAuthToken, pathParamValidator, handleLoginToken }}>
 			{children}
 		</AuthContext.Provider>
 	)

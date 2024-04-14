@@ -75,7 +75,7 @@ const authController = {
             const token = req.headers.authorization.split(' ')[1]; // Extract and verify the token from the request headers
             const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
             */
-            res.json({ message: "Logout successful" });
+            res.json({ message: "Logout Successful!" });
         }
         catch (error) {
             next(error);

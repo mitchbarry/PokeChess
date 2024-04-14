@@ -11,8 +11,6 @@ const pokemonController = {
             res.json(newPokemon);
         }
         catch (error) {
-            console.log(error);
-            res.status(400).json(error);
             next(error);
         }
     },
@@ -23,8 +21,6 @@ const pokemonController = {
             res.json(allPokemon);
         }
         catch (error) {
-            console.error(error);
-            res.status(400).json(error); // here is our error response
             next(error);
         }
     },
@@ -43,8 +39,6 @@ const pokemonController = {
             res.json(somePokemon);
         }
         catch (error) {
-            console.error(error);
-            res.status(400).json(error); // Error response
             next(error);
         }
     },
@@ -56,8 +50,6 @@ const pokemonController = {
             res.json(foundPokemon);
         }
         catch (error) {
-            console.error(error);
-            res.status(400).json(error); // here is our error response
             next(error);
         }
     },
@@ -73,8 +65,6 @@ const pokemonController = {
             res.json(updatedPokemon)
         }
         catch (error) {
-            console.error(error);
-            res.status(400).json(error); // here is our error response
             next(error);
         }
     },
@@ -90,8 +80,6 @@ const pokemonController = {
             res.json(deletedPokemon);
         }
         catch (error) {
-            console.error(error);
-            res.status(400).json(error);
             next(error);
         }
     },
@@ -172,6 +160,7 @@ const pokemonController = {
                             }
                             catch (error) {
                                 console.error(`Error downloading image ${imageName}:`, error);
+                                next(error)
                             }
                         }
                     }
@@ -195,14 +184,14 @@ const pokemonController = {
                             }
                             catch (error) {
                                 console.error(`Error downloading image ${imageName}:`, error);
+                                next(error)
                             }
                         }
                     }
                 }
             }
-            catch (err) {
-                console.error(err);
-                next(err);
+            catch (error) {
+                next(error);
             }
         };
         await addAllPokemonToDb();
