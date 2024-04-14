@@ -143,7 +143,7 @@ const pokemonController = {
                         const imageURL = onePokemon.spriteFrontDefault;
                         const imageName = `${onePokemon.name}Front.png`;
                         const imagePath = path.join('../client/src/assets/pokemon', imageName);
-    
+
                         if (fs.existsSync(imagePath)) {
                             console.log(`Image ${imageName} already exists. Skipping download.`);
                         }
