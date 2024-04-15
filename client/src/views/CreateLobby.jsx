@@ -1,17 +1,17 @@
-import { React, useState, useEffect } from 'react'
-import { useNavigate,Link } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from 'react-router-dom';
+import { Container,Table,ButtonGroup,Button } from 'react-bootstrap';
 
-import { useAuth } from "../context/AuthContext"
-import LobbyService from '../services/LobbyService'
-import errorUtilities from '../utilities/error.utilities'
-import gameStateUtilities from '../utilities/gameState.utilities'
+import { useAuth } from "../context/AuthContext";
+import LobbyService from '../services/LobbyService';
+import errorUtilities from '../utilities/error.utilities';
+import gameStateUtilities from '../utilities/gameState.utilities';
 
-import styles from "../styles/CreateLobby.module.css"
-import { Container,Table,ButtonGroup,Button } from 'react-bootstrap'
+import"../styles/CreateLobby.css";
 
 const CreateLobby = () => {
 
-    const { loggedUser } = useAuth();
+    const { authToken, loggedUser, handleLoginResponse, updateLoggedUser, updateAuthToken, pathParamValidator, handleLoginToken } = useAuth();
 
     const navigate = useNavigate()
 
@@ -32,7 +32,8 @@ const CreateLobby = () => {
             response = await LobbyService.getUserLobbies(loggedUser._id);
         }
         catch (error) {
-            console.error(error);
+            setErrors(errorUtilities.catchError(error));
+            setShowNotification(true);
         }
         finally {
             setLobbies(response);
