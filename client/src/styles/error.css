@@ -33,6 +33,21 @@
 .blueButtonMarginTop {
     margin-top: 20px;
 }
+/* ------------------------------------------------------------------------------------ flash box items > */
+.flash-box-li {
+    font-size: 120%;
+    display: flex;
+    align-items: center;
+}
+.close-button-red {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    background: transparent;
+    font-size: 14px;
+    cursor: pointer;
+	color: #752026;
+}
 /* ------------------------------------------------------------------------------------ simple styling items > */
 .heading2 {
     font-size: 240%;

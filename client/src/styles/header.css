@@ -1,13 +1,4 @@
-.container-header {
-	padding-top: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 90px;
-}
-.favicon-img {
-	height: 64px;
-}
+/* ------------------------------------------------------------------------------------ animations > */
 @keyframes wiggle { /* Define the keyframes for the wiggle animation */
     0%, 100% {
         transform: translateX(0) rotate(0deg);
@@ -22,54 +13,7 @@
         transform: translateX(-3px) rotate(-5deg);
     }
 }
-.favicon-img:hover { /* Apply animation to Pokeball on hover */
-    animation: wiggle 0.5s ease;
-}
-.navbar-container {
-	background: linear-gradient(rgb(0,128,255),rgb(204,34,0));
-	margin-left: 5px;
-	width: 90%;
-	height: 70px;
-	border: #FFCC01 solid 3px;
-	padding: 0 !important;
-}
-.nav-container {
-	min-width: fit-content;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-.pokeChess-img {
-	transition: all 0.3s ease;
-	height: 50px;
-}
-.pokeChess-img:hover {
-	height: 55px;
-}
-.pokeDex-img {
-	height: 45px;
-}
-.nav-item, .nav-item-img, .nav-item-button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.nav-item-img {
-	min-width: 200px;
-	margin-left: 5px;
-}
-.nav-item {
-	font-size: 130%;
-	font-weight: bold;
-	font-family: fantasy;
-	width: fit-content;
-}
-.nav-item-button {
-	width: fit-content;
-	margin-right: 13px;
-}
+/* ------------------------------------------------------------------------------------ buttons > */
 .login-button, .logout-button {
 	border: solid 2px !important;
 	padding-left: 5px auto !important;
@@ -97,12 +41,57 @@
 	fill: #9A383D;
 	stroke: #9A383D;
 }
-.flexBoxSpaceBetween {
+/* ------------------------------------------------------------------------------------ containers > */
+.container-header {
+	padding-top: 20px;
+	max-width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 90px;
+}
+.header-navbar {
+	height: 70px;
+	width: 100%;
+	background: linear-gradient(rgb(0,128,255),rgb(204,34,0));
+	margin-left: 5px;
+	border: #FFCC01 solid 3px;
+	border-radius: 45px; /* border radius is 1/2 the header's height */
+	padding: 0 !important;
+}
+.navbar-nav {
+	min-width: fit-content;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.flex-box-space-around {
 	height: 100%;
 	width: 100%;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+}
+.nav-item, .nav-item-img, .nav-item-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.nav-item-img {
+	min-width: 200px;
+	margin-left: 5px;
+}
+.nav-item {
+	font-size: 130%;
+	font-weight: bold;
+	font-family: fantasy;
+	width: fit-content;
+}
+.nav-item-button {
+	width: fit-content;
+	margin-right: 13px;
 }
 .link {
 	display: flex;
@@ -119,4 +108,18 @@
 	color: #C69500;
 	fill: #C69500;
 	stroke: #C69500;
+}
+/* ------------------------------------------------------------------------------------ images > */
+.favicon-img {
+	height: 64px;
+}
+.favicon-img:hover { /* Apply animation to Pokeball on hover */
+    animation: wiggle 0.5s ease;
+}
+.pokeChess-img {
+	transition: all 0.3s ease;
+	height: 50px;
+}
+.pokeChess-img:hover {
+	height: 55px;
 }

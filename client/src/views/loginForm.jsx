@@ -1,13 +1,13 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Container } from 'react-bootstrap'
+import { Container, FormGroup } from 'react-bootstrap'
 
 import { useAuth } from "../context/AuthContext"
 import AuthService from "../services/AuthService"
 import errorUtilities from '../utilities/error.utilities'
 
-import login from "../assets/fonts/login.png"
-import "../styles/Form.css";
+import login from "../assets/text/login.png"
+import "../styles/form.css";
 
 const LoginForm = () => {
 
@@ -126,9 +126,12 @@ const handleBlur = (e) => {
 };
 
 	return (
-        <Container className="container-main">
-            <img src={login} className="header-img"/>
-            <div className="form-container">
+        <div className="container-login">
+            <img src={login} className="login-img"/>
+            <div className="login-form">
+                <h1 className="heading111">
+                    THIS IS A TEST
+                </h1>
                 {Object.keys(errors).length !== 0 && showNotification && (
                     <ul className="alert alert-danger">
                         <button type="button" className="btn-close close-button-red" aria-label="Close" onClick={closeNotification}></button>
@@ -153,7 +156,7 @@ const handleBlur = (e) => {
                 )}
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <div className="input-container">
+                        <div className="group-input">
                             <input
                                 type="text"
                                 id="email"
@@ -168,7 +171,7 @@ const handleBlur = (e) => {
                         </div>
                     </div>
                     <div className="form-group">
-                        <div className="input-container">
+                        <div className="group-input">
                             <input
                                 type={showPassword ? "text" : "password"}
                                 id="password"
@@ -196,7 +199,7 @@ const handleBlur = (e) => {
                     </button>
                 </form>
             </div>
-        </Container>
+        </div>
 	)
 }
 

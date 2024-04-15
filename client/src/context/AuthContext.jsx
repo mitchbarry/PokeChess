@@ -26,17 +26,17 @@ export const AuthProvider = ({ children }) => {
 		Cookies.set("authToken", response.token, { expires: 7 }); // Set the token as a browser cookie with an expiry time (1 week)
 	}
 
-	const handleLoginToken = async () => {
+	const handleLoginToken = async (cookieToken) => {
 		let userResponse;
 		try {
-            userResponse = await AuthService.getUserInfo(Cookies.get("authToken"));
+            userResponse = await AuthService.getUserInfo(cookieToken);
         }
         catch (error) {
             console.error("Login failed:", error); // Handle login error
             Cookies.remove("authToken");
         }
 		finally {
-			setAuthToken(Cookies.get("authToken")); // Set the token and user information in state
+			setAuthToken(cookieToken); // Set the token and user information in state
             setLoggedUser(userResponse);
 		}
 	}

@@ -1,7 +1,8 @@
 import Lobby from "../models/Lobby.model.js";
 
 const lobbyController = {
-    async createLobby(req, res, next) {
+    async createOneLobby(req, res, next) {
+        console.log(req.body)
         try {
             const newLobby = await Lobby.create(req.body);
             res.json(newLobby);
@@ -26,7 +27,8 @@ const lobbyController = {
             const userId = req.params.userId; // Get the user ID from the URL parameter
             const userLobbies = await Lobby.find({ 'creator._id' : userId }); // Search for lobbies where the creator attribute matches the user ID
             res.json(userLobbies);
-        } catch (error) {
+        }
+        catch (error) {
             next(error);
         }
     }

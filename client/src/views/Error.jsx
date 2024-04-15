@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext"
 
-import styles from "../styles/Error.module.css";
+import "../styles/error.css";
 
 const Error = (props) => {
 
@@ -11,33 +11,34 @@ const Error = (props) => {
     const { errors } = props
 
     return (
-        <div className={styles.flexBox}>
-            <div className={styles.mainItem}>
-                {Object.keys(errors).length !== 0 && (
-                    <span className={styles.whiteText}>
+        <div className={flexBox}>
+            <div className={mainItem}>
+                {Object.keys(errors).length !== 0 && showNotification && (
+                    <ul className="alert alert-danger">
+                        <button type="button" className="btn-close close-button-red" aria-label="Close" onClick={closeNotification}></button>
                         {errors.statusCode && errors.name && (
-                            <h2 className={styles.heading2}>
-                                Error {errors.statusCode}: {errors.name} 
-                            </h2>
+                            <li className="flash-box-li">
+                                <b>Error {errors.statusCode}: {errors.name}</b>
+                            </li>
                         )}
                         {errors.message && (
-                            <p className={styles.paragraphTag}>
+                            <li className="flash-box-li">
                                 {errors.message}
-                            </p>
+                            </li>
                         )}
                         {errors.validationErrors && errors.validationErrors.length !== 0 && (
-                            Object.keys(errors.validationErrors).map((key, index) => (
-                                <p key={index} className={styles.paragraphTag}>
-                                    {errors.validationErrors[key]}
-                                </p>
+                            errors.validationErrors.map((error, index) => (
+                            <li key={index} className="flash-box-li">
+                                {error}
+                            </li>
                             ))
                         )}
-                    </span>
+                    </ul>
                 )}
                 {authToken ? (
-                    <Link to="/lobbies/home" className={styles.blueButtonMarginTop}>Home</Link>
+                    <Link to="/lobbies/home" className={blueButtonMarginTop}>Home</Link>
                 ) : (
-                    <Link to="/login" className={styles.blueButton}>Home</Link>
+                    <Link to="/login" className={blueButton}>Home</Link>
                 )}
             </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 
-import pokeNews from "../assets/fonts/pokeNews.png"
+import pokeNewsImg from "../assets/text/pokeNews.png"
 import "../styles/pokeNews.css"
 
 const PokeTwitter = () => {
@@ -9,13 +9,12 @@ const PokeTwitter = () => {
 		script.async = true
 		script.src = "https://platform.twitter.com/widgets.js"
 		document.body.appendChild(script)
-
 		return () => document.body.removeChild(script)
 	}, [])
 
 	return (
 		<div className="title">
-			<img src={pokeNews} alt="PokeNews" />
+			<img src={pokeNewsImg} alt="PokéNews" />
 			<div className="poke-twitter-container">
 				<a
 					className="twitter-timeline"

@@ -6,8 +6,8 @@ import { useAuth } from "../context/AuthContext"
 import AuthService from "../services/AuthService"
 import errorUtilities from '../utilities/error.utilities'
 
-import register from "../assets/fonts/register.png"
-import "../styles/Form.css";
+import registerImg from "../assets/text/register.png"
+import "../styles/form.css";
 
 const RegistrationForm = () => {
 
@@ -238,8 +238,8 @@ const RegistrationForm = () => {
 	// (Object.keys(formErrors).every(key => formErrors[key] === "") whether submit button is grayed out -> might need to be a useState variable
 
 	return (
-		<Container className="container-main">
-			<img src={register} className="header-img"/>
+		<div className="container-register">
+			<img src={registerImg} className="header-img"/>
 			<div className="form-container">
 				{Object.keys(errors).length !== 0 && showNotification && (
                     <ul className="alert alert-danger">
@@ -323,7 +323,7 @@ const RegistrationForm = () => {
 					</button>
 				</form>
 			</div>
-		</Container>
+		</div>
 	)
 }
 

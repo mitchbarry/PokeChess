@@ -7,7 +7,7 @@ import LobbyService from '../services/LobbyService';
 import errorUtilities from '../utilities/error.utilities';
 import gameStateUtilities from '../utilities/gameState.utilities';
 
-import"../styles/CreateLobby.css";
+import"../styles/createLobby.css";
 
 const CreateLobby = () => {
 
@@ -23,8 +23,11 @@ const CreateLobby = () => {
     const [showNotification, setShowNotification] = useState(false);
 
     useEffect(() => {
-        getUserLobbies();
-    }, []);
+        if (loggedUser) {
+            console.log(loggedUser)
+            getUserLobbies();
+        }
+    }, [loggedUser]);
 
     const getUserLobbies = async () => {
         let response;
@@ -77,7 +80,7 @@ const CreateLobby = () => {
                 name: name.trim() ? name : loggedUser.username + "'s Lobby",
                 description: description.trim(),
                 password: password.trim(),
-                creator: loggedUser,
+                creator: loggedUser._id,
                 gameState: newGameState
             });
         }
@@ -112,28 +115,28 @@ const CreateLobby = () => {
             <div className="container d-flex flex-row col-12 " style={{backgroundColor:'rgb(51, 103, 153, 0.9)'}}>
                 <div>
                     <h2 className='text-warning'>Create Lobby</h2>
-                    {(Object.keys(errors).length !== 0  && showNotification) && (
-                        <ul className={styles.flashBox}>
-                            <button className={styles.closeButtonRed} onClick={() => closeNotification()}>x</button>
+                    {/* {Object.keys(errors).length !== 0 && showNotification && (
+                        <ul className="alert alert-danger">
+                            <button type="button" className="btn-close close-button-red" aria-label="Close" onClick={closeNotification}></button>
                             {errors.statusCode && errors.name && (
-                                <li className={styles.flashBoxLi}>
-                                    Error {errors.statusCode}: {errors.name} 
+                                <li className="flash-box-li">
+                                    <b>Error {errors.statusCode}: {errors.name}</b>
                                 </li>
                             )}
                             {errors.message && (
-                                <li className={styles.flashBoxLi}>
+                                <li className="flash-box-li">
                                     {errors.message}
                                 </li>
                             )}
                             {errors.validationErrors && errors.validationErrors.length !== 0 && (
-                                Object.keys(errors.validationErrors).map((key, index) => (
-                                    <li key={index} className={styles.flashBoxLi}>
-                                        {errors.validationErrors[key]}
-                                    </li>
+                                errors.validationErrors.map((error, index) => (
+                                <li key={index} className="flash-box-li">
+                                    {error}
+                                </li>
                                 ))
                             )}
                         </ul>
-                    )}
+                    )} */}
                     <form onSubmit={handleSubmit} className="form-control mt-3 d-flex flex-column" style={{background:'radial-gradient(silver,slategrey)',width:'45vh'}}>
                         <label className='form-label my-1 text-warning' htmlFor="name">
                             <h5>Lobby</h5>

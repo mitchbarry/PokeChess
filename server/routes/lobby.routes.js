@@ -6,7 +6,7 @@ const router = Router();
 
 router.route("/lobbies")
     .get(lobbyController.getAllLobbies)
-    .post(lobbyController.createLobby)
+    .post(lobbyController.createOneLobby)
 
 router.route("/lobbies/user/:userId")
     .get(lobbyController.getUserLobbies);

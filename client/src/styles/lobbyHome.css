@@ -1,0 +1,83 @@
+/* ------------------------------------------------------------------------------------ containers > */
+.container-main {
+	height: 60vh;
+	position: relative;
+	margin-top: calc((100vh - 90px) / 8); /* calc determines the top margin which will start the container 1/8 of the way down the page after the bottom of the header */
+	border: 2px solid #FFCC01;
+	border-radius: 5px;
+	background: linear-gradient(teal,rgba(51, 103, 153, 0.9),rgb(138,18,0));
+}
+.container-content {
+	height: 100%;
+	width: 100%;
+	padding: 40px 20px 20px 20px;
+	display: flex;
+	justify-content: space-around;
+}
+.content-main {
+	padding-top: 10px;
+	width: 45%;
+	display: flex;
+	flex-direction: column;
+	border: 3px solid #FFCC01;
+	border-radius: 5px;
+	color: #FFCC01;
+}
+/* ------------------------------------------------------------------------------------ fonts > */
+@font-face {
+	font-family: "digitalPixel";
+	src: url("../assets/text/fonts/digitalPixel.ttf") format("truetype");
+}
+/* ------------------------------------------------------------------------------------ images > */
+.lobbies-img {
+	height: 120px;
+	position: absolute;
+	top: -65px; /* 1/2 the height of the img with a 5px offset */
+	left: calc(width / 2);
+}
+/* -------------------------------------------------------------------------- icons > */
+.icon {
+	fill: #FFCC01;
+	stroke: #FFCC01;
+	margin-left: 2px;
+}
+/* ------------------------------------------------------------------------------------ text > */
+.table-head {
+	width: 34%;
+	font-size: 120%;
+}
+
+
+.btn-warning:hover,
+Button:hover {
+	transform: scale(1.1);
+	transition: transform 0.2s ease-in-out;
+}
+.pokeChessLobbiesLogo img {
+	width: 100%;
+	max-width: 720px;
+	height: auto;
+	margin-top: -100px;
+	margin-bottom: -75px;
+}
+.pokeChessLobbiesLogo img:hover {
+	transform: scale(1.05);
+	transition: transform 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+	h2 {
+		font-size: 5vw;
+		h2 {
+			text-shadow: 2px 2px 0px rgba(30, 144, 255, 0.3);
+		}
+	}
+
+	h3 {
+		font-size: 4vw;
+	}
+
+	th {
+		font-size: 3vw;
+	}
+}

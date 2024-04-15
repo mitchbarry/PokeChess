@@ -21,11 +21,11 @@ const LobbySchema = new Schema(
 		creator: {
             type: Schema.Types.ObjectId,
             ref: 'User',
-			required: [true, "Creator is required"]
+			required: [true, "Creator is required!"]
         },
 		gameState: {
 			type: Object,
-			required: true
+			required: [true, "Game state is required!"]
 		}
 	},
 	{ timestamps: true }
