@@ -1,0 +1,15 @@
+.color-bg-blue {
+    background-color: rgba(51, 103, 153, 0.9);
+}
+.color-burgundy {
+    color: #752026;
+}
+.color-light-gray { /* the order of these css rules matters, in this case color-red takes total priority */
+    color: #999;
+}
+.color-dark-gray {
+    color: #555;
+}
+.color-red {
+    color: red;
+}

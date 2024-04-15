@@ -1,0 +1,17 @@
+.spacing-mt-custom {
+    margin-top: calc((100vh - 90px) / 8); /* calc determines the top margin which will start the container 1/8 of the way down the page after the bottom of the header */
+}
+.spacing-p-input {
+    padding: 20px 12px 6px 12px !important;
+}
+.spacing-p-input-password {
+    padding: 20px 44px 6px 12px !important;
+}
+.spacing-input-label {
+    top: 7px;
+    left: 13px;
+}
+.spacing-input-label--shrink {
+    top: 2px;
+    left: 13px;
+}

@@ -1,0 +1,14 @@
+.border-shadow {
+    border-radius: 8px;
+	box-shadow: 0 4px 8px rgb(0, 0, 0);
+}
+.border-shadow-inset {
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.border-shadow-error {
+    box-shadow: inset 0 1px 3px rgb(150,0,0, 0.8);
+}
+.border-error {
+    border: 1px solid red !important;
+}
