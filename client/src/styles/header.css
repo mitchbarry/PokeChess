@@ -1,18 +1,3 @@
-/* ------------------------------------------------------------------------------------ animations > */
-@keyframes wiggle { /* Define the keyframes for the wiggle animation */
-    0%, 100% {
-        transform: translateX(0) rotate(0deg);
-    }
-    25% {
-        transform: translateX(-3px) rotate(-5deg);
-    }
-    50% {
-        transform: translateX(3px) rotate(5deg);
-    }
-    75% {
-        transform: translateX(-3px) rotate(-5deg);
-    }
-}
 /* ------------------------------------------------------------------------------------ buttons > */
 .login-button, .logout-button {
 	border: solid 2px !important;
@@ -42,64 +27,11 @@
 	stroke: #9A383D;
 }
 /* ------------------------------------------------------------------------------------ containers > */
-.header-navbar {
-	height: 70px;
-	width: 100%;
-	background: linear-gradient(rgb(0,128,255),rgb(204,34,0));
-	margin-left: 5px;
-	border: #FFCC01 solid 3px;
-	border-radius: 45px; /* border radius is 1/2 the header's height */
-	padding: 0 !important;
-}
-.navbar-nav {
-	min-width: fit-content;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-.flex-box-space-around {
-	height: 100%;
-	width: 100%;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-}
-.nav-item, .nav-item-img, .nav-item-button {
+.nav-item-button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
-.nav-item-img {
-	min-width: 200px;
-	margin-left: 5px;
-}
-.nav-item {
-	font-size: 130%;
-	font-weight: bold;
-	font-family: fantasy;
-	width: fit-content;
-}
-.nav-item-button {
-	width: fit-content;
 	margin-right: 13px;
-}
-.link {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	text-decoration: none;
-	color: #FFCC01;
-	font-weight: 100;
-	fill: #FFCC01;
-	stroke: #FFCC01;
-	transition: all 0.3s ease;
-}
-.link:hover {
-	color: #C69500;
-	fill: #C69500;
-	stroke: #C69500;
 }
 /* ------------------------------------------------------------------------------------ images > */
 .pokeChess-img {

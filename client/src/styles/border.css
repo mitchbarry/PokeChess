@@ -13,8 +13,11 @@
     box-shadow: inset 0 1px 3px rgb(150,0,0, 0.8);
 }
 /* -------------------------------------------------------------------------------[ border attribute ]> */
-.border-error {
+.border-error-s {
     border: 1px solid red !important;
+}
+.border-gold-m {
+    border: #FFCC01 solid 2px;
 }
 .border-none {
     border: none;

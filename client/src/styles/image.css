@@ -1,26 +1,36 @@
 /*  [.image prefix] ------------------------------------------------------------------------------------[ images ]> */
 /* -------------------------------------------------------------------------------[ image types ]> */
-.image-header {
+.image-form-header {
 	height: 100px;
 }
-.image-logo {
-	height: 64px;
+.image-header-logo {
+	height: 66px;
+	margin-right: 5px;
 }
 /* ----------------------------------------------------------------[ image type states ]> */
-.image-logo:hover { /* Apply animation to Pokeball on hover */
+.image-header-logo:hover { /* Apply animation to Pokeball on hover */
     animation: wiggle 0.5s ease;
 }
 /* -------------------------------------------------------------------------------[ icon types ]> */
 /* ----------------------------------------------------------------[ icon colors ]> */
+.image-icon-gold {
+	fill: #FFCC01;
+	stroke: #FFCC01;
+}
 .image-icon-light-gray {
 	fill: #cecece;
 	stroke: #cecece;
 }
-.image-icon-light-gray:hover {
+.image-icon-dark-gray {
 	fill: #afafaf;
 	stroke: #afafaf;
 }
-.image-icon-dark-gray {
+/* -------------------------------------------------[ icon color states ]> */
+.image-icon-gold-h:hover {
+	fill: #C69500;
+	stroke: #C69500;
+}
+.image-icon-light-gray-h:hover {
 	fill: #afafaf;
 	stroke: #afafaf;
 }
