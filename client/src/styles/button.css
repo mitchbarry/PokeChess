@@ -1,0 +1,9 @@
+/*  .button prefix ------------------------------------------------------------------------------------ buttons > */
+.button-submit-gray-red {
+	height: 50px;
+	background-color: darkslategray;
+	color: #ffffff;
+}
+.button-submit-gray-red:hover {
+	background-color: hsl(358, 85%, 62%);
+}

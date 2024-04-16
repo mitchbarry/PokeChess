@@ -1,37 +1,30 @@
-/* ------------------------------------------------------------------------------------ buttons > */
-.form-submit-btn {
+/*  .form prefix ------------------------------------------------------------------------------------ forms > */
+.form-m {
+	width: 50vw;
+	min-width: 200px;
+	max-width: 600px;
+}
+/* ------------------------------------------------------------------------------------ form inputs > */
+.form-input-m {
 	height: 50px;
-	width: 100%;
-	padding: 10px;
-	border: none;
-	border-radius: 4px;
-	background-color: darkslategray;
-	color: #ffffff;
-	font-size: 140%;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-.form-submit-btn:hover {
-	background-color: hsl(358, 85%, 62%);
+/* -------------------------------------------------------------------------- input padding > */
+.form-p-input {
+    padding: 20px 12px 6px 12px !important;
 }
-/* -------------------------------------------------------------------------- icons > */
-.password-icon, .password-icon-active {
-    position: absolute;
-    top: 15px;
+.form-p-input-password {
+    padding: 20px 44px 6px 12px !important;
+}
+/* -------------------------------------------------------------------------- input positioning > */
+.form-input-label {
+    top: 7px;
+    left: 13px;
+}
+.form-input-label--shrink {
+    top: 2px;
+    left: 13px;
+}
+.form-input-icon {
+	top: 15px;
     right: 10px;
-	cursor: pointer;
-    transition: all 0.3s ease;
-}
-.password-icon {
-	fill: #cecece;
-	stroke: #cecece;
-}
-.password-icon:hover {
-	fill: #afafaf;
-	stroke: #afafaf;
-}
-.password-icon-active {
-	fill: #afafaf;
-	stroke: #afafaf;
 }

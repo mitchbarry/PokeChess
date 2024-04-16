@@ -47,12 +47,6 @@
 	font-size: 120%;
 }
 
-
-.btn-warning:hover,
-Button:hover {
-	transform: scale(1.1);
-	transition: transform 0.2s ease-in-out;
-}
 .pokeChessLobbiesLogo img {
 	width: 100%;
 	max-width: 720px;

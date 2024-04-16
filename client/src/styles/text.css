@@ -1,5 +1,9 @@
+/*  .text prefix ------------------------------------------------------------------------------------ text size > */
 .text-150 {
     font-size: 150%;
+}
+.text-140 {
+    font-size: 140%;
 }
 .text-120 {
 	font-size: 120%;
@@ -10,11 +14,11 @@
 .text-50 {
     font-size: 50%;
 }
-.text-input-label {
-    pointer-events: none;
-    transition: all 0.3s ease;
+/* ------------------------------------------------------------------------------------ text weight > */
+.text-lighter {
     font-weight: lighter;
 }
+/* ------------------------------------------------------------------------------------ text shadows > */
 .text-shadow {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }

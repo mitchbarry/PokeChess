@@ -1,10 +1,12 @@
+/*  .color prefix ------------------------------------------------------------------------------------ backgrounds > */
 .color-bg-blue {
     background-color: rgba(51, 103, 153, 0.9);
 }
+/* ------------------------------------------------------------------------------------ colors > */
 .color-burgundy {
     color: #752026;
 }
-.color-light-gray { /* the order of these css rules matters, in this case color-red takes total priority */
+.color-light-gray {
     color: #999;
 }
 .color-dark-gray {

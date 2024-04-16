@@ -1,0 +1,17 @@
+/*  .image prefix ------------------------------------------------------------------------------------ image sizes > */
+.image-header {
+	height: 100px;
+}
+/* ------------------------------------------------------------------------------------ icon colors > */
+.image-icon-light-gray {
+	fill: #cecece;
+	stroke: #cecece;
+}
+.image-icon-light-gray:hover {
+	fill: #afafaf;
+	stroke: #afafaf;
+}
+.image-icon-dark-gray {
+	fill: #afafaf;
+	stroke: #afafaf;
+}
