@@ -6,13 +6,28 @@
 .transition-ease {
     transition: all 0.3s ease;
 }
+.rounded-bullet {
+    border-radius: 15em 100em 100em 15em;
+}
 /* -------------------------------------------------------------------------------[ custom spacing ]> */
 .mt-custom {
     margin-top: calc((100vh - 90px) / 8); /* calc determines the top margin which will start the container 1/8 of the way down the page after the bottom of the header */
 }
-.height-70 {
+.height-70-p {
     height: 70px;
 }
-.min-width-200 {
+.height-70 {
+    height: 70%;
+}
+.height-60 {
+    height: 60%;
+}
+.width-120-p {
+    width: 150px;
+}
+.me-custom {
+    margin-right: calc(70px - (70px * 0.79)); /* calc determines right margin for login/logout button by taking header height (70px) - the height of the button + one of the gaps (60% + (100% - 60%) / 2) + (1%) for extra room for visual */
+}
+.min-width-200-p {
     min-width: 200px;
 }

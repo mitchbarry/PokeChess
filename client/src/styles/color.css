@@ -3,8 +3,15 @@
 .color-bg-blue {
     background-color: rgba(51, 103, 153, 0.9);
 }
+.color-bg-gold {
+    background-color: #FFCC01;
+}
 .color-bg-blue-red-l {
     background: linear-gradient(rgb(0,128,255),rgb(204,34,0));
+}
+/* ----------------------------------------------------------------[ background attribute states ]> */
+.color-bg-light-gold--h:hover {
+    background-color: #FFCC01;
 }
 /* -------------------------------------------------------------------------------[ color attributes ]> */
 .color-burgundy {
@@ -23,6 +30,12 @@
     color: red;
 }
 /* ----------------------------------------------------------------[ color attribute states ]> */
-.color-gold-h:hover {
+.color-gold--h:hover {
     color: #C69500;
+}
+.color-navy--h:hover {
+    color: #3466B0
+}
+.color-red--h:hover {
+    color: rgb(182, 24, 24);
 }

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=fantasy:wght@200&display=swap');
 #root {
-  max-width: 1340px;
+  max-width: 1084px; /* 1024 pixel width standard with padding increase of 60 */
   margin: 0 auto;
   padding: 0px 30px 0px 30px;
   text-align: center;

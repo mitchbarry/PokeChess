@@ -6,7 +6,7 @@
 	color: #ffffff;
 }
 /* --------------------------------------------------------------------------[ button type states ]> */
-.button-50-gray-red:hover {
+.button-50-gray-red--h:hover {
 	background-color: hsl(358, 85%, 62%);
 }
 .button-50-gray-red--disabled {
