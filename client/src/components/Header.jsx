@@ -37,8 +37,8 @@ const Header = () => {
 
 	{/* SVG icons are included in this component instead of in seperate components to allow for use of :hover css feature */}
     return (
-		<div className="container-header">
-			<img src={favicon} className="favicon-img" alt="Pokeball Favicon"/>
+		<div className="pt-4 d-flex align-items-center justify-content-center">
+			<img src={favicon} className="image-logo" alt="Pokeball Logo"/>
 			<Navbar className="header-navbar">
 				<Nav className="navbar-nav">
 					<Nav.Item className="nav-item-img">

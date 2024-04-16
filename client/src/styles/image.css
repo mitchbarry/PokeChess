@@ -1,8 +1,17 @@
-/*  .image prefix ------------------------------------------------------------------------------------ image sizes > */
+/*  [.image prefix] ------------------------------------------------------------------------------------[ images ]> */
+/* -------------------------------------------------------------------------------[ image types ]> */
 .image-header {
 	height: 100px;
 }
-/* ------------------------------------------------------------------------------------ icon colors > */
+.image-logo {
+	height: 64px;
+}
+/* ----------------------------------------------------------------[ image type states ]> */
+.image-logo:hover { /* Apply animation to Pokeball on hover */
+    animation: wiggle 0.5s ease;
+}
+/* -------------------------------------------------------------------------------[ icon types ]> */
+/* ----------------------------------------------------------------[ icon colors ]> */
 .image-icon-light-gray {
 	fill: #cecece;
 	stroke: #cecece;
@@ -14,4 +23,19 @@
 .image-icon-dark-gray {
 	fill: #afafaf;
 	stroke: #afafaf;
+}
+/* -------------------------------------------------------------------------------[ animations ]> */
+@keyframes wiggle { /* Keyframes for the wiggle animation */
+    0%, 100% {
+        transform: translateX(0) rotate(0deg);
+    }
+    25% {
+        transform: translateX(-3px) rotate(-5deg);
+    }
+    50% {
+        transform: translateX(3px) rotate(5deg);
+    }
+    75% {
+        transform: translateX(-3px) rotate(-5deg);
+    }
 }

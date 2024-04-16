@@ -42,14 +42,6 @@
 	stroke: #9A383D;
 }
 /* ------------------------------------------------------------------------------------ containers > */
-.container-header {
-	padding-top: 20px;
-	max-width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 90px;
-}
 .header-navbar {
 	height: 70px;
 	width: 100%;
@@ -110,12 +102,6 @@
 	stroke: #C69500;
 }
 /* ------------------------------------------------------------------------------------ images > */
-.favicon-img {
-	height: 64px;
-}
-.favicon-img:hover { /* Apply animation to Pokeball on hover */
-    animation: wiggle 0.5s ease;
-}
 .pokeChess-img {
 	transition: all 0.3s ease;
 	height: 50px;

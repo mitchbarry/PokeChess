@@ -18,7 +18,16 @@ import LoginForm from "./views/LoginForm";
 import Error from "./views/Error";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import "./App.css";
+
+import "./styles/border.css"; /* VV These will be compiled into one css file before launch VV */
+import "./styles/button.css";
+import "./styles/color.css";
+import "./styles/form.css";
+import "./styles/image.css";
+import "./styles/misc.css";
+import "./styles/text.css";
 
 const App = () => {
 

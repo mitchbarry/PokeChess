@@ -1,10 +1,12 @@
-/*  no prefix ------------------------------------------------------------------------------------ misc > */
+/*  [no prefix] ------------------------------------------------------------------------------------[ misc ]> */
+/* -------------------------------------------------------------------------------[ misc properties ]> */
 .cursor-pointer {
     cursor: pointer;
 }
-.mt-custom {
-    margin-top: calc((100vh - 90px) / 8); /* calc determines the top margin which will start the container 1/8 of the way down the page after the bottom of the header */
-}
 .transition-ease {
     transition: all 0.3s ease;
+}
+/* -------------------------------------------------------------------------------[ custom spacing ]> */
+.mt-custom {
+    margin-top: calc((100vh - 90px) / 8); /* calc determines the top margin which will start the container 1/8 of the way down the page after the bottom of the header */
 }

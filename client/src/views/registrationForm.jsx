@@ -1,13 +1,11 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Container } from 'react-bootstrap'
 
 import { useAuth } from "../context/AuthContext"
 import AuthService from "../services/AuthService"
 import errorUtilities from '../utilities/error.utilities'
 
 import registerImg from "../assets/text/register.png"
-import "../styles/form.css";
 
 const RegistrationForm = () => {
 
