@@ -1,9 +1,14 @@
 /*  .button prefix ------------------------------------------------------------------------------------ buttons > */
-.button-submit-gray-red {
+.button-50-gray-red {
 	height: 50px;
 	background-color: darkslategray;
 	color: #ffffff;
 }
-.button-submit-gray-red:hover {
+.button-50-gray-red:hover {
 	background-color: hsl(358, 85%, 62%);
+}
+.button-50-gray-red--disabled {
+	height: 50px;
+	background-color: rgb(192, 192, 192);
+	color: #888888;
 }

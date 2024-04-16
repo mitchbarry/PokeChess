@@ -204,7 +204,7 @@ const handleBlur = (e) => {
                             </label>
                         </div>
                     </div>
-                    <button type="submit" className="button-submit-gray-red transition-ease text-140 border-shadow-light border-none w-100 rounded">
+                    <button type="submit" className="button-50-gray-red transition-ease text-140 border-shadow-light border-none w-100 rounded">
                         Login
                     </button>
                 </form>
