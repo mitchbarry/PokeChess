@@ -4,16 +4,16 @@ Dive into the electrifying world of Pokémon without investing countless hours i
 
 ## Links
 
-[Website](...)
+Play: [Website](...) (Not Live)
 
-[GitHub](https://github.com/mitchbarry/PokeChess)
+Source: [GitHub](https://github.com/mitchbarry/PokeChess)
 
 ## Features
 
 - **MERN Stack**: Developed using MongoDB, Express.js, React.js, and Node.js, ensuring a robust and scalable architecture.
 - **CRUD Features**: Experience full CRUD (Create, Read, Update, Delete) functionality to effortlessly manage your account and create or join lobbies.
 - **Real-time Communication**: Harnesses sockets for seamless real-time communication, facilitating smooth gameplay interactions and fostering communication between players.
-- **In Development**: While functional, the app is not yet live and is continuously evolving with new features and improvements in the pipeline.
+- **In Development**: While the app is not yet live, its continuously evolving with new features and improvements in the pipeline.
 
 ## Contact Information
 
@@ -39,8 +39,8 @@ To contribute to PokeChess, follow these steps:
 9. Define the required environment variables in the following format:
 ```
     PORT=8000
-    MONGODB_URI={`your mongoDB URI`}
-    JWT_SECRET={`random string`}
+    MONGODB_URI={your mongoDB URI}
+    JWT_SECRET={random string}
 ```
 10. Save the .env file.
 11. Start the client server by running `npm run dev` in the project's client directory.
