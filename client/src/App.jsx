@@ -17,9 +17,8 @@ import LobbyHome from './views/LobbyHome';
 import LoginForm from "./views/LoginForm";
 import Error from "./views/Error";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-
 import "./App.css";
+import "./css/utility.css"
 
 import "./styles/border.css"; /* VV These will be compiled into one css file before launch VV */
 import "./styles/button.css";

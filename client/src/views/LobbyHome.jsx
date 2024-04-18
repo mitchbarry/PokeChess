@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Container, Button, ButtonGroup } from "react-bootstrap";
 
 import { useAuth } from "../context/AuthContext";
 import lobbiesImg from "../assets/text/lobbies.png";
