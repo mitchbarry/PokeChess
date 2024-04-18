@@ -1,0 +1,75 @@
+:root {
+    --black: rgb(25,25,25);
+    --white: rgb(245,245,245);
+}
+
+.screenSize_container {
+    text-align: center;
+    height: 20px;
+    width: 100vw;
+    display: flex;
+    padding: 0 30vw;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--black);
+}
+
+.button_container {
+    width: fit-content;
+    display: flex;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8pt;
+    width: 100px;
+    height: 80%;
+    margin: 0 10px;
+    color: var(--white);
+    background-color: var(--black);
+    border: 1px solid var(--white);
+    border-radius: 5px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.button:hover {
+    color: var(--white);
+    background-color: var(--white);
+}
+
+.lg16_9::after, .md16_9::after, .sm16_9::after, .sm4_3::after, .lg19_5_9::after, .md19_5_9::after, .sm19_5_9::after {
+    font-size: 8pt;
+    position: fixed;
+    transition: all 0.2s ease;
+    opacity: 0; /* Initially hidden */
+    color: var(--black);
+}
+
+.lg16_9:hover::after, .md16_9:hover::after, .sm16_9:hover::after, .sm4_3:hover::after, .lg19_5_9:hover::after, .md19_5_9:hover::after, .sm19_5_9:hover::after {
+    opacity: 1;
+}
+
+.lg16_9::after {
+    content: '2560 x 1440';
+}
+.md16_9::after {
+    content: '1920 x 1080';
+}
+.sm16_9::after {
+    content: '1366 x 768';
+}
+.sm4_3::after {
+    content: '1024 x 768';
+}
+.lg19_5_9::after {
+    content: '414 x 896';
+}
+.md19_5_9::after {
+    content: '375 x 812';
+}
+.sm19_5_9::after {
+    content: '320 x 568';
+}

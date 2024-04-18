@@ -1,6 +1,5 @@
 :root {
 	display: flex;
-	background-color: var(--pokedex-bg-color, rgba(51, 103, 153, 0.8));
 	--selected-type-hue: hsl(var(--selected-type-hue), 100%, 50%);
 	--detail-border-color: hsl(240, 100%, 50%);
 	width: 80vh;
