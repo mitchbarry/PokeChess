@@ -1,1 +1,4 @@
 /* * use CEM (Component, Entity, Modifier) for all css classes */
+.red {
+    border: 5px solid blue;
+}

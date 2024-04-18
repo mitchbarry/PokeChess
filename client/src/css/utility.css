@@ -1,6 +1,14 @@
 /* * use CEM (Component, Entity, Modifier) for all css classes */
 /* * --------------------[ containers ]-------------------- */
-
+#container {
+    margin: 0 auto;
+    transition: all 1s ease;
+    border: 2px solid black;
+    position: fixed;
+    background: url('./assets/rayquazagif.gif');
+    background-size:cover;
+    z-index: -1;
+}
 /* * --------------------[ forms ]-------------------- */
 
 /* * --------------------[ buttons ]-------------------- */

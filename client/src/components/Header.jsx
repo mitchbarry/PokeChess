@@ -37,7 +37,7 @@ const Header = () => {
 
 	{/* SVG icons are included in this component instead of in seperate components to allow for use of :hover css feature */}
     return (
-		<div className={utilities.red + styles.red}> {/* height-70-p mt-2 d-flex align-items-center justify-content-center */}
+		<div className={`${styles.red} ${utilities.red}`}> {/* height-70-p mt-2 d-flex align-items-center justify-content-center */}
 			<img src={favicon} className='image-header-logo image-header-logo--h me-2' alt='Pokeball Logo'/>
 			<nav className='text-fantasy border-gold-m color-bg-blue-red-l d-flex align-items-center justify-content-between h-100 w-100 rounded-pill'>
 				<Link className='min-width-200-p ms-2 d-flex justify-content-center align-items-center h-100'
