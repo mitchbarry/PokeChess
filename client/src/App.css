@@ -1,31 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=fantasy:wght@200&display=swap');
 
-#container {
+#container { /* ! THIS CLASS IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */
     margin: 0 auto;
-
-
+    width: 100vw;
+    height: 100vh;
     background-color: white;
     background: radial-gradient(rgb(0, 0, 0, 0.5),rgb(0, 0, 0, 0));
     z-index: -1;
-
 }
 
-#screen_container {
-    width: 100;
-    height: 100vh;
+#screen_container { /* ! THIS CLASS IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */
+    width: 100%;
+    height: calc(100% - 30px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-#screen_size {
+#screen_size { /* ! THIS CLASS IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */
     transition: all 1s ease;
     border: 2px solid black;
     background: url('./assets/rayquazagif.gif');
-    background-size:cover;
+    background-size: cover;
+    background-position: center;
     z-index: 0;
 }
+
+/* ! THIS CLASS IS TO BE USED WHEN PULLING TO PROD  -- COMMENT IN WHEN PUSHING TO PROD */
+/*
+#container {
+    margin: 0 auto;
+    width: 100vw;
+    height: 100vh;
+    background: url('./assets/rayquazagif.gif');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+*/
 
 /* * CSS RESET */
 /* Box sizing rules */
