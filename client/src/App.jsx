@@ -46,9 +46,9 @@ const App = () => {
 	},[])
 
 	return (
-		<div id='container'>
+		<>
 			<ScreenSize updateSize={updateSize} /> {/* ! THIS LINE IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */}
-			<div id='screen_container'> {/* ! THIS LINE IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */}
+			<div id='container'> {/* ! THIS LINE IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */}
 				<div id='screen_size' style={{width: `${size.width}px`, height: `${size.height}px`}}> {/* ! THIS LINE IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */}
 					<Header />
 					<Routes>
@@ -75,7 +75,7 @@ const App = () => {
 					</Routes>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 
