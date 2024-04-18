@@ -7,18 +7,18 @@ import { useAuth } from "./context/AuthContext";
 import Header from "./components/Header";
 import ErrorNavigator from "./components/ErrorNavigator";
 
-import RegistrationForm from "./views/RegistrationForm";
+import Login from "./views/Login";
+import Registration from "./views/Registration";
 import PokeDex from './views/PokeDex';
 import PokeNews from "./views/PokeNews";
 import CreateLobby from './views/CreateLobby';
 import UpdateLobby from './views/UpdateLobby';
 import Play from "./views/Play";
 import LobbyHome from './views/LobbyHome';
-import LoginForm from "./views/LoginForm";
+
 import Error from "./views/Error";
 
 import "./App.css";
-import "./css/utility.css"
 
 import "./styles/border.css"; /* VV These will be compiled into one css file before launch VV */
 import "./styles/button.css";
@@ -60,8 +60,8 @@ const App = () => {
 				<Route path="/pokenews" element={<PokeNews/>} />
 
 				{/* Login Routes */}
-				<Route path="/login" element={Cookies.get("authToken") || authToken ? <Navigate to="/lobbies/home" /> : <LoginForm />} />
-				<Route path="/register" element={Cookies.get("authToken") || authToken ? <Navigate to="/lobbies/home" /> : <RegistrationForm />} />
+				<Route path="/login" element={Cookies.get("authToken") || authToken ? <Navigate to="/lobbies/home" /> : <Login />} />
+				<Route path="/register" element={Cookies.get("authToken") || authToken ? <Navigate to="/lobbies/home" /> : <Registration />} />
 			
 				{/* Auth Routes */}
 				<Route path="/lobbies/new" element={Cookies.get("authToken") || authToken ? <CreateLobby /> : <ErrorNavigator error={401} updateErrors={updateErrors} />} />
