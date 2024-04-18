@@ -57,6 +57,4 @@ This project is licensed under the [MIT License](https://github.com/mitchbarry/P
 
 ---
 
-Enjoy your journey into the world of Pokémon battles with PokeChess! For any inquiries or support, feel free to contact me at the provided email address.
-
-Happy battling!
+For any inquiries or support, feel free to contact me at the provided email address.
