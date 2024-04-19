@@ -1,26 +1,19 @@
-:root {
-    --black: rgb(25,25,25);
-    --white: rgb(245,245,245);
-}
-
 .screenSize_container {
-    text-align: center;
     height: 20px;
     width: 100vw;
-    padding: 0 30vw;
+    padding: 0 15%;
+    text-align: center;
+    font-size: 8pt;
     background-color: var(--black);
 }
 
-.button_group {
-    width: fit-content;
-    display: flex;
+.label {
+    margin: 0;
+    color: var(--white);
 }
 
-.button {
-    font-size: 8pt;
-    width: 100px;
-    height: 75%;
-    margin: 0 10px;
+.button, .button_small {
+    margin: 0 5px;
     color: var(--white);
     background-color: var(--black);
     border: 1px solid var(--white);
@@ -28,6 +21,12 @@
     cursor: pointer;
     transition: color 0.2s ease 0.2s;
     transition: background-color 0.2s ease 0.2s;
+}
+.button {
+    width: 80px;
+}
+.button_small {
+    padding: 2px 2px;
 }
 
 .button:hover {
@@ -38,7 +37,6 @@
 }
 
 .lg16_9::after, .md16_9::after, .sm16_9::after, .sm4_3::after, .lg19_5_9::after, .md19_5_9::after, .sm19_5_9::after {
-    font-size: 8pt;
     opacity: 0;
     color: var(--black);
     position: fixed;
@@ -70,4 +68,12 @@
 }
 .sm19_5_9::after {
     content: '320 x 568';
+}
+
+.icon {
+    width: 12px;
+    height: 12px;
+    fill: var(--white);
+    stroke: var(--white);
+    pointer-events: none;
 }

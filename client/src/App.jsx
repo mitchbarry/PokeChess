@@ -26,10 +26,10 @@ const App = () => {
 	const { authToken, handleLoginToken } = useAuth()
 
 	const [errors, setErrors] = useState({})
-	const [size, setSize] = useState({width: 1920, height: 1080})
+	const [screenSize, setScreenSize] = useState({width: 1920, height: 1080, orientation: "landscape"})
 
-	const updateSize = (newSize) => {
-		setSize(newSize)
+	const updateScreenSize = (newScreenSize) => {
+		setScreenSize(newScreenSize)
 	}
 
 	const updateErrors = (newErrors) => {
@@ -51,9 +51,9 @@ const App = () => {
 
 	return (
 		<>
-			<ScreenSize updateSize={updateSize} /> {/* ! THIS LINE IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */}
+			<ScreenSize screenSize={screenSize} updateScreenSize={updateScreenSize} /> {/* ! THIS LINE IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */}
 			<div id='container'>
-				<div id='screen_size' style={{width: `${size.width}px`, height: `${size.height}px`}}> {/* ! THIS LINE IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */}
+				<div id='screen_size' style={{width: `${screenSize.width}px`, height: `${screenSize.height}px`}}> {/* ! THIS LINE IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */}
 					<Header />
 					<Routes>
 						{/* Root Route */}

@@ -1,18 +1,36 @@
 /* * use CEM (Component, Entity, Modifier) for all css classes */
+/* * --------------------[ custom properties ]-------------------- */
+:root {
+    --white: rgb(245, 245, 245);
+    --gray: rgb(206, 206, 206);
+    --gray--hover: rgb(166, 166, 166);
+    --black: rgb(25,25,25);
+    --gold: rgb(255, 204, 1);
+    --gold--hover: rgb(215, 164, 0);
+    --red: rgb(204,34,0);
+    --scarlet: rgb(182, 24, 24);
+    --blue: rgb(0,128,255);
+    --navy: rgb(52, 102, 176);
+}
 /* * --------------------[ containers ]-------------------- */
-.flex_center, .flex_between, .flex_around {
+.flex-center, .flex-between, .flex-around {
     display: flex;
     align-items: center;
 }
-.flex_center {
+.flex-center {
     justify-content: center;
 }
-.flex_between {
+.flex-between {
     justify-content: space-between;
 }
-.flex_around {
+.flex-around {
     justify-content: space-around;
 }
 /* * --------------------[ forms ]-------------------- */
 
 /* * --------------------[ buttons ]-------------------- */
+.button {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}

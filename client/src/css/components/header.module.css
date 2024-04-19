@@ -1,4 +1,88 @@
 /* * use CEM (Component, Entity, Modifier) for all css classes */
-.red {
-    border: 5px solid blue;
+.header {
+    width: 100%;
+    margin-top: clamp(5px, 1%, 10px);
+}
+
+.header_logo {
+    width: clamp(30px, 5%, 80px);
+    margin-right: clamp(5px, 1%, 10px);
+}
+.header_logo:hover {
+    animation: wiggle 0.7s ease;
+}
+
+.header_nav {
+    width: 80%;
+    padding: 1em 1em 1em 0em;
+    border: 2px solid var(--gold);
+    background: linear-gradient(var(--blue),var(--red));
+    border-radius: 4em;
+}
+
+.nav_title {
+    min-width: 15%;
+}
+
+.title {
+    width: 15%;
+    transition: all 0.3s ease;
+}
+.title:hover {
+    width: 20%;
+}
+
+.nav_link {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--gold);
+    fill: var(--gold);
+	stroke: var(--gold);
+    transition: all 0.3s ease;
+}
+.nav_link:hover {
+    color: var(--gold--hover);
+    fill: var(--gold--hover);
+	stroke: var(--gold--hover);
+}
+
+.nav_button {
+    width: 20%;
+    padding: 1em 1.5em 1em 1em;
+    margin-right: 2em;
+    font-size: 1.125em;
+    font-weight: bold;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    border-radius: 15em 100em 100em 15em;;
+    fill: var(--gold);
+	stroke: var(--gold);
+}
+.nav_button:hover {
+    background-color: var(--gold);
+    color: var(--navy);
+    fill: var(--navy);
+	stroke: var(--navy);
+}
+
+.button_logout:hover {
+    color: var(--scarlet);
+    fill: var(--scarlet);
+	stroke: var(--scarlet);
+}
+
+@keyframes wiggle { /* Keyframes for the wiggle animation */
+    0%, 100% {
+        transform: translateX(0) rotate(0deg);
+    }
+    25% {
+        transform: translateX(-3px) rotate(-5deg);
+    }
+    50% {
+        transform: translateX(3px) rotate(5deg);
+    }
+    75% {
+        transform: translateX(-3px) rotate(-5deg);
+    }
 }
