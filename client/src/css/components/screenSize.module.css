@@ -7,10 +7,7 @@
     text-align: center;
     height: 20px;
     width: 100vw;
-    display: flex;
     padding: 0 30vw;
-    justify-content: space-between;
-    align-items: center;
     background-color: var(--black);
 }
 
@@ -20,9 +17,6 @@
 }
 
 .button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-size: 8pt;
     width: 100px;
     height: 75%;
@@ -45,7 +39,7 @@
 
 .lg16_9::after, .md16_9::after, .sm16_9::after, .sm4_3::after, .lg19_5_9::after, .md19_5_9::after, .sm19_5_9::after {
     font-size: 8pt;
-    opacity: 0; /* Initially hidden */
+    opacity: 0;
     color: var(--black);
     position: fixed;
     transition: opacity 0.2s ease;

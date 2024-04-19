@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'
 
 import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
@@ -12,24 +12,24 @@ import styles from '../css/components/header.module.css'
 
 const Header = () => {
 
-    const location = useLocation();
-	const navigate = useNavigate();
+    const location = useLocation()
+	const navigate = useNavigate()
 
-    const { authToken, loggedUser, updateLoggedUser, updateAuthToken } = useAuth();
+    const { authToken, loggedUser, updateLoggedUser, updateAuthToken } = useAuth()
 
 	const handleLogout = async () => {
-		let serverResponse;
+		let serverResponse
         try {
-            serverResponse = await AuthService.logout(/*token*/); // token may be passed through to invalidate it via a blacklist (have not yet implemented)
+            serverResponse = await AuthService.logout(/*token*/) // token may be passed through to invalidate it via a blacklist (have not yet implemented)
         }
         catch (error) {
-            console.error('Logout failed:', error);
+            console.error('Logout failed:', error)
         }
 		finally {
-			updateAuthToken(null);
-			updateLoggedUser(null);
-			Cookies.remove('authToken');
-			console.log(serverResponse);
+			updateAuthToken(null)
+			updateLoggedUser(null)
+			Cookies.remove('authToken')
+			console.log(serverResponse)
 			navigate('/login')
 		}
 	}
@@ -105,4 +105,4 @@ const Header = () => {
 	)
 }
 
-export default Header;
+export default Header

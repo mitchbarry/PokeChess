@@ -77,12 +77,6 @@ img, picture, video, canvas, svg {
     max-width: 100%;
 }
 
-/* Inherit fonts for inputs and buttons */
-input, button, textarea, select {
-    font-family: inherit;
-    font-size: inherit;
-}
-
 /* Anything that has been anchored to should have extra scroll margin */
 :target {
     scroll-margin-block: 5ex;

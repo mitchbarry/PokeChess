@@ -1,8 +1,17 @@
 /* * use CEM (Component, Entity, Modifier) for all css classes */
 /* * --------------------[ containers ]-------------------- */
-.flex_center {
+.flex_center, .flex_between, .flex_around {
     display: flex;
+    align-items: center;
+}
+.flex_center {
     justify-content: center;
+}
+.flex_between {
+    justify-content: space-between;
+}
+.flex_around {
+    justify-content: space-around;
 }
 /* * --------------------[ forms ]-------------------- */
 
