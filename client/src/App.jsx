@@ -45,6 +45,10 @@ const App = () => {
 		}
 	},[])
 
+	/* 
+	! SOME LINES BELOW AS WELL AS LINES IN './App.css' ARE FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD
+	*/
+
 	return (
 		<>
 			<ScreenSize updateSize={updateSize} /> {/* ! THIS LINE IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */}
