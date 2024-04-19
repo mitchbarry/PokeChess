@@ -48,7 +48,7 @@ const App = () => {
 	return (
 		<>
 			<ScreenSize updateSize={updateSize} /> {/* ! THIS LINE IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */}
-			<div id='container'> {/* ! THIS LINE IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */}
+			<div id='container'>
 				<div id='screen_size' style={{width: `${size.width}px`, height: `${size.height}px`}}> {/* ! THIS LINE IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */}
 					<Header />
 					<Routes>
