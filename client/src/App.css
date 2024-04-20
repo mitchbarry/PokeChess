@@ -10,7 +10,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: -1;
 }
 
 #screen_size { /* ! THIS CLASS IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */
@@ -19,7 +18,6 @@
     background: url('./assets/rayquazagif.gif');
     background-size: cover;
     background-position: center;
-    z-index: 0;
     overflow: auto;
 }
 

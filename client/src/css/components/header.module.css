@@ -1,7 +1,14 @@
 /* * use CEM (Component, Entity, Modifier) for all css classes */
 .header {
-    width: 100%;
-    margin-top: clamp(5px, 1%, 10px);
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 90%;
+    background-color: rgb(25, 25, 25, 0.5);
+    border-radius: 0 0 15px 15px;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
 }
 
 .header_logo {
@@ -15,8 +22,6 @@
 .header_nav {
     width: 80%;
     padding: 1em 1em 1em 0em;
-    border: 2px solid var(--gold);
-    background: linear-gradient(var(--blue),var(--red));
     border-radius: 4em;
 }
 

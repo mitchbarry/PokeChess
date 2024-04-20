@@ -1,16 +1,92 @@
 /* * use CEM (Component, Entity, Modifier) for all css classes */
+/* * --------------------[ imports ]-------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=Poppins:wght@300;400;500;600;700&display=swap'); /* Poppins font at weights; 300 , 400, 500, 600, 700 | Archivo font at weights 100 - 900 */
 /* * --------------------[ custom properties ]-------------------- */
 :root {
-    --white: rgb(245, 245, 245);
-    --gray: rgb(206, 206, 206);
-    --gray--hover: rgb(166, 166, 166);
-    --black: rgb(25,25,25);
-    --gold: rgb(255, 204, 1);
-    --gold--hover: rgb(215, 164, 0);
-    --red: rgb(204,34,0);
-    --scarlet: rgb(182, 24, 24);
+    --color-000: rgb(255, 255, 255);
+    --color-100: rgb(230, 230, 230);
+    --color-200: rgb(205, 205, 205);
+    --color-300: rgb(180, 180, 180);
+    --color-400: rgb(155, 155, 155);
+    --color-500: rgb(130, 130, 130);
+    --color-600: rgb(105, 105, 105);
+    --color-700: rgb(80, 80, 80);
+    --color-800: rgb(55, 55, 55);
+    --color-900: rgb(30, 30, 30);
+    --red: rgb(227, 53, 13);
+    --orange: rgb(238, 107, 47);
+    --yellow: rgb(255, 204, 1);
+    --green: rgb(77, 173, 91);
     --blue: rgb(0,128,255);
-    --navy: rgb(52, 102, 176);
+    --navy: rgb(27, 83, 186);
+    --teal: rgb(48, 167, 215);
+    --view-min: 320px;
+    --view-xs: 480px;
+    --view-sm: 720px;
+    --view-md: 960px;
+    --view-lg: 1200px;
+    --view-xl: 1400px;
+    --view-xxl: 1600px;
+    --view-max: 2600px;
+    --font-default: "Poppins", Helvetica, Arial, sans-serif;
+    --font-accent: "Archivo", Helvetica, Arial, sans-serif;
+    --font-default-weight: 600;
+    --font-accent-weight: 500;
+    --color-background-100: rgb(10, 13, 21);
+    --color-background-300: rgb(21, 28, 40);
+    --color-background-500: rgb(35, 42, 57);
+    --color-background-700: rgb(50, 58, 72);
+    --color-darken-100: #0000000d;
+    --color-darken-300: #0000001a;
+    --color-darken-400: #00000026;
+    --color-darken-500: #0000004d;
+    --color-darken-600: #00000080;
+    --color-darken-700: #000000b3;
+    --color-darken-800: #000000e6;
+    --color-darken-900: #000;
+    --shadow-xs: 0 1px 3px 0 rgba(0, 0, 0, .12);
+    --shadow-sm: 0 4px 6px 0 rgba(0, 0, 0, .12);
+    --shadow-md: 0 5px 15px 0 rgba(0, 0, 0, .12);
+    --shadow-lg: 0 10px 24px 0 rgba(0, 0, 0, .12);
+    --shadow-xl: 0 15px 35px 0 rgba(0, 0, 0, .12);
+    --transition-hover-speed: 0.1s;
+    --transition-hover: color var(--transition-hover-speed) ease, background-color var(--transition-hover-speed) ease, text-decoration-color var(--transition-hover-speed) ease, filter var(--transition-hover-speed) ease, border-color var(--transition-hover-speed) ease;
+    --navbar-background-color: #282d43cc;
+    --navbar-background-color-no-blur: #222639f2;
+
+    --navbar-background-blur: 20px;
+
+    --navbar-button-padding-md: 0 var(--size-150);
+    --navbar-button-padding-lg: 0 var(--size-200);
+    --navbar-button-padding-xl: 0 var(--size-300);
+    --navbar-button-border-radius: var(--size-100);
+    --navbar-z-index: 99;
+    --navbar-mobile-dropdown-duration: 250ms;
+    --navbar-logo-size: var(--size-1000);
+    --navbar-logo-padding: var(--size-100);
+    --navbar-mobile-logo-size-width: var(--size-500);
+    --navbar-mobile-logo-size-height: var(--size-500);
+    --navbar-menu-font-size: var(--font-size-550);
+    --font-subtext-weight: var(--font-accent-weight);
+    --navbar-mobile-overflowed-item-font-family: var(--font-default);
+    --navbar-mobile-overflowed-item-font-weight: var(--font-default-weight);
+    --navbar-menu-border-radius: var(--size-100);
+    --navbar-icon-right-margin: var(--size-150);
+    --navbar-menu-border-size: 0px;
+    --navbar-menu-border-color: #0000;
+    --navbar-search-dropdown-max-height: 600px;
+    --navbar-search-dropdown-width: 400px;
+    --footer-z-index: 98;
+    --footer-logo-color: #009dff;
+    --footer-logo-bottom-color: #009dff;
+    --footer-background-image-desktop: none;
+    --footer-background-image-mobile: none;
+    --footer-background-gradient: none;
+    --footer-content-size: var(--font-size-300);
+    --footer-region-font-size: var(--font-size-400);
+    --footer-language-font-size: var(--font-size-550);
+    --footer-background-blur: none;
+    scroll-behavior: smooth;
 }
 /* * --------------------[ containers ]-------------------- */
 .flex-center, .flex-between, .flex-around {
