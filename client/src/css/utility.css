@@ -13,13 +13,39 @@
     --color-700: rgb(80, 80, 80);
     --color-800: rgb(55, 55, 55);
     --color-900: rgb(30, 30, 30);
-    --red: rgb(227, 53, 13);
-    --orange: rgb(238, 107, 47);
-    --yellow: rgb(255, 204, 1);
-    --green: rgb(77, 173, 91);
-    --blue: rgb(0,128,255);
-    --navy: rgb(27, 83, 186);
-    --teal: rgb(48, 167, 215);
+    --color-red: rgb(227, 53, 13);
+    --color-orange: rgb(238, 107, 47);
+    --color-yellow: rgb(255, 204, 1);
+    --color-green: rgb(77, 173, 91);
+    --color-blue: rgb(0, 128, 255);
+    --color-navy: rgb(27, 83, 186);
+    --color-teal: rgb(48, 167, 215);
+    --color-darken-100: rgb(0, 0, 0, 0.05);
+    --color-darken-300: rgb(0, 0, 0, 0.1);
+    --color-darken-400: rgb(0, 0, 0, 0.15);
+    --color-darken-500: rgb(0, 0, 0, 0.3);
+    --color-darken-600: rgb(0, 0, 0, 0.5);
+    --color-darken-700: rgb(0, 0, 0, 0.7);
+    --color-darken-800: rgb(0, 0, 0, 0.9);
+    --color-darken-900: rgb(0, 0, 0);
+    --color-content-100: rgba(255, 255, 255, 0.05);
+    --color-content-300: rgba(255, 255, 255, 0.1);
+    --color-content-400: rgba(255, 255, 255, 0.15);
+    --color-content-500: rgba(255, 255, 255, 0.3);
+    --color-content-600: rgba(255, 255, 255, 0.5);
+    --color-content-700: rgba(255, 255, 255, 0.7);
+    --color-content-800: rgba(255, 255, 255, 0.9);
+    --color-content-900: rgb(255, 255, 255);
+    --color-accent-500: rgba(93, 113, 152, 0.4);
+    --color-accent-600: rgba(93, 113, 152, 0.6);
+    --color-accent-700: rgba(93, 113, 152, 0.8);
+    --color-background-navbar: rgb(40, 45, 67, 0.8);
+    --color-background-100: rgb(10, 13, 21);
+    --color-background-300: rgb(21, 28, 40);
+    --color-background-500: rgb(35, 42, 57);
+    --color-background-700: rgb(50, 58, 72);
+    --color-background-800: rgb(58, 70, 95);
+
     --view-min: 320px;
     --view-xs: 480px;
     --view-sm: 720px;
@@ -28,65 +54,91 @@
     --view-xl: 1400px;
     --view-xxl: 1600px;
     --view-max: 2600px;
-    --font-default: "Poppins", Helvetica, Arial, sans-serif;
-    --font-accent: "Archivo", Helvetica, Arial, sans-serif;
+
+    --size-025: 2px;
+    --size-050: 4px;
+    --size-075: 6px;
+    --size-100: 8px;
+    --size-150: 12px;
+    --size-200: 16px;
+    --size-250: 20px;
+    --size-300: 24px;
+    --size-350: 28px;
+    --size-400: 32px;
+    --size-500: 40px;
+    --size-600: 48px;
+    --size-700: 56px;
+    --size-800: 64px;
+    --size-900: 72px;
+    --size-1000: 80px;
+    --size-1100: 88px;
+    --size-1150: 92px;
+
+    --resize-025: 2px;
+    --resize-050: 4px;
+    --resize-075: 6px;
+    --resize-100: 8px;
+    --resize-150: 12px;
+    --resize-200: 16px;
+    --resize-250: 16px;
+    --resize-300: 16px;
+    --resize-400: 24px;
+    --resize-500: 32px;
+    --resize-600: 32px;
+    --resize-700: 40px;
+    --resize-800: 40px;
+    --resize-900: 48px;
+    --resize-1000: 48px;
+
+    --font-default-scale: 1;
+    --font-accent-scale: 1;
+    --font-fallback: Helvetica, Arial, sans-serif;
+    --font-default: "Poppins", var(--font-fallback);
+    --font-accent: "Archivo", var(--font-fallback);
     --font-default-weight: 600;
-    --font-accent-weight: 500;
-    --color-background-100: rgb(10, 13, 21);
-    --color-background-300: rgb(21, 28, 40);
-    --color-background-500: rgb(35, 42, 57);
-    --color-background-700: rgb(50, 58, 72);
-    --color-darken-100: #0000000d;
-    --color-darken-300: #0000001a;
-    --color-darken-400: #00000026;
-    --color-darken-500: #0000004d;
-    --color-darken-600: #00000080;
-    --color-darken-700: #000000b3;
-    --color-darken-800: #000000e6;
-    --color-darken-900: #000;
+    --font-accent-weight: 400;
+    --font-size-100: 0.625em;   /* 10px / 16px = 0.625em */
+    --font-size-200: 0.75em;    /* 12px / 16px = 0.75em */
+    --font-size-300: 0.875em;   /* 14px / 16px = 0.875em */
+    --font-size-400: 1em;       /* 16px / 16px = 1em */
+    --font-size-500: 1em;       /* 16px / 16px = 1em */
+    --font-size-600: 1.25em;    /* 20px / 16px = 1.25em */
+    --font-size-700: 1.5em;     /* 24px / 16px = 1.5em */
+    --font-size-800: 1.875em;   /* 30px / 16px = 1.875em */
+    --font-size-900: 2.25em;    /* 36px / 16px = 2.25em */
+    --font-200: var(--font-default-weight) calc(var(--font-size-200) * var(--font-default-scale)) var(--font-default);
+    --font-300: var(--font-default-weight) calc(var(--font-size-300) * var(--font-default-scale)) var(--font-default);
+    --font-400: var(--font-default-weight) calc(var(--font-size-400) * var(--font-default-scale)) var(--font-default);
+    --font-500: var(--font-default-weight) calc(var(--font-size-500) * var(--font-default-scale)) var(--font-default);
+    --font-600: var(--font-default-weight) calc(var(--font-size-600) * var(--font-default-scale)) var(--font-default);
+    --font-accent-100: var(--font-accent-weight) calc(var(--font-size-100) * var(--font-accent-scale)) var(--font-accent);
+    --font-accent-200: var(--font-accent-weight) calc(var(--font-size-200) * var(--font-accent-scale)) var(--font-accent);
+    --font-accent-300: var(--font-accent-weight) calc(var(--font-size-300) * var(--font-accent-scale)) var(--font-accent);
+    --font-accent-400: var(--font-accent-weight) calc(var(--font-size-400) * var(--font-accent-scale)) var(--font-accent);
+    --font-accent-500: var(--font-accent-weight) calc(var(--font-size-500) * var(--font-accent-scale)) var(--font-accent);
+    --font-accent-600: var(--font-accent-weight) calc(var(--font-size-600) * var(--font-accent-scale)) var(--font-accent);
+    --font-accent-700: var(--font-accent-weight) calc(var(--font-size-700) * var(--font-accent-scale)) var(--font-accent);
+    --font-accent-800: var(--font-accent-weight) calc(var(--font-size-800) * var(--font-accent-scale)) var(--font-accent);
+    --font-accent-900: var(--font-accent-weight) calc(var(--font-size-900) * var(--font-accent-scale)) var(--font-accent);
+
+    --line-height: 1;
+    --line-height-tight: 1.1;
+    --line-height-comfy: 1.4;
+    --line-height-relaxed: 1.7;
+    --line-height-loose: 2;
+
     --shadow-xs: 0 1px 3px 0 rgba(0, 0, 0, .12);
     --shadow-sm: 0 4px 6px 0 rgba(0, 0, 0, .12);
     --shadow-md: 0 5px 15px 0 rgba(0, 0, 0, .12);
     --shadow-lg: 0 10px 24px 0 rgba(0, 0, 0, .12);
     --shadow-xl: 0 15px 35px 0 rgba(0, 0, 0, .12);
+
     --transition-hover-speed: 0.1s;
     --transition-hover: color var(--transition-hover-speed) ease, background-color var(--transition-hover-speed) ease, text-decoration-color var(--transition-hover-speed) ease, filter var(--transition-hover-speed) ease, border-color var(--transition-hover-speed) ease;
-    --navbar-background-color: #282d43cc;
-    --navbar-background-color-no-blur: #222639f2;
 
-    --navbar-background-blur: 20px;
+    --blur-default: 20px;
 
-    --navbar-button-padding-md: 0 var(--size-150);
-    --navbar-button-padding-lg: 0 var(--size-200);
-    --navbar-button-padding-xl: 0 var(--size-300);
-    --navbar-button-border-radius: var(--size-100);
-    --navbar-z-index: 99;
-    --navbar-mobile-dropdown-duration: 250ms;
-    --navbar-logo-size: var(--size-1000);
-    --navbar-logo-padding: var(--size-100);
-    --navbar-mobile-logo-size-width: var(--size-500);
-    --navbar-mobile-logo-size-height: var(--size-500);
-    --navbar-menu-font-size: var(--font-size-550);
-    --font-subtext-weight: var(--font-accent-weight);
-    --navbar-mobile-overflowed-item-font-family: var(--font-default);
-    --navbar-mobile-overflowed-item-font-weight: var(--font-default-weight);
-    --navbar-menu-border-radius: var(--size-100);
-    --navbar-icon-right-margin: var(--size-150);
-    --navbar-menu-border-size: 0px;
-    --navbar-menu-border-color: #0000;
-    --navbar-search-dropdown-max-height: 600px;
-    --navbar-search-dropdown-width: 400px;
-    --footer-z-index: 98;
-    --footer-logo-color: #009dff;
-    --footer-logo-bottom-color: #009dff;
-    --footer-background-image-desktop: none;
-    --footer-background-image-mobile: none;
-    --footer-background-gradient: none;
-    --footer-content-size: var(--font-size-300);
-    --footer-region-font-size: var(--font-size-400);
-    --footer-language-font-size: var(--font-size-550);
-    --footer-background-blur: none;
-    scroll-behavior: smooth;
+    --scroll-behavior: smooth;
 }
 /* * --------------------[ containers ]-------------------- */
 .flex-center, .flex-between, .flex-around {
@@ -101,12 +153,4 @@
 }
 .flex-around {
     justify-content: space-around;
-}
-/* * --------------------[ forms ]-------------------- */
-
-/* * --------------------[ buttons ]-------------------- */
-.button {
-    transition: all 0.3s ease;
-    cursor: pointer;
-    text-decoration: none;
 }
