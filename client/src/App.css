@@ -1,37 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=fantasy:wght@200&display=swap');
 
-#container { /* ! THIS CLASS IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */
-    margin: 0 auto;
-    width: 100vw;
-    height: calc(100vh - 30px);
-    background-color: white;
-    background: radial-gradient(rgb(0, 0, 0, 0.5),rgb(0, 0, 0, 0));
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#screen_size { /* ! THIS CLASS IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */
-    transition: all 1s ease;
-    border: 2px solid black;
-    background: url('./assets/rayquazagif.gif');
-    background-size: cover;
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: url('./assets/rayquazagif.gif');
     background-position: center;
-    overflow: auto;
-}
-
-/* ! THIS CLASS IS TO BE USED WHEN PULLING TO PROD  -- COMMENT IN WHEN PUSHING TO PROD */
-/*
-#container {
-    margin: 0 auto;
-    width: 100vw;
-    background: url('./assets/rayquazagif.gif');
     background-size: cover;
-    background-position: center;
     z-index: -1;
 }
-*/
 
 /* * CSS RESET */
 /* Box sizing rules */
@@ -58,6 +37,7 @@ ul[role='list'], ol[role='list'] {
 
 /* Set core body defaults */
 body {
+    margin: 0 auto;
     line-height: var(--line-height-comfy);
     -webkit-font-smoothing: antialiased;
 }

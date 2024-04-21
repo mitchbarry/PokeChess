@@ -10,10 +10,6 @@
     transform: scale(1.05);
 }
 
-body {
-    height: 100vh;
-}
-
 .poke-twitter-container {
     background-color: black;
     border-radius: 40px;

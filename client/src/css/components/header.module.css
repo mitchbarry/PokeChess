@@ -1,14 +1,25 @@
 /* * use CEM (Component, Entity, Modifier) for all css classes */
 .header {
-    position: relative;
-    top: 0;
-    left: 0;
-    margin: 0 auto;
-    width: 90%;
-    background-color: rgb(25, 25, 25, 0.5);
-    border-radius: 0 0 15px 15px;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
+    position: sticky;
+    background-color: var(--color-darken-400);
+    backdrop-filter: blur(var(--blur-default));
+    -webkit-backdrop-filter: blur(var(--blur-default));
+}
+
+@media screen and (width < 960px) { /* ! awaiting var() support in @media queries */
+    .header {
+        width: 100%;
+        height: var(--size-700)
+    }
+}
+
+@media screen and (width >= 960px) { /* ! awaiting var() support in @media queries */
+    .header {
+        width: calc(100% - 2 * var(--size-150));
+        margin: var(--size-150);
+        border-radius: var(--border-radius);
+        height: var(--size-900)
+    }
 }
 
 .header_logo {

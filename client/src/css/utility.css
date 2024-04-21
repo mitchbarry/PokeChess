@@ -3,6 +3,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=Poppins:wght@300;400;500;600;700&display=swap'); /* Poppins font at weights; 300 , 400, 500, 600, 700 | Archivo font at weights 100 - 900 */
 /* * --------------------[ custom properties ]-------------------- */
 :root {
+    --view-min: 320px;
+    --view-xs: 480px;
+    --view-sm: 720px;
+    --view-md: 960px;
+    --view-lg: 1200px;
+    --view-xl: 1400px;
+    --view-xxl: 1600px;
+    --view-max: 2600px;
+
     --color-000: rgb(255, 255, 255);
     --color-100: rgb(230, 230, 230);
     --color-200: rgb(205, 205, 205);
@@ -28,32 +37,22 @@
     --color-darken-700: rgb(0, 0, 0, 0.7);
     --color-darken-800: rgb(0, 0, 0, 0.9);
     --color-darken-900: rgb(0, 0, 0);
-    --color-content-100: rgba(255, 255, 255, 0.05);
-    --color-content-300: rgba(255, 255, 255, 0.1);
-    --color-content-400: rgba(255, 255, 255, 0.15);
-    --color-content-500: rgba(255, 255, 255, 0.3);
-    --color-content-600: rgba(255, 255, 255, 0.5);
-    --color-content-700: rgba(255, 255, 255, 0.7);
-    --color-content-800: rgba(255, 255, 255, 0.9);
-    --color-content-900: rgb(255, 255, 255);
+    --color-lighten-100: rgba(255, 255, 255, 0.05);
+    --color-lighten-300: rgba(255, 255, 255, 0.1);
+    --color-lighten-400: rgba(255, 255, 255, 0.15);
+    --color-lighten-500: rgba(255, 255, 255, 0.3);
+    --color-lighten-600: rgba(255, 255, 255, 0.5);
+    --color-lighten-700: rgba(255, 255, 255, 0.7);
+    --color-lighten-800: rgba(255, 255, 255, 0.9);
+    --color-lighten-900: rgb(255, 255, 255);
     --color-accent-500: rgba(93, 113, 152, 0.4);
     --color-accent-600: rgba(93, 113, 152, 0.6);
     --color-accent-700: rgba(93, 113, 152, 0.8);
-    --color-background-navbar: rgb(40, 45, 67, 0.8);
     --color-background-100: rgb(10, 13, 21);
     --color-background-300: rgb(21, 28, 40);
     --color-background-500: rgb(35, 42, 57);
     --color-background-700: rgb(50, 58, 72);
     --color-background-800: rgb(58, 70, 95);
-
-    --view-min: 320px;
-    --view-xs: 480px;
-    --view-sm: 720px;
-    --view-md: 960px;
-    --view-lg: 1200px;
-    --view-xl: 1400px;
-    --view-xxl: 1600px;
-    --view-max: 2600px;
 
     --size-025: 2px;
     --size-050: 4px;
@@ -71,8 +70,6 @@
     --size-800: 64px;
     --size-900: 72px;
     --size-1000: 80px;
-    --size-1100: 88px;
-    --size-1150: 92px;
 
     --resize-025: 2px;
     --resize-050: 4px;
@@ -137,6 +134,8 @@
     --transition-hover: color var(--transition-hover-speed) ease, background-color var(--transition-hover-speed) ease, text-decoration-color var(--transition-hover-speed) ease, filter var(--transition-hover-speed) ease, border-color var(--transition-hover-speed) ease;
 
     --blur-default: 20px;
+
+    --border-radius: 15px;
 
     --scroll-behavior: smooth;
 }

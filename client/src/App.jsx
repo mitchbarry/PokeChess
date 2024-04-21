@@ -4,7 +4,6 @@ import Cookies from 'js-cookie'
 
 import { useAuth } from './context/AuthContext'
 
-import ScreenSize from './components/ScreenSize'
 import Header from './components/Header'
 import ErrorNavigator from './components/ErrorNavigator'
 
@@ -18,6 +17,7 @@ import Play from './views/Play'
 import LobbyHome from './views/LobbyHome'
 import Error from './views/Error'
 
+import background from './assets/rayquazagif.gif'
 import './App.css'
 import './css/utility.css'
 
@@ -26,11 +26,6 @@ const App = () => {
 	const { authToken, handleLoginToken } = useAuth()
 
 	const [errors, setErrors] = useState({})
-	const [screenSize, setScreenSize] = useState({width: 1920, height: 1080, orientation: "landscape"})
-
-	const updateScreenSize = (newScreenSize) => {
-		setScreenSize(newScreenSize)
-	}
 
 	const updateErrors = (newErrors) => {
 		setErrors(newErrors)
@@ -45,41 +40,32 @@ const App = () => {
 		}
 	},[])
 
-	/* 
-	! SOME LINES BELOW AS WELL AS LINES IN './App.css' ARE FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD
-	*/
-
 	return (
-		<>
-			<ScreenSize screenSize={screenSize} updateScreenSize={updateScreenSize} /> {/* ! THIS LINE IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */}
-			<div id='container'>
-				<div id='screen_size' style={{width: `${screenSize.width}px`, height: `${screenSize.height}px`}}> {/* ! THIS LINE IS FOR DEV PURPOSES ONLY -- COMMENT OUT BEFORE PUSHING TO PROD */}
-					<Header />
-					<Routes>
-						{/* Root Route */}
-						<Route path={'/' || ''} element={Cookies.get('authToken') || authToken ? <Navigate to='/lobbies/home' /> : <Navigate to='/login' />} />
+		<div id='background'>
+			<Header />
+			<Routes>
+				{/* Root Route */}
+				<Route path={'/' || ''} element={Cookies.get('authToken') || authToken ? <Navigate to='/lobbies/home' /> : <Navigate to='/login' />} />
 
-						{/* Non-Auth Routes */}
-						<Route path='/error' element={<Error errors={errors}/>}/>
-						<Route path='/pokedex' element={<PokeDex />} />
-						<Route path='/pokenews' element={<PokeNews/>} />
+				{/* Non-Auth Routes */}
+				<Route path='/error' element={<Error errors={errors}/>}/>
+				<Route path='/pokedex' element={<PokeDex />} />
+				<Route path='/pokenews' element={<PokeNews/>} />
 
-						{/* Login Routes */}
-						<Route path='/login' element={Cookies.get('authToken') || authToken ? <Navigate to='/lobbies/home' /> : <Login />} />
-						<Route path='/register' element={Cookies.get('authToken') || authToken ? <Navigate to='/lobbies/home' /> : <Registration />} />
-					
-						{/* Auth Routes */}
-						<Route path='/lobbies/new' element={Cookies.get('authToken') || authToken ? <CreateLobby /> : <ErrorNavigator error={401} updateErrors={updateErrors} />} />
-						<Route path='/lobbies/:id/edit' element={Cookies.get('authToken') || authToken ? <UpdateLobby /> : <ErrorNavigator error={401} updateErrors={updateErrors} />} />
-						<Route path='/lobbies/home' element={Cookies.get('authToken') || authToken ? <LobbyHome /> : <ErrorNavigator error={401} updateErrors={updateErrors} />} />
-						<Route path='/play/:id' element={Cookies.get('authToken') || authToken ? <Play /> : <ErrorNavigator error={401} updateErrors={updateErrors} />} />
+				{/* Login Routes */}
+				<Route path='/login' element={Cookies.get('authToken') || authToken ? <Navigate to='/lobbies/home' /> : <Login />} />
+				<Route path='/register' element={Cookies.get('authToken') || authToken ? <Navigate to='/lobbies/home' /> : <Registration />} />
+			
+				{/* Auth Routes */}
+				<Route path='/lobbies/new' element={Cookies.get('authToken') || authToken ? <CreateLobby /> : <ErrorNavigator error={401} updateErrors={updateErrors} />} />
+				<Route path='/lobbies/:id/edit' element={Cookies.get('authToken') || authToken ? <UpdateLobby /> : <ErrorNavigator error={401} updateErrors={updateErrors} />} />
+				<Route path='/lobbies/home' element={Cookies.get('authToken') || authToken ? <LobbyHome /> : <ErrorNavigator error={401} updateErrors={updateErrors} />} />
+				<Route path='/play/:id' element={Cookies.get('authToken') || authToken ? <Play /> : <ErrorNavigator error={401} updateErrors={updateErrors} />} />
 
-						{/* Catch All Route */}
-						<Route path='*' element={<ErrorNavigator error={404} updateErrors={updateErrors} />} />
-					</Routes>
-				</div>
-			</div>
-		</>
+				{/* Catch All Route */}
+				<Route path='*' element={<ErrorNavigator error={404} updateErrors={updateErrors} />} />
+			</Routes>
+		</div>
 	)
 }
 
