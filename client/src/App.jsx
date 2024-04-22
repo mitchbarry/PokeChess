@@ -17,7 +17,6 @@ import Play from './views/Play'
 import LobbyHome from './views/LobbyHome'
 import Error from './views/Error'
 
-import background from './assets/rayquazagif.gif'
 import './App.css'
 import './css/utility.css'
 

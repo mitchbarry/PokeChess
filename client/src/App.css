@@ -1,15 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=fantasy:wght@200&display=swap');
 
 #background {
+    margin: 0 auto;
+    width: 100%;
+    max-width: var(--view-max);
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     background-image: url('./assets/rayquazagif.gif');
-    background-position: center;
+    background-position:top;
     background-size: cover;
     z-index: -1;
+}
+
+@media screen and (width > 2600px) {
+    #background {
+        background-size: cover; /* Maintain aspect ratio and fit within 2600px width */
+        background-repeat: no-repeat;
+        background-color: var(--color-1000); /* Fallback color */
+        box-shadow: inset 10px 0 10px -10px var(--color-darken-700), inset -10px 0 10px -10px var(--color-darken-700);
+    }
 }
 
 /* * CSS RESET */
@@ -23,6 +35,8 @@ html {
     -moz-text-size-adjust: none;
     -webkit-text-size-adjust: none;
     text-size-adjust: none;
+    z-index: -1;
+    background-color: var(--color-1000);
 }
 
 /* Remove default margin in favour of better control in authored CSS */
