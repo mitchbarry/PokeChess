@@ -133,15 +133,9 @@
 
     --transition-hover-speed: 0.1s;
     --transition-hover: color var(--transition-hover-speed) ease, background-color var(--transition-hover-speed) ease, text-decoration-color var(--transition-hover-speed) ease, filter var(--transition-hover-speed) ease, border-color var(--transition-hover-speed) ease;
-
-    --blur-default: 20px;
-
-    --border-radius: 15px;
-
-    --scroll-behavior: smooth;
 }
 /* * --------------------[ containers ]-------------------- */
-.flex-center, .flex-between, .flex-around {
+.flex-center, .flex-between, .flex-around, .flex-fit {
     display: flex;
     align-items: center;
 }
@@ -153,4 +147,7 @@
 }
 .flex-around {
     justify-content: space-around;
+}
+.flex-fit {
+    width: fit-content;
 }

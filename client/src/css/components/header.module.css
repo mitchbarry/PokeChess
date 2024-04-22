@@ -2,8 +2,9 @@
 .header {
     position: sticky;
     background-color: var(--color-darken-400);
-    backdrop-filter: blur(var(--blur-default));
-    -webkit-backdrop-filter: blur(var(--blur-default));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: var(--size-075);
 }
 
 @media screen and (width < 960px) { /* ! awaiting var() support in @media queries */
@@ -17,35 +18,33 @@
     .header {
         width: calc(100% - 2 * var(--size-150));
         margin: var(--size-150);
-        border-radius: var(--border-radius);
+        border-radius: 15px;
         height: var(--size-900)
     }
 }
 
+.header_main {
+    height: 100%;
+}
+
 .header_logo {
-    width: clamp(30px, 5%, 80px);
-    margin-right: clamp(5px, 1%, 10px);
+    height: 100%;
 }
 .header_logo:hover {
     animation: wiggle 0.7s ease;
 }
 
-.header_nav {
-    width: 80%;
-    padding: 1em 1em 1em 0em;
-    border-radius: 4em;
-}
-
 .nav_title {
-    min-width: 15%;
+    margin-left: var(--size-200);
+    height: 100%;
 }
 
 .title {
-    width: 15%;
+    height: 95%;
     transition: all 0.3s ease;
 }
 .title:hover {
-    width: 20%;
+    height: 100%;
 }
 
 .nav_link {
