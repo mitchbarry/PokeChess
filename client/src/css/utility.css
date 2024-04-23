@@ -93,7 +93,7 @@
     --font-fallback: Helvetica, Arial, sans-serif;
     --font-default: "Poppins", var(--font-fallback);
     --font-accent: "Archivo", var(--font-fallback);
-    --font-default-weight: 600;
+    --font-default-weight: 500;
     --font-accent-weight: 400;
     --font-size-100: 0.625em;   /* 10px / 16px = 0.625em */
     --font-size-200: 0.75em;    /* 12px / 16px = 0.75em */
@@ -109,6 +109,9 @@
     --font-400: var(--font-default-weight) calc(var(--font-size-400) * var(--font-default-scale)) var(--font-default);
     --font-500: var(--font-default-weight) calc(var(--font-size-500) * var(--font-default-scale)) var(--font-default);
     --font-600: var(--font-default-weight) calc(var(--font-size-600) * var(--font-default-scale)) var(--font-default);
+    --font-700: var(--font-default-weight) calc(var(--font-size-700) * var(--font-default-scale)) var(--font-default);
+    --font-800: var(--font-default-weight) calc(var(--font-size-800) * var(--font-default-scale)) var(--font-default);
+    --font-900: var(--font-default-weight) calc(var(--font-size-900) * var(--font-default-scale)) var(--font-default);
     --font-accent-100: var(--font-accent-weight) calc(var(--font-size-100) * var(--font-accent-scale)) var(--font-accent);
     --font-accent-200: var(--font-accent-weight) calc(var(--font-size-200) * var(--font-accent-scale)) var(--font-accent);
     --font-accent-300: var(--font-accent-weight) calc(var(--font-size-300) * var(--font-accent-scale)) var(--font-accent);

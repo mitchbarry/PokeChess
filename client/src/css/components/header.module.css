@@ -2,9 +2,12 @@
 .header {
     position: sticky;
     background-color: var(--color-darken-400);
+    padding: var(--size-075);
+    font: var(--font-600);
+    color: var(--color-000);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: var(--size-075);
+
 }
 
 @media screen and (width < 960px) { /* ! awaiting var() support in @media queries */
@@ -25,6 +28,7 @@
 
 .header_main {
     height: 100%;
+    overflow: hidden;
 }
 
 .header_logo {
@@ -34,21 +38,15 @@
     animation: wiggle 0.7s ease;
 }
 
-.nav_title {
-    margin-left: var(--size-200);
-    width: 
+.main_title {
     height: 100%;
 }
 
 .title {
     height: 95%;
-    transition: all 0.3s ease;
-}
-.title:hover {
-    height: 100%;
 }
 
-.nav_link {
+.main_link {
     font-size: 1.2em;
     font-weight: bold;
     text-decoration: none;
