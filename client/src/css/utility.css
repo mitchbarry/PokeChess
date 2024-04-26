@@ -93,7 +93,7 @@
     --font-fallback: Helvetica, Arial, sans-serif;
     --font-default: "Poppins", var(--font-fallback);
     --font-accent: "Archivo", var(--font-fallback);
-    --font-default-weight: 500;
+    --font-default-weight: 600;
     --font-accent-weight: 400;
     --font-size-100: 0.625em;   /* 10px / 16px = 0.625em */
     --font-size-200: 0.75em;    /* 12px / 16px = 0.75em */

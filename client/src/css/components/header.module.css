@@ -1,9 +1,36 @@
 /* * use CEM (Component, Entity, Modifier) for all css classes */
+
+@media screen and (width >= 960px) { /* ! awaiting var() support in @media queries */
+    .header {
+        width: calc(100% - 2 * var(--size-150));
+        margin: var(--size-150);
+        border-radius: 15px;
+        height: var(--size-900)
+    }
+    .icon {
+        display: none;
+    }
+}
+
+
+@media screen and (width < 960px) { /* ! awaiting var() support in @media queries */
+    .header {
+        width: 100%;
+        height: var(--size-700)
+    }
+    .header_main {
+        width: 100%;
+    }
+    .title {
+        display: none;
+    }
+}
+
 .header {
     position: sticky;
     background-color: var(--color-darken-400);
     padding: var(--size-075);
-    font: var(--font-600);
+    font: var(--font-700);
     color: var(--color-000);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -15,56 +42,50 @@
     height: 100%;
 }
 
-@media screen and (width < 960px) { /* ! awaiting var() support in @media queries */
-    .header {
-        width: 100%;
-        height: var(--size-700)
-    }
+.main_logo {
+    height: inherit;
+    margin-right: var(--size-075);
 }
 
-@media screen and (width >= 960px) { /* ! awaiting var() support in @media queries */
-    .header {
-        width: calc(100% - 2 * var(--size-150));
-        margin: var(--size-150);
-        border-radius: 15px;
-        height: var(--size-900)
-    }
-    .header_main {
-        width: fit-content;
-        display: flex;
-        align-items: center;
-        height: 100%;
-    }
+.logo {
+    height: inherit;
 }
-
-.header_logo {
-    height: 100%;
-}
-.header_logo:hover {
+.logo:hover {
     animation: wiggle 0.7s ease;
-}
-
-.main_title {
-    height: 100%;
 }
 
 .title {
     height: 95%;
 }
 
-.main_link {
-    font-size: 1.2em;
-    font-weight: bold;
+.main_link, .main_list {
+    height: 80%;
+    padding: 0 var(--size-200);
     text-decoration: none;
-    color: var(--gold);
-    fill: var(--gold);
-	stroke: var(--gold);
-    transition: all 0.3s ease;
+    color: inherit;
+    transition: var(--transition-hover);
+    border-radius: 7px;
+    cursor: pointer;
 }
-.nav_link:hover {
-    color: var(--gold--hover);
-    fill: var(--gold--hover);
-	stroke: var(--gold--hover);
+.main_link:hover, .main_list:hover {
+    background-color: var(--color-lighten-400);
+}
+
+.icon, .icon_arrow {
+    width: auto;
+}
+
+.icon {
+    height: var(--size-250);
+    fill: var(--color-000);
+    stroke: var(--color-000);
+}
+
+.icon_arrow {
+    margin-left: var(--size-075);
+    height: var(--size-075);
+    fill: var(--color-200);
+    stroke: var(--color-200);
 }
 
 .nav_button {
