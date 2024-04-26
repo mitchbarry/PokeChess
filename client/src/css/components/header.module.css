@@ -7,7 +7,12 @@
     color: var(--color-000);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+}
 
+.header_main {
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 @media screen and (width < 960px) { /* ! awaiting var() support in @media queries */
@@ -24,11 +29,12 @@
         border-radius: 15px;
         height: var(--size-900)
     }
-}
-
-.header_main {
-    height: 100%;
-    overflow: hidden;
+    .header_main {
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
 }
 
 .header_logo {

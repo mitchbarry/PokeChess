@@ -37,7 +37,7 @@ const Header = () => {
 	{/* SVG icons are included in this component instead of in seperate components to allow for use of :hover css feature */}
     return (
 		<nav className={`${styles.header} flex-between`}>
-			<div className={`${styles.header_main} flex-fit`}>
+			<div className={`${styles.header_main}`}>
 				<Link className={`${styles.main_title} flex-center`} to={authToken ? '/lobbies/home' : location.pathname === '/register' ? '/register' : '/login'}>
 					<img src={favicon} className={`${styles.header_logo}`} alt='Pokeball Logo'/>
 					<img src={pokeChess} className={`${styles.title}`} alt='PokeChess'/>
