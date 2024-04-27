@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, parsePath, useLocation, useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 import { useAuth } from '../context/AuthContext'
@@ -21,11 +21,6 @@ const Header = () => {
 
     const { authToken, loggedUser, updateLoggedUser, updateAuthToken } = useAuth()
 
-	const {hover, setHover} = useState({
-		gameInfo: false,
-		community: false
-	})
-
 	const handleLogout = async () => {
 		let serverResponse
         try {
@@ -46,24 +41,44 @@ const Header = () => {
 	{/* SVG icons are included in this component instead of in seperate components to allow for use of :hover css feature */}
     return (
 		<nav className={`${styles.header} flex-between`}>
-			<div className={`${styles.header_main}`}>
-				<Link className={`${styles.main_logo} flex-center`} to={authToken ? '/lobbies/home' : location.pathname === '/register' ? '/register' : '/login'}>
+			<div className={`${styles.nav_primary}`}>
+				<Link className={`${styles.primary_logo} flex-center`} to={authToken ? '/lobbies/home' : location.pathname === '/register' ? '/register' : '/login'}>
 					<img src={favicon} className={`${styles.logo}`} alt='Pokeball Logo'/>
 					<img src={pokeChess} className={`${styles.title}`} alt='PokeChess'/>
 				</Link>
-				<div className={`${styles.main_list} flex-center`}> {/* to={authToken ? '/lobbies/new' : location.pathname === '/register' ? '/register' : '/login'} */}
+				<div className={`${styles.primary_list} flex-center`}> {/* to={authToken ? '/lobbies/new' : location.pathname === '/register' ? '/register' : '/login'} */}
 					<LobbiesSvg />
-					Game Info
+					<span className={`${styles.link_text}`}>Game Info</span>
 					<ArrowSvg />
+					<div className={`${styles.list_menu}`}>
+						<Link>
+							Pokedex
+						</Link>
+						<Link>
+							Patch Notes
+						</Link>
+						<Link>
+							About
+						</Link>
+					</div>
 				</div>
-				<Link className={`${styles.main_link} flex-center`} to='/pokenews'>
-					<NewsSvg />
-					News
+				<Link className={`${styles.primary_link} flex-center`} to='/pokenews'>
+					<span className={`${styles.link_text}`}>News</span>
+					
 				</Link>
-				<div className={`${styles.main_list} flex-center`}>
-					<PokedexSvg />
-					Community
+				<div className={`${styles.primary_dropdown} flex-center`}>
+					<span className={`${styles.link_text}`}>Community</span>
 					<ArrowSvg />
+					<div className={styles.dropdown_arrow} />
+					<div className={styles.dropdown_bridge} />
+					<div className={`${styles.dropdown_menu}`}>
+						<Link className={styles.dropdown_text}>Forums</Link>
+						<Link className={styles.dropdown_text}>Leaderboards</Link>
+						<Link className={`${styles.dropdown_text}`}>
+							Discord
+							{/* SVG goes here */}
+						</Link>
+					</div>
 				</div>
 			</div>
 			{authToken ? (
