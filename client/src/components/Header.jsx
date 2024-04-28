@@ -69,8 +69,7 @@ const Header = () => {
 				<div className={`${styles.primary_dropdown} flex-center`}>
 					<span className={`${styles.link_text}`}>Community</span>
 					<ArrowSvg />
-					<div className={styles.dropdown_arrow} />
-					<div className={styles.dropdown_bridge} />
+					<div className={styles.dropdown_bridge}/>
 					<div className={`${styles.dropdown_menu}`}>
 						<Link className={styles.dropdown_text}>Forums</Link>
 						<Link className={styles.dropdown_text}>Leaderboards</Link>
