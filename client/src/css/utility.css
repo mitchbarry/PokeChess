@@ -129,6 +129,7 @@
     --line-height-comfy: 1.4;
     --line-height-relaxed: 1.7;
     --line-height-loose: 2;
+    --line-height-slack: 2.3;
 
     --shadow-xs: 0 1px 3px 0 rgba(0, 0, 0, .12);
     --shadow-sm: 0 4px 6px 0 rgba(0, 0, 0, .12);

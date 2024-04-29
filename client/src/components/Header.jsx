@@ -8,6 +8,7 @@ import AuthService from '../services/AuthService'
 import pokeChess from '../assets/text/pokeChess.png'
 import favicon from '../assets/favicon126px.png'
 import ArrowSvg from './svgs/ArrowSvg'
+import ExternalLinkSvg from "./svgs/ExternalLinkSvg"
 import LobbiesSvg from './svgs/LobbiesSvg'
 import PokedexSvg from './svgs/PokedexSvg'
 import NewsSvg from './svgs/NewsSvg'
@@ -46,25 +47,18 @@ const Header = () => {
 					<img src={favicon} className={`${styles.logo}`} alt='Pokeball Logo'/>
 					<img src={pokeChess} className={`${styles.title}`} alt='PokeChess'/>
 				</Link>
-				<div className={`${styles.primary_list} flex-center`}> {/* to={authToken ? '/lobbies/new' : location.pathname === '/register' ? '/register' : '/login'} */}
-					<LobbiesSvg />
+				<div className={`${styles.primary_dropdown} flex-center`}>{/* to={authToken ? '/lobbies/new' : location.pathname === '/register' ? '/register' : '/login'} */}
 					<span className={`${styles.link_text}`}>Game Info</span>
 					<ArrowSvg />
-					<div className={`${styles.list_menu}`}>
-						<Link>
-							Pokedex
-						</Link>
-						<Link>
-							Patch Notes
-						</Link>
-						<Link>
-							About
-						</Link>
+					<div className={styles.dropdown_bridge}/>
+					<div className={`${styles.dropdown_menu}`}>
+						<Link className={styles.dropdown_text}>Pokedex</Link>
+						<Link className={styles.dropdown_text}>Patch Notes</Link>
+						<Link className={`${styles.dropdown_text}`}>About</Link>
 					</div>
 				</div>
 				<Link className={`${styles.primary_link} flex-center`} to='/pokenews'>
 					<span className={`${styles.link_text}`}>News</span>
-					
 				</Link>
 				<div className={`${styles.primary_dropdown} flex-center`}>
 					<span className={`${styles.link_text}`}>Community</span>
@@ -75,7 +69,7 @@ const Header = () => {
 						<Link className={styles.dropdown_text}>Leaderboards</Link>
 						<Link className={`${styles.dropdown_text}`}>
 							Discord
-							{/* SVG goes here */}
+							<ExternalLinkSvg />
 						</Link>
 					</div>
 				</div>
