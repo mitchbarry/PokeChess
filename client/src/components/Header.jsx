@@ -15,6 +15,7 @@ import LoginIcon from './svgs/LoginSvg'
 import LogoutIcon from './svgs/LogoutSvg'
 import RegisterIcon from './svgs/RegisterSvg'
 import SettingsIcon from './svgs/SettingsSvg'
+import SupportIcon from './svgs/SupportSvg'
 import MultiplayerIcon from './svgs/MultiplayerSvg'
 import PokedexIcon from './svgs/PokedexSvg'
 import NewsIcon from './svgs/NewsSvg'
@@ -93,14 +94,22 @@ const Header = () => {
 			<div className={`${styles.nav_secondary} flex-center`}>
 				<div className={`${styles.dropdown} flex-center`}>
 					<AccountIcon />
-					<span className={`${styles.secondary_text}`}>Account</span>
+					{authToken ? (
+						<span className={`${styles.secondary_text}`}>{loggedUser.username}</span>
+					) : (
+						<span className={`${styles.secondary_text}`}>Account</span>
+					)}
 					<ArrowIcon />
 					<div className={styles.dropdown_bridge}/>
-					<div className={`${styles.dropdown_menu}`}>
-						<Link className={`${styles.login_link} flex-center`}>
-							<LoginIcon />
+					<div className={`${styles.dropdown_menu} ${styles.menu_primary}`}>
+						{authToken ? (
 							<span className={`${styles.secondary_text} ${styles.dropdown_text}`}>Login</span>
-						</Link>
+						): (
+							<Link className={`${styles.login_link} flex-center`}>
+								<LoginIcon />
+								<span className={`${styles.secondary_text} ${styles.dropdown_text}`}>Login</span>
+							</Link>
+						)}
 						<Link className={styles.dropdown_link}>
 							<SettingsIcon />
 							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Account Settings</span>
@@ -116,6 +125,12 @@ const Header = () => {
 								<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Sign Up</span>
 							</Link>
 						)}
+						<div className={`${styles.menu_secondary}`}>
+							<Link className={styles.dropdown_link}>
+								<SupportIcon />
+								<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Support</span>
+							</Link>
+						</div>
 					</div>
 				</div>
 				<Link className={`${styles.play_link} flex-center`} to='/'>

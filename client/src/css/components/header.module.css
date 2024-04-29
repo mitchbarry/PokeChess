@@ -1,4 +1,6 @@
 /*  * Use CEM (Component, Entity, Modifier) for all CSS classes */
+
+/* * Media Queries */
 @media screen and (width >= 960px) { /* ! awaiting var() support in @media queries */
     .header {
         width: calc(100% - 2 * var(--size-150));
@@ -24,6 +26,7 @@
     }
 }
 
+/* * Common Styles */
 .header {
     position: sticky;
     background-color: var(--color-darken-400);
@@ -56,37 +59,75 @@
 .primary_text {
     font: var(--font-800);
 }
+
 .secondary_text {
     font: var(--font-600);
 }
+
 .accent_text {
     font: var(--font-accent-600);
 }
+
 .dropdown_text {
     line-height: var(--line-height-slack);
 }
 
+/* * Links */
 .primary_link, .dropdown, .dropdown_link, .login_link, .play_link  {
     text-decoration: none;
     color: inherit;
     transition: var(--transition-hover);
     cursor: pointer;
 }
+
 .primary_link, .dropdown, .dropdown_link, .login_link {
     padding: 0 var(--size-200);
 }
+
 .primary_link, .dropdown, .play_link  {
     height: var(--size-600);
     border-radius: 7px;
 }
+
 .dropdown {
     position: relative;
 }
+
 .primary_link:hover, .dropdown:hover, .dropdown_link:hover {
     background-color: var(--color-lighten-400);
 }
 
-.dropdown_bridge, .dropdown_menu, .dropdown_bridge::before  {
+.dropdown_link, .login_link {
+    border-radius: 5px;
+}
+
+.dropdown_link {
+    width: calc(100% - 2 * (var(--size-200)));
+    margin: 0 var(--size-200);
+    display: flex;
+    align-items: center;
+}
+
+.login_link {
+    width: calc(100% - (var(--size-400) * 2));
+    margin: var(--size-100) var(--size-400) var(--size-200) var(--size-400);
+    background-color: var(--color-teal);
+}
+.login_link:hover {
+    background-color: var(--color-teal-lighten);
+}
+
+.play_link {
+    margin-left: var(--size-200);
+    padding: 0 var(--size-300);
+    background-color: var(--color-green);
+}
+.play_link:hover {
+    background-color: var(--color-green-lighten);
+}
+
+/* * Dropdown Styles */
+.dropdown_bridge, .dropdown_menu, .dropdown_bridge::before, .menu_secondary {
     position: absolute;
     pointer-events: none;
     cursor: auto;
@@ -99,7 +140,7 @@
     top: 100%;
 }
 
-.dropdown_bridge, .dropdown_menu {
+.dropdown_bridge, .dropdown_menu, .menu_secondary {
     width: 312px;
 }
 
@@ -118,55 +159,42 @@
     border-radius: 4px;
 }
 
-.dropdown_menu {
-    top: calc(100% + var(--size-200));
-    padding: var(--size-200);
-    border-radius: 7px;
+.dropdown_menu, .menu_secondary {
+    padding: var(--size-200) 0;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    border-radius: 7px;
     box-shadow: var(--shadow-sm);
     transform: perspective(var(--view-md)) rotateX(-20deg); /* Initially rotate the menu */
     transform-origin: top center;
 }
 
-.dropdown_link, .login_link {
-    border-radius: 5px;
+.dropdown_menu {
+    top: calc(100% + var(--size-200));
 }
 
-.dropdown_link {
-    width: 100%;
-    display: flex;
-    align-items: center;
+.menu_primary {
+    border-radius: 7px 7px 0 0;
+}
+
+.menu_secondary {
+    top: 100%;
+    background-color: var(--color-background-800);
+    border-radius: 0 0 7px 7px;
 }
 
 .dropdown:hover {
-    .dropdown_bridge, .dropdown_bridge::before, .dropdown_menu {
+    .dropdown_bridge, .dropdown_bridge::before, .dropdown_menu, .menu_secondary {
         pointer-events: auto;
         opacity: 1;
     }
-    .dropdown_menu {
+    .dropdown_menu, .menu_secondary {
         transform: perspective(var(--view-md)) rotateX(0deg);
     }
 }
 
-.login_link {
-    width: calc(100% - (var(--size-200) * 2));
-    margin: var(--size-100) var(--size-150) var(--size-150) var(--size-150);
-    background-color: var(--color-teal);
-}
-.login_link:hover {
-    background-color: var(--color-teal-lighten);
-}
-
-.play_link {
-    margin-left: var(--size-200);
-    padding: 0 var(--size-300);
-    background-color: var(--color-green);
-}
-.play_link:hover {
-    background-color: var(--color-green-lighten);
-}
-
+/* * Icons */
 .icon_default, .icon_arrow, .icon_externalLink {
     width: auto;
 }
@@ -192,7 +220,8 @@
     stroke: var(--color-lighten-500);
 }
 
-@keyframes wiggle { /* Keyframes for the wiggle animation */
+/* * Keyframes */
+@keyframes wiggle {
     0%, 100% {
         transform: translateX(0) rotate(0deg);
     }
