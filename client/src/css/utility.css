@@ -38,7 +38,8 @@
     --color-green-lighten: rgb(91, 215, 105);
     --color-blue: rgb(0, 128, 255);
     --color-navy: rgb(27, 83, 186);
-    --color-teal: rgb(48, 167, 215);
+    --color-teal: rgb(43, 162, 210);
+    --color-teal-lighten: rgb(63, 182, 230);
     --color-darken-100: rgb(0, 0, 0, 0.05);
     --color-darken-300: rgb(0, 0, 0, 0.1);
     --color-darken-400: rgb(0, 0, 0, 0.15);

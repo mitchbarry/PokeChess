@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from 'react'
 import { Link, parsePath, useLocation, useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
@@ -7,11 +7,17 @@ import AuthService from '../services/AuthService'
 
 import pokeChess from '../assets/text/pokeChess.png'
 import favicon from '../assets/favicon126px.png'
-import ArrowSvg from './svgs/ArrowSvg'
-import ExternalLinkSvg from "./svgs/ExternalLinkSvg"
-import LobbiesSvg from './svgs/LobbiesSvg'
-import PokedexSvg from './svgs/PokedexSvg'
-import NewsSvg from './svgs/NewsSvg'
+
+import ArrowIcon from './svgs/ArrowSvg'
+import ExternalLinkIcon from './svgs/ExternalLinkSvg'
+import AccountIcon from './svgs/AccountSvg'
+import LoginIcon from './svgs/LoginSvg'
+import LogoutIcon from './svgs/LogoutSvg'
+import RegisterIcon from './svgs/RegisterSvg'
+import SettingsIcon from './svgs/SettingsSvg'
+import MultiplayerIcon from './svgs/MultiplayerSvg'
+import PokedexIcon from './svgs/PokedexSvg'
+import NewsIcon from './svgs/NewsSvg'
 
 import styles from '../css/components/header.module.css'
 
@@ -49,7 +55,7 @@ const Header = () => {
 				</Link>
 				<div className={`${styles.dropdown} flex-center`}>{/* to={authToken ? '/lobbies/new' : location.pathname === '/register' ? '/register' : '/login'} */}
 					<span className={`${styles.primary_text}`}>Game Info</span>
-					<ArrowSvg />
+					<ArrowIcon />
 					<div className={styles.dropdown_bridge}/>
 					<div className={`${styles.dropdown_menu}`}>
 						<Link className={`${styles.dropdown_link}`}>
@@ -68,7 +74,7 @@ const Header = () => {
 				</Link>
 				<div className={`${styles.dropdown} flex-center`}>
 					<span className={`${styles.primary_text}`}>Community</span>
-					<ArrowSvg />
+					<ArrowIcon />
 					<div className={styles.dropdown_bridge}/>
 					<div className={`${styles.dropdown_menu}`}>
 						<Link className={`${styles.dropdown_link}`}>
@@ -79,34 +85,34 @@ const Header = () => {
 						</Link>
 						<Link className={`${styles.dropdown_link}`}>
 							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Discord</span>
-							<ExternalLinkSvg />
+							<ExternalLinkIcon />
 						</Link>
 					</div>
 				</div>
 			</div>
 			<div className={`${styles.nav_secondary} flex-center`}>
 				<div className={`${styles.dropdown} flex-center`}>
-					<></>
+					<AccountIcon />
 					<span className={`${styles.secondary_text}`}>Account</span>
-					<ArrowSvg />
+					<ArrowIcon />
 					<div className={styles.dropdown_bridge}/>
 					<div className={`${styles.dropdown_menu}`}>
 						<Link className={`${styles.login_link} flex-center`}>
-							<></>
+							<LoginIcon />
 							<span className={`${styles.secondary_text} ${styles.dropdown_text}`}>Login</span>
 						</Link>
 						<Link className={styles.dropdown_link}>
-							<></>
+							<SettingsIcon />
 							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Account Settings</span>
 						</Link>
 						{authToken ? (
 							<button className={`${styles.dropdown_link}`} onClick={handleLogout}>
-								<></>
+								<LogoutIcon />
 								<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Logout</span>
 							</button>
 						) : (
 							<Link className={`${styles.dropdown_link}`}>
-								<></>
+								<RegisterIcon />
 								<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Sign Up</span>
 							</Link>
 						)}

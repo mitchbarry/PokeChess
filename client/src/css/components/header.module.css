@@ -120,7 +120,7 @@
 
 .dropdown_menu {
     top: calc(100% + var(--size-200));
-    padding: var(--size-150);
+    padding: var(--size-200);
     border-radius: 7px;
     display: flex;
     flex-direction: column;
@@ -151,11 +151,11 @@
 
 .login_link {
     width: calc(100% - (var(--size-200) * 2));
-    margin: var(--size-200);
-    background-color: var(--color-green);
+    margin: var(--size-100) var(--size-150) var(--size-150) var(--size-150);
+    background-color: var(--color-teal);
 }
 .login_link:hover {
-    background-color: var(--color-green);
+    background-color: var(--color-teal-lighten);
 }
 
 .play_link {
@@ -167,14 +167,15 @@
     background-color: var(--color-green-lighten);
 }
 
-.icon, .icon_arrow, .icon_externalLink {
+.icon_default, .icon_arrow, .icon_externalLink {
     width: auto;
 }
 
-.icon {
+.icon_default {
     height: var(--size-250);
-    fill: var(--color-000);
-    stroke: var(--color-000);
+    margin-right: var(--size-150);
+    fill: var(--color-100);
+    stroke: var(--color-100);
 }
 
 .icon_arrow {
