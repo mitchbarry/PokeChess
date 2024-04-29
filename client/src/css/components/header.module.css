@@ -68,8 +68,23 @@
     font: var(--font-accent-600);
 }
 
+.detail_text {
+    font: var(--font-accent-200);
+    color: var(--color-100);
+}
+
 .dropdown_text {
     line-height: var(--line-height-slack);
+}
+
+.account_info_text {
+    line-height: var(--line-height-relaxed);
+}
+
+.account_info {
+    color: var(--color-teal-lighten);
+    display: flex;
+    flex-direction: column;
 }
 
 /* * Links */
@@ -109,8 +124,6 @@
 }
 
 .login_link {
-    width: calc(100% - (var(--size-400) * 2));
-    margin: var(--size-100) var(--size-400) var(--size-200) var(--size-400);
     background-color: var(--color-teal);
 }
 .login_link:hover {
@@ -192,6 +205,11 @@
     .dropdown_menu, .menu_secondary {
         transform: perspective(var(--view-md)) rotateX(0deg);
     }
+}
+
+.dropdown_head {
+    width: calc(100% - (var(--size-400) * 2));
+    margin: var(--size-100) var(--size-400) var(--size-200) var(--size-400);
 }
 
 /* * Icons */

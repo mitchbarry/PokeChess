@@ -50,7 +50,7 @@ const Header = () => {
     return (
 		<nav className={`${styles.header} flex-between`}>
 			<div className={`${styles.nav_primary} flex-center`}>
-				<Link className={`${styles.primary_logo} flex-center`} to={authToken ? '/lobbies/home' : location.pathname === '/register' ? '/register' : '/login'}>
+				<Link className={`${styles.primary_logo} flex-center`} to='/'>
 					<img src={favicon} className={`${styles.logo}`} alt='Pokeball Logo'/>
 					<img src={pokeChess} className={`${styles.title}`} alt='PokeChess'/>
 				</Link>
@@ -59,18 +59,18 @@ const Header = () => {
 					<ArrowIcon />
 					<div className={styles.dropdown_bridge}/>
 					<div className={`${styles.dropdown_menu}`}>
-						<Link className={`${styles.dropdown_link}`}>
+						<Link className={`${styles.dropdown_link}`} to='/pokedex'>
 							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Pokedex</span>
 						</Link>
-						<Link className={`${styles.dropdown_link}`}>
+						<Link className={`${styles.dropdown_link}`} to='/patch'>
 							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Patch Notes</span>
 						</Link>
-						<Link className={`${styles.dropdown_link}`}>
+						<Link className={`${styles.dropdown_link}`} to='/about'>
 							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>About</span>
 						</Link>
 					</div>
 				</div>
-				<Link className={`${styles.primary_link} flex-center`} to='/pokenews'>
+				<Link className={`${styles.primary_link} flex-center`} to='/news'>
 					<span className={`${styles.primary_text}`}>News</span>
 				</Link>
 				<div className={`${styles.dropdown} flex-center`}>
@@ -78,20 +78,20 @@ const Header = () => {
 					<ArrowIcon />
 					<div className={styles.dropdown_bridge}/>
 					<div className={`${styles.dropdown_menu}`}>
-						<Link className={`${styles.dropdown_link}`}>
+						<Link className={`${styles.dropdown_link}`} to='/forums'>
 							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Forums</span>
 						</Link>
-						<Link className={`${styles.dropdown_link}`}>
+						<Link className={`${styles.dropdown_link}`} to='/leaderboards'>
 							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Leaderboards</span>
 						</Link>
-						<Link className={`${styles.dropdown_link}`}>
+						<Link className={`${styles.dropdown_link}`}> {/* EXTERNAL LINK NEEDS IMPLEMENTATION !!!!! */}
 							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Discord</span>
 							<ExternalLinkIcon />
 						</Link>
 					</div>
 				</div>
 			</div>
-			<div className={`${styles.nav_secondary} flex-center`}>
+			<div className={`${styles.nav_secondary} flex-center`}> 
 				<div className={`${styles.dropdown} flex-center`}>
 					<AccountIcon />
 					{authToken ? (
@@ -103,14 +103,17 @@ const Header = () => {
 					<div className={styles.dropdown_bridge}/>
 					<div className={`${styles.dropdown_menu} ${styles.menu_primary}`}>
 						{authToken ? (
-							<span className={`${styles.secondary_text} ${styles.dropdown_text}`}>Login</span>
+							<div className={`${styles.dropdown_head} ${styles.account_info}`}> {/* NEEDS TESTING !!!!! */}
+								<span className={`${styles.accent_text} ${styles.account_info_text}`}>{loggedUser.username}</span>
+								<span className={`${styles.detail_text} ${styles.account_info_text}`}>{loggedUser.email}</span>
+							</div>
 						): (
-							<Link className={`${styles.login_link} flex-center`}>
+							<Link className={`${styles.dropdown_head} ${styles.login_link} flex-center`} to='/login'>
 								<LoginIcon />
 								<span className={`${styles.secondary_text} ${styles.dropdown_text}`}>Login</span>
 							</Link>
 						)}
-						<Link className={styles.dropdown_link}>
+						<Link className={styles.dropdown_link} to={authToken ? '/account' : '/login'}>
 							<SettingsIcon />
 							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Account Settings</span>
 						</Link>
@@ -120,20 +123,20 @@ const Header = () => {
 								<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Logout</span>
 							</button>
 						) : (
-							<Link className={`${styles.dropdown_link}`}>
+							<Link className={`${styles.dropdown_link}`} to='/register'>
 								<RegisterIcon />
 								<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Sign Up</span>
 							</Link>
 						)}
 						<div className={`${styles.menu_secondary}`}>
-							<Link className={styles.dropdown_link}>
+							<Link className={styles.dropdown_link} to='/contact'>
 								<SupportIcon />
 								<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Support</span>
 							</Link>
 						</div>
 					</div>
 				</div>
-				<Link className={`${styles.play_link} flex-center`} to='/'>
+				<Link className={`${styles.play_link} flex-center`} to='/lobbies'>
 					<span className={`${styles.secondary_text}`}>Play Now</span>
 				</Link>
 			</div>

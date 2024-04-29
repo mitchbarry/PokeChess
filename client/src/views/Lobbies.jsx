@@ -7,7 +7,7 @@ import LobbyService from "../services/LobbyService";
 
 import "../styles/lobbyHome.css"
 
-const LobbyHome = () => {
+const Lobbies = () => {
 
     const { authToken, loggedUser, handleLoginResponse, updateLoggedUser, updateAuthToken, pathParamValidator, handleLoginToken } = useAuth();
 
@@ -133,4 +133,4 @@ const LobbyHome = () => {
     );
 };
 
-    export default LobbyHome;
+    export default Lobbies;

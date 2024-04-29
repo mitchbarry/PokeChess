@@ -3,7 +3,7 @@ import React, { useEffect } from "react"
 import pokeNewsImg from "../assets/text/pokeNews.png"
 import "../styles/pokeNews.css"
 
-const PokeTwitter = () => {
+const News = () => {
 	useEffect(() => {
 		const script = document.createElement("script")
 		script.async = true
@@ -26,4 +26,4 @@ const PokeTwitter = () => {
 	)
 }
 
-export default PokeTwitter
+export default News
