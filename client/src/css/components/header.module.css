@@ -1,5 +1,4 @@
-/* * use CEM (Component, Entity, Modifier) for all css classes */
-
+/*  * Use CEM (Component, Entity, Modifier) for all CSS classes */
 @media screen and (width >= 960px) { /* ! awaiting var() support in @media queries */
     .header {
         width: calc(100% - 2 * var(--size-150));
@@ -11,7 +10,6 @@
         display: none;
     }
 }
-
 
 @media screen and (width < 960px) { /* ! awaiting var() support in @media queries */
     .header {
@@ -35,9 +33,7 @@
     -webkit-backdrop-filter: blur(20px);
 }
 
-.nav_primary {
-    display: flex;
-    align-items: center;
+.nav_primary, .nav_secondary {
     height: 100%;
 }
 
@@ -57,24 +53,33 @@
     height: 95%;
 }
 
-.primary_link, .primary_dropdown {
-    height: 80%;
+.primary_text {
+    font: var(--font-700);
+}
+.secondary_text {
+    font: var(--font-600);
+}
+.accent_text {
+    font: var(--font-accent-600);
+    line-height: var(--line-height-slack);
+}
+
+.primary_link, .dropdown, .dropdown_link {
+    height: 85%;
     padding: 0 var(--size-200);
     text-decoration: none;
     color: inherit;
-    border-radius: 7px;
     transition: var(--transition-hover);
     cursor: pointer;
 }
-.primary_dropdown {
+.primary_link, .dropdown {
+    border-radius: 7px;
+}
+.dropdown {
     position: relative;
 }
-.primary_link:hover, .primary_dropdown:hover {
+.primary_link:hover, .dropdown:hover, .dropdown_link:hover {
     background-color: var(--color-lighten-400);
-}
-
-.link_text {
-    font: var(--font-700);
 }
 
 .dropdown_bridge, .dropdown_menu, .dropdown_bridge::before  {
@@ -88,7 +93,6 @@
 .dropdown_bridge {
     height: var(--size-200);
     top: 100%;
-    transform-origin: top center;
 }
 
 .dropdown_bridge, .dropdown_menu {
@@ -117,11 +121,18 @@
     display: flex;
     flex-direction: column;
     box-shadow: var(--shadow-sm);
-    transform: perspective(var(--view-md)) rotateX(-15deg); /* Initially rotate the menu */
+    transform: perspective(var(--view-md)) rotateX(-20deg); /* Initially rotate the menu */
     transform-origin: top center;
 }
 
-.primary_dropdown:hover {
+.dropdown_link {
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown:hover {
     .dropdown_bridge, .dropdown_bridge::before, .dropdown_menu {
         pointer-events: auto;
         opacity: 1;
@@ -148,28 +159,29 @@
     stroke: var(--color-100);
 }
 
-.dropdown_text {
-    width: 100%;
-    padding: 0 var(--size-150);
-    font: var(--font-600);
-    line-height: var(--line-height-slack);
-    text-decoration: none;
-    color: var(--color-000);
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    transition: var(--transition-hover);
-}
-.dropdown_text:hover {
-    background-color: var(--color-lighten-400);
-}
-
 .icon_externalLink {
     height: var(--size-100);
     margin-left: var(--size-100);
     fill: var(--color-lighten-500);
     stroke: var(--color-lighten-500);
 }
+
+.play_link {
+    height: 85%;
+    padding: 0 var(--size-300);
+    text-decoration: none;
+    color: inherit;
+    background-color: var(--color-green);
+    border-radius: 7px;
+    transition: var(--transition-hover);
+    cursor: pointer;
+}
+.play_link:hover {
+    background-color: var(--color-green-lighten);
+}
+
+
+
 
 .nav_button {
     width: 20%;

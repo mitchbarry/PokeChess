@@ -1,4 +1,12 @@
-/* * use CEM (Component, Entity, Modifier) for all css classes */
+/*  * Use CEM (Component, Entity, Modifier) for all CSS classes
+    * Properties listed roughly in this order:
+    *   width/height
+    *   padding/margin/position/transform
+    *   text
+    *   color
+    *   display/opacity/filter
+    *   transition/cursor
+*/
 /* * --------------------[ imports ]-------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=Poppins:wght@300;400;500;600;700&display=swap'); /* Poppins font at weights; 300 , 400, 500, 600, 700 | Archivo font at weights 100 - 900 */
 /* * --------------------[ custom properties ]-------------------- */
@@ -23,10 +31,11 @@
     --color-800: rgb(55, 55, 55);
     --color-900: rgb(30, 30, 30);
     --color-1000: rgb(0,0,0);
-    --color-red: rgb(227, 53, 13);
+    --color-red: rgb(255, 28, 28);
     --color-orange: rgb(238, 107, 47);
     --color-yellow: rgb(255, 204, 1);
-    --color-green: rgb(77, 173, 91);
+    --color-green: rgb(71, 195, 85);
+    --color-green-lighten: rgb(91, 215, 105);
     --color-blue: rgb(0, 128, 255);
     --color-navy: rgb(27, 83, 186);
     --color-teal: rgb(48, 167, 215);
