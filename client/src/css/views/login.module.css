@@ -47,7 +47,7 @@
     width: 396px;
     margin-top: var(--size-150);
     padding: var(--size-300);
-    background-color: rgb(51, 103, 153);
+    background-color: var(--color-200);
     border-radius: 10px;
 }
 
@@ -78,7 +78,7 @@
 .form_input {
     width: calc(100%);
     position: relative;
-    margin-bottom: var(--size-300);
+    margin-bottom: var(--size-350);
 }
 
 .input, .input_password {
@@ -146,14 +146,15 @@
 .form_submit {
     width: 100%;
     height: var(--size-600);
+    font-size: inherit;
     color: var(--color-100);
-    background-color: darkslategray;
+    background-color: var(--color-teal);
     border-radius: 8px;
     box-shadow: var(--shadow-xs);
     transition: var(--transition-hover);
 }
 .form_submit:hover {
-    background-color: rgb(240, 76, 81);
+    background-color: var(--color-teal-lighten);
 }
 
 .icon_default, .icon_close {
