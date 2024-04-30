@@ -1,1 +1,6 @@
 /* * use CEM (Component, Entity, Modifier) for all css classes */
+
+.login {
+    margin-top: var(--size-1000);
+    flex-direction: column;
+}

@@ -129,7 +129,7 @@ const handleBlur = (e) => {
 }
 
 	return (
-        <div className={styles.pp}> {/* mt-custom d-flex flex-column justify-content-center align-items-center */}
+        <div className={`${styles.login} flex-center`}>
             <img src={login} className='image-form-header'/>
             <div className='border-shadow color-bg-blue form-m mt-3 p-4 rounded'>
                 {Object.keys(errors).length !== 0 && showNotification && (
