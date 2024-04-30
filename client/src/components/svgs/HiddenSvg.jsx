@@ -1,4 +1,4 @@
-import styles from '../../css/components/header.module.css'
+import styles from '../../css/components/Header.module.css'
 
 const HiddenSvg = () => {
 

@@ -1,6 +1,138 @@
 /* * use CEM (Component, Entity, Modifier) for all css classes */
 
+/* * Common Styles */
 .login {
-    margin-top: var(--size-1000);
+    margin-top: 250px;
     flex-direction: column;
+}
+
+.primary_text {
+    font: var(--font-500);
+}
+
+.primary_text__shrink {
+    font: var(--font-200);
+}
+
+.secondary_text {
+    font: var(--font-400);
+}
+
+.primary_text_accent {
+    font: var(--font-accent-600);
+}
+
+.secondary_text_accent {
+    font: var(--font-accent-400)
+}
+
+.detail_text {
+    font: var(--font-400);
+}
+
+.detail_text_accent {
+    font: var(--font-accent-200);
+}
+
+.login_title {
+    width: 250px;
+    height: auto;
+}
+
+.login_form, .alert_error {
+    box-shadow: var(--shadow-md);
+}
+
+.login_form {
+    width: 396px;
+    margin-top: var(--size-150);
+    padding: var(--size-300);
+    background-color: rgb(51, 103, 153);
+    border-radius: 10px;
+}
+
+.alert_error {
+    margin-bottom: var(--size-200);
+    padding: var(--size-150) var(--size-200);
+    position: relative;
+    color: var(--color-alert-red);
+    background-color: var(--color-alert-red-background);
+    border-radius: 8px;
+    list-style-type: none;
+}
+
+.error_close {
+    position: absolute;
+    top: var(--size-075);
+    right: var(--size-100);
+    background-color: transparent;
+    fill: var(--color-alert-red);
+    stroke: var(--color-alert-red);
+    cursor: pointer;
+}
+.error_close:hover {
+    fill: var(--color-alert-red-darken);
+    stroke: var(--color-alert-red-darken);
+}
+
+.form_input {
+    width: calc(100%);
+    position: relative;
+}
+
+.input, .input_password {
+    width: 100%;
+    height: var(--size-600);
+    margin-bottom: var(--size-250);
+    padding: var(--size-250) var(--size-150) var(--size-075) var(--size-150);
+    color: var(--color-800);
+    border-radius: 8px;
+    box-shadow: inset var(--shadow-xs);
+    transition: all var(--transition-hover-speed);
+}
+
+.input {
+    padding: var(--size-250) var(--size-150) var(--size-075) var(--size-150);
+}
+
+.input_password {
+    padding: var(--size-250) var(--size-600) var(--size-075) var(--size-150);
+}
+
+.input__error {
+    border: 1px solid var(--color-red);
+}
+
+.input_label {
+    position: absolute;
+    top: calc(50% - var(--size-250));
+    left: var(--size-150);
+    line-height: var(--line-height);
+    color: var(--color-400);
+    text-shadow: var(--shadow-xs);
+    transition: all var(--transition-hover-speed);
+}
+.input_label__shrink {
+    top: var(--size-050);
+    color: var(--color-500);
+}
+
+.input_label__error {
+    color: var(--color-red);
+}
+
+.input_password_icon {
+    position: absolute;
+    top: calc(50% - var(--size-250));
+    right: var(--size-150);
+}
+
+.icon_close {
+    height: auto;
+}
+
+.icon_close {
+    width: var(--size-100);
+    fill: inherit;
+    stroke: inherit;
 }

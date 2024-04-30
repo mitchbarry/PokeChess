@@ -1,9 +1,10 @@
 /*  * Use CEM (Component, Entity, Modifier) for all CSS classes
     * Properties listed roughly in this order:
     *   width/height
-    *   padding/margin/position/transform
+    *   margin/padding/position/transform
     *   text
     *   color
+    *   border
     *   display/opacity/filter
     *   transition/cursor
 */
@@ -34,12 +35,27 @@
     --color-red: rgb(255, 28, 28);
     --color-orange: rgb(238, 107, 47);
     --color-yellow: rgb(255, 204, 1);
-    --color-green: rgb(71, 195, 85);
     --color-green-lighten: rgb(91, 215, 105);
+    --color-green: rgb(71, 195, 85);
     --color-blue: rgb(0, 128, 255);
     --color-navy: rgb(27, 83, 186);
-    --color-teal: rgb(43, 162, 210);
     --color-teal-lighten: rgb(63, 182, 230);
+    --color-teal: rgb(43, 162, 210);
+    --color-alert-red: rgb(155, 20, 20);
+    --color-alert-red-darken: rgb(140, 15, 15);
+    --color-alert-red-background: rgb(255, 200, 200);
+    --color-alert-green-background: rgb(200, 255, 200);
+    --color-alert-blue-background: rgb(145, 230, 255);
+    --color-background-000: rgb(195, 195, 205);
+    --color-background-100: rgb(175, 175, 185);
+    --color-background-200: rgb(155, 155, 165);
+    --color-background-300: rgb(135, 135, 145);
+    --color-background-400: rgb(115, 115, 125);
+    --color-background-500: rgb(95, 95, 105);
+    --color-background-600: rgb(75, 75, 85);
+    --color-background-700: rgb(55, 55, 65);
+    --color-background-800: rgb(35, 35, 45);
+    --color-background-900: rgb(15, 15, 25);
     --color-darken-100: rgb(0, 0, 0, 0.05);
     --color-darken-300: rgb(0, 0, 0, 0.1);
     --color-darken-400: rgb(0, 0, 0, 0.15);
@@ -56,16 +72,6 @@
     --color-lighten-700: rgba(255, 255, 255, 0.7);
     --color-lighten-800: rgba(255, 255, 255, 0.9);
     --color-lighten-900: rgb(255, 255, 255);
-    --color-background-000: rgb(195, 195, 205);
-    --color-background-100: rgb(175, 175, 185);
-    --color-background-200: rgb(155, 155, 165);
-    --color-background-300: rgb(135, 135, 145);
-    --color-background-400: rgb(115, 115, 125);
-    --color-background-500: rgb(95, 95, 105);
-    --color-background-600: rgb(75, 75, 85);
-    --color-background-700: rgb(55, 55, 65);
-    --color-background-800: rgb(35, 35, 45);
-    --color-background-900: rgb(15, 15, 25);
 
     --size-025: 2px;
     --size-050: 4px;
@@ -142,26 +148,36 @@
     --line-height-loose: 2;
     --line-height-slack: 2.3;
 
-    --shadow-xs: 0 1px 3px 0 rgba(0, 0, 0, .12);
-    --shadow-sm: 0 4px 6px 0 rgba(0, 0, 0, .12);
-    --shadow-md: 0 5px 15px 0 rgba(0, 0, 0, .12);
-    --shadow-lg: 0 10px 24px 0 rgba(0, 0, 0, .12);
-    --shadow-xl: 0 15px 35px 0 rgba(0, 0, 0, .12);
+    --shadow-xs: 0 1px 3px 0 rgba(0, 0, 0, .2);
+    --shadow-sm: 0 4px 6px 0 rgba(0, 0, 0, .2);
+    --shadow-md: 0 5px 15px 0 rgba(0, 0, 0, .2);
+    --shadow-lg: 0 10px 24px 0 rgba(0, 0, 0, .2);
+    --shadow-xl: 0 15px 35px 0 rgba(0, 0, 0, .2);
 
-    --transition-hover-speed: 0.1s;
+    --transition-hover-speed: 0.15s;
     --transition-hover: color var(--transition-hover-speed) ease, background-color var(--transition-hover-speed) ease, text-decoration-color var(--transition-hover-speed) ease, filter var(--transition-hover-speed) ease, border-color var(--transition-hover-speed) ease, opacity var(--transition-hover-speed) ease, transform var(--transition-hover-speed) ease;
 }
 /* * --------------------[ containers ]-------------------- */
-.flex-center, .flex-between, .flex-around {
+.flex-center, .flex-between, .flex-around, .flex-col {
     display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-center, .flex-between, .flex-around {
     align-items: center;
 }
+
 .flex-center {
     justify-content: center;
 }
+
 .flex-between {
     justify-content: space-between;
 }
+
 .flex-around {
     justify-content: space-around;
 }

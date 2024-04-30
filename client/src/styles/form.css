@@ -10,9 +10,7 @@
 	height: 50px;
 }
 /* ----------------------------------------------------------------[ input padding ]> */
-.form-p-input {
-    padding: 20px 12px 6px 12px !important;
-}
+
 .form-p-input-password {
     padding: 20px 44px 6px 12px !important;
 }
