@@ -155,7 +155,7 @@
     --shadow-xl: 0 15px 35px 0 rgba(0, 0, 0, .2);
 
     --transition-hover-speed: 0.15s;
-    --transition-hover: color var(--transition-hover-speed) ease, background-color var(--transition-hover-speed) ease, text-decoration-color var(--transition-hover-speed) ease, filter var(--transition-hover-speed) ease, border-color var(--transition-hover-speed) ease, opacity var(--transition-hover-speed) ease, transform var(--transition-hover-speed) ease;
+    --transition-hover: all var(--transition-hover-speed) ease;
 }
 /* * --------------------[ containers ]-------------------- */
 .flex-center, .flex-between, .flex-around, .flex-col {

@@ -19,7 +19,7 @@
 }
 
 .primary_text_accent {
-    font: var(--font-accent-600);
+    font: var(--font-accent-500);
 }
 
 .secondary_text_accent {
@@ -78,12 +78,12 @@
 .form_input {
     width: calc(100%);
     position: relative;
+    margin-bottom: var(--size-300);
 }
 
 .input, .input_password {
     width: 100%;
     height: var(--size-600);
-    margin-bottom: var(--size-250);
     padding: var(--size-250) var(--size-150) var(--size-075) var(--size-150);
     color: var(--color-800);
     border-radius: 8px;
@@ -105,15 +105,17 @@
 
 .input_label {
     position: absolute;
-    top: calc(50% - var(--size-250));
+    top: calc(50%);
     left: var(--size-150);
+    transform: translateY(-50%);
     line-height: var(--line-height);
     color: var(--color-400);
     text-shadow: var(--shadow-xs);
     transition: all var(--transition-hover-speed);
+    pointer-events: none;
 }
 .input_label__shrink {
-    top: var(--size-050);
+    top: var(--size-150);
     color: var(--color-500);
 }
 
@@ -123,16 +125,47 @@
 
 .input_password_icon {
     position: absolute;
-    top: calc(50% - var(--size-250));
+    top: calc(50%);
     right: var(--size-150);
+    transform: translateY(-50%);
+    fill: var(--color-400);
+    stroke: var(--color-400);
+    background-color: transparent;
+    transition: var(--transition-hover);
+    cursor: pointer;
+}
+.input_password_icon:hover, .input_password_icon__active {
+    fill: var(--color-500);
+    stroke: var(--color-500);
 }
 
-.icon_close {
+.label {
+    transition: var(--transition-hover);
+}
+
+.form_submit {
+    width: 100%;
+    height: var(--size-600);
+    color: var(--color-100);
+    background-color: darkslategray;
+    border-radius: 8px;
+    box-shadow: var(--shadow-xs);
+    transition: var(--transition-hover);
+}
+.form_submit:hover {
+    background-color: rgb(240, 76, 81);
+}
+
+.icon_default, .icon_close {
     height: auto;
+    fill: inherit;
+    stroke: inherit;
+}
+
+.icon_default {
+    width: var(--size-350);
 }
 
 .icon_close {
     width: var(--size-100);
-    fill: inherit;
-    stroke: inherit;
 }
