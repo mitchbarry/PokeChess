@@ -100,8 +100,8 @@ const LoginForm = () => {
         setShowPassword(showPassword ? false : true)
     }
 
-    const handleFocus = (e) => {
-        switch(e.target.id) {
+    const handleFocus = (input) => {
+        switch(input) {
             case 'email':
                 return setFocus(prevFocus => ({...prevFocus, email: true}))
             case 'password':
@@ -111,22 +111,22 @@ const LoginForm = () => {
         }
     }
 
-const handleBlur = (e) => {
-    switch(e.target.id) {
-        case 'email':
-            if (!email.trim()) {
-                return setFocus(prevFocus => ({...prevFocus, email: false}))
-            }
-            break
-        case 'password':
-            if (!password.trim()) {
-                return setFocus(prevFocus => ({...prevFocus, password: false}))
-            }
-            break
-        default:
-            return
+    const handleBlur = (input) => {
+        switch(input) {
+            case 'email':
+                if (!email.trim()) {
+                    return setFocus(prevFocus => ({...prevFocus, email: false}))
+                }
+                break
+            case 'password':
+                if (!password.trim()) {
+                    return setFocus(prevFocus => ({...prevFocus, password: false}))
+                }
+                break
+            default:
+                return
+        }
     }
-}
 
 	return (
         <div className={`${styles.login} flex-center`}>
@@ -159,7 +159,10 @@ const handleBlur = (e) => {
                     <span className={styles.primary_text}>Login</span>
                 </h1>
                 <form onSubmit={handleSubmit} className={styles.form}>
-                    <div className={styles.form_input}>
+                    <div className={styles.form_input}
+                        onFocus={() => handleFocus('email')}
+                        onBlur={() => handleBlur('email')}
+                    >
                         <input
                             type='text'
                             id='email'
@@ -167,8 +170,6 @@ const handleBlur = (e) => {
                             className={`${styles.input} ${styles.primary_text} ${focus.email || email ? styles.input__focus : ''} ${formErrors.email ? styles.input__error : ''}`}
                             value={email}
                             onChange={(e) => handleInput(e)}
-                            onFocus={(e) => handleFocus(e)}
-                            onBlur={(e) => handleBlur(e)}
                         />
                         <label htmlFor='email' className={`${styles.input_label}
                             ${focus.email || email ? styles.input_label__shrink : ''}
@@ -176,7 +177,10 @@ const handleBlur = (e) => {
                             <span className={`${styles.label} ${focus.email || email ? styles.primary_text__shrink : styles.primary_text}`}>Email or Username</span>
                         </label>
                     </div>
-                    <div className={styles.form_input}>
+                    <div className={styles.form_input}
+                        onFocus={() => handleFocus('password')}
+                        onBlur={() => handleBlur('password')}
+                    >
                         <input
                             type={showPassword ? 'text' : 'password'}
                             id='password'
@@ -184,16 +188,16 @@ const handleBlur = (e) => {
                             className={`${styles.input_password} ${styles.primary_text} ${focus.password || password ? styles.input_password__focus : ''} ${formErrors.password ? styles.input__error : ''}`}
                             value={password}
                             onChange={(e) => handleInput(e)}
-                            onFocus={(e) => handleFocus(e)}
-                            onBlur={(e) => handleBlur(e)}
                         />
-                        <div className={`${styles.input_password_icon} ${showPassword ? styles.input_password_icon__active : ''}`} onClick={handleShowPassword}>
-                            {showPassword ? (
-                                <RevealIcon />
-                            ) : (
-                                <HiddenIcon />
-                            )}
-                        </div>
+                        {(focus.password || password) &&
+                            <button type='button' className={`${styles.input_password_icon} ${showPassword ? styles.input_password_icon__active : ''}`} onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
+                                {showPassword ? (
+                                    <RevealIcon />
+                                ) : (
+                                    <HiddenIcon />
+                                )}
+                            </button>
+                        }
                         <label htmlFor='password' className={`${styles.input_label}
                             ${focus.password || password ? styles.input_label__shrink : ''}
                             ${formErrors.password ? styles.input_label__error : ''}`}>
