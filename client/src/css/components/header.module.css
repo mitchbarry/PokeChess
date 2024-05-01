@@ -70,14 +70,11 @@
     height: 100%;
 }
 
-.primary_logo {
+.primary_logo, .logo {
     height: inherit;
     margin-right: var(--size-075);
 }
 
-.logo {
-    height: inherit;
-}
 .logo:hover {
     animation: wiggle 0.7s ease;
 }

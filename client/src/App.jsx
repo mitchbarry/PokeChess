@@ -7,11 +7,12 @@ import { useAuth } from './context/AuthContext'
 import Header from './components/Header'
 import ErrorNavigator from './components/ErrorNavigator'
 
-import Home from './views/Home'
+import Landing from './views/Landing'
 import Error from './views/Error'
 import Pokedex from './views/Pokedex'
 import News from './views/News'
 import About from './views/About'
+import Contact from './views/Contact'
 
 import Login from './views/Login'
 import Registration from './views/Registration'
@@ -51,13 +52,14 @@ const App = () => {
 			<Header />
 			<Routes>
 				{/* Root Route */}
-				<Route path={'/' || ''} element={<Home />} />
+				<Route path={'/' || ''} element={<Landing />} />
 
 				{/* Non-Auth Routes */}
 				<Route path='/error' element={<Error errors={errors}/>}/>
 				<Route path='/pokedex' element={<Pokedex />} />
 				<Route path='/news' element={<News/>} />
 				<Route path='/about' element={<About />} />
+				<Route path='/contact' element={<Contact />} />
 
 				{/* Login Routes */}
 				<Route path='/login' element={Cookies.get('authToken') || authToken ? <Navigate to='/home' /> : <Login />} />

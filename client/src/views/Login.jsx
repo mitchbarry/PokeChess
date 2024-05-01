@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
 import errorUtilities from '../utilities/error.utilities'
-
-import login from '../assets/text/login.png'
 
 import CloseIcon from '../components/svgs/CloseSvg'
 import HiddenIcon from '../components/svgs/HiddenSvg'
@@ -132,7 +130,7 @@ const handleBlur = (e) => {
 
 	return (
         <div className={`${styles.login} flex-center`}>
-            <div className={styles.login_form}>
+            <div className={`${styles.login_form} flex-col`}>
                 {Object.keys(errors).length !== 0 && showNotification && (
                     <ul className={`${styles.alert_error} flex-col`}>
                         <button className={styles.error_close} aria-label='Close' onClick={closeNotification}>
@@ -157,7 +155,9 @@ const handleBlur = (e) => {
                         )}
                     </ul>
                 )}
-                <h1 className={styles.login_title}><span className={styles.primary_text}>Login</span></h1>
+                <h1 className={styles.form_title}>
+                    <span className={styles.primary_text}>Login</span>
+                </h1>
                 <form onSubmit={handleSubmit} className={styles.form}>
                     <div className={styles.form_input}>
                         <input
@@ -204,6 +204,14 @@ const handleBlur = (e) => {
                         <LoginArrowIcon />
                     </button>
                 </form>
+                <div className={`${styles.form_links} flex-col`}>
+                    <Link className={styles.form_link} to='/register'>
+                        <span className={styles.primary_text__shrink}>Create an Account</span>
+                        </Link>
+                    <Link className={styles.form_link} to='/contact'>
+                        <span className={styles.primary_text__shrink}>Can't log in?</span>
+                        </Link>
+                </div>
             </div>
         </div>
 	)

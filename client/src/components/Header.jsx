@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link, parsePath, useLocation, useNavigate } from 'react-router-dom'
+import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 import { useAuth } from '../context/AuthContext'
@@ -24,7 +24,6 @@ import styles from '../css/components/Header.module.css'
 
 const Header = () => {
 
-    const location = useLocation()
 	const navigate = useNavigate()
 
     const { authToken, loggedUser, updateLoggedUser, updateAuthToken } = useAuth()
