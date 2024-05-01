@@ -26,16 +26,7 @@
     }
 }
 
-/* * Common Styles */
-.header {
-    position: sticky;
-    background-color: var(--color-darken-400);
-    padding: var(--size-075) var(--size-150) var(--size-075) var(--size-075);
-    color: var(--color-000);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-}
-
+/* * Typography */
 .primary_text {
     font: var(--font-800);
 }
@@ -61,6 +52,20 @@
     line-height: var(--line-height-relaxed);
 }
 
+.account_info {
+    color: var(--color-teal-lighten);
+}
+
+/* * Header */
+.header {
+    position: sticky;
+    background-color: var(--color-darken-400);
+    padding: var(--size-075) var(--size-150) var(--size-075) var(--size-075);
+    color: var(--color-000);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
 .nav_primary, .nav_secondary {
     height: 100%;
 }
@@ -81,10 +86,6 @@
     height: 95%;
 }
 
-.account_info {
-    color: var(--color-teal-lighten);
-}
-
 /* * Links */
 .primary_link, .dropdown, .dropdown_link, .login_link, .play_link  {
     text-decoration: none;
@@ -100,10 +101,6 @@
 .primary_link, .dropdown, .play_link  {
     height: var(--size-600);
     border-radius: 8px;
-}
-
-.dropdown {
-    position: relative;
 }
 
 .primary_link:hover, .dropdown:hover, .dropdown_link:hover {
@@ -138,6 +135,10 @@
 }
 
 /* * Dropdown Styles */
+.dropdown {
+    position: relative;
+}
+
 .dropdown_bridge, .dropdown_menu, .dropdown_bridge::before, .menu_secondary {
     position: absolute;
     pointer-events: none;
@@ -216,7 +217,7 @@
     stroke: var(--color-100);
 }
 
-.icon_arrow {
+.icon_dropdownArrow {
     margin-left: var(--size-075);
     height: var(--size-075);
     fill: var(--color-100);

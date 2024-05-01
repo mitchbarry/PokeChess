@@ -22,7 +22,12 @@
     --view-max: 2600px;
 
     --color-000: rgb(255, 255, 255);
+    --color-020: rgb(250, 250, 250);
+    --color-040: rgb(245, 245, 245);
+    --color-060: rgb(240, 240, 240);
+    --color-080: rgb(235, 235, 235);
     --color-100: rgb(230, 230, 230);
+    --color-140: rgb(220, 220, 220);
     --color-200: rgb(205, 205, 205);
     --color-300: rgb(180, 180, 180);
     --color-400: rgb(155, 155, 155);
@@ -41,9 +46,8 @@
     --color-navy: rgb(27, 83, 186);
     --color-teal-lighten: rgb(63, 182, 230);
     --color-teal: rgb(43, 162, 210);
-    --color-alert-red: rgb(155, 20, 20);
-    --color-alert-red-darken: rgb(140, 15, 15);
-    --color-alert-red-background: rgb(255, 200, 200);
+    --color-alert-red: rgb(220, 54, 46);
+    --color-alert-red-background: #FCEBEB;
     --color-alert-green-background: rgb(200, 255, 200);
     --color-alert-blue-background: rgb(145, 230, 255);
     --color-background-000: rgb(195, 200, 215);

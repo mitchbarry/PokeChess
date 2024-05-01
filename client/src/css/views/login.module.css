@@ -1,11 +1,6 @@
 /* * use CEM (Component, Entity, Modifier) for all css classes */
 
-/* * Common Styles */
-.login {
-    margin-top: 250px;
-    flex-direction: column;
-}
-
+/* * Typography */
 .primary_text {
     font: var(--font-500);
 }
@@ -18,46 +13,35 @@
     font: var(--font-400);
 }
 
-.primary_text_accent {
-    font: var(--font-accent-500);
-}
-
 .secondary_text_accent {
     font: var(--font-accent-400)
 }
 
-.detail_text {
-    font: var(--font-400);
-}
-
-.detail_text_accent {
-    font: var(--font-accent-200);
+/* * Login */
+.login {
+    margin-top: 20vh;
+    flex-direction: column;
 }
 
 .login_title {
-    width: 250px;
-    height: auto;
-}
-
-.login_form, .alert_error {
-    box-shadow: var(--shadow-md);
+    text-align: center;
+    margin-bottom: var(--size-350);
+    color: var(--color-800);
 }
 
 .login_form {
-    width: 396px;
-    margin-top: var(--size-150);
+    width: 416px;
     padding: var(--size-300);
-    background-color: var(--color-200);
+    background-color: var(--color-000);
     border-radius: 10px;
 }
 
+/* * Alerts */
 .alert_error {
-    margin-bottom: var(--size-200);
     padding: var(--size-150) var(--size-200);
     position: relative;
     color: var(--color-alert-red);
     background-color: var(--color-alert-red-background);
-    border-radius: 8px;
     list-style-type: none;
 }
 
@@ -66,29 +50,51 @@
     top: var(--size-075);
     right: var(--size-100);
     background-color: transparent;
-    fill: var(--color-alert-red);
-    stroke: var(--color-alert-red);
-    cursor: pointer;
+    fill: var(--color-700);
+    stroke: var(--color-700);
 }
 .error_close:hover {
-    fill: var(--color-alert-red-darken);
-    stroke: var(--color-alert-red-darken);
+    fill: var(--color-800);
+    stroke: var(--color-800);
 }
 
-.form_input {
-    width: calc(100%);
-    position: relative;
+.alert_error, .form_input {
     margin-bottom: var(--size-350);
 }
 
-.input, .input_password {
+/* * Form Inputs */
+.form_input, .input, .input_password, .form_submit {
     width: 100%;
+    border-radius: 5px;
+}
+
+.form_input {
+    position: relative;
+}
+
+.input, .input_password, .input_label, .input_password_icon, .label, .form_submit {
+    transition: var(--transition-hover);
+}
+
+.error_close, .input_password_icon, .form_submit {
+    cursor: pointer;
+}
+
+.input, .input_password {
     height: var(--size-600);
     padding: var(--size-250) var(--size-150) var(--size-075) var(--size-150);
     color: var(--color-800);
-    border-radius: 8px;
-    box-shadow: inset var(--shadow-xs);
-    transition: all var(--transition-hover-speed);
+    background-color: var(--color-040);
+    border: 2px solid transparent;
+}
+.input:hover, .input_password:hover {
+    background-color: var(--color-060);
+    border: 2px solid var(--color-100);
+}
+
+.input__focus, .input_password__focus, .input__focus:hover, .input_password__focus:hover  {
+    background-color: var(--color-020);
+    border: 2px solid var(--color-800);
 }
 
 .input {
@@ -100,18 +106,23 @@
 }
 
 .input__error {
-    border: 1px solid var(--color-red);
+    border: 2px solid var(--color-alert-red);
+}
+.input__error:hover {
+    border: 2px solid var(--color-alert-red);
+}
+
+.input_label, .input_password_icon {
+    position: absolute;
+    top: calc(50%);
+    transform: translateY(-50%);
 }
 
 .input_label {
-    position: absolute;
-    top: calc(50%);
     left: var(--size-150);
-    transform: translateY(-50%);
     line-height: var(--line-height);
     color: var(--color-400);
     text-shadow: var(--shadow-xs);
-    transition: all var(--transition-hover-speed);
     pointer-events: none;
 }
 .input_label__shrink {
@@ -120,43 +131,33 @@
 }
 
 .input_label__error {
-    color: var(--color-red);
+    color: var(--color-alert-red);
 }
 
 .input_password_icon {
-    position: absolute;
-    top: calc(50%);
     right: var(--size-150);
-    transform: translateY(-50%);
     fill: var(--color-400);
     stroke: var(--color-400);
     background-color: transparent;
-    transition: var(--transition-hover);
-    cursor: pointer;
 }
 .input_password_icon:hover, .input_password_icon__active {
     fill: var(--color-500);
     stroke: var(--color-500);
 }
 
-.label {
-    transition: var(--transition-hover);
-}
-
+/* * Form Submit Button */
 .form_submit {
-    width: 100%;
     height: var(--size-600);
-    font-size: inherit;
     color: var(--color-100);
     background-color: var(--color-teal);
-    border-radius: 8px;
-    box-shadow: var(--shadow-xs);
-    transition: var(--transition-hover);
+    fill: var(--color-100);
+    stroke: var(--color-100);
 }
 .form_submit:hover {
     background-color: var(--color-teal-lighten);
 }
 
+/* * Icons */
 .icon_default, .icon_close {
     height: auto;
     fill: inherit;

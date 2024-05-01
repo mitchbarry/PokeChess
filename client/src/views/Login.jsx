@@ -10,6 +10,7 @@ import login from '../assets/text/login.png'
 import CloseIcon from '../components/svgs/CloseSvg'
 import HiddenIcon from '../components/svgs/HiddenSvg'
 import RevealIcon from '../components/svgs/RevealSvg'
+import LoginArrowIcon from '../components/svgs/LoginArrowSvg'
 
 import styles from '../css/views/Login.module.css'
 
@@ -131,7 +132,6 @@ const handleBlur = (e) => {
 
 	return (
         <div className={`${styles.login} flex-center`}>
-            <img src={login} className={styles.login_title}/>
             <div className={styles.login_form}>
                 {Object.keys(errors).length !== 0 && showNotification && (
                     <ul className={`${styles.alert_error} flex-col`}>
@@ -157,13 +157,14 @@ const handleBlur = (e) => {
                         )}
                     </ul>
                 )}
+                <h1 className={styles.login_title}><span className={styles.primary_text}>Login</span></h1>
                 <form onSubmit={handleSubmit} className={styles.form}>
                     <div className={styles.form_input}>
                         <input
                             type='text'
                             id='email'
                             name='email'
-                            className={`${styles.input} ${styles.primary_text} ${formErrors.email ? styles.input__error : ''}`}
+                            className={`${styles.input} ${styles.primary_text} ${focus.email || email ? styles.input__focus : ''} ${formErrors.email ? styles.input__error : ''}`}
                             value={email}
                             onChange={(e) => handleInput(e)}
                             onFocus={(e) => handleFocus(e)}
@@ -180,7 +181,7 @@ const handleBlur = (e) => {
                             type={showPassword ? 'text' : 'password'}
                             id='password'
                             name='password'
-                            className={`${styles.input_password} ${styles.primary_text} ${formErrors.password ? styles.input__error : ''}`}
+                            className={`${styles.input_password} ${styles.primary_text} ${focus.password || password ? styles.input_password__focus : ''} ${formErrors.password ? styles.input__error : ''}`}
                             value={password}
                             onChange={(e) => handleInput(e)}
                             onFocus={(e) => handleFocus(e)}
@@ -199,8 +200,8 @@ const handleBlur = (e) => {
                             <span className={`${styles.label} ${focus.password || password ? styles.primary_text__shrink : styles.primary_text}`}>Password</span>
                         </label>
                     </div>
-                    <button type='submit' className={styles.form_submit}>
-                        <span className={styles.primary_text}>Login</span>
+                    <button type='submit' className={`${styles.form_submit} flex-center`}>
+                        <LoginArrowIcon />
                     </button>
                 </form>
             </div>

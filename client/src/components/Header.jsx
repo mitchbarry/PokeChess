@@ -8,7 +8,7 @@ import AuthService from '../services/AuthService'
 import pokeChess from '../assets/text/pokeChess.png'
 import favicon from '../assets/favicon126px.png'
 
-import ArrowIcon from './svgs/ArrowSvg'
+import DropdownArrowIcon from './svgs/DropdownArrowSvg'
 import ExternalLinkIcon from './svgs/ExternalLinkSvg'
 import AccountIcon from './svgs/AccountSvg'
 import LoginIcon from './svgs/LoginSvg'
@@ -56,7 +56,7 @@ const Header = () => {
 				</Link>
 				<div className={`${styles.dropdown} flex-center`}>{/* to={authToken ? '/lobbies/new' : location.pathname === '/register' ? '/register' : '/login'} */}
 					<span className={`${styles.primary_text}`}>Game Info</span>
-					<ArrowIcon />
+					<DropdownArrowIcon />
 					<div className={styles.dropdown_bridge}/>
 					<div className={`${styles.dropdown_menu} flex-col`}>
 						<Link className={`${styles.dropdown_link}`} to='/pokedex'>
@@ -75,7 +75,7 @@ const Header = () => {
 				</Link>
 				<div className={`${styles.dropdown} flex-center`}>
 					<span className={`${styles.primary_text}`}>Community</span>
-					<ArrowIcon />
+					<DropdownArrowIcon />
 					<div className={styles.dropdown_bridge}/>
 					<div className={`${styles.dropdown_menu} flex-col`}>
 						<Link className={`${styles.dropdown_link}`} to='/forums'>
@@ -99,7 +99,7 @@ const Header = () => {
 					) : (
 						<span className={`${styles.secondary_text}`}>Account</span>
 					)}
-					<ArrowIcon />
+					<DropdownArrowIcon />
 					<div className={styles.dropdown_bridge}/>
 					<div className={`${styles.dropdown_menu} ${styles.menu_primary} flex-col`}>
 						{authToken ? (
