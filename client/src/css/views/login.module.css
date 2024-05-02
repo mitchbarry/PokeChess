@@ -1,4 +1,4 @@
-/* * use CEM (Component, Entity, Modifier) for all css classes */
+/* * use BEM (Block, Entity, Modifier) for all css classes */
 
 /* * Media Queries */
 @media screen and (width >= 960px) { /* ! awaiting var() support in @media queries */
@@ -229,7 +229,7 @@
 }
 
 /* * Icons */
-.icon_default, .icon_close, .icon_check, .icon_warning {
+.icon_default, .icon_check, .icon_warning {
     height: auto;
     fill: inherit;
     stroke: inherit;
@@ -237,10 +237,6 @@
 
 .icon_default {
     width: var(--size-350);
-}
-
-.icon_close {
-    width: var(--size-100);
 }
 
 .icon_check {

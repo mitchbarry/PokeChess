@@ -20,7 +20,7 @@ import MultiplayerIcon from './svgs/MultiplayerSvg'
 import PokedexIcon from './svgs/PokedexSvg'
 import NewsIcon from './svgs/NewsSvg'
 
-import styles from '../css/components/Header.module.css'
+import headerStyles from '../css/components/Header.module.css'
 
 const Header = () => {
 
@@ -45,98 +45,97 @@ const Header = () => {
 		}
 	}
 
-	{/* SVG icons are included in this component instead of in seperate components to allow for use of :hover css feature */}
     return (
-		<nav className={`${styles.header} flex-between`}>
-			<div className={`${styles.nav_primary} flex-center`}>
-				<Link className={`${styles.primary_logo} flex-center`} to='/'>
-					<img src={favicon} className={`${styles.logo}`} alt='Pokeball Logo'/>
-					<img src={pokeChess} className={`${styles.title}`} alt='PokeChess'/>
+		<nav className={`${headerStyles.header} flex-between`}>
+			<div className={`${headerStyles.nav_primary} flex-center`}>
+				<Link className={`${headerStyles.primary_logo} flex-center`} to='/'>
+					<img src={favicon} className={`${headerStyles.logo}`} alt='Pokeball Logo'/>
+					<img src={pokeChess} className={`${headerStyles.title}`} alt='PokeChess'/>
 				</Link>
-				<div className={`${styles.dropdown} flex-center`}>{/* to={authToken ? '/lobbies/new' : location.pathname === '/register' ? '/register' : '/login'} */}
-					<span className={`${styles.primary_text}`}>Game Info</span>
-					<DropdownArrowIcon />
-					<div className={styles.dropdown_bridge}/>
-					<div className={`${styles.dropdown_menu} flex-col`}>
-						<Link className={`${styles.dropdown_link}`} to='/pokedex'>
-							<span className={`${styles.text_accent} ${styles.dropdown_text}`}>Pokedex</span>
+				<div className={`${headerStyles.dropdown} flex-center`}>
+					<span className={`${headerStyles.primary_text}`}>Game Info</span>
+					<DropdownArrowIcon className={headerStyles.icon_dropdownArrow}/>
+					<div className={headerStyles.dropdown_bridge}/>
+					<div className={`${headerStyles.dropdown_menu} flex-col`}>
+						<Link className={`${headerStyles.dropdown_link}`} to='/pokedex'>
+							<span className={`${headerStyles.text_accent} ${headerStyles.dropdown_text}`}>Pokedex</span>
 						</Link>
-						<Link className={`${styles.dropdown_link}`} to='/patch'>
-							<span className={`${styles.text_accent} ${styles.dropdown_text}`}>Patch Notes</span>
+						<Link className={`${headerStyles.dropdown_link}`} to='/patch'>
+							<span className={`${headerStyles.text_accent} ${headerStyles.dropdown_text}`}>Patch Notes</span>
 						</Link>
-						<Link className={`${styles.dropdown_link}`} to='/about'>
-							<span className={`${styles.text_accent} ${styles.dropdown_text}`}>About</span>
+						<Link className={`${headerStyles.dropdown_link}`} to='/about'>
+							<span className={`${headerStyles.text_accent} ${headerStyles.dropdown_text}`}>About</span>
 						</Link>
 					</div>
 				</div>
-				<Link className={`${styles.primary_link} flex-center`} to='/news'>
-					<span className={`${styles.primary_text}`}>News</span>
+				<Link className={`${headerStyles.primary_link} flex-center`} to='/news'>
+					<span className={`${headerStyles.primary_text}`}>News</span>
 				</Link>
-				<div className={`${styles.dropdown} flex-center`}>
-					<span className={`${styles.primary_text}`}>Community</span>
-					<DropdownArrowIcon />
-					<div className={styles.dropdown_bridge}/>
-					<div className={`${styles.dropdown_menu} flex-col`}>
-						<Link className={`${styles.dropdown_link}`} to='/forums'>
-							<span className={`${styles.text_accent} ${styles.dropdown_text}`}>Forums</span>
+				<div className={`${headerStyles.dropdown} flex-center`}>
+					<span className={`${headerStyles.primary_text}`}>Community</span>
+					<DropdownArrowIcon className={headerStyles.icon_dropdownArrow}/>
+					<div className={headerStyles.dropdown_bridge}/>
+					<div className={`${headerStyles.dropdown_menu} flex-col`}>
+						<Link className={`${headerStyles.dropdown_link}`} to='/forums'>
+							<span className={`${headerStyles.text_accent} ${headerStyles.dropdown_text}`}>Forums</span>
 						</Link>
-						<Link className={`${styles.dropdown_link}`} to='/leaderboards'>
-							<span className={`${styles.text_accent} ${styles.dropdown_text}`}>Leaderboards</span>
+						<Link className={`${headerStyles.dropdown_link}`} to='/leaderboards'>
+							<span className={`${headerStyles.text_accent} ${headerStyles.dropdown_text}`}>Leaderboards</span>
 						</Link>
-						<Link className={`${styles.dropdown_link}`}> {/* EXTERNAL LINK NEEDS IMPLEMENTATION !!!!! */}
-							<span className={`${styles.text_accent} ${styles.dropdown_text}`}>Discord</span>
-							<ExternalLinkIcon />
+						<Link className={`${headerStyles.dropdown_link}`}> {/* EXTERNAL LINK NEEDS IMPLEMENTATION !!!!! */}
+							<span className={`${headerStyles.text_accent} ${headerStyles.dropdown_text}`}>Discord</span>
+							<ExternalLinkIcon className={headerStyles.icon_externalLink}/>
 						</Link>
 					</div>
 				</div>
 			</div>
-			<div className={`${styles.nav_secondary} flex-center`}> 
-				<div className={`${styles.dropdown} flex-center`}>
-					<AccountIcon />
+			<div className={`${headerStyles.nav_secondary} flex-center`}> 
+				<div className={`${headerStyles.dropdown} flex-center`}>
+					<AccountIcon className={headerStyles.icon_default}/>
 					{authToken ? (
-						<span className={`${styles.secondary_text}`}>{loggedUser.username}</span>
+						<span className={`${headerStyles.secondary_text}`}>{loggedUser.username}</span>
 					) : (
-						<span className={`${styles.secondary_text}`}>Account</span>
+						<span className={`${headerStyles.secondary_text}`}>Account</span>
 					)}
-					<DropdownArrowIcon />
-					<div className={styles.dropdown_bridge}/>
-					<div className={`${styles.dropdown_menu} ${styles.menu_primary} flex-col`}>
+					<DropdownArrowIcon className={headerStyles.icon_dropdownArrow}/>
+					<div className={headerStyles.dropdown_bridge}/>
+					<div className={`${headerStyles.dropdown_menu} ${headerStyles.menu_primary} flex-col`}>
 						{authToken ? (
-							<div className={`${styles.dropdown_head} ${styles.account_info} flex-col`}> {/* NEEDS TESTING !!!!! */}
-								<span className={`${styles.text_accent} ${styles.account_info_text}`}>{loggedUser.username}</span>
-								<span className={`${styles.detail_text} ${styles.account_info_text}`}>{loggedUser.email}</span>
+							<div className={`${headerStyles.dropdown_head} ${headerStyles.account_info} flex-col`}> {/* NEEDS TESTING !!!!! */}
+								<span className={`${headerStyles.text_accent} ${headerStyles.account_info_text}`}>{loggedUser.username}</span>
+								<span className={`${headerStyles.detail_text} ${headerStyles.account_info_text}`}>{loggedUser.email}</span>
 							</div>
 						): (
-							<Link className={`${styles.dropdown_head} ${styles.login_link} flex-center`} to='/login'>
-								<LoginIcon />
-								<span className={`${styles.secondary_text} ${styles.dropdown_text}`}>Login</span>
+							<Link className={`${headerStyles.dropdown_head} ${headerStyles.login_link} flex-center`} to='/login'>
+								<LoginIcon className={headerStyles.icon_default}/>
+								<span className={`${headerStyles.secondary_text} ${headerStyles.dropdown_text}`}>Login</span>
 							</Link>
 						)}
-						<Link className={styles.dropdown_link} to={authToken ? '/account' : '/login'}>
-							<SettingsIcon />
-							<span className={`${styles.text_accent} ${styles.dropdown_text}`}>Account Settings</span>
+						<Link className={headerStyles.dropdown_link} to={authToken ? '/account' : '/login'}>
+							<SettingsIcon className={headerStyles.icon_default}/>
+							<span className={`${headerStyles.text_accent} ${headerStyles.dropdown_text}`}>Account Settings</span>
 						</Link>
 						{authToken ? (
-							<button className={`${styles.dropdown_link}`} onClick={handleLogout}>
-								<LogoutIcon />
-								<span className={`${styles.text_accent} ${styles.dropdown_text}`}>Logout</span>
+							<button className={`${headerStyles.dropdown_link}`} onClick={handleLogout}>
+								<LogoutIcon className={headerStyles.icon_default}/>
+								<span className={`${headerStyles.text_accent} ${headerStyles.dropdown_text}`}>Logout</span>
 							</button>
 						) : (
-							<Link className={`${styles.dropdown_link}`} to='/register'>
-								<RegisterIcon />
-								<span className={`${styles.text_accent} ${styles.dropdown_text}`}>Sign Up</span>
+							<Link className={`${headerStyles.dropdown_link}`} to='/register'>
+								<RegisterIcon className={headerStyles.icon_default}/>
+								<span className={`${headerStyles.text_accent} ${headerStyles.dropdown_text}`}>Sign Up</span>
 							</Link>
 						)}
-						<div className={`${styles.menu_secondary} flex-col`}>
-							<Link className={styles.dropdown_link} to='/contact'>
-								<SupportIcon />
-								<span className={`${styles.text_accent} ${styles.dropdown_text}`}>Support</span>
+						<div className={`${headerStyles.menu_secondary} flex-col`}>
+							<Link className={headerStyles.dropdown_link} to='/contact'>
+								<SupportIcon className={headerStyles.icon_default}/>
+								<span className={`${headerStyles.text_accent} ${headerStyles.dropdown_text}`}>Support</span>
 							</Link>
 						</div>
 					</div>
 				</div>
-				<Link className={`${styles.play_link} flex-center`} to='/lobbies'>
-					<span className={`${styles.secondary_text}`}>Play Now</span>
+				<Link className={`${headerStyles.play_link} flex-center`} to='/lobbies'>
+					<span className={`${headerStyles.secondary_text}`}>Play Now</span>
 				</Link>
 			</div>
 		</nav>

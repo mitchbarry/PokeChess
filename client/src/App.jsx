@@ -5,7 +5,7 @@ import Cookies from 'js-cookie'
 import { useAuth } from './context/AuthContext'
 
 import Header from './components/Header'
-import PrevPage from './components/PrevPage'
+import ReturnHeader from './components/ReturnHeader'
 import ErrorNavigator from './components/ErrorNavigator'
 
 import Landing from './views/Landing'
@@ -52,7 +52,7 @@ const App = () => {
 
 	return (
 		<div id='background'>
-			{!['/login', '/register'].includes(location.pathname) ? <Header /> : <PrevPage />}
+			{!['/login', '/register'].includes(location.pathname) ? <Header /> : <ReturnHeader />}
 			<Routes>
 				{/* Root Route */}
 				<Route path={'/' || ''} element={<Landing />} />

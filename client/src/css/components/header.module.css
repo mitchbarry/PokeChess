@@ -1,4 +1,4 @@
-/*  * Use CEM (Component, Entity, Modifier) for all CSS classes */
+/*  * Use BEM (Block, Entity, Modifier) for all CSS classes */
 
 /* * Media Queries */
 @media screen and (width >= 960px) { /* ! awaiting var() support in @media queries */
