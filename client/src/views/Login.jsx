@@ -5,9 +5,9 @@ import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
 import errorUtilities from '../utilities/error.utilities'
 
-import CloseIcon from '../components/svgs/CloseSvg'
 import HiddenIcon from '../components/svgs/HiddenSvg'
 import RevealIcon from '../components/svgs/RevealSvg'
+import WarningIcon from '../components/svgs/WarningSvg'
 import LoginArrowIcon from '../components/svgs/LoginArrowSvg'
 import CheckIcon from '../components/svgs/CheckSvg'
 
@@ -19,25 +19,24 @@ const LoginForm = () => {
 
 	const { handleLoginResponse } = useAuth()
 
-    const [email, setEmail] = useState('')
+    const [accountName, setAccountName] = useState('')
     const [password, setPassword] = useState('')
     const [stayLogged, setStayLogged] = useState(false)
 	const [errors, setErrors] = useState({})
-    const [showNotification, setShowNotification] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
     const [formErrors, setFormErrors] = useState({
-        email: false,
+        accountName: false,
         password: false
     })
 	const [focus, setFocus] = useState({
-		email: false,
+		accountName: false,
 		password: false
 	})
 
     const handleInput = (e) => {
         switch(e.target.id) {
-            case 'email':
-                return handleEmail(e)
+            case 'accountName':
+                return handleAccountName(e)
             case 'password':
                 return handlePassword(e)
             default:
@@ -45,10 +44,10 @@ const LoginForm = () => {
         }
     }
 
-    const handleEmail = (e) => {
+    const handleAccountName = (e) => {
         const value = e.target.value
-        setFormErrors(prevErrors => ({...prevErrors, email: false}))
-        setEmail(value)
+        setFormErrors(prevErrors => ({...prevErrors, accountName: false}))
+        setAccountName(value)
     }
 
     const handlePassword = (e) => {
@@ -68,8 +67,8 @@ const LoginForm = () => {
 
     const checkForm = () => {
         const newFormErrors = {...formErrors}
-        if (!email.trim() || !/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
-            newFormErrors.email = true
+        if (!accountName.trim() || !/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(accountName)) {
+            newFormErrors.accountName = true
         }
         if (!password.trim()) {
             newFormErrors.password = true
@@ -84,22 +83,16 @@ const LoginForm = () => {
 	const sendRequest = async () => {
         try {
             const response = await AuthService.login({
-                email: email.trim(),
+                accountName: accountName.trim(),
                 password: password.trim()
             })
             handleLoginResponse(response ,stayLogged)
+            navigate('/')
         }
         catch (error) {
             setErrors(errorUtilities.catchError(error))
             setShowNotification(true)
         }
-		finally {
-			navigate('/lobbies/home')
-		}
-    }
-
-	const closeNotification = () => {
-        setShowNotification(false)
     }
 
     const handleShowPassword = () => {
@@ -108,8 +101,8 @@ const LoginForm = () => {
 
     const handleFocus = (input) => {
         switch(input) {
-            case 'email':
-                return setFocus(prevFocus => ({...prevFocus, email: true}))
+            case 'accountName':
+                return setFocus(prevFocus => ({...prevFocus, accountName: true}))
             case 'password':
                 return setFocus(prevFocus => ({...prevFocus, password: true}))
             default:
@@ -119,9 +112,9 @@ const LoginForm = () => {
 
     const handleBlur = (input) => {
         switch(input) {
-            case 'email':
-                if (!email.trim()) {
-                    return setFocus(prevFocus => ({...prevFocus, email: false}))
+            case 'accountName':
+                if (!accountName.trim()) {
+                    return setFocus(prevFocus => ({...prevFocus, accountName: false}))
                 }
                 break
             case 'password':
@@ -137,53 +130,37 @@ const LoginForm = () => {
 	return (
         <div className={`${styles.login} flex-center`}>
             <div className={`${styles.login_form} flex-col`}>
-                {Object.keys(errors).length !== 0 && showNotification && (
-                    <ul className={`${styles.alert_error} flex-col`}>
-                        <button className={styles.error_close} aria-label='Close' onClick={closeNotification}>
-                            <CloseIcon />
-                        </button>
-                        {errors.statusCode && errors.name && (
-                            <li>
-                                <span className={styles.secondary_text}><b>Error {errors.statusCode}: {errors.name}</b></span>
-                            </li>
-                        )}
-                        {errors.message && (
-                            <li>
-                                <span className={styles.secondary_text_accent}>{errors.message}</span>
-                            </li>
-                        )}
-                        {errors.validationErrors && errors.validationErrors.length !== 0 && (
-                            errors.validationErrors.map((error, index) => (
-                                <li key={index}>
-                                    <span className={styles.secondary_text_accent}>{error}</span>
-                                </li>
-                            ))
-                        )}
-                    </ul>
-                )}
                 <h1 className={styles.form_title}>
                     <span className={styles.primary_text}>Login</span>
                 </h1>
                 <form onSubmit={handleSubmit} className={styles.form}>
-                    <div className={styles.form_input}
-                        onFocus={() => handleFocus('email')}
-                        onBlur={() => handleBlur('email')}
+                    <div className={`${styles.form_input} ${(Object.keys(errors).length !== 0 && errors.message === 'InvalidAccountName') ? styles.form_input__error : ''}`}
+                        onFocus={() => handleFocus('accountName')}
+                        onBlur={() => handleBlur('accountName')}
                     >
                         <input
                             type='text'
-                            id='email'
+                            id='accountName'
                             name='email'
-                            className={`${styles.input} ${styles.primary_text} ${(focus.email || email) ? styles.input__focus : ''} ${formErrors.email ? styles.input__error : ''}`}
-                            value={email}
+                            className={`${styles.input} ${styles.primary_text} ${(focus.accountName || accountName) ? styles.input__focus : ''} ${formErrors.accountName ? styles.input__error : ''}`}
+                            value={accountName}
                             onChange={(e) => handleInput(e)}
                         />
-                        <label htmlFor='email' className={`${styles.input_label}
-                            ${(focus.email || email) ? styles.input_label__shrink : ''}
-                            ${formErrors.email ? styles.input_label__error : ''}`}>
-                            <span className={`${styles.label} ${(focus.email || email) ? styles.primary_text__shrink : styles.primary_text}`}>Email or Username</span>
+                        <label htmlFor='accountName' className={`${styles.input_label}
+                            ${(focus.accountName || accountName) ? styles.input_label__shrink : ''}
+                            ${formErrors.accountName ? styles.input_label__error : ''}`}>
+                            <span className={`${styles.label} ${(focus.accountName || accountName) ? styles.primary_text__shrink : styles.primary_text}`}>Email or Username</span>
                         </label>
                     </div>
-                    <div className={styles.form_input}
+                    {Object.keys(errors).length !== 0 && (
+                        errors.message === 'InvalidAccountName' && (
+                            <div className={styles.input_error}>
+                                <WarningIcon />
+                                <span className={styles.secondary_text_accent}>Please enter a valid account name.</span>
+                            </div>
+                        )
+                    )}
+                    <div className={`${styles.form_input} ${(Object.keys(errors).length !== 0 && errors.message === 'InvalidPassword') ? styles.form_input__error : ''}`}
                         onFocus={() => handleFocus('password')}
                         onBlur={() => handleBlur('password')}
                     >
@@ -210,6 +187,14 @@ const LoginForm = () => {
                             <span className={`${styles.label} ${(focus.password || password) ? styles.primary_text__shrink : styles.primary_text}`}>Password</span>
                         </label>
                     </div>
+                    {Object.keys(errors).length !== 0 && (
+                        errors.message === 'InvalidPassword' && (
+                            <div className={styles.input_error}>
+                                <WarningIcon />
+                                <span className={styles.secondary_text_accent}>Please enter your password.</span>
+                            </div>
+                        )
+                    )}
                     <div className={`${styles.form_checkbox}`}>
                         <div className={`${styles.checkbox} flex-center`}>
                             <input type='checkbox' className={`${styles.box}`} checked={stayLogged} onChange={handleStayLogged}/>

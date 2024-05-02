@@ -40,34 +40,22 @@
 }
 
 /* * Alerts */
-.alert_error {
-    padding: var(--size-150) var(--size-200);
-    position: relative;
-    color: var(--color-alert-red);
-    background-color: var(--color-alert-red-background);
-    list-style-type: none;
-}
-
-.error_close {
-    position: absolute;
-    top: var(--size-075);
-    right: var(--size-100);
-    background-color: transparent;
-    fill: var(--color-700);
-    stroke: var(--color-700);
-}
-.error_close:hover {
-    fill: var(--color-800);
-    stroke: var(--color-800);
-}
-
-.alert_error, .form_input, .form_submit, .form_checkbox {
-    margin-bottom: var(--size-350);
+.input_error {
+    margin-bottom: var(--size-200);
+    display: flex;
+    align-items: center;
+    color:var(--color-alert-red);
+    fill: var(--color-alert-red);
+    stroke: var(--color-alert-red);
 }
 
 /* * Form Inputs */
 .form_input, .input, .input_password, .form_submit {
     width: 100%;
+}
+
+.form_input, .form_submit, .form_checkbox {
+    margin-bottom: var(--size-350);
 }
 
 .input, .input_password, .form_submit {
@@ -76,6 +64,10 @@
 
 .form_input {
     position: relative;
+}
+
+.form_input__error {
+    margin-bottom: var(--size-200);
 }
 
 .input, .input_password, .input_label, .label, .input_password_icon, .form_submit, .form_link, .checkbox {
@@ -212,7 +204,7 @@
 }
 
 /* * Icons */
-.icon_default, .icon_close, .icon_check {
+.icon_default, .icon_close, .icon_check, .icon_warning {
     height: auto;
     fill: inherit;
     stroke: inherit;
@@ -233,4 +225,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
+}
+
+.icon_warning {
+    width: var(--size-200);
+    margin-right: var(--size-075);
 }

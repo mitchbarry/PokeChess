@@ -40,12 +40,18 @@ const authController = {
 
     async loginUser(req, res, next) {
         try {
-            const { email, password } = req.body;
-            const user = await User.findOne({ email });
+            const { accountName, password } = req.body;
+            const isEmail = accountName.includes('@');
+            let user;
+            if (isEmail) {
+                user = await User.findOne({ email: accountName });
+            } else {
+                user = await User.findOne({ username: accountName });
+            }
             if (!user) {
                 const normalizedError = {
                     statusCode: 401,
-                    message: "Invalid email.",
+                    message: "InvalidAccountName",
                     name: "AuthenticationError",
                     validationErrors: {}
                 };
@@ -55,7 +61,7 @@ const authController = {
             if (!passwordMatch) {
                 const normalizedError = {
                     statusCode: 401,
-                    message: "Invalid password.",
+                    message: "InvalidPassword",
                     name: "AuthenticationError",
                     validationErrors: {}
                 };
@@ -63,8 +69,7 @@ const authController = {
             }
             const token = generateAuthToken(user);
             res.json({ user, token });
-        }
-        catch (error) {
+        } catch (error) {
             next(error);
         }
     },
