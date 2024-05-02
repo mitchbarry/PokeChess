@@ -45,7 +45,7 @@ const authController = {
             if (!user) {
                 const normalizedError = {
                     statusCode: 401,
-                    message: "Invalid email or password",
+                    message: "Invalid email.",
                     name: "AuthenticationError",
                     validationErrors: {}
                 };
@@ -55,7 +55,7 @@ const authController = {
             if (!passwordMatch) {
                 const normalizedError = {
                     statusCode: 401,
-                    message: "Invalid email or password",
+                    message: "Invalid password.",
                     name: "AuthenticationError",
                     validationErrors: {}
                 };

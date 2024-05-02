@@ -2,7 +2,7 @@
 
 /* * Typography */
 .primary_text {
-    font: var(--font-500);
+    font: var(--font-400);
 }
 
 .primary_text__shrink {
