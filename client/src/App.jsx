@@ -1,10 +1,11 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 
 import { useAuth } from './context/AuthContext'
 
 import Header from './components/Header'
+import PrevPage from './components/PrevPage'
 import ErrorNavigator from './components/ErrorNavigator'
 
 import Landing from './views/Landing'
@@ -30,6 +31,8 @@ import './css/utility.css'
 
 const App = () => {
 
+	const location = useLocation()
+
 	const { authToken, handleLoginToken } = useAuth()
 
 	const [errors, setErrors] = useState({})
@@ -49,7 +52,7 @@ const App = () => {
 
 	return (
 		<div id='background'>
-			<Header />
+			{!['/login', '/register'].includes(location.pathname) ? <Header /> : <PrevPage />}
 			<Routes>
 				{/* Root Route */}
 				<Route path={'/' || ''} element={<Landing />} />
