@@ -5,8 +5,9 @@ import Cookies from 'js-cookie'
 import { useAuth } from './context/AuthContext'
 
 import Header from './components/Header'
-import ReturnHeader from './components/ReturnHeader'
+import Return from './components/Return'
 import ErrorNavigator from './components/ErrorNavigator'
+import Footer from './components/Footer'
 
 import Landing from './views/Landing'
 import Error from './views/Error'
@@ -52,7 +53,7 @@ const App = () => {
 
 	return (
 		<div id='background'>
-			{!['/login', '/register'].includes(location.pathname) ? <Header /> : <ReturnHeader />}
+			{!['/login', '/register'].includes(location.pathname) ? <Header /> : <Return />}
 			<Routes>
 				{/* Root Route */}
 				<Route path={'/' || ''} element={<Landing />} />
@@ -65,8 +66,8 @@ const App = () => {
 				<Route path='/contact' element={<Contact />} />
 
 				{/* Login Routes */}
-				<Route path='/login' element={Cookies.get('authToken') || authToken ? <Navigate to='/home' /> : <Login />} />
-				<Route path='/register' element={Cookies.get('authToken') || authToken ? <Navigate to='/home' /> : <Registration />} />
+				<Route path='/login' element={Cookies.get('authToken') || authToken ? <Navigate to='/' /> : <Login />} />
+				<Route path='/register' element={Cookies.get('authToken') || authToken ? <Navigate to='/' /> : <Registration />} />
 			
 				{/* Auth Routes */}
 				<Route path='/account' element={Cookies.get('authToken') || authToken ? <Account /> : <ErrorNavigator error={401} updateErrors={updateErrors} />} />
@@ -79,6 +80,7 @@ const App = () => {
 				{/* Catch All Route */}
 				<Route path='*' element={<ErrorNavigator error={404} updateErrors={updateErrors} />} />
 			</Routes>
+			<Footer />
 		</div>
 	)
 }

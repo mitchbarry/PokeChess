@@ -1,31 +1,5 @@
 /* * use BEM (Block, Entity, Modifier) for all css classes */
 
-/* * Media Queries */
-@media screen and (width >= 960px) { /* ! awaiting var() support in @media queries */
-    .header {
-        width: calc(100% - 2 * var(--size-150));
-        margin: var(--size-150);
-        border-radius: 15px;
-        height: var(--size-900)
-    }
-    .icon {
-        display: none;
-    }
-}
-
-@media screen and (width < 960px) { /* ! awaiting var() support in @media queries */
-    .header {
-        width: 100%;
-        height: var(--size-700)
-    }
-    .header_main {
-        width: 100%;
-    }
-    .title {
-        display: none;
-    }
-}
-
 /* * Typography */
 .primary_text {
     font: var(--font-400);
@@ -49,7 +23,8 @@
 
 /* * Login */
 .login {
-    height: 85%;
+    min-height: calc(100vh - (var(--size-600) + var(--size-800)));
+    padding-bottom: calc(var(--size-900) + var(--size-600))
 }
 
 .form_title {

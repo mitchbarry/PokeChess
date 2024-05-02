@@ -1,0 +1,11 @@
+/* * use BEM (Block, Entity, Modifier) for all css classes */
+
+/* * Footer */
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: var(--size-900);
+    margin: 0 var(--size-900) var(--size-600) var(--size-900);
+}

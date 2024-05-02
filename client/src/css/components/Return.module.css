@@ -1,0 +1,33 @@
+/* * use BEM (Block, Entity, Modifier) for all css classes */
+
+/* * Header */
+.header {
+    width: 100%;
+    padding: var(--size-600) var(--size-900) 0 var(--size-900);
+}
+
+.header_return {
+    width: var(--size-800);
+    height: var(--size-800);
+    border-radius: 7px;
+    background-color: var(--color-060);
+    transition: var(--transition-hover);
+    fill: var(--color-800);
+    stroke: var(--color-800);
+    cursor: pointer;
+}
+.header_return:hover {
+    background-color: var(--color-100);
+}
+
+/* * Icons */
+.icon_default {
+    width: auto;
+}
+
+.icon_default {
+    height: var(--size-225);
+    fill: inherit;
+    stroke: inherit;
+    transform: rotate(180deg);
+}
