@@ -9,6 +9,7 @@ import CloseIcon from '../components/svgs/CloseSvg'
 import HiddenIcon from '../components/svgs/HiddenSvg'
 import RevealIcon from '../components/svgs/RevealSvg'
 import LoginArrowIcon from '../components/svgs/LoginArrowSvg'
+import CheckIcon from '../components/svgs/CheckSvg'
 
 import styles from '../css/views/Login.module.css'
 
@@ -20,6 +21,7 @@ const LoginForm = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [stayLogged, setStayLogged] = useState(false)
 	const [errors, setErrors] = useState({})
     const [showNotification, setShowNotification] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
@@ -55,6 +57,10 @@ const LoginForm = () => {
         setPassword(value)
     }
 
+    const handleStayLogged = () => {
+        setStayLogged(!stayLogged)
+    }
+
 	const handleSubmit = (e) => {
         e.preventDefault()
         checkForm()
@@ -81,7 +87,7 @@ const LoginForm = () => {
                 email: email.trim(),
                 password: password.trim()
             })
-            handleLoginResponse(response)
+            handleLoginResponse(response ,stayLogged)
         }
         catch (error) {
             setErrors(errorUtilities.catchError(error))
@@ -97,7 +103,7 @@ const LoginForm = () => {
     }
 
     const handleShowPassword = () => {
-        setShowPassword(showPassword ? false : true)
+        setShowPassword(!showPassword)
     }
 
     const handleFocus = (input) => {
@@ -167,14 +173,14 @@ const LoginForm = () => {
                             type='text'
                             id='email'
                             name='email'
-                            className={`${styles.input} ${styles.primary_text} ${focus.email || email ? styles.input__focus : ''} ${formErrors.email ? styles.input__error : ''}`}
+                            className={`${styles.input} ${styles.primary_text} ${(focus.email || email) ? styles.input__focus : ''} ${formErrors.email ? styles.input__error : ''}`}
                             value={email}
                             onChange={(e) => handleInput(e)}
                         />
                         <label htmlFor='email' className={`${styles.input_label}
-                            ${focus.email || email ? styles.input_label__shrink : ''}
+                            ${(focus.email || email) ? styles.input_label__shrink : ''}
                             ${formErrors.email ? styles.input_label__error : ''}`}>
-                            <span className={`${styles.label} ${focus.email || email ? styles.primary_text__shrink : styles.primary_text}`}>Email or Username</span>
+                            <span className={`${styles.label} ${(focus.email || email) ? styles.primary_text__shrink : styles.primary_text}`}>Email or Username</span>
                         </label>
                     </div>
                     <div className={styles.form_input}
@@ -185,11 +191,11 @@ const LoginForm = () => {
                             type={showPassword ? 'text' : 'password'}
                             id='password'
                             name='password'
-                            className={`${styles.input_password} ${styles.primary_text} ${focus.password || password ? styles.input_password__focus : ''} ${formErrors.password ? styles.input__error : ''}`}
+                            className={`${styles.input_password} ${styles.primary_text} ${(focus.password || password) ? styles.input_password__focus : ''} ${formErrors.password ? styles.input__error : ''}`}
                             value={password}
                             onChange={(e) => handleInput(e)}
                         />
-                        {(focus.password || password) &&
+                        {(focus.password || password) && (
                             <button type='button' className={`${styles.input_password_icon} ${showPassword ? styles.input_password_icon__active : ''}`} onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
                                 {showPassword ? (
                                     <RevealIcon />
@@ -197,12 +203,21 @@ const LoginForm = () => {
                                     <HiddenIcon />
                                 )}
                             </button>
-                        }
+                        )}
                         <label htmlFor='password' className={`${styles.input_label}
-                            ${focus.password || password ? styles.input_label__shrink : ''}
+                            ${(focus.password || password) ? styles.input_label__shrink : ''}
                             ${formErrors.password ? styles.input_label__error : ''}`}>
-                            <span className={`${styles.label} ${focus.password || password ? styles.primary_text__shrink : styles.primary_text}`}>Password</span>
+                            <span className={`${styles.label} ${(focus.password || password) ? styles.primary_text__shrink : styles.primary_text}`}>Password</span>
                         </label>
+                    </div>
+                    <div className={`${styles.form_checkbox}`}>
+                        <div className={`${styles.checkbox} flex-center`}>
+                            <input type='checkbox' className={`${styles.box}`} checked={stayLogged} onChange={handleStayLogged}/>
+                            {stayLogged && (
+                                <CheckIcon />
+                            )}
+                        </div>
+                        <span className={`${styles.primary_text_accent__shrink} flex-center`}>Stay logged in</span>
                     </div>
                     <button type='submit' className={`${styles.form_submit} flex-center`}>
                         <LoginArrowIcon />

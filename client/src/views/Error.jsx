@@ -11,8 +11,8 @@ const Error = (props) => {
     const { errors } = props
 
     return (
-        <div className={flexBox}>
-            <div className={mainItem}>
+        <div>
+            {/* <div className={mainItem}>
                 {Object.keys(errors).length !== 0 && showNotification && (
                     <ul className="alert alert-danger">
                         <button type="button" className="btn-close close-button-red" aria-label="Close" onClick={closeNotification}></button>
@@ -40,7 +40,7 @@ const Error = (props) => {
                 ) : (
                     <Link to="/login" className={blueButton}>Home</Link>
                 )}
-            </div>
+            </div> */}
         </div>
     );
 }

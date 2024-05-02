@@ -168,7 +168,7 @@
     padding: var(--size-200) 0;
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
-    transform: perspective(var(--view-md)) rotateX(-20deg); /* Initially rotate the menu */
+    transform: perspective(var(--view-md)) rotateX(-10deg); /* Initially rotate the menu */
     transform-origin: top center;
 }
 

@@ -43,10 +43,12 @@
     --color-green-lighten: rgb(91, 215, 105);
     --color-green: rgb(71, 195, 85);
     --color-blue: rgb(0, 128, 255);
+    --color-blue-darken: rgb(0, 103, 230);
     --color-navy: rgb(27, 83, 186);
     --color-teal-lighten: rgb(63, 182, 230);
     --color-teal: rgb(43, 162, 210);
     --color-alert-red: rgb(220, 54, 46);
+    --color-alert-red-darken: rgb(195, 29, 21);
     --color-alert-red-background: #FCEBEB;
     --color-alert-green-background: rgb(200, 255, 200);
     --color-alert-blue-background: rgb(145, 230, 255);
@@ -81,8 +83,11 @@
     --size-050: 4px;
     --size-075: 6px;
     --size-100: 8px;
+    --size-125: 10px;
     --size-150: 12px;
+    --size-175: 14px;
     --size-200: 16px;
+    --size-225: 18px;
     --size-250: 20px;
     --size-300: 24px;
     --size-350: 28px;
