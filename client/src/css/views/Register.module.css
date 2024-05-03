@@ -51,11 +51,11 @@
 }
 
 /* * Form Inputs */
-.form_input, .input, .input_password, .form_submit {
+.form_input, .form_password, .input, .input_password, .form_submit {
     width: 100%;
 }
 
-.form_input, .form_submit {
+.form_input, .form_submit, .form_password_check {
     margin-bottom: var(--size-350);
 }
 
@@ -63,7 +63,7 @@
     border-radius: 4px;
 }
 
-.form_input {
+.form_input, .form_password {
     position: relative;
 }
 
@@ -71,11 +71,11 @@
     margin-bottom: var(--size-200);
 }
 
-.input, .input_password, .input_label, .label, .input_password_icon, .form_submit, .form_link, .password_check {
+.input, .input_password, .input_label, .label, .input_password_icon, .form_submit, .form_link {
     transition: var(--transition-hover);
 }
 
-.error_close, .input_password_icon, .form_submit, .password_check {
+.error_close, .input_password_icon, .form_submit {
     cursor: pointer;
 }
 
@@ -144,32 +144,32 @@
     stroke: var(--color-500);
 }
 
-.form_password_check {
-    margin-bottom: var(--size-100);
+.form_password, .password_check {
+    margin-bottom: var(--size-150);
+}
+
+.password_check {
     display: flex;
     align-items: center;
 }
 
-.password_check {
+.password_check_box {
     margin-right: var(--size-100);
     position: relative;
-    fill: var(--color-800);
-    stroke: var(--color-800);
+    fill: var(--color-000);
+    stroke: var(--color-000);
 }
 
 .check_box {
-    appearance: none;
-    width: var(--size-225);
-    height: var(--size-225);
-    background-color: var(--color-060);
-    border: 2px solid transparent;
-    transition: var(--transition-hover);
+    width: var(--size-200);
+    height: var(--size-200);
+    background-color: var(--color-200);
     border-radius: 3px;
-    cursor: pointer;
 }
 
-.password_check__checked {
-    background-color: var(--color-blue);
+.check_box__checked {
+    background-color: var(--color-green);
+    border-radius: 50%;
 }
 
 /* * Form Submit Button */
@@ -211,7 +211,7 @@
 
 .icon_check {
     position: absolute;
-    width: var(--size-150);
+    width: var(--size-100);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
