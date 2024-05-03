@@ -67,7 +67,7 @@ const LoginForm = () => {
 
     const checkForm = () => {
         const newFormErrors = {...formErrors}
-        if (!accountName.trim() || !/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(accountName)) {
+        if (!accountName.trim()) {
             newFormErrors.accountName = true
         }
         if (!password.trim()) {
@@ -75,7 +75,8 @@ const LoginForm = () => {
         }
         if (!Object.values(newFormErrors).includes(true)) {
             sendRequest()
-        } else {
+        }
+        else {
             setFormErrors(prevErrors => ({...prevErrors, ...newFormErrors}))
         }
     }
@@ -110,7 +111,8 @@ const LoginForm = () => {
             setFocus((prevFocus) => ({
                 ...prevFocus, accountName: false
             }))
-        } else if (input === 'password' && !password.trim()) {
+        }
+        else if (input === 'password' && !password.trim()) {
             setFocus((prevFocus) => ({
                 ...prevFocus, password: false
             }))
@@ -146,7 +148,7 @@ const LoginForm = () => {
                         errors.message === 'InvalidAccountName' && (
                             <div className={loginStyles.input_error}>
                                 <WarningIcon className={loginStyles.icon_warning}/>
-                                <span className={loginStyles.secondary_text_accent}>Please enter a valid account name.</span>
+                                <span className={loginStyles.secondary_text_accent}>Please enter a valid account name</span>
                             </div>
                         )
                     )}
@@ -181,7 +183,7 @@ const LoginForm = () => {
                         errors.message === 'InvalidPassword' && (
                             <div className={loginStyles.input_error}>
                                 <WarningIcon className={loginStyles.icon_warning}/>
-                                <span className={loginStyles.secondary_text_accent}>Please enter your password.</span>
+                                <span className={loginStyles.secondary_text_accent}>Please enter your password</span>
                             </div>
                         )
                     )}

@@ -55,7 +55,7 @@
     width: 100%;
 }
 
-.form_input, .form_submit, .form_checkbox {
+.form_input, .form_submit {
     margin-bottom: var(--size-350);
 }
 
@@ -71,11 +71,11 @@
     margin-bottom: var(--size-200);
 }
 
-.input, .input_password, .input_label, .label, .input_password_icon, .form_submit, .form_link, .checkbox {
+.input, .input_password, .input_label, .label, .input_password_icon, .form_submit, .form_link, .password_check {
     transition: var(--transition-hover);
 }
 
-.error_close, .input_password_icon, .form_submit, .checkbox {
+.error_close, .input_password_icon, .form_submit, .password_check {
     cursor: pointer;
 }
 
@@ -144,19 +144,20 @@
     stroke: var(--color-500);
 }
 
-.form_checkbox {
+.form_password_check {
+    margin-bottom: var(--size-100);
     display: flex;
     align-items: center;
 }
 
-.checkbox {
+.password_check {
     margin-right: var(--size-100);
     position: relative;
     fill: var(--color-800);
     stroke: var(--color-800);
 }
 
-.box {
+.check_box {
     appearance: none;
     width: var(--size-225);
     height: var(--size-225);
@@ -166,16 +167,9 @@
     border-radius: 3px;
     cursor: pointer;
 }
-.box:hover {
-    background-color: var(--color-080);
-    border: 2px solid var(--color-100);
-}
 
-.checkbox:checked {
-    background-color: var(--color-blue) !important;
-}
-.checkbox:checked:hover {
-    background-color: var(--color-blue-darken) !important;
+.password_check__checked {
+    background-color: var(--color-blue);
 }
 
 /* * Form Submit Button */

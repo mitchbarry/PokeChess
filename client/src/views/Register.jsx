@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { hasBadWords } from 'expletives'
 
 import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
 import errorUtilities from '../utilities/error.utilities'
+import profanityUtilities from '../utilities/profanity.utilities'
 
 import HiddenIcon from '../components/svgs/HiddenSvg'
 import RevealIcon from '../components/svgs/RevealSvg'
 import WarningIcon from '../components/svgs/WarningSvg'
 import ArrowIcon from '../components/svgs/ArrowSvg'
+import CheckIcon from '../components/svgs/CheckSvg'
+import XIcon from '../components/svgs/XSvg'
 
 import registerStyles from '../css/views/Register.module.css'
 
@@ -27,7 +29,10 @@ const Register = () => {
     const [formErrors, setFormErrors] = useState({
         username: '',
         email: '',
-        password: ''
+        password: {
+            size: true,
+            characters: true
+        }
     })
 	const [focus, setFocus] = useState({
 		username: false,
@@ -52,9 +57,9 @@ const Register = () => {
         const value = e.target.value
         setFormErrors((prevErrors) => {
             if (
-                (prevErrors.username === 'Your username is required' && value) ||
-                (prevErrors.username === 'Your username must be at least 3 characters long' && value.length >= 3) ||
-                (prevErrors.username === 'Your username must be no more than 16 characters long' && value.length <= 16)
+                (prevErrors.username === `Your username is required` && value) ||
+                (prevErrors.username === `Your username must be at least 3 characters` && value.length >= 3) ||
+                (prevErrors.username === `Your username can't be more than 16 characters` && value.length <= 16)
             ) {
                 return { ...prevErrors, username: '' }
             }
@@ -66,47 +71,40 @@ const Register = () => {
     const handleEmail = (e) => {
         const value = e.target.value
         setFormErrors((prevErrors) => {
-            if (prevErrors.email === 'Your email is required') {
+            if (prevErrors.email === `Your email is required`) {
                 if (value) {
                     return { ...prevErrors, email: '' }
-                } else {
+                }
+                else {
                     return prevErrors
                 }
-            } else {
+            }
+            else {
                 return prevErrors
             }
         })
         setEmail(value)
     }
 
-	const handlePassword = (e) => {
+    const handlePassword = (e) => {
         const value = e.target.value
         setFormErrors((prevErrors) => {
-            switch (prevErrors.password) {
-                case 'Password is required!':
-                    if (value) {
-                        return {...prevErrors, password: ''}
-                    }
-					else {
-						return prevErrors
-					}
-                case 'Password must be at least 6 characters long!':
-                    if (value.length > 6) {
-                        return {...prevErrors, password: ''}
-                    }
-					else {
-						return prevErrors
-					}
-                case 'Password must be less than 255 characters long!':
-                    if (value.length > 255) {
-                        return {...prevErrors, password: ''}
-                    }
-					else {
-						return prevErrors
-					}
-                default:
-                    return prevErrors
+            const updatedErrors = { ...prevErrors }
+            if (value.length >= 8 && value.length <= 255) { // Check length
+                updatedErrors.password.size = false
+            } 
+            else {
+                updatedErrors.password.size = true
             }
+            if (/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(value) ||
+                /^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$/.test(value) ||
+                /^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(value)) { // Check character requirements
+                updatedErrors.password.characters = false
+            }
+            else {
+                updatedErrors.password.characters = true
+            }
+            return updatedErrors
         })
         setPassword(value)
     }
@@ -116,37 +114,47 @@ const Register = () => {
         checkForm()
 	}
 
-	const checkForm = () => {
-        const newFormErrors = {...formErrors}
-        if (!username.trim()) { // checks username on submit
-            newFormErrors.username = 'Username is required!'
+    const checkForm = () => {
+        const newFormErrors = { ...formErrors }
+        const usernameTrim = username.trim()
+        const emailTrim = email.trim()
+        let hasError = false
+
+        if (!usernameTrim) { // Check username on submit
+            newFormErrors.username = `Your username is required`
+            hasError = true
+        } else if (profanityUtilities.containsProfanity(usernameTrim)) {
+            newFormErrors.username = `Your username must be appropriate`
+            hasError = true
+        } else if (!/^[a-zA-Z0-9\s]+$/.test(usernameTrim)) {
+            newFormErrors.username = `Your username can't contain special characters`
+            hasError = true
+        } else if (usernameTrim.length < 3) {
+            newFormErrors.username = `Your username must be at least 3 characters`
+            hasError = true
+        } else if (usernameTrim.length > 16) {
+            newFormErrors.username = `Your username can't be more than 16 characters`
+            hasError = true
         }
-        else if (username.trim().length < 4) {
-            newFormErrors.username = 'Username must be at least 4 characters long!'
+
+        if (!emailTrim) { // Check email on submit
+            newFormErrors.email = `Your email is required`
+            hasError = true
+        } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(emailTrim)) {
+            newFormErrors.email = `Please enter a valid email`
+            hasError = true
         }
-        else if (username.trim().length > 25) {
-            newFormErrors.username = 'Username must be less than 25 characters long!'
+
+        if (newFormErrors.password.size === true ||
+            newFormErrors.password.characters === true) {
+            hasError = true
         }
-        if (!email.trim()) { // checks email on submit
-            newFormErrors.email = 'Email is required!'
-        }
-        else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
-            newFormErrors.email = 'Please enter a valid email!'
-        }
-        if (!password.trim()) { // checks password on submit
-            newFormErrors.password = 'Password is required!'
-        }
-        else if (password.trim().length < 6) {
-            newFormErrors.password = 'Password must be at least 6 characters long!'
-        }
-        else if (password.trim().length > 255) {
-            newFormErrors.password = 'Password must be less than 255 characters long!'
-        }
-        if (Object.keys(newFormErrors).every(key => newFormErrors[key] === '')) {
-            sendRequest()
+        
+        if (hasError || Object.values(newFormErrors).some(error => error !== '')) {
+            setFormErrors(prevErrors => ({ ...prevErrors, ...newFormErrors }))
         }
         else {
-            setFormErrors(prevErrors => ({...prevErrors, ...newFormErrors}))
+            sendRequest()
         }
     }
 
@@ -155,7 +163,7 @@ const Register = () => {
             const response = await AuthService.register({
                 username: username.trim(),
                 email: email.trim(),
-                password: password.trim()
+                password: password
             })
             handleLoginResponse(response)
             navigate('/')
@@ -279,6 +287,28 @@ const Register = () => {
                             ${formErrors.password ? registerStyles.input_label__error : ''}`}>
                             <span className={`${registerStyles.label} ${(focus.password || password) ? registerStyles.primary_text__shrink : registerStyles.primary_text}`}>Password</span>
                         </label>
+                    </div>
+                    <div className={`${registerStyles.form_password_check}`}>
+                        <div className={`${registerStyles.password_check} flex-center`}>
+                            <div className={`${registerStyles.check_box}`}/>
+                            {!formErrors.password.size ? (
+                                <CheckIcon className={registerStyles.icon_check}/>
+                            ) : (
+                                <XIcon className={registerStyles.icon_check}/>
+                            )}
+                        </div>
+                        <span className={`${registerStyles.primary_text_accent__shrink} flex-center`}>Password is at least 8 characters</span>
+                    </div>
+                    <div className={`${registerStyles.form_password_check}`}>
+                        <div className={`${registerStyles.password_check} flex-center`}>
+                            <div className={`${registerStyles.check_box}`}/>
+                            {!formErrors.password.characters ? (
+                                <CheckIcon className={registerStyles.icon_check}/>
+                            ) : (
+                                <XIcon className={registerStyles.icon_check}/>
+                            )}
+                        </div>
+                        <span className={`${registerStyles.primary_text_accent__shrink} flex-center`}>Password includes two of the following; letter, number, or symbol</span>
                     </div>
                     {Object.keys(errors).length !== 0 && (
                         errors.message === 'InvalidPassword' && (

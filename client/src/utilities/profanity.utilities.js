@@ -1,10 +1,11 @@
-import { badWords } from 'expletives';
+import { badWords } from 'expletives'
 
-const wordBoundryBefore = `(?<=[\\s,.:;!?"']|^)`
-const wordBoundryAfter = `(?=[\\s,.:;!?"']|$)`
+const badWordsArray = [badWords];
+const boundaryBefore = `(?<=[\\s,.:!?''-]|^)`
+const boundaryAfter = `(?=[\\s,.:!?''-]|$)`
 const badWordsRegex = new RegExp(
-    `${wordBoundryBefore}(${badWords.join("|")})${wordBoundryAfter}`,
-    "gim"
+    `${boundaryBefore}(${badWordsArray.join('|')})${boundaryAfter}`,
+    'gim'
 )
 
 const profanityUtilities = {
@@ -13,4 +14,4 @@ const profanityUtilities = {
     }
 }
 
-export default profanityUtilities;
+export default profanityUtilities

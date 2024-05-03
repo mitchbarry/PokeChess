@@ -1,4 +1,5 @@
 import loginStyles from '../../css/views/Login.module.css'
+import registerStyles from '../../css/views/Register.module.css'
 
 const CheckSvg = (props) => {
 
