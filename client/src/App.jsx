@@ -17,7 +17,7 @@ import About from './views/About'
 import Contact from './views/Contact'
 
 import Login from './views/Login'
-import Registration from './views/Registration'
+import Register from './views/Register'
 import Account from './views/Account'
 import AccountEdit from './views/AccountEdit'
 
@@ -68,7 +68,7 @@ const App = () => {
 
 					{/* Login Routes */}
 					<Route path='/login' element={Cookies.get('authToken') || authToken ? <Navigate to='/' /> : <Login />} />
-					<Route path='/register' element={Cookies.get('authToken') || authToken ? <Navigate to='/' /> : <Registration />} />
+					<Route path='/register' element={Cookies.get('authToken') || authToken ? <Navigate to='/' /> : <Register />} />
 				
 					{/* Auth Routes */}
 					<Route path='/account' element={Cookies.get('authToken') || authToken ? <Account /> : <ErrorNavigator error={401} updateErrors={updateErrors} />} />

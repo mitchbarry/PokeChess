@@ -211,10 +211,10 @@ const LoginForm = () => {
                 <div className={`${loginStyles.form_links} flex-col`}>
                     <Link className={loginStyles.form_link} to='/register'>
                         <span className={loginStyles.primary_text__shrink}>Create an Account</span>
-                        </Link>
+                    </Link>
                     <Link className={loginStyles.form_link} to='/contact'>
                         <span className={loginStyles.primary_text__shrink}>Can't log in?</span>
-                        </Link>
+                    </Link>
                 </div>
             </div>
         </div>

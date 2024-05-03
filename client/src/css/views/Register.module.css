@@ -1,0 +1,230 @@
+/* * use BEM (Block, Entity, Modifier) for all css classes */
+
+/* * Typography */
+.primary_text {
+    font: var(--font-400);
+}
+
+.primary_text__shrink {
+    font: var(--font-200);
+}
+
+.primary_text_accent__shrink {
+    font: var(--font-accent-300);
+}
+
+.secondary_text {
+    font: var(--font-400);
+}
+
+.secondary_text_accent {
+    font: var(--font-accent-400)
+}
+
+/* * Register */
+.register {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.register_form {
+    width: 512px;
+    padding: var(--size-400);
+    text-align: center;
+    background-color: var(--color-000);
+}
+
+.form_title {
+    margin-bottom: var(--size-350);
+    color: var(--color-800);
+}
+
+/* * Alerts */
+.input_error {
+    margin-bottom: var(--size-200);
+    display: flex;
+    align-items: center;
+    color:var(--color-alert-red);
+    fill: var(--color-alert-red);
+    stroke: var(--color-alert-red);
+}
+
+/* * Form Inputs */
+.form_input, .input, .input_password, .form_submit {
+    width: 100%;
+}
+
+.form_input, .form_submit, .form_checkbox {
+    margin-bottom: var(--size-350);
+}
+
+.input, .input_password, .form_submit {
+    border-radius: 4px;
+}
+
+.form_input {
+    position: relative;
+}
+
+.form_input__error {
+    margin-bottom: var(--size-200);
+}
+
+.input, .input_password, .input_label, .label, .input_password_icon, .form_submit, .form_link, .checkbox {
+    transition: var(--transition-hover);
+}
+
+.error_close, .input_password_icon, .form_submit, .checkbox {
+    cursor: pointer;
+}
+
+.input, .input_password {
+    height: var(--size-600);
+    padding: var(--size-250) var(--size-150) var(--size-075) var(--size-150);
+    color: var(--color-800);
+    background-color: var(--color-060);
+    border: 2px solid transparent;
+}
+.input:hover, .input_password:hover {
+    background-color: var(--color-080);
+    border: 2px solid var(--color-100);
+}
+
+.input__focus, .input_password__focus, .input__focus:hover, .input_password__focus:hover  {
+    background-color: var(--color-020);
+    border: 2px solid var(--color-800);
+}
+
+.input {
+    padding: var(--size-250) var(--size-150) var(--size-075) var(--size-150);
+}
+
+.input_password {
+    padding: var(--size-250) var(--size-600) var(--size-075) var(--size-150);
+}
+
+.input__error {
+    border: 2px solid var(--color-alert-red);
+}
+.input__error:hover {
+    border: 2px solid var(--color-alert-red);
+}
+
+.input_label, .input_password_icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.input_label {
+    left: var(--size-150);
+    line-height: var(--line-height);
+    color: var(--color-500);
+    text-shadow: var(--shadow-xs);
+    pointer-events: none;
+}
+.input_label__shrink {
+    top: var(--size-150);
+    color: var(--color-600);
+}
+
+.input_label__error {
+    color: var(--color-alert-red);
+}
+
+.input_password_icon {
+    right: var(--size-150);
+    fill: var(--color-400);
+    stroke: var(--color-400);
+    background-color: transparent;
+}
+.input_password_icon:hover, .input_password_icon__active {
+    fill: var(--color-500);
+    stroke: var(--color-500);
+}
+
+.form_checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox {
+    margin-right: var(--size-100);
+    position: relative;
+    fill: var(--color-800);
+    stroke: var(--color-800);
+}
+
+.box {
+    appearance: none;
+    width: var(--size-225);
+    height: var(--size-225);
+    background-color: var(--color-060);
+    border: 2px solid transparent;
+    transition: var(--transition-hover);
+    border-radius: 3px;
+    cursor: pointer;
+}
+.box:hover {
+    background-color: var(--color-080);
+    border: 2px solid var(--color-100);
+}
+
+.checkbox:checked {
+    background-color: var(--color-blue) !important;
+}
+.checkbox:checked:hover {
+    background-color: var(--color-blue-darken) !important;
+}
+
+/* * Form Submit Button */
+.form_submit {
+    height: var(--size-600);
+    color: var(--color-100);
+    background-color: var(--color-teal);
+    fill: var(--color-100);
+    stroke: var(--color-100);
+}
+.form_submit:hover {
+    background-color: var(--color-teal-lighten);
+}
+
+/* * Links */
+.form_links {
+    align-items: center;
+}
+
+.form_link {
+    margin-top: var(--size-050);
+    text-decoration: none;
+    color: var(--color-500);
+}
+.form_link:hover {
+    color: var(--color-800);
+}
+
+/* * Icons */
+.icon_default, .icon_check, .icon_warning {
+    height: auto;
+    fill: inherit;
+    stroke: inherit;
+}
+
+.icon_default {
+    width: var(--size-350);
+}
+
+.icon_check {
+    position: absolute;
+    width: var(--size-150);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.icon_warning {
+    width: var(--size-200);
+    margin-right: var(--size-075);
+}
