@@ -23,8 +23,9 @@
 
 /* * Login */
 .login {
-    min-height: calc(100vh - (var(--size-600) + var(--size-800)));
-    padding-bottom: calc(var(--size-900) + var(--size-600))
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .form_title {

@@ -1,4 +1,17 @@
+/* * use BEM (Block, Entity, Modifier) for all css classes */
+
+/* * Imports */
 @import url('https://fonts.googleapis.com/css2?family=fantasy:wght@200&display=swap');
+
+/* * Media Queries */
+@media screen and (width > 2600px) {
+    #background {
+        background-size: cover; /* Maintain aspect ratio and fit within 2600px width */
+        background-repeat: no-repeat;
+        background-color: var(--color-1000); /* Fallback color */
+        box-shadow: inset 10px 0 10px -10px var(--color-darken-700), inset -10px 0 10px -10px var(--color-darken-700);
+    }
+}
 
 #background {
     margin: 0 auto;
@@ -15,16 +28,14 @@
     z-index: -1;
 }
 
-@media screen and (width > 2600px) {
-    #background {
-        background-size: cover; /* Maintain aspect ratio and fit within 2600px width */
-        background-repeat: no-repeat;
-        background-color: var(--color-1000); /* Fallback color */
-        box-shadow: inset 10px 0 10px -10px var(--color-darken-700), inset -10px 0 10px -10px var(--color-darken-700);
-    }
+#container {
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    height: 100vh;
 }
 
-/* * CSS RESET */
+/* * CSS Resets */
 /* Box sizing rules and global spacing reset */
 *, *::before, *::after {
     margin: 0;

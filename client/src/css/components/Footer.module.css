@@ -2,10 +2,7 @@
 
 /* * Footer */
 .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
     width: 100%;
-    height: var(--size-900);
-    margin: 0 var(--size-900) var(--size-600) var(--size-900);
+    height: var(--size-800);
+    margin: var(--size-250) var(--size-900) var(--size-600) var(--size-900);
 }
