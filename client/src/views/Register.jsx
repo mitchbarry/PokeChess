@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { hasBadWords } from 'expletives'
 
 import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
 import errorUtilities from '../utilities/error.utilities'
-import profanityUtilities from '../utilities/profanity.utilities'
 
 import HiddenIcon from '../components/svgs/HiddenSvg'
 import RevealIcon from '../components/svgs/RevealSvg'
@@ -123,7 +123,7 @@ const Register = () => {
         if (!usernameTrim) { // Check username on submit
             newFormErrors.username = `Your username is required`
             hasError = true
-        } else if (profanityUtilities.containsProfanity(usernameTrim)) {
+        } else if (hasBadWords(usernameTrim)) {
             newFormErrors.username = `Your username must be appropriate`
             hasError = true
         } else if (!/^[a-zA-Z0-9\s]+$/.test(usernameTrim)) {
@@ -209,7 +209,7 @@ const Register = () => {
                     <span className={registerStyles.primary_text}>Register</span>
                 </h1>
 				<form onSubmit={handleSubmit} className={registerStyles.form}>
-                    <div className={`${registerStyles.form_input} ${(Object.keys(errors).length !== 0 && errors.message === 'USERNAMESERVERSIDEERRORPLACEHOLDER') ? registerStyles.form_input__error : ''}`}
+                    <div className={`${registerStyles.form_input} ${(Object.keys(errors).length !== 0 && errors.message === 'USERNAMESERVERSIDEERRORPLACEHOLDER') || (formErrors.username !== '') ? registerStyles.form_input__error : ''}`}
                         onFocus={() => handleFocus('username')}
                         onBlur={() => handleBlur('username')}
                     >
@@ -227,6 +227,12 @@ const Register = () => {
                             <span className={`${registerStyles.label} ${(focus.username || username) ? registerStyles.primary_text__shrink : registerStyles.primary_text}`}>Username</span>
                         </label>
                     </div>
+                    {formErrors.username !== '' && (
+                        <div className={registerStyles.input_error}>
+                            <WarningIcon className={registerStyles.icon_warning}/>
+                            <span className={registerStyles.secondary_text_accent}>{formErrors.username}</span>
+                        </div>
+                    )}
                     {Object.keys(errors).length !== 0 && (
                         errors.message === 'USERNAMESERVERSIDEERRORPLACEHOLDER' && (
                             <div className={registerStyles.input_error}>
@@ -235,7 +241,7 @@ const Register = () => {
                             </div>
                         )
                     )}
-                    <div className={`${registerStyles.form_input} ${(Object.keys(errors).length !== 0 && errors.message === 'EMAILSERVERSIDEERRORPLACEHOLDER') ? registerStyles.form_input__error : ''}`}
+                    <div className={`${registerStyles.form_input} ${(Object.keys(errors).length !== 0 && errors.message === 'EMAILSERVERSIDEERRORPLACEHOLDER') || (formErrors.email !== '')? registerStyles.form_input__error : ''}`}
                         onFocus={() => handleFocus('email')}
                         onBlur={() => handleBlur('email')}
                     >
@@ -253,6 +259,12 @@ const Register = () => {
                             <span className={`${registerStyles.label} ${(focus.email || email) ? registerStyles.primary_text__shrink : registerStyles.primary_text}`}>Email</span>
                         </label>
                     </div>
+                    {formErrors.email !== '' && (
+                        <div className={registerStyles.input_error}>
+                            <WarningIcon className={registerStyles.icon_warning}/>
+                            <span className={registerStyles.secondary_text_accent}>{formErrors.email}</span>
+                        </div>
+                    )}
                     {Object.keys(errors).length !== 0 && (
                         errors.message === 'EMAILSERVERSIDEERRORPLACEHOLDER' && (
                             <div className={registerStyles.input_error}>
@@ -288,6 +300,14 @@ const Register = () => {
                             <span className={`${registerStyles.label} ${(focus.password || password) ? registerStyles.primary_text__shrink : registerStyles.primary_text}`}>Password</span>
                         </label>
                     </div>
+                    {Object.keys(errors).length !== 0 && (
+                        errors.message === 'InvalidPassword' && (
+                            <div className={registerStyles.input_error}>
+                                <WarningIcon className={registerStyles.icon_warning}/>
+                                <span className={registerStyles.secondary_text_accent}>Please enter your password.</span>
+                            </div>
+                        )
+                    )}
                     <div className={registerStyles.form_password_check}>
                         <div className={`${registerStyles.password_check}`}>
                             <div className={`${registerStyles.password_check_box} flex-center`}>
@@ -312,14 +332,6 @@ const Register = () => {
                             <span className={`${registerStyles.primary_text_accent__shrink} flex-center`}>Password includes two of the following; letter, number, or symbol</span>
                         </div>
                     </div>
-                    {Object.keys(errors).length !== 0 && (
-                        errors.message === 'InvalidPassword' && (
-                            <div className={registerStyles.input_error}>
-                                <WarningIcon className={registerStyles.icon_warning}/>
-                                <span className={registerStyles.secondary_text_accent}>Please enter your password.</span>
-                            </div>
-                        )
-                    )}
                     <button type='submit' className={`${registerStyles.form_submit} flex-center`}>
                         <ArrowIcon className={registerStyles.icon_default}/>
                     </button>

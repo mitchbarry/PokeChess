@@ -1,16 +1,8 @@
-import { badWords } from 'expletives'
+import { hasBadWords } from 'expletives'
 
-const badWordsArray = [badWords];
-const boundaryBefore = `(?<=[\\s,.:!?''-]|^)`
-const boundaryAfter = `(?=[\\s,.:!?''-]|$)`
-const badWordsRegex = new RegExp(
-    `${boundaryBefore}(${badWordsArray.join('|')})${boundaryAfter}`,
-    'gim'
-)
-
-const profanityUtilities = {
+profanityUtilities = {
     containsProfanity(inputString) {
-        return badWordsRegex.test(inputString)
+        return hasBadWords(inputString)
     }
 }
 
