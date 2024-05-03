@@ -100,30 +100,20 @@ const LoginForm = () => {
     }
 
     const handleFocus = (input) => {
-        switch(input) {
-            case 'accountName':
-                return setFocus(prevFocus => ({...prevFocus, accountName: true}))
-            case 'password':
-                return setFocus(prevFocus => ({...prevFocus, password: true}))
-            default:
-                return
-        }
+        setFocus((prevFocus) => ({
+            ...prevFocus, [input]: true,
+        }))
     }
 
     const handleBlur = (input) => {
-        switch(input) {
-            case 'accountName':
-                if (!accountName.trim()) {
-                    return setFocus(prevFocus => ({...prevFocus, accountName: false}))
-                }
-                break
-            case 'password':
-                if (!password.trim()) {
-                    return setFocus(prevFocus => ({...prevFocus, password: false}))
-                }
-                break
-            default:
-                return
+        if (input === 'accountName' && !accountName.trim()) {
+            setFocus((prevFocus) => ({
+                ...prevFocus, accountName: false
+            }))
+        } else if (input === 'password' && !password.trim()) {
+            setFocus((prevFocus) => ({
+                ...prevFocus, password: false
+            }))
         }
     }
 

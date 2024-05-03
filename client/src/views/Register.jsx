@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { hasBadWords } from 'expletives'
 
 import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
@@ -47,58 +48,32 @@ const Register = () => {
         }
     }
 
-	const handleUsername = (e) => {
+    const handleUsername = (e) => {
         const value = e.target.value
         setFormErrors((prevErrors) => {
-            switch (prevErrors.username) {
-                case 'Username is required!':
-                    if (value) {
-                        return {...prevErrors, username: ''}
-                    }
-					else {
-						return prevErrors
-					}
-                case 'Username must be at least 4 characters long!':
-                    if (value.length > 4) {
-                        return {...prevErrors, username: ''}
-                    }
-					else {
-						return prevErrors
-					}
-                case 'Username must be less than 25 characters long!':
-                    if (value.length < 25) {
-                        return {...prevErrors, username: ''}
-                    }
-					else {
-						return prevErrors
-					}
-                default:
-                    return prevErrors
+            if (
+                (prevErrors.username === 'Your username is required' && value) ||
+                (prevErrors.username === 'Your username must be at least 3 characters long' && value.length >= 3) ||
+                (prevErrors.username === 'Your username must be no more than 16 characters long' && value.length <= 16)
+            ) {
+                return { ...prevErrors, username: '' }
             }
+            return prevErrors
         })
         setUsername(value)
     }
 
-	const handleEmail = (e) => {
+    const handleEmail = (e) => {
         const value = e.target.value
         setFormErrors((prevErrors) => {
-            switch (prevErrors.email) {
-                case 'Email is required!':
-                    if (value) {
-                        return{...prevErrors, email: ''}
-                    }
-					else {
-						return prevErrors
-					}
-                case 'Please enter a valid email!':
-                    if (/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value)) {
-                        return{...prevErrors, email: ''}
-                    }
-					else {
-						return prevErrors
-					}
-                default:
+            if (prevErrors.email === 'Your email is required') {
+                if (value) {
+                    return { ...prevErrors, email: '' }
+                } else {
                     return prevErrors
+                }
+            } else {
+                return prevErrors
             }
         })
         setEmail(value)
@@ -188,7 +163,6 @@ const Register = () => {
         catch (error) {
             setErrors(errorUtilities.catchError(error))
             setShowNotification(true)
-            
         }
     }
 
@@ -196,40 +170,29 @@ const Register = () => {
         setShowPassword(!showPassword)
     }
 
-	const handleFocus = (input) => {
-		switch(input) {
-			case 'username':
-				return setFocus(prevFocus => ({...prevFocus, username: true}))
-			case 'email':
-				return setFocus(prevFocus => ({...prevFocus, email: true}))
-			case 'password':
-				return setFocus(prevFocus => ({...prevFocus, password: true}))
-			default:
-				return
-		}
-	}
+    const handleFocus = (input) => {
+        setFocus((prevFocus) => ({
+            ...prevFocus, [input]: true,
+        }))
+    }
 
-	const handleBlur = (input) => {
-		switch(input) {
-			case 'username':
-				if (!username.trim()) {
-					return setFocus(prevFocus => ({...prevFocus, username: false}))
-				}
-				break
-			case 'email':
-				if (!email.trim()) {
-					return setFocus(prevFocus => ({...prevFocus, email: false}))
-				}
-				break
-			case 'password':
-				if (!password.trim()) {
-					return setFocus(prevFocus => ({...prevFocus, password: false}))
-				}
-				break
-			default:
-				return
-		}
-	}
+    const handleBlur = (input) => {
+        if (input === 'username' && !username.trim()) {
+            setFocus((prevFocus) => ({
+                ...prevFocus, username: false
+            }))
+        }
+        else if (input === 'email' && !email.trim()) {
+            setFocus((prevFocus) => ({
+                ...prevFocus, email: false
+            }))
+        }
+        else if (input === 'password' && !password.trim()) {
+            setFocus((prevFocus) => ({
+                ...prevFocus, password: false
+            }))
+        }
+    }
 
 	return (
 		<div className={`${registerStyles.register} flex-center`}>

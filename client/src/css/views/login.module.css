@@ -28,16 +28,16 @@
     flex-grow: 1;
 }
 
-.form_title {
-    margin-bottom: var(--size-350);
-    color: var(--color-800);
-}
-
 .login_form {
     width: 512px;
     padding: var(--size-400);
     text-align: center;
     background-color: var(--color-000);
+}
+
+.form_title {
+    margin-bottom: var(--size-350);
+    color: var(--color-800);
 }
 
 /* * Alerts */
