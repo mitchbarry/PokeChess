@@ -29,9 +29,10 @@ const Register = () => {
     const [formErrors, setFormErrors] = useState({
         username: '',
         email: '',
-        password: {
-            size: true,
-            characters: true
+        password: false,
+        passwordErrors: {
+            passwordLength: true,
+            passwordCharacters: true
         }
     })
 	const [focus, setFocus] = useState({
@@ -57,9 +58,9 @@ const Register = () => {
         const value = e.target.value
         setFormErrors((prevErrors) => {
             if (
-                (prevErrors.username === `Your username is required` && value) ||
-                (prevErrors.username === `Your username must be at least 3 characters` && value.length >= 3) ||
-                (prevErrors.username === `Your username can't be more than 16 characters` && value.length <= 16)
+                (prevErrors.username === `Your username is required.` && value) ||
+                (prevErrors.username === `Your username must be at least 3 characters.` && value.length >= 3) ||
+                (prevErrors.username === `Your username can't be more than 16 characters.` && value.length <= 16)
             ) {
                 return { ...prevErrors, username: '' }
             }
@@ -71,7 +72,7 @@ const Register = () => {
     const handleEmail = (e) => {
         const value = e.target.value
         setFormErrors((prevErrors) => {
-            if (prevErrors.email === `Your email is required`) {
+            if (prevErrors.email === `Your email is required.`) {
                 if (value) {
                     return { ...prevErrors, email: '' }
                 }
@@ -91,18 +92,18 @@ const Register = () => {
         setFormErrors((prevErrors) => {
             const updatedErrors = { ...prevErrors }
             if (value.length >= 8 && value.length <= 255) { // Check length
-                updatedErrors.password.size = false
+                updatedErrors.passwordErrors.passwordLength = false
             } 
             else {
-                updatedErrors.password.size = true
+                updatedErrors.passwordErrors.passwordLength = true
             }
             if (/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(value) ||
                 /^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$/.test(value) ||
                 /^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(value)) { // Check character requirements
-                updatedErrors.password.characters = false
+                updatedErrors.passwordErrors.passwordCharacters = false
             }
             else {
-                updatedErrors.password.characters = true
+                updatedErrors.passwordErrors.passwordCharacters = true
             }
             return updatedErrors
         })
@@ -121,36 +122,42 @@ const Register = () => {
         let hasError = false
 
         if (!usernameTrim) { // Check username on submit
-            newFormErrors.username = `Your username is required`
+            newFormErrors.username = `Your username is required.`
             hasError = true
-        } else if (hasBadWords(usernameTrim)) {
-            newFormErrors.username = `Your username must be appropriate`
+        }
+        else if (hasBadWords(usernameTrim)) {
+            newFormErrors.username = `Your username must be appropriate.`
             hasError = true
-        } else if (!/^[a-zA-Z0-9\s]+$/.test(usernameTrim)) {
-            newFormErrors.username = `Your username can't contain special characters`
+        }
+        else if (!/^[a-zA-Z0-9\s]+$/.test(usernameTrim)) {
+            newFormErrors.username = `Your username can't contain special characters.`
             hasError = true
-        } else if (usernameTrim.length < 3) {
-            newFormErrors.username = `Your username must be at least 3 characters`
+        }
+        else if (usernameTrim.length < 3) {
+            newFormErrors.username = `Your username must be at least 3 characters.`
             hasError = true
-        } else if (usernameTrim.length > 16) {
-            newFormErrors.username = `Your username can't be more than 16 characters`
+        }
+        else if (usernameTrim.length > 16) {
+            newFormErrors.username = `Your username can't be more than 16 characters.`
             hasError = true
         }
 
         if (!emailTrim) { // Check email on submit
-            newFormErrors.email = `Your email is required`
+            newFormErrors.email = `Your email is required.`
             hasError = true
-        } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(emailTrim)) {
-            newFormErrors.email = `Please enter a valid email`
+        }
+        else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(emailTrim)) {
+            newFormErrors.email = `Please enter a valid email.`
             hasError = true
         }
 
-        if (newFormErrors.password.size === true ||
-            newFormErrors.password.characters === true) {
+        if (newFormErrors.passwordErrors.passwordLength === true ||
+            newFormErrors.passwordErrors.passwordCharacters === true) {
+            newFormErrors.password = true
             hasError = true
         }
         
-        if (hasError || Object.values(newFormErrors).some(error => error !== '')) {
+        if (hasError) {
             setFormErrors(prevErrors => ({ ...prevErrors, ...newFormErrors }))
         }
         else {
@@ -209,7 +216,7 @@ const Register = () => {
                     <span className={registerStyles.primary_text}>Register</span>
                 </h1>
 				<form onSubmit={handleSubmit} className={registerStyles.form}>
-                    <div className={`${registerStyles.form_input} ${(Object.keys(errors).length !== 0 && errors.message === 'USERNAMESERVERSIDEERRORPLACEHOLDER') || (formErrors.username !== '') ? registerStyles.form_input__error : ''}`}
+                    <div className={`${registerStyles.form_input} ${(Object.keys(errors).length !== 0 && errors.message) || (formErrors.username !== '') ? registerStyles.form_input__error : ''}`}
                         onFocus={() => handleFocus('username')}
                         onBlur={() => handleBlur('username')}
                     >
@@ -241,7 +248,7 @@ const Register = () => {
                             </div>
                         )
                     )}
-                    <div className={`${registerStyles.form_input} ${(Object.keys(errors).length !== 0 && errors.message === 'EMAILSERVERSIDEERRORPLACEHOLDER') || (formErrors.email !== '')? registerStyles.form_input__error : ''}`}
+                    <div className={`${registerStyles.form_input} ${(Object.keys(errors).length !== 0 && errors.message) || (formErrors.email !== '')? registerStyles.form_input__error : ''}`}
                         onFocus={() => handleFocus('email')}
                         onBlur={() => handleBlur('email')}
                     >
@@ -273,7 +280,7 @@ const Register = () => {
                             </div>
                         )
                     )}
-                    <div className={`${registerStyles.form_password} ${(Object.keys(errors).length !== 0 && errors.message === 'PASSWORDSERVERSIDEERRORPLACEHOLDER') ? registerStyles.form_input__error : ''}`}
+                    <div className={`${registerStyles.form_password} ${(Object.keys(errors).length !== 0 && errors.message) ? registerStyles.form_input__error : ''}`}
                         onFocus={() => handleFocus('password')}
                         onBlur={() => handleBlur('password')}
                     >
@@ -301,35 +308,35 @@ const Register = () => {
                         </label>
                     </div>
                     {Object.keys(errors).length !== 0 && (
-                        errors.message === 'InvalidPassword' && (
+                        errors.message === 'PASSWORDSERVERSIDEERRORPLACEHOLDER' && (
                             <div className={registerStyles.input_error}>
                                 <WarningIcon className={registerStyles.icon_warning}/>
-                                <span className={registerStyles.secondary_text_accent}>Please enter your password.</span>
+                                <span className={registerStyles.secondary_text_accent}>PASSWORDSERVERSIDEERRORPLACEHOLDER</span>
                             </div>
                         )
                     )}
                     <div className={registerStyles.form_password_check}>
                         <div className={`${registerStyles.password_check}`}>
                             <div className={`${registerStyles.password_check_box} flex-center`}>
-                                <div className={`${registerStyles.check_box} ${!formErrors.password.size ? registerStyles.check_box__checked : ''}`}/>
-                                {!formErrors.password.size ? (
+                                <div className={`${registerStyles.check_box} ${!formErrors.passwordErrors.passwordLength ? registerStyles.check_box__checked : ''}`}/>
+                                {!formErrors.passwordErrors.passwordLength ? (
                                     <CheckIcon className={registerStyles.icon_check}/>
                                 ) : (
                                     <XIcon className={registerStyles.icon_check}/>
                                 )}
                             </div>
-                            <span className={`${registerStyles.primary_text_accent__shrink} flex-center`}>Password is at least 8 characters</span>
+                            <span className={`${registerStyles.primary_text_accent__shrink} flex-center`}>Password is at least 8 characters.</span>
                         </div>
                         <div className={`${registerStyles.password_check}`}>
                             <div className={`${registerStyles.password_check_box} flex-center`}>
-                                <div className={`${registerStyles.check_box} ${!formErrors.password.characters ? registerStyles.check_box__checked : ''}`}/>
-                                {!formErrors.password.characters ? (
+                                <div className={`${registerStyles.check_box} ${!formErrors.passwordErrors.passwordCharacters ? registerStyles.check_box__checked : ''}`}/>
+                                {!formErrors.passwordErrors.passwordCharacters ? (
                                     <CheckIcon className={registerStyles.icon_check}/>
                                 ) : (
                                     <XIcon className={registerStyles.icon_check}/>
                                 )}
                             </div>
-                            <span className={`${registerStyles.primary_text_accent__shrink} flex-center`}>Password includes two of the following; letter, number, or symbol</span>
+                            <span className={`${registerStyles.primary_text_accent__shrink} flex-center`}>Password includes two of the following; letter, number, or symbol.</span>
                         </div>
                     </div>
                     <button type='submit' className={`${registerStyles.form_submit} flex-center`}>
