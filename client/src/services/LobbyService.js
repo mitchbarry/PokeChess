@@ -1,39 +1,39 @@
-import axios from "axios";
+import axios from 'axios'
 
 const http = axios.create({
-    baseURL: "http://localhost:8000/api/lobbies",
+    baseURL: 'http://localhost:8000/api/lobbies',
 })
 
 const LobbyService = {
     async getAllLobbies() {
-        return http.get("/lobbies")
+        return http.get('/lobbies')
             .then(response => response.data)
             .catch(error => {
-                throw error;
-            });
+                throw error
+            })
     },
 
     async getUserLobbies(userId) {
         return http.get(`/lobbies/user/${userId}`) // Pass the user ID as a URL parameter
             .then(response => response.data)
             .catch(error => {
-                throw error;
-            });
+                throw error
+            })
     },
 
     async getOneLobby(id) {
         return http.get(`/lobbies/${id}`)
             .then(response => response.data)
             .catch(error => {
-                throw error;
+                throw error
             })
     },
 
     async createOneLobby(lobby) {
-        return http.post("/lobbies", lobby)
+        return http.post('/lobbies', lobby)
             .then(response => response.data)
             .catch(error => {
-                throw error;
+                throw error
             })
     },
 
@@ -54,4 +54,4 @@ const LobbyService = {
     }
 }
 
-export default LobbyService;
+export default LobbyService

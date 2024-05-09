@@ -24,7 +24,7 @@ const Register = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [errors, setErrors] = useState({})
+    const [error, setError] = useState({})
 	const [showPassword, setShowPassword] = useState(false)
     const [formErrors, setFormErrors] = useState({
         username: '',
@@ -97,9 +97,7 @@ const Register = () => {
             else {
                 updatedErrors.passwordErrors.passwordLength = true
             }
-            if (/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(value) ||
-                /^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$/.test(value) ||
-                /^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(value)) { // Check character requirements
+            if (/^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(value)) { // Check character requirements
                 updatedErrors.passwordErrors.passwordCharacters = false
             }
             else {
@@ -112,7 +110,8 @@ const Register = () => {
 
 	const handleSubmit = (e) => {
         e.preventDefault()
-        checkForm()
+        // checkForm()
+        sendRequest() // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATESTING                                      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA TESTING
 	}
 
     const checkForm = () => {
@@ -176,8 +175,7 @@ const Register = () => {
             navigate('/')
         }
         catch (error) {
-            setErrors(errorUtilities.catchError(error))
-            setShowNotification(true)
+            setError(errorUtilities.catchError(error))
         }
     }
 
@@ -216,7 +214,7 @@ const Register = () => {
                     <span className={registerStyles.primary_text}>Register</span>
                 </h1>
 				<form onSubmit={handleSubmit} className={registerStyles.form}>
-                    <div className={`${registerStyles.form_input} ${(Object.keys(errors).length !== 0 && errors.message) || (formErrors.username !== '') ? registerStyles.form_input__error : ''}`}
+                    <div className={`${registerStyles.form_input} ${(Object.keys(error).length !== 0 && error.message) || (formErrors.username !== '') ? registerStyles.form_input__error : ''}`}
                         onFocus={() => handleFocus('username')}
                         onBlur={() => handleBlur('username')}
                     >
@@ -240,15 +238,15 @@ const Register = () => {
                             <span className={registerStyles.secondary_text_accent}>{formErrors.username}</span>
                         </div>
                     )}
-                    {Object.keys(errors).length !== 0 && (
-                        errors.message === 'USERNAMESERVERSIDEERRORPLACEHOLDER' && (
+                    {Object.keys(error).length !== 0 && (
+                        error.message && (
                             <div className={registerStyles.input_error}>
                                 <WarningIcon className={registerStyles.icon_warning}/>
-                                <span className={registerStyles.secondary_text_accent}>USERNAMESERVERSIDEERRORPLACEHOLDER</span>
+                                <span className={registerStyles.secondary_text_accent}>{`${error.message === 'UsernameTaken' ? 'Username is already in use.' : error.message}`}</span>
                             </div>
                         )
                     )}
-                    <div className={`${registerStyles.form_input} ${(Object.keys(errors).length !== 0 && errors.message) || (formErrors.email !== '')? registerStyles.form_input__error : ''}`}
+                    <div className={`${registerStyles.form_input} ${(Object.keys(error).length !== 0 && error.message) || (formErrors.email !== '')? registerStyles.form_input__error : ''}`}
                         onFocus={() => handleFocus('email')}
                         onBlur={() => handleBlur('email')}
                     >
@@ -272,15 +270,15 @@ const Register = () => {
                             <span className={registerStyles.secondary_text_accent}>{formErrors.email}</span>
                         </div>
                     )}
-                    {Object.keys(errors).length !== 0 && (
-                        errors.message === 'EMAILSERVERSIDEERRORPLACEHOLDER' && (
+                    {Object.keys(error).length !== 0 && (
+                        error.message && (
                             <div className={registerStyles.input_error}>
                                 <WarningIcon className={registerStyles.icon_warning}/>
-                                <span className={registerStyles.secondary_text_accent}>EMAILSERVERSIDEERRORPLACEHOLDER</span>
+                                <span className={registerStyles.secondary_text_accent}>{`${error.message === 'EmailTaken' ? 'Email is already in use.' : error.message}`}</span>
                             </div>
                         )
                     )}
-                    <div className={`${registerStyles.form_password} ${(Object.keys(errors).length !== 0 && errors.message) ? registerStyles.form_input__error : ''}`}
+                    <div className={`${registerStyles.form_password} ${(Object.keys(error).length !== 0 && error.message) ? registerStyles.form_input__error : ''}`}
                         onFocus={() => handleFocus('password')}
                         onBlur={() => handleBlur('password')}
                     >
@@ -307,11 +305,11 @@ const Register = () => {
                             <span className={`${registerStyles.label} ${(focus.password || password) ? registerStyles.primary_text__shrink : registerStyles.primary_text}`}>Password</span>
                         </label>
                     </div>
-                    {Object.keys(errors).length !== 0 && (
-                        errors.message === 'PASSWORDSERVERSIDEERRORPLACEHOLDER' && (
+                    {Object.keys(error).length !== 0 && (
+                        error.message && (
                             <div className={registerStyles.input_error}>
                                 <WarningIcon className={registerStyles.icon_warning}/>
-                                <span className={registerStyles.secondary_text_accent}>PASSWORDSERVERSIDEERRORPLACEHOLDER</span>
+                                <span className={registerStyles.secondary_text_accent}>{error.message}</span>
                             </div>
                         )
                     )}

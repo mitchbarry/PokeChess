@@ -1,34 +1,56 @@
-import { model, Schema } from "mongoose"
+import { model, Schema } from 'mongoose'
+import { hasBadWords } from 'expletives'
+
+const passwordValidator = (password) => {
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/
+    return passwordRegex.test(password)
+}
 
 const UserSchema = new Schema(
 	{
 		username: {
 			type: String,
-			required: [true, "Username is required!"],
-			minlength: [4, "Username must be at least 4 characters long!"],
-			maxlength: [25, "Username must be at most 25 characters long!"]
+			required: [true, `Your username is required.`],
+			minlength: [3, `Your username must be at least 3 characters.`],
+			maxlength: [16, `Your username can't be more than 16 characters.`],
+			validate: {
+				validator: async function(username) {
+					if (hasBadWords(username)) {
+						return false
+					}
+					return true
+				},
+				message: `Your username must be appropriate.`
+			}
 		},
 		email: {
 			type: String,
-			required: [true, "Email is required!"],
+			required: [true, `Your email is required.`],
 			match: [
 				/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-				"Please enter a valid email address"
+				`Please enter a valid email.`
 			]
 		},
 		password: {
 			type: String,
-			required: [true, "Password is required!"] // I got rid of the validations on the server side bc passwords will be stored as a bcrypt hash
+			required: [true, 'Password is required!'],
+			minlength: [8, `Your password must be at least 8 characters.`],
+			maxlength: [255, `Your password can't be more than 255 characters.`],
+			validate: {
+				validator: passwordValidator,
+				message: `Your password must include at least two of the following; letter, number, or symbol.`
+			}
 		},
 		starter: {
 			type: Number,
-			required: false
+			required: false,
+			default: 0
 		}
 	},
 	{ timestamps: true }
 )
 
-const User = model("User", UserSchema)
+const User = model('User', UserSchema)
 
 
-export default User;
+export default User
