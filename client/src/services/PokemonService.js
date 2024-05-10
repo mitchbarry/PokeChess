@@ -23,7 +23,7 @@ const pokemonService = {
         catch (error) {
             throw error
         }
-    },
+    }, //hellobirthdaybug
 
     async getOnePokemon(id) {
         try {
