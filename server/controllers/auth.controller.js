@@ -16,10 +16,11 @@ const authController = {
             if (existingEmail || existingUsername) {
                 const normalizedError = {
                     statusCode: 400,
-                    message: `${existingEmail ? 'EmailTaken.' : existingUsername && 'UsernameTaken.'}`,
+                    message: `${existingEmail ? 'EmailTaken' : existingUsername && 'UsernameTaken'}`,
                     name: 'ValidationError',
                     validationErrors: {}
                 }
+                console.log(normalizedError)
                 return res.status(400).json(normalizedError)
             }
             const hashedPassword = await bcrypt.hash(password, 10)

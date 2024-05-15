@@ -21,6 +21,7 @@ const Register = () => {
 
 	const { handleLoginResponse } = useAuth()
 
+    const [page, setPage] = useState(1)
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -240,10 +241,10 @@ const Register = () => {
                         </div>
                     )}
                     {Object.keys(error).length !== 0 && (
-                        error.message && (
+                        (error.validationErrors.username || error.message === 'UsernameTaken') && (
                             <div className={registerStyles.input_error}>
                                 <WarningIcon className={registerStyles.icon_warning}/>
-                                <span className={registerStyles.secondary_text_accent}>{`${error.message === 'UsernameTaken' ? 'Username is already in use.' : error.message}`}</span>
+                                <span className={registerStyles.secondary_text_accent}>{`${error.message === 'UsernameTaken' ? 'Username is already in use.' : error.validationErrors.username}`}</span>
                             </div>
                         )
                     )}
@@ -272,10 +273,10 @@ const Register = () => {
                         </div>
                     )}
                     {Object.keys(error).length !== 0 && (
-                        error.message && (
+                        (error.validationErrors.email || error.message === 'EmailTaken') && (
                             <div className={registerStyles.input_error}>
                                 <WarningIcon className={registerStyles.icon_warning}/>
-                                <span className={registerStyles.secondary_text_accent}>{`${error.message === 'EmailTaken' ? 'Email is already in use.' : error.message}`}</span>
+                                <span className={registerStyles.secondary_text_accent}>{`${error.message === 'EmailTaken' ? 'Email is already in use.' : error.validationErrors.email}`}</span>
                             </div>
                         )
                     )}
@@ -306,11 +307,11 @@ const Register = () => {
                             <span className={`${registerStyles.label} ${(focus.password || password) ? registerStyles.primary_text__shrink : registerStyles.primary_text}`}>Password</span>
                         </label>
                     </div>
-                    {Object.keys(error).length !== 0 && (
-                        error.message && (
+                    {Object.keys(error).length !== 0 && ( // THIS BIT IS CONFUSING BECASUE MAYBE EVEN IF ITS AN EMPTY STRING IT GETS HASHED THEN IT CHECKS THE HASH FUCKKK
+                        error.validationErrors.password && (
                             <div className={registerStyles.input_error}>
                                 <WarningIcon className={registerStyles.icon_warning}/>
-                                <span className={registerStyles.secondary_text_accent}>{error.message}</span>
+                                <span className={registerStyles.secondary_text_accent}>{error.validationErrors.password}</span>
                             </div>
                         )
                     )}
