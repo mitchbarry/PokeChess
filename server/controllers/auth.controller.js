@@ -11,24 +11,63 @@ const authController = {
     async registerUser(req, res, next) {
         try {
             const { username, email, password } = req.body
-            const existingEmail = await User.findOne({ email })
             const existingUsername = await User.findOne({ username })
-            if (existingEmail || existingUsername) {
-                const normalizedError = {
-                    statusCode: 400,
-                    message: `${existingEmail ? 'EmailTaken' : existingUsername && 'UsernameTaken'}`,
-                    name: 'ValidationError',
-                    validationErrors: {}
-                }
-                console.log(normalizedError)
-                return res.status(400).json(normalizedError)
-            }
+            const existingEmail = await User.findOne({ email })
+            const isPasswordValid = password.length >= 8 && // password is tested here before its hashed
+                password.length <= 255 &&
+                (/^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(password))
             const hashedPassword = await bcrypt.hash(password, 10)
-            const newUser = await User.create({
+            const newUser = new User({
                 username,
                 email,
                 password: hashedPassword
             })
+            newUser.validate((error) => {
+                if (error) {
+
+                }
+                else {
+
+                }
+            })
+            if (existingEmail || existingUsername || !isPasswordValid) {
+                let normalizedError = {
+                    statusCode: 400,
+                    message: 'User validation failed: ',
+                    name: 'ValidationError',
+                    validationErrors: {}
+                }
+                if (existingUsername) {
+                    const usernameError = 'Username already in use.'
+                    normalizedError.message = `${normalizedError.message} username: ${usernameError}`
+                    normalizedError.validationErrors.username = usernameError
+                }
+                if (existingEmail) {
+                    const emailError = 'Email already in use.'
+                    normalizedError.message = `${normalizedError.message}${normalizedError.message !== 'User validation failed: ' ? ', ' : ''}email: ${emailError}`
+                    normalizedError.validationErrors.email = emailError
+                }
+                if (!isPasswordValid) {
+                    let passwordError
+                    if (password.length === 0) {
+                        passwordError = `Your password is required.`
+                    }
+                    else if (password.length < 8) {
+                        passwordError = `Your password must be at least 8 characters.`
+                    }
+                    else if (password.length > 255) {
+                        passwordError = `Your password can't be more than 255 characters.`
+                    }
+                    else if (!/^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(password)) {
+                        passwordError = `Your password must include at least two of the following; letter, number, or symbol.`
+                    }
+                    normalizedError.message = `${normalizedError.message}${normalizedError.message !== 'User validation failed: ' ? ', ' : ''}password: ${passwordError}`
+                    normalizedError.validationErrors.password = passwordError
+                }
+                console.error(normalizedError)
+                return res.status(400).json(normalizedError)
+            }
+
             const token = generateAuthToken(newUser)
             res.json({ user: newUser, token })
         }

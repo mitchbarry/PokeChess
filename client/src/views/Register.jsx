@@ -241,10 +241,10 @@ const Register = () => {
                         </div>
                     )}
                     {Object.keys(error).length !== 0 && (
-                        (error.validationErrors.username || error.message === 'UsernameTaken') && (
+                        error.validationErrors.username && (
                             <div className={registerStyles.input_error}>
                                 <WarningIcon className={registerStyles.icon_warning}/>
-                                <span className={registerStyles.secondary_text_accent}>{`${error.message === 'UsernameTaken' ? 'Username is already in use.' : error.validationErrors.username}`}</span>
+                                <span className={registerStyles.secondary_text_accent}>{error.validationErrors.username}</span>
                             </div>
                         )
                     )}
@@ -273,10 +273,10 @@ const Register = () => {
                         </div>
                     )}
                     {Object.keys(error).length !== 0 && (
-                        (error.validationErrors.email || error.message === 'EmailTaken') && (
+                        error.validationErrors.email && (
                             <div className={registerStyles.input_error}>
                                 <WarningIcon className={registerStyles.icon_warning}/>
-                                <span className={registerStyles.secondary_text_accent}>{`${error.message === 'EmailTaken' ? 'Email is already in use.' : error.validationErrors.email}`}</span>
+                                <span className={registerStyles.secondary_text_accent}>{error.validationErrors.email}</span>
                             </div>
                         )
                     )}

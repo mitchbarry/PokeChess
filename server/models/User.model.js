@@ -1,11 +1,6 @@
 import { model, Schema } from 'mongoose'
 import { hasBadWords } from 'expletives'
 
-const passwordValidator = (password) => {
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/
-    return passwordRegex.test(password)
-}
-
 const UserSchema = new Schema(
 	{
 		username: {
@@ -33,24 +28,16 @@ const UserSchema = new Schema(
 		},
 		password: {
 			type: String,
-			required: [true, 'Password is required!'],
-			minlength: [8, `Your password must be at least 8 characters.`],
-			maxlength: [255, `Your password can't be more than 255 characters.`],
-			validate: {
-				validator: passwordValidator,
-				message: `Your password must include at least two of the following; letter, number, or symbol.`
-			}
+			required: [true, 'Password is required!'] // no validations present because hashed password is used to create user object
 		},
 		starter: {
 			type: Number,
-			required: false,
-			default: 0
+			required: [true, 'Starter is required!']
 		}
 	},
 	{ timestamps: true }
 )
 
 const User = model('User', UserSchema)
-
 
 export default User
