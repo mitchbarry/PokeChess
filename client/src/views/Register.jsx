@@ -175,7 +175,8 @@ const Register = () => {
             navigate('/')
         }
         catch (error) {
-            setError(errorUtilities.catchError(error))
+            const newError = errorUtilities.catchError(error)
+            setError(newError)
         }
     }
 

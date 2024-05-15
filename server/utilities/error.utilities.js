@@ -1,14 +1,11 @@
 const errorUtilities = {
     normalizeError(error) {
-        console.log('-----------------------------------ERROR---------------------------------------')
-        console.error(error)
         const normalizedError = {
             statusCode: error.statusCode || 500,
             message: error.message || 'Something went wrong.',
             name: error.name || 'Server Error.',
             validationErrors: this.extractValidationErrors(error)
         }
-        console.log('----------------------------------NORMALIZED ERROR----------------------------------------')
         console.error(normalizedError)
         return normalizedError
     },
