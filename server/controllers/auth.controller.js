@@ -3,51 +3,54 @@ import bcrypt from 'bcrypt'
 
 import User from '../models/User.model.js'
 
+import errorUtilities from '../utilities/error.utilities.js'
+
 const generateAuthToken = (user) => {
     return jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' })
 }
 
 const authController = {
-    async registerUser(req, res, next) {
+    async validateUser(req, res, next) {
         try {
             const { username, email, password } = req.body
             const existingUsername = await User.findOne({ username })
             const existingEmail = await User.findOne({ email })
-            const isPasswordValid = password.length >= 8 && // password is tested here before its hashed
+            const isPasswordValid = password.length >= 8 &&
                 password.length <= 255 &&
                 (/^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(password))
-            const hashedPassword = await bcrypt.hash(password, 10)
-            const newUser = new User({
+            const newUser = new User({ // create user object for User validation testing
                 username,
                 email,
-                password: hashedPassword
+                password,
+                starter: 0 // set starter to 0 temporarily
             })
-            newUser.validate((error) => {
-                if (error) {
-
-                }
-                else {
-
-                }
-            })
+            let normalizedError = {}
+            try {
+                await newUser.validate()
+            }
+            catch (error) {
+                normalizedError = errorUtilities.normalizeError(error)
+            }
             if (existingEmail || existingUsername || !isPasswordValid) {
-                let normalizedError = {
-                    statusCode: 400,
-                    message: 'User validation failed: ',
-                    name: 'ValidationError',
-                    validationErrors: {}
-                }
-                if (existingUsername) {
+                normalizedError === {} && (
+                    normalizedError = {
+                        statusCode: 400,
+                        message: 'User validation failed: ',
+                        name: 'ValidationError',
+                        validationErrors: {}
+                    }
+                )
+                if (existingUsername && !normalizedError.username) {
                     const usernameError = 'Username already in use.'
                     normalizedError.message = `${normalizedError.message} username: ${usernameError}`
                     normalizedError.validationErrors.username = usernameError
                 }
-                if (existingEmail) {
+                if (existingEmail && !normalizedError.email) {
                     const emailError = 'Email already in use.'
                     normalizedError.message = `${normalizedError.message}${normalizedError.message !== 'User validation failed: ' ? ', ' : ''}email: ${emailError}`
                     normalizedError.validationErrors.email = emailError
                 }
-                if (!isPasswordValid) {
+                if (!isPasswordValid && !normalizedError.password) {
                     let passwordError
                     if (password.length === 0) {
                         passwordError = `Your password is required.`
@@ -64,10 +67,25 @@ const authController = {
                     normalizedError.message = `${normalizedError.message}${normalizedError.message !== 'User validation failed: ' ? ', ' : ''}password: ${passwordError}`
                     normalizedError.validationErrors.password = passwordError
                 }
-                console.error(normalizedError)
                 return res.status(400).json(normalizedError)
             }
+        }
+        catch (error) {
+            next(error)
+        }
+    },
 
+    async registerUser(req, res, next) {
+        try {
+            const { username, email, password, starter } = req.body
+            const hashedPassword = await bcrypt.hash(password, 10)
+            const newUser = new User({
+                username,
+                email,
+                password: hashedPassword,
+                starter
+            })
+            await newUser.save()
             const token = generateAuthToken(newUser)
             res.json({ user: newUser, token })
         }

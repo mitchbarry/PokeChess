@@ -5,7 +5,7 @@ const http = axios.create({
 })
 
 const AuthService = {
-    async register(user) {
+    async register (user) {
         try {
             const response = await http.post('/auth/register', user)
             return response.data
@@ -15,7 +15,7 @@ const AuthService = {
         }
     },
 
-    async login(user) {
+    async login (user) {
         try {
             const response = await http.post('/auth/login', user)
             return response.data
@@ -25,7 +25,7 @@ const AuthService = {
         }
     },
 
-    async logout(){
+    async logout () {
         try {
             const response = await http.post('/auth/logout')
             return response.data
@@ -35,7 +35,7 @@ const AuthService = {
         }
     },
 
-    async getUserInfo(token){
+    async getUserInfo (token) {
         const config = {
             headers: {
                 Authorization: `Bearer ${token}` // Include the token in the Authorization header
@@ -43,6 +43,16 @@ const AuthService = {
         }
         try {
             const response = await http.get('/auth/login', config)
+            return response.data
+        }
+        catch (error) {
+            throw error
+        }
+    },
+
+    async validateUser (user) {
+        try {
+            const response = await http.post('/auth/validate', user)
             return response.data
         }
         catch (error) {

@@ -28,11 +28,11 @@ const UserSchema = new Schema(
 		},
 		password: {
 			type: String,
-			required: [true, 'Password is required!'] // no validations present because hashed password is used to create user object
+			required: [true, 'Your password is required.'] // no validations present because hashed password is used to create user object
 		},
 		starter: {
 			type: Number,
-			required: [true, 'Starter is required!']
+			required: [true, 'Your starter is required.']
 		}
 	},
 	{ timestamps: true }

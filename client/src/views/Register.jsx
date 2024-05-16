@@ -167,13 +167,14 @@ const Register = () => {
 
 	const sendRequest = async () => {
         try {
-            const response = await AuthService.register({
+            const response = await AuthService.validateUser({
                 username: username.trim(),
                 email: email.trim(),
                 password: password
             })
-            handleLoginResponse(response)
-            navigate('/')
+            console.log(response)
+            // handleLoginResponse(response)
+            // navigate('/')
         }
         catch (error) {
             const newError = errorUtilities.catchError(error)
