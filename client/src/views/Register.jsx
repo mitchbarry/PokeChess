@@ -1,37 +1,26 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { useAuth } from '../context/AuthContext'
+
+import AuthService from '../services/AuthService'
 
 import RegisterForm from '../components/RegisterForm'
 import StarterForm from '../components/StarterForm'
 
+import registerStyles from '../css/views/Register.module.css'
+
 const Register = () => {
+
+    const navigate = useNavigate()
+
+    const { handleLoginResponse } = useAuth()
 
     const [page, setPage] = useState(0)
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [starter, setStarter] = useState(0)
-    const [showPassword, setShowPassword] = useState(false)
-    const [formErrors, setFormErrors] = useState({
-        username: '',
-        email: '',
-        password: false,
-        passwordErrors: {
-            passwordLength: true,
-            passwordCharacters: true
-        }
-    })
-    const [error, setError] = useState({})
-	const [focus, setFocus] = useState({
-		username: false,
-		email: false,
-		password: false,
-        starter: {
-            bulbasaur: false,
-            charmander: false,
-            squirtle: false,
-            pikachu: false
-        }
-	})
 
     const handlePage = (page) => {
         setPage(page)
@@ -52,47 +41,58 @@ const Register = () => {
     const handleStarter = (starter) => {
         setStarter(starter)
     }
-    
-    const handleShowPassword = (showPassword) => {
-        setShowPassword(showPassword)
-    }
-    
-    const handleFormErrors = (formErrors) => {
-        setFormErrors(formErrors)
-    }
-    
-    const handleError = (error) => {
-        setError(error)
-    }
-    
-    const handleFocus = (focus) => {
-        setFocus(focus)
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        sendRequest()
+	}
+
+    const sendRequest = async () => {
+        try {
+            const response = await AuthService.validateUser({
+                username: username.trim(),
+                email: email.trim(),
+                password: password
+            })
+            console.log(response)
+            // handleLoginResponse(response)
+            // navigate('/')
+        }
+        catch (error) {
+            const newError = errorUtilities.catchError(error)
+            handleError(newError)
+        }
     }
 
 	return (
-        <div>
+        <div className={`${registerStyles.register} flex-center`}>
             {page === 0 ? (
                 <RegisterForm
                     handlePage={handlePage}
-                    username={username} handleUsername={handleUsername}
-                    email={email} handleEmail={handleEmail}
-                    password={password} handlePassword={handlePassword}
-                    handleShowPassword={handleShowPassword}
-                    handleFormErrors={handleFormErrors}
-                    handleError={handleError}
-                    handleFocus={handleFocus}
+                    username={username}
+                    handleUsername={handleUsername}
+                    email={email}
+                    handleEmail={handleEmail}
+                    password={password}
+                    handlePassword={handlePassword}
                 />
             ) : (
-                <StarterForm
-                    username={username}
-                    email={email}
-                    password={password}
-                    starter={starter} handleStarter={handleStarter}
-                    handleError={handleError}
-                    handleFocus={handleFocus}
-                />
+                page === 1 && (
+                    <StarterForm
+                        username={username}
+                        email={email}
+                        password={password}
+                        starter={starter}
+                        handleStarter={handleStarter}
+                        error={error}
+                        handleError={handleError}
+                        focus={focus}
+                        handleFocus={handleFocus}
+                    />
+                )
             )}
             <>
+                
             </>
         </div>
 	)
