@@ -29,8 +29,8 @@ const RegisterForm = (props) => {
     const [formErrors, setFormErrors] = useState({
         username: '',
         email: '',
-        password: false,
-        passwordErrors: {
+        password: {
+            initialRender: true,
             passwordLength: true,
             passwordCharacters: true
         }
@@ -58,12 +58,32 @@ const RegisterForm = (props) => {
     const handleUsernameInput = (e) => {
         const value = e.target.value
         setFormErrors((prevErrors) => {
-            if (
-                (prevErrors.username === `Your username is required.` && value) ||
-                (prevErrors.username === `Your username must be at least 3 characters.` && value.length >= 3) ||
-                (prevErrors.username === `Your username can't be more than 16 characters.` && value.length <= 16)
-            ) {
-                return { ...prevErrors, username: '' }
+            switch (prevErrors.username) {
+                case `Your username is required.`:
+                    if (value) {
+                        return { ...prevErrors, username: '' }
+                    }
+                    break
+                case `Your username must be at least 3 characters.`:
+                    if (value.length >= 3) {
+                        return { ...prevErrors, username: '' }
+                    }
+                    break
+                case `Your username can't be more than 16 characters.`:
+                    if (value.length <= 16) {
+                        return { ...prevErrors, username: '' }
+                    }
+                    break
+                case `Your username can't contain special characters.`:
+                    if (/^[a-zA-Z0-9\s]+$/.test(value)) {
+                        return { ...prevErrors, username: '' }
+                    }
+                    break
+                case `Your username must be appropriate.`:
+                    if (!hasBadWords(value)) {
+                        return { ...prevErrors, username: '' }
+                    }
+                    break
             }
             return prevErrors
         })
@@ -73,17 +93,19 @@ const RegisterForm = (props) => {
     const handleEmailInput = (e) => {
         const value = e.target.value
         setFormErrors((prevErrors) => {
-            if (prevErrors.email === `Your email is required.`) {
-                if (value) {
-                    return { ...prevErrors, email: '' }
-                }
-                else {
-                    return prevErrors
-                }
+            switch (prevErrors.email) {
+                case `Your email is required.`:
+                    if (value) {
+                        return { ...prevErrors, email: '' }
+                    }
+                    break
+                case `Please enter a valid email.`:
+                    if (/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value)) {
+                        return { ...prevErrors, email: '' }
+                    }
+                    break
             }
-            else {
-                return prevErrors
-            }
+            return prevErrors
         })
         handleEmail(value)
     }
@@ -93,16 +115,16 @@ const RegisterForm = (props) => {
         setFormErrors((prevErrors) => {
             const updatedErrors = { ...prevErrors }
             if (value.length >= 8 && value.length <= 255) { // Check length
-                updatedErrors.passwordErrors.passwordLength = false
+                updatedErrors.password.passwordLength = false
             } 
             else {
-                updatedErrors.passwordErrors.passwordLength = true
+                updatedErrors.password.passwordLength = true
             }
             if (/^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(value)) {
-                updatedErrors.passwordErrors.passwordCharacters = false
+                updatedErrors.password.passwordCharacters = false
             }
             else {
-                updatedErrors.passwordErrors.passwordCharacters = true
+                updatedErrors.password.passwordCharacters = true
             }
             return updatedErrors
         })
@@ -150,17 +172,32 @@ const RegisterForm = (props) => {
             hasError = true
         }
 
-        if (newFormErrors.passwordErrors.passwordLength === true ||
-            newFormErrors.passwordErrors.passwordCharacters === true) {
-            newFormErrors.password = true
-            hasError = true
+        if (newFormErrors.password.passwordLength === true ||
+            newFormErrors.password.passwordCharacters === true) {
+                newFormErrors.password.initialRender = false
+                hasError = true
         }
 
         if (hasError) {
             setFormErrors(prevErrors => ({ ...prevErrors, ...newFormErrors }))
         }
         else {
+            sendValidationRequest()
+        }
+    }
+
+    const sendValidationRequest = async () => {
+        try {
+            await AuthService.validateUser({
+                username: username.trim(),
+                email: email.trim(),
+                password: password
+            })
             handlePage(page + 1)
+        }
+        catch (error) {
+            const newError = errorUtilities.catchError(error)
+            handleError(newError)
         }
     }
 
@@ -270,7 +307,7 @@ const RegisterForm = (props) => {
                         type={showPassword ? 'text' : 'password'}
                         id='password'
                         name='password'
-                        className={`${registerStyles.input_password} ${registerStyles.primary_text} ${(focus.password || password) ? registerStyles.input_password__focus : ''} ${formErrors.password ? registerStyles.input__error : ''}`}
+                        className={`${registerStyles.input_password} ${registerStyles.primary_text} ${(focus.password || password) ? registerStyles.input_password__focus : ''} ${(Object.values(formErrors.password).some(value => value) && !formErrors.password.initialRender) ? registerStyles.input__error : ''}`}
                         value={password}
                         onChange={(e) => handleInput(e)}
                     />
@@ -285,7 +322,7 @@ const RegisterForm = (props) => {
                     )}
                     <label htmlFor='password' className={`${registerStyles.input_label}
                         ${(focus.password || password) ? registerStyles.input_label__shrink : ''}
-                        ${formErrors.password ? registerStyles.input_label__error : ''}`}>
+                        ${(Object.values(formErrors.password).some(value => value) && !formErrors.password.initialRender )? registerStyles.input_label__error : ''}`}>
                         <span className={`${registerStyles.label} ${(focus.password || password) ? registerStyles.primary_text__shrink : registerStyles.primary_text}`}>Password</span>
                     </label>
                 </div>
@@ -300,8 +337,8 @@ const RegisterForm = (props) => {
                 <div className={registerStyles.form_password_check}>
                     <div className={`${registerStyles.password_check}`}>
                         <div className={`${registerStyles.password_check_box} flex-center`}>
-                            <div className={`${registerStyles.check_box} ${!formErrors.passwordErrors.passwordLength ? registerStyles.check_box__checked : ''}`}/>
-                            {!formErrors.passwordErrors.passwordLength ? (
+                            <div className={`${registerStyles.check_box} ${!formErrors.password.passwordLength ? registerStyles.check_box__checked : ''}`}/>
+                            {!formErrors.password.passwordLength ? (
                                 <CheckIcon className={registerStyles.icon_check}/>
                             ) : (
                                 <XIcon className={registerStyles.icon_check}/>
@@ -311,8 +348,8 @@ const RegisterForm = (props) => {
                     </div>
                     <div className={`${registerStyles.password_check}`}>
                         <div className={`${registerStyles.password_check_box} flex-center`}>
-                            <div className={`${registerStyles.check_box} ${!formErrors.passwordErrors.passwordCharacters ? registerStyles.check_box__checked : ''}`}/>
-                            {!formErrors.passwordErrors.passwordCharacters ? (
+                            <div className={`${registerStyles.check_box} ${!formErrors.password.passwordCharacters ? registerStyles.check_box__checked : ''}`}/>
+                            {!formErrors.password.passwordCharacters ? (
                                 <CheckIcon className={registerStyles.icon_check}/>
                             ) : (
                                 <XIcon className={registerStyles.icon_check}/>
@@ -321,7 +358,37 @@ const RegisterForm = (props) => {
                         <span className={`${registerStyles.primary_text_accent__shrink} flex-center`}>Password includes two of the following letter, number, or symbol.</span>
                     </div>
                 </div>
-                <button type='submit' className={`${registerStyles.form_submit} flex-center`}>
+                <button 
+                    type="submit"
+                    className={
+                        `${registerStyles.form_submit}
+                        ${
+                            (!Object.entries(formErrors).every(([key, value]) => {
+                                if (key === 'password') {
+                                    return true
+                                }
+                                return value === ''
+                            }) ||
+                            !formErrors.password.initialRender && (
+                                formErrors.password.passwordLength ||
+                                formErrors.password.passwordCharacters
+                            )) ? registerStyles.form_submit__disabled : registerStyles.form_submit__active
+                        }
+                        flex-center`
+                    }
+                    disabled={
+                        !Object.entries(formErrors).every(([key, value]) => {
+                            if (key === 'password') {
+                                return true
+                            }
+                            return value === ''
+                        }) ||
+                        !formErrors.password.initialRender && (
+                            formErrors.password.passwordLength ||
+                            formErrors.password.passwordCharacters
+                        )
+                    }
+                >
                     <ArrowIcon className={registerStyles.icon_default}/>
                 </button>
             </form>

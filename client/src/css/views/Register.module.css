@@ -75,7 +75,7 @@
     transition: var(--transition-hover);
 }
 
-.error_close, .input_password_icon, .form_submit {
+.error_close, .input_password_icon, .form_submit__active {
     cursor: pointer;
 }
 
@@ -175,13 +175,20 @@
 /* * Form Submit Button */
 .form_submit {
     height: var(--size-600);
-    color: var(--color-100);
+}
+.form_submit__active {
     background-color: var(--color-teal);
     fill: var(--color-100);
     stroke: var(--color-100);
 }
-.form_submit:hover {
+.form_submit__active:hover {
     background-color: var(--color-teal-lighten);
+}
+.form_submit__disabled {
+    background-color: var(--color-100);
+    fill: var(--color-300);
+    stroke: var(--color-300);
+    cursor: not-allowed;
 }
 
 /* * Links */
@@ -196,6 +203,38 @@
 }
 .form_link:hover {
     color: var(--color-800);
+}
+
+.register_page {
+    width: fit-content;
+    background-color: var(--color-000);
+    border-radius: 0px 0px 10px 10px;
+    padding: 0 var(--size-700) var(--size-100);
+}
+
+.page_container {
+    width: var(--size-150);
+    height: var(--size-150);
+    margin: var(--size-075);
+}
+
+.page_button {
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition-hover);
+}
+.page_button__disabled {
+    width: var(--size-100);
+    height: var(--size-100);
+    background-color: var(--color-200);
+}
+.page_button__disabled:hover {
+    background-color: var(--color-300);
+}
+.page_button__active {
+    width: var(--size-125);
+    height: var(--size-125);
+    background-color: var(--color-teal);
 }
 
 /* * Icons */

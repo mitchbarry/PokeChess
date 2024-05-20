@@ -21,8 +21,7 @@ const authController = {
             const newUser = new User({ // create user object for User validation testing
                 username,
                 email,
-                password,
-                starter: 0 // set starter to 0 temporarily
+                password
             })
             let normalizedError = {}
             try {

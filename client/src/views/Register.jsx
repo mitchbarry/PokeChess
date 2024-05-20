@@ -84,16 +84,19 @@ const Register = () => {
                         password={password}
                         starter={starter}
                         handleStarter={handleStarter}
-                        error={error}
-                        handleError={handleError}
-                        focus={focus}
-                        handleFocus={handleFocus}
                     />
                 )
             )}
-            <>
-                
-            </>
+            <div className={`${registerStyles.register_page} flex-center`}>
+                <div className={`${registerStyles.page_container} flex-center`}>
+                    <div className={`${registerStyles.page_button} ${page === 0 ? registerStyles.page_button__active : registerStyles.page_button__disabled}`} onClick={() => handlePage(0)}>
+                    </div>
+                </div>
+                <div className={`${registerStyles.page_container} flex-center`}>
+                    <div className={`${registerStyles.page_button} ${page === 1 ? registerStyles.page_button__active : registerStyles.page_button__disabled}`} onClick={() => handlePage(1)}>
+                    </div>
+                </div>
+            </div>
         </div>
 	)
 }

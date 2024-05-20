@@ -5,18 +5,24 @@ const UserSchema = new Schema(
 	{
 		username: {
 			type: String,
-			required: [true, `Your username is required.`],
-			minlength: [3, `Your username must be at least 3 characters.`],
-			maxlength: [16, `Your username can't be more than 16 characters.`],
-			validate: {
-				validator: async function(username) {
-					if (hasBadWords(username)) {
-						return false
-					}
-					return true
+			required: [true, 'Your username is required.'],
+			minlength: [3, 'Your username must be at least 3 characters.'],
+			maxlength: [16, 'Your username can\'t be more than 16 characters.'],
+			validate: [
+				{
+					validator: async (username) => {
+						if (hasBadWords(username)) {
+							return false;
+						}
+						return true;
+					},
+					message: 'Your username must be appropriate.'
 				},
-				message: `Your username must be appropriate.`
-			}
+				{
+					validator: (username) => /^[a-zA-Z0-9\s]+$/.test(username),
+					message: `Your username can't contain special characters.`
+				}
+			]
 		},
 		email: {
 			type: String,
@@ -32,7 +38,8 @@ const UserSchema = new Schema(
 		},
 		starter: {
 			type: Number,
-			required: [true, 'Your starter is required.']
+			required: false,
+			default: 0
 		}
 	},
 	{ timestamps: true }
