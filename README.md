@@ -1,6 +1,6 @@
 # PokeChess
 
-Dive into the electrifying world of Pokémon without investing countless hours in a single storyline. Inspired by popular titles like Teamfight Tactics and Hearthstone's Battlegrounds, PokéChess delivers an immersive gaming experience right in your web browser. Whether you're a seasoned Pokémon trainer or new to the scene, prepare for strategic battles like never before.
+Dive into the electrifying world of Pokémon with PokeChess! Inspired by popular titles like Teamfight Tactics and Hearthstone's Battlegrounds, PokeChess delivers an immersive gaming experience right in your web browser. Whether you're a seasoned Pokémon trainer or new to the scene, prepare for strategic battles like never before.
 
 ## Links
 
