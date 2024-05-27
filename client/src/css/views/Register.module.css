@@ -26,14 +26,17 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+}
+
+.register_form {
     width: 512px;
-    padding: var(--size-400);
+    padding: var(--size-200) var(--size-400) var(--size-400) var(--size-400);
     text-align: center;
     background-color: var(--color-000);
 }
 
 .form_title {
-    margin-bottom: var(--size-350);
+    margin: var(--size-350) 0;
     color: var(--color-800);
 }
 
@@ -48,11 +51,11 @@
 }
 
 /* * Form Inputs */
-.form_input, .form_password, .input, .input_password, .form_submit {
+.form_input, .form_password, .input, .input_password, .form_submit, .register_page {
     width: 100%;
 }
 
-.form_input, .form_submit, .form_password_check {
+.form_input, .form_password_check {
     margin-bottom: var(--size-350);
 }
 
@@ -169,14 +172,18 @@
     border-radius: 50%;
 }
 
+.check_box__error {
+    background-color: var(--color-alert-red);
+}
+
 /* * Form Submit Button */
 .form_submit {
     height: var(--size-600);
 }
 .form_submit__active {
     background-color: var(--color-teal);
-    fill: var(--color-100);
-    stroke: var(--color-100);
+    fill: var(--color-000);
+    stroke: var(--color-000);
 }
 .form_submit__active:hover {
     background-color: var(--color-teal-lighten);
@@ -191,10 +198,10 @@
 /* * Links */
 .form_links {
     align-items: center;
+    margin-top: var(--size-250);
 }
 
 .form_link {
-    margin-top: var(--size-050);
     text-decoration: none;
     color: var(--color-500);
 }
@@ -203,34 +210,25 @@
 }
 
 .register_page {
-    width: fit-content;
-    background-color: var(--color-000);
-    border-radius: 0px 0px 10px 10px;
-    padding: 0 var(--size-700) var(--size-100);
+    margin-bottom: var(--size-100);
 }
 
 .page_container {
-    width: var(--size-150);
-    height: var(--size-150);
-    margin: var(--size-075);
+    margin: 0 var(--size-075);
 }
 
 .page_button {
-    border-radius: 50%;
+    width: var(--size-325);
+    height: var(--size-050);
     cursor: pointer;
-    transition: var(--transition-hover);
 }
 .page_button__disabled {
-    width: var(--size-100);
-    height: var(--size-100);
     background-color: var(--color-200);
 }
 .page_button__disabled:hover {
     background-color: var(--color-300);
 }
 .page_button__active {
-    width: var(--size-125);
-    height: var(--size-125);
     background-color: var(--color-teal);
 }
 

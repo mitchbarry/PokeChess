@@ -13,61 +13,66 @@ const authController = {
     async validateUser(req, res, next) {
         try {
             const { username, email, password } = req.body
-            const existingUsername = await User.findOne({ username })
-            const existingEmail = await User.findOne({ email })
+            let normalizedError = {
+                statusCode: 400,
+                message: 'User validation failed: ',
+                name: 'ValidationError',
+                validationErrors: {}
+            }
+
+            const [existingUsername, existingEmail] = await Promise.all([
+                User.findOne({ username }),
+                User.findOne({ email })
+            ])
+
             const isPasswordValid = password.length >= 8 &&
                 password.length <= 255 &&
                 (/^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(password))
-            const newUser = new User({ // create user object for User validation testing
-                username,
-                email,
-                password
-            })
-            let normalizedError = {}
+
+            const newUser = new User({ username, email, password })
+
             try {
                 await newUser.validate()
             }
             catch (error) {
                 normalizedError = errorUtilities.normalizeError(error)
             }
-            if (existingEmail || existingUsername || !isPasswordValid) {
-                normalizedError === {} && (
-                    normalizedError = {
-                        statusCode: 400,
-                        message: 'User validation failed: ',
-                        name: 'ValidationError',
-                        validationErrors: {}
-                    }
-                )
-                if (existingUsername && !normalizedError.username) {
-                    const usernameError = 'Username already in use.'
-                    normalizedError.message = `${normalizedError.message} username: ${usernameError}`
-                    normalizedError.validationErrors.username = usernameError
+
+            if (existingUsername) {
+                const usernameError = 'Username already in use.'
+                normalizedError.message += `username: ${usernameError} `
+                normalizedError.validationErrors.username = usernameError
+            }
+
+            if (existingEmail) {
+                const emailError = 'Email already in use.'
+                normalizedError.message += `email: ${emailError} `
+                normalizedError.validationErrors.email = emailError
+            }
+
+            if (!isPasswordValid) {
+                let passwordError
+                if (password.length === 0) {
+                    passwordError = 'Your password is required.'
                 }
-                if (existingEmail && !normalizedError.email) {
-                    const emailError = 'Email already in use.'
-                    normalizedError.message = `${normalizedError.message}${normalizedError.message !== 'User validation failed: ' ? ', ' : ''}email: ${emailError}`
-                    normalizedError.validationErrors.email = emailError
+                else if (password.length < 8) {
+                    passwordError = 'Your password must be at least 8 characters.'
                 }
-                if (!isPasswordValid && !normalizedError.password) {
-                    let passwordError
-                    if (password.length === 0) {
-                        passwordError = `Your password is required.`
-                    }
-                    else if (password.length < 8) {
-                        passwordError = `Your password must be at least 8 characters.`
-                    }
-                    else if (password.length > 255) {
-                        passwordError = `Your password can't be more than 255 characters.`
-                    }
-                    else if (!/^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(password)) {
-                        passwordError = `Your password must include at least two of the following; letter, number, or symbol.`
-                    }
-                    normalizedError.message = `${normalizedError.message}${normalizedError.message !== 'User validation failed: ' ? ', ' : ''}password: ${passwordError}`
-                    normalizedError.validationErrors.password = passwordError
+                else if (password.length > 255) {
+                    passwordError = 'Your password can\'t be more than 255 characters.'
                 }
+                else if (!/^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(password)) {
+                    passwordError = 'Your password must include at least two of the following: letter, number, or symbol.'
+                }
+                normalizedError.message += `password: ${passwordError} `
+                normalizedError.validationErrors.password = passwordError
+            }
+
+            if (Object.keys(normalizedError.validationErrors).length > 0) {
                 return res.status(400).json(normalizedError)
             }
+
+            return res.status(200).json({ isValid: true })
         }
         catch (error) {
             next(error)

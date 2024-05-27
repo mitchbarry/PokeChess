@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-import { hasBadWords } from 'expletives'
-
-import errorUtilities from '../utilities/error.utilities'
 
 import HiddenIcon from '../components/svgs/HiddenSvg'
 import RevealIcon from '../components/svgs/RevealSvg'
@@ -149,7 +146,7 @@ const RegisterForm = (props) => {
                     type={showPassword ? 'text' : 'password'}
                     id='password'
                     name='password'
-                    className={`${registerStyles.input_password} ${registerStyles.primary_text} ${(focus.password || password) ? registerStyles.input_password__focus : ''} ${(Object.values(formErrors.password).some(value => value) && !formErrors.password.initialRender) ? registerStyles.input__error : ''}`}
+                    className={`${registerStyles.input_password} ${registerStyles.primary_text} ${(focus.password || password) ? registerStyles.input_password__focus : ''} ${(Object.values(formErrors.password).some(value => value) && !formErrors.initialRender) ? registerStyles.input__error : ''}`}
                     value={password}
                     onChange={(e) => handleInput(e)}
                 />
@@ -164,7 +161,7 @@ const RegisterForm = (props) => {
                 )}
                 <label htmlFor='password' className={`${registerStyles.input_label}
                     ${(focus.password || password) ? registerStyles.input_label__shrink : ''}
-                    ${(Object.values(formErrors.password).some(value => value) && !formErrors.password.initialRender )? registerStyles.input_label__error : ''}`}>
+                    ${(Object.values(formErrors.password).some(value => value) && !formErrors.initialRender ) ? registerStyles.input_label__error : ''}`}>
                     <span className={`${registerStyles.label} ${(focus.password || password) ? registerStyles.primary_text__shrink : registerStyles.primary_text}`}>Password</span>
                 </label>
             </div>
@@ -181,22 +178,22 @@ const RegisterForm = (props) => {
             <div className={registerStyles.form_password_check}>
                 <div className={`${registerStyles.password_check}`}>
                     <div className={`${registerStyles.password_check_box} flex-center`}>
-                        <div className={`${registerStyles.check_box} ${!formErrors.password.passwordLength ? registerStyles.check_box__checked : ''}`}/>
+                    <div className={`${registerStyles.check_box} ${!formErrors.password.passwordLength ? registerStyles.check_box__checked : !formErrors.initialRender ? registerStyles.check_box__error : ''}`}/>
                         {!formErrors.password.passwordLength ? (
                             <CheckIcon className={registerStyles.icon_check}/>
                         ) : (
-                            <XIcon className={registerStyles.icon_check}/>
+                            <XIcon className={`${registerStyles.icon_check}`}/>
                         )}
                     </div>
                     <span className={`${registerStyles.primary_text_accent__shrink} flex-center`}>Password is at least 8 characters.</span>
                 </div>
                 <div className={`${registerStyles.password_check}`}>
                     <div className={`${registerStyles.password_check_box} flex-center`}>
-                        <div className={`${registerStyles.check_box} ${!formErrors.password.passwordCharacters ? registerStyles.check_box__checked : ''}`}/>
+                        <div className={`${registerStyles.check_box} ${!formErrors.password.passwordCharacters ? registerStyles.check_box__checked : !formErrors.initialRender ? registerStyles.check_box__error : ''}`}/>
                         {!formErrors.password.passwordCharacters ? (
                             <CheckIcon className={registerStyles.icon_check}/>
                         ) : (
-                            <XIcon className={registerStyles.icon_check}/>
+                            <XIcon className={`${registerStyles.icon_check}`}/>
                         )}
                     </div>
                     <span className={`${registerStyles.primary_text_accent__shrink} flex-center`}>Password includes two of the following letter, number, or symbol.</span>

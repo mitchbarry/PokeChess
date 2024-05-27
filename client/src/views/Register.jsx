@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { hasBadWords } from 'expletives'
+
 
 import { useAuth } from '../context/AuthContext'
-
 import AuthService from '../services/AuthService'
+import errorUtilities from '../utilities/error.utilities'
 
 import RegisterForm from '../components/RegisterForm'
 import StarterForm from '../components/StarterForm'
@@ -26,10 +28,11 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [starter, setStarter] = useState(0)
     const [formErrors, setFormErrors] = useState({
+        validated: false,
+        initialRender: true,
         username: '',
         email: '',
         password: {
-            initialRender: true,
             passwordLength: true,
             passwordCharacters: true
         }
@@ -38,6 +41,7 @@ const Register = () => {
 
     const handleUsername = (value) => {
         setFormErrors((prevErrors) => {
+            prevErrors.validated = false
             switch (prevErrors.username) {
                 case `Your username is required.`:
                     if (value) {
@@ -72,6 +76,7 @@ const Register = () => {
     
     const handleEmail = (value) => {
         setFormErrors((prevErrors) => {
+            prevErrors.validated = false
             switch (prevErrors.email) {
                 case `Your email is required.`:
                     if (value) {
@@ -92,6 +97,7 @@ const Register = () => {
     const handlePassword = (value) => {
         setFormErrors((prevErrors) => {
             const updatedErrors = { ...prevErrors }
+            updatedErrors.validated = false
             if (value.length >= 8 && value.length <= 255) { // Check length
                 updatedErrors.password.passwordLength = false
             } 
@@ -118,8 +124,14 @@ const Register = () => {
     }
 
     const handleSubmit = (e) => {
+        
         e.preventDefault()
-        checkForm()
+        if (formErrors.validated) {
+            setStep(step + 1)
+        }
+        else {
+            checkForm()
+        }
 	}
 
     const checkForm = () => {
@@ -166,9 +178,13 @@ const Register = () => {
 
         if (hasError) {
             setFormErrors(prevErrors => ({ ...prevErrors, ...newFormErrors }))
-            setStep(0)
+            if (step !== 0) {
+                setStep(0)
+            }
+            
         }
         else {
+            
             if (step === 0) {
                 sendValidationRequest()
             }
@@ -180,11 +196,12 @@ const Register = () => {
 
     const sendValidationRequest = async () => {
         try {
-            await AuthService.validateUser({
+            const response = await AuthService.validateUser({
                 username: username.trim(),
                 email: email.trim(),
                 password
             })
+            formErrors.validated = response.isValid
             setStep(step + 1)
         }
         catch (error) {
@@ -212,82 +229,92 @@ const Register = () => {
 
 	return (
         <div className={`${registerStyles.register} flex-center`}>
-            <div className={`${registerStyles.register_page} flex-center`}>
-                <div className={`${registerStyles.page_container} flex-center`}>
-                    <div className={`${registerStyles.page_button} ${step === 0 ? registerStyles.page_button__active : registerStyles.page_button__disabled}`} onClick={() => setStep(0)}>
+            <div className={`${registerStyles.register_form}`}>
+                <div className={`${registerStyles.register_page} flex-center`}>
+                    <div className={`${registerStyles.page_container}`}>
+                        <div className={`${registerStyles.page_button} ${step === 0 ? registerStyles.page_button__active : registerStyles.page_button__disabled}`} onClick={() => step !== 0 && setStep(0)}>
+                        </div>
+                    </div>
+                    <div className={`${registerStyles.page_container}`}>
+                        <div className={`${registerStyles.page_button} ${step === 1 ? registerStyles.page_button__active : registerStyles.page_button__disabled}`} onClick={() => (formErrors.validated && step !== 1) && setStep(1)}>
+                        </div>
                     </div>
                 </div>
-                <div className={`${registerStyles.page_container} flex-center`}>
-                    <div className={`${registerStyles.page_button} ${step === 1 ? registerStyles.page_button__active : registerStyles.page_button__disabled}`} onClick={() => setStep(1)}>
-                    </div>
-                </div>
-            </div>
 
-            <h1 className={registerStyles.form_title}>
-                <span className={registerStyles.primary_text}>{step === 0 ? 'Register' : 'Choose Your Starter'}</span>
-            </h1>
+                <h1 className={registerStyles.form_title}>
+                    <span className={registerStyles.primary_text}>{step === 0 ? 'Register' : 'Choose Your Starter'}</span>
+                </h1>
 
-            <form onSubmit={handleSubmit} className={registerStyles.form}>
-                {step === 0 ? (
-                    <RegisterForm
-                        username={username}
-                        handleUsername={handleUsername}
-                        email={email}
-                        handleEmail={handleEmail}
-                        password={password}
-                        handlePassword={handlePassword}
-                        showPassword={showPassword}
-                        handleShowPassword={handleShowPassword}
-                        formErrors={formErrors}
-                        error={error}
-                    />
-                ) : (
-                step === 1 && (
-                    <StarterForm
-                        starter={starter}
-                        handleStarter={handleStarter}
-                    />
-                ))}
-            </form>
+                <form onSubmit={handleSubmit} className={registerStyles.form}>
+                    {step === 0 ? (
+                        <RegisterForm
+                            username={username}
+                            handleUsername={handleUsername}
+                            email={email}
+                            handleEmail={handleEmail}
+                            password={password}
+                            handlePassword={handlePassword}
+                            showPassword={showPassword}
+                            handleShowPassword={handleShowPassword}
+                            formErrors={formErrors}
+                            error={error}
+                        />
+                    ) : (
+                    step === 1 && (
+                        <StarterForm
+                            starter={starter}
+                            handleStarter={handleStarter}
+                        />
+                    ))}
 
-            <button 
-                type="submit"
-                className={
-                    `${registerStyles.form_submit}
-                    ${
-                        (!Object.entries(formErrors).every(([key, value]) => {
-                            if (key === 'password') {
-                                return true
+                    <button 
+                        type="submit"
+                        className={
+                            `${registerStyles.form_submit}
+                            ${
+                                (!Object.entries(formErrors).every(([key, value]) => {
+                                    if (key === 'password') {
+                                        return true
+                                    }
+                                    else if (key === 'validated') {
+                                        return true
+                                    }
+                                    return value === ''
+                                }) ||
+                                !formErrors.initialRender && (
+                                    formErrors.password.passwordLength ||
+                                    formErrors.password.passwordCharacters
+                                )) ? registerStyles.form_submit__disabled : registerStyles.form_submit__active
                             }
-                            return value === ''
-                        }) ||
-                        !formErrors.password.initialRender && (
-                            formErrors.password.passwordLength ||
-                            formErrors.password.passwordCharacters
-                        )) ? registerStyles.form_submit__disabled : registerStyles.form_submit__active
-                    }
-                    flex-center`
-                }
-                disabled={
-                    !Object.entries(formErrors).every(([key, value]) => {
-                        if (key === 'password') {
-                            return true
+                            flex-center`
                         }
-                        return value === ''
-                    }) ||
-                    !formErrors.password.initialRender && (
-                        formErrors.password.passwordLength ||
-                        formErrors.password.passwordCharacters
-                    )
-                }
-            >
-                <ArrowIcon className={registerStyles.icon_default}/>
-            </button>
+                        disabled={
+                            !Object.entries(formErrors).every(([key, value]) => {
+                                if (key === 'password') {
+                                    return true
+                                }
+                                else if (key === 'validated') {
+                                    return true
+                                }
+                                return value === ''
+                            }) ||
+                            !formErrors.initialRender && (
+                                formErrors.password.passwordLength ||
+                                formErrors.password.passwordCharacters
+                            )
+                        }
+                    >
+                        <ArrowIcon className={registerStyles.icon_default}/>
+                    </button>
+                </form>
 
-            <div className={`${registerStyles.form_links} flex-col`}>
-                <Link className={registerStyles.form_link} to='/login'>
-                    <span className={registerStyles.primary_text__shrink}>Already have an account?</span>
-                </Link>
+                {step === 0 && (
+                    <div className={`${registerStyles.form_links} flex-col`}>
+                        <Link className={registerStyles.form_link} to='/login'>
+                            <span className={registerStyles.primary_text__shrink}>Already have an account?</span>
+                        </Link>
+                    </div>
+                )}
             </div>
         </div>
 	)
