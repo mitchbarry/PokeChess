@@ -172,7 +172,7 @@ const Register = () => {
 
         if (newFormErrors.password.passwordLength === true ||
             newFormErrors.password.passwordCharacters === true) {
-                newFormErrors.password.initialRender = false
+                newFormErrors.initialRender = false
                 hasError = true
         }
 
@@ -273,10 +273,7 @@ const Register = () => {
                             `${registerStyles.form_submit}
                             ${
                                 (!Object.entries(formErrors).every(([key, value]) => {
-                                    if (key === 'password') {
-                                        return true
-                                    }
-                                    else if (key === 'validated') {
+                                    if (key === 'password' || key === 'validated' || key === 'initialRender') {
                                         return true
                                     }
                                     return value === ''
@@ -290,10 +287,7 @@ const Register = () => {
                         }
                         disabled={
                             !Object.entries(formErrors).every(([key, value]) => {
-                                if (key === 'password') {
-                                    return true
-                                }
-                                else if (key === 'validated') {
+                                if (key === 'password' || key === 'validated' || key === 'initialRender') {
                                     return true
                                 }
                                 return value === ''

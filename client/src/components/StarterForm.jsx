@@ -1,6 +1,11 @@
 import React from 'react'
 
-const StarterForm = () => {
+const StarterForm = (props) => {
+
+	const {
+		starter,
+		handleStarter
+    } = props
 
     return (
 		<>
