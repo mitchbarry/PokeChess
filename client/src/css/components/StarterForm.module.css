@@ -13,3 +13,28 @@
 .starter {
     pointer-events: none;
 }
+
+.starter_option {
+    width: 12.5%;
+    aspect-ratio: 1 / 1;
+    background-color: teal;
+    border-radius: 50%;
+    position:absolute;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.option1 {
+    top: 47%;
+    left: 10.5%;
+}
+
+.option2 {
+    top: 69%;
+    left: 45%;
+}
+
+.option3 {
+    top: 46%;
+    left: 78.5%;
+}

@@ -26,7 +26,7 @@ const RegisterForm = (props) => {
 	const [focus, setFocus] = useState({
 		username: false,
 		email: false,
-		password: false,
+		password: false
 	})
 
     const handleInput = (e) => {
@@ -50,17 +50,17 @@ const RegisterForm = (props) => {
 
     const handleBlur = (input) => {
         if (input === 'username' && !username.trim()) {
-            setFocus((prevFocus) => ({
+            return setFocus((prevFocus) => ({
                 ...prevFocus, username: false
             }))
         }
-        else if (input === 'email' && !email.trim()) {
-            setFocus((prevFocus) => ({
+        if (input === 'email' && !email.trim()) {
+            return setFocus((prevFocus) => ({
                 ...prevFocus, email: false
             }))
         }
-        else if (input === 'password' && !password.trim()) {
-            setFocus((prevFocus) => ({
+        if (input === 'password' && !password.trim()) {
+            return setFocus((prevFocus) => ({
                 ...prevFocus, password: false
             }))
         }
