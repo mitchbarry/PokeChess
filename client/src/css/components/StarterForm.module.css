@@ -1,0 +1,15 @@
+/* * use BEM (Block, Entity, Modifier) for all css classes */
+
+/* * Form Inputs */
+.input_starter, .starter {
+    width: 100%;
+}
+
+.input_starter {
+    margin: var(--size-500) 0 var(--size-800);
+    position: relative;
+}
+
+.starter {
+    pointer-events: none;
+}

@@ -181,7 +181,6 @@ const Register = () => {
             if (step !== 0) {
                 setStep(0)
             }
-            
         }
         else {
             
@@ -203,6 +202,7 @@ const Register = () => {
             })
             formErrors.validated = response.isValid
             setStep(step + 1)
+            formErrors.initialRender = true
         }
         catch (error) {
             const newError = errorUtilities.catchError(error)

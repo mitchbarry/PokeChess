@@ -6,7 +6,7 @@ import WarningIcon from '../components/svgs/WarningSvg'
 import CheckIcon from '../components/svgs/CheckSvg'
 import XIcon from '../components/svgs/XSvg'
 
-import registerStyles from '../css/views/Register.module.css'
+import registerFormStyles from '../css/components/RegisterForm.module.css'
 
 const RegisterForm = (props) => {
 
@@ -68,7 +68,7 @@ const RegisterForm = (props) => {
 
     return (
         <>
-            <div className={`${registerStyles.form_input} ${(Object.keys(error).length !== 0 && error.message) || (formErrors.username !== '') ? registerStyles.form_input__error : ''}`}
+            <div className={`${registerFormStyles.form_input} ${(Object.keys(error).length !== 0 && error.message) || (formErrors.username !== '') ? registerFormStyles.form_input__error : ''}`}
                 onFocus={() => handleFocus('username')}
                 onBlur={() => handleBlur('username')}
             >
@@ -76,34 +76,34 @@ const RegisterForm = (props) => {
                     type='text'
                     id='username'
                     name='username'
-                    className={`${registerStyles.input} ${registerStyles.primary_text} ${(focus.username || username) ? registerStyles.input__focus : ''} ${formErrors.username ? registerStyles.input__error : ''}`}
+                    className={`${registerFormStyles.input} ${registerFormStyles.primary_text} ${(focus.username || username) ? registerFormStyles.input__focus : ''} ${formErrors.username ? registerFormStyles.input__error : ''}`}
                     value={username}
                     onChange={(e) => handleInput(e)}
                 />
-                <label htmlFor='username' className={`${registerStyles.input_label}
-                    ${(focus.username || username) ? registerStyles.input_label__shrink : ''}
-                    ${formErrors.username ? registerStyles.input_label__error : ''}`}>
-                    <span className={`${registerStyles.label} ${(focus.username || username) ? registerStyles.primary_text__shrink : registerStyles.primary_text}`}>Username</span>
+                <label htmlFor='username' className={`${registerFormStyles.input_label}
+                    ${(focus.username || username) ? registerFormStyles.input_label__shrink : ''}
+                    ${formErrors.username ? registerFormStyles.input_label__error : ''}`}>
+                    <span className={`${registerFormStyles.label} ${(focus.username || username) ? registerFormStyles.primary_text__shrink : registerFormStyles.primary_text}`}>Username</span>
                 </label>
             </div>
 
             {formErrors.username !== '' && (
-                <div className={registerStyles.input_error}>
-                    <WarningIcon className={registerStyles.icon_warning}/>
-                    <span className={registerStyles.secondary_text_accent}>{formErrors.username}</span>
+                <div className={registerFormStyles.error_container}>
+                    <WarningIcon className={registerFormStyles.icon_warning}/>
+                    <span className={registerFormStyles.secondary_text_accent}>{formErrors.username}</span>
                 </div>
             )}
 
             {Object.keys(error).length !== 0 && (
                 error.validationErrors.username && (
-                    <div className={registerStyles.input_error}>
-                        <WarningIcon className={registerStyles.icon_warning}/>
-                        <span className={registerStyles.secondary_text_accent}>{error.validationErrors.username}</span>
+                    <div className={registerFormStyles.error_container}>
+                        <WarningIcon className={registerFormStyles.icon_warning}/>
+                        <span className={registerFormStyles.secondary_text_accent}>{error.validationErrors.username}</span>
                     </div>
                 )
             )}
 
-            <div className={`${registerStyles.form_input} ${(Object.keys(error).length !== 0 && error.message) || (formErrors.email !== '')? registerStyles.form_input__error : ''}`}
+            <div className={`${registerFormStyles.form_input} ${(Object.keys(error).length !== 0 && error.message) || (formErrors.email !== '')? registerFormStyles.form_input__error : ''}`}
                 onFocus={() => handleFocus('email')}
                 onBlur={() => handleBlur('email')}
             >
@@ -111,34 +111,34 @@ const RegisterForm = (props) => {
                     type='text'
                     id='email'
                     name='email'
-                    className={`${registerStyles.input} ${registerStyles.primary_text} ${(focus.email || email) ? registerStyles.input__focus : ''} ${formErrors.email ? registerStyles.input__error : ''}`}
+                    className={`${registerFormStyles.input} ${registerFormStyles.primary_text} ${(focus.email || email) ? registerFormStyles.input__focus : ''} ${formErrors.email ? registerFormStyles.input__error : ''}`}
                     value={email}
                     onChange={(e) => handleInput(e)}
                 />
-                <label htmlFor='email' className={`${registerStyles.input_label}
-                    ${(focus.email || email) ? registerStyles.input_label__shrink : ''}
-                    ${formErrors.email ? registerStyles.input_label__error : ''}`}>
-                    <span className={`${registerStyles.label} ${(focus.email || email) ? registerStyles.primary_text__shrink : registerStyles.primary_text}`}>Email</span>
+                <label htmlFor='email' className={`${registerFormStyles.input_label}
+                    ${(focus.email || email) ? registerFormStyles.input_label__shrink : ''}
+                    ${formErrors.email ? registerFormStyles.input_label__error : ''}`}>
+                    <span className={`${registerFormStyles.label} ${(focus.email || email) ? registerFormStyles.primary_text__shrink : registerFormStyles.primary_text}`}>Email</span>
                 </label>
             </div>
 
             {formErrors.email !== '' && (
-                <div className={registerStyles.input_error}>
-                    <WarningIcon className={registerStyles.icon_warning}/>
-                    <span className={registerStyles.secondary_text_accent}>{formErrors.email}</span>
+                <div className={registerFormStyles.error_container}>
+                    <WarningIcon className={registerFormStyles.icon_warning}/>
+                    <span className={registerFormStyles.secondary_text_accent}>{formErrors.email}</span>
                 </div>
             )}
 
             {Object.keys(error).length !== 0 && (
                 error.validationErrors.email && (
-                    <div className={registerStyles.input_error}>
-                        <WarningIcon className={registerStyles.icon_warning}/>
-                        <span className={registerStyles.secondary_text_accent}>{error.validationErrors.email}</span>
+                    <div className={registerFormStyles.error_container}>
+                        <WarningIcon className={registerFormStyles.icon_warning}/>
+                        <span className={registerFormStyles.secondary_text_accent}>{error.validationErrors.email}</span>
                     </div>
                 )
             )}
 
-            <div className={`${registerStyles.form_password} ${(Object.keys(error).length !== 0 && error.message) ? registerStyles.form_input__error : ''}`}
+            <div className={`${registerFormStyles.form_password} ${(Object.keys(error).length !== 0 && error.message) ? registerFormStyles.form_input__error : ''}`}
                 onFocus={() => handleFocus('password')}
                 onBlur={() => handleBlur('password')}
             >
@@ -146,57 +146,57 @@ const RegisterForm = (props) => {
                     type={showPassword ? 'text' : 'password'}
                     id='password'
                     name='password'
-                    className={`${registerStyles.input_password} ${registerStyles.primary_text} ${(focus.password || password) ? registerStyles.input_password__focus : ''} ${(Object.values(formErrors.password).some(value => value) && !formErrors.initialRender) ? registerStyles.input__error : ''}`}
+                    className={`${registerFormStyles.input_password} ${registerFormStyles.primary_text} ${(focus.password || password) ? registerFormStyles.input_password__focus : ''} ${(Object.values(formErrors.password).some(value => value) && !formErrors.initialRender) ? registerFormStyles.input__error : ''}`}
                     value={password}
                     onChange={(e) => handleInput(e)}
                 />
                 {(focus.password || password) && (
-                    <button type='button' className={`${registerStyles.input_password_icon} ${showPassword ? registerStyles.input_password_icon__active : ''}`} onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
+                    <button type='button' className={`${registerFormStyles.input_password_icon} ${showPassword ? registerFormStyles.input_password_icon__active : ''}`} onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
                         {showPassword ? (
-                            <RevealIcon className={registerStyles.icon_default}/>
+                            <RevealIcon className={registerFormStyles.icon_default}/>
                         ) : (
-                            <HiddenIcon className={registerStyles.icon_default}/>
+                            <HiddenIcon className={registerFormStyles.icon_default}/>
                         )}
                     </button>
                 )}
-                <label htmlFor='password' className={`${registerStyles.input_label}
-                    ${(focus.password || password) ? registerStyles.input_label__shrink : ''}
-                    ${(Object.values(formErrors.password).some(value => value) && !formErrors.initialRender ) ? registerStyles.input_label__error : ''}`}>
-                    <span className={`${registerStyles.label} ${(focus.password || password) ? registerStyles.primary_text__shrink : registerStyles.primary_text}`}>Password</span>
+                <label htmlFor='password' className={`${registerFormStyles.input_label}
+                    ${(focus.password || password) ? registerFormStyles.input_label__shrink : ''}
+                    ${(Object.values(formErrors.password).some(value => value) && !formErrors.initialRender ) ? registerFormStyles.input_label__error : ''}`}>
+                    <span className={`${registerFormStyles.label} ${(focus.password || password) ? registerFormStyles.primary_text__shrink : registerFormStyles.primary_text}`}>Password</span>
                 </label>
             </div>
 
             {Object.keys(error).length !== 0 && ( // THIS BIT IS CONFUSING BECASUE MAYBE EVEN IF ITS AN EMPTY STRING IT GETS HASHED THEN IT CHECKS THE HASH FUCKKK
                 error.validationErrors.password && (
-                    <div className={registerStyles.input_error}>
-                        <WarningIcon className={registerStyles.icon_warning}/>
-                        <span className={registerStyles.secondary_text_accent}>{error.validationErrors.password}</span>
+                    <div className={registerFormStyles.error_container}>
+                        <WarningIcon className={registerFormStyles.icon_warning}/>
+                        <span className={registerFormStyles.secondary_text_accent}>{error.validationErrors.password}</span>
                     </div>
                 )
             )}
 
-            <div className={registerStyles.form_password_check}>
-                <div className={`${registerStyles.password_check}`}>
-                    <div className={`${registerStyles.password_check_box} flex-center`}>
-                    <div className={`${registerStyles.check_box} ${!formErrors.password.passwordLength ? registerStyles.check_box__checked : !formErrors.initialRender ? registerStyles.check_box__error : ''}`}/>
+            <div className={registerFormStyles.form_password_check}>
+                <div className={`${registerFormStyles.password_check}`}>
+                    <div className={`${registerFormStyles.password_check_box} flex-center`}>
+                    <div className={`${registerFormStyles.check_box} ${!formErrors.password.passwordLength ? registerFormStyles.check_box__checked : !formErrors.initialRender ? registerFormStyles.check_box__error : ''}`}/>
                         {!formErrors.password.passwordLength ? (
-                            <CheckIcon className={registerStyles.icon_check}/>
+                            <CheckIcon className={registerFormStyles.icon_check}/>
                         ) : (
-                            <XIcon className={`${registerStyles.icon_check}`}/>
+                            <XIcon className={`${registerFormStyles.icon_check}`}/>
                         )}
                     </div>
-                    <span className={`${registerStyles.primary_text_accent__shrink} flex-center`}>Password is at least 8 characters.</span>
+                    <span className={`${registerFormStyles.primary_text_accent__shrink} flex-center`}>Password is at least 8 characters.</span>
                 </div>
-                <div className={`${registerStyles.password_check}`}>
-                    <div className={`${registerStyles.password_check_box} flex-center`}>
-                        <div className={`${registerStyles.check_box} ${!formErrors.password.passwordCharacters ? registerStyles.check_box__checked : !formErrors.initialRender ? registerStyles.check_box__error : ''}`}/>
+                <div className={`${registerFormStyles.password_check}`}>
+                    <div className={`${registerFormStyles.password_check_box} flex-center`}>
+                        <div className={`${registerFormStyles.check_box} ${!formErrors.password.passwordCharacters ? registerFormStyles.check_box__checked : !formErrors.initialRender ? registerFormStyles.check_box__error : ''}`}/>
                         {!formErrors.password.passwordCharacters ? (
-                            <CheckIcon className={registerStyles.icon_check}/>
+                            <CheckIcon className={registerFormStyles.icon_check}/>
                         ) : (
-                            <XIcon className={`${registerStyles.icon_check}`}/>
+                            <XIcon className={`${registerFormStyles.icon_check}`}/>
                         )}
                     </div>
-                    <span className={`${registerStyles.primary_text_accent__shrink} flex-center`}>Password includes two of the following letter, number, or symbol.</span>
+                    <span className={`${registerFormStyles.primary_text_accent__shrink} flex-center`}>Password includes two of the following letter, number, or symbol.</span>
                 </div>
             </div>
         </>
