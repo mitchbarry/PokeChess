@@ -266,7 +266,6 @@ const Register = () => {
                             handleStarter={handleStarter}
                         />
                     ))}
-
                     <button 
                         type="submit"
                         className={

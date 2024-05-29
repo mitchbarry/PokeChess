@@ -24,6 +24,46 @@
     opacity: 0.5;
 }
 
+.pointer {
+    width: 10%;
+    position: absolute;
+    pointer-events: none;
+}
+
+.pointer_option1 {
+    top: 25%;
+    left: 13%;
+}
+
+.pointer_option2 {
+    top: 47%;
+    left: 47.5%;
+}
+
+.pointer_option3 {
+    top: 24%;
+    left: 81%;
+}
+
+.starter_bubble {
+    width: 35%;
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(to bottom, var(--color-000), var(--color-100));
+    border: 3px solid var(--color-300);
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.starter_pokemon {
+    width: 35%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .option1 {
     top: 47%;
     left: 10.5%;
