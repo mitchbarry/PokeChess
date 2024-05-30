@@ -151,7 +151,7 @@ const StarterForm = (props) => {
     }
 
     return (
-        <div className={starterFormStyles.input_starter}>
+        <div className={`${starterFormStyles.input_starter} w-100`}>
             {starterData.map((option) => {
                 const isFocused = focus[option.id] || starter === option.pokedexNumber
                 const pointerClass = starterFormStyles[`pointer_${option.id}`]
@@ -173,7 +173,7 @@ const StarterForm = (props) => {
                     id={option.id}
                     tabIndex="0"
                     role="button"
-                    className={`${starterFormStyles.starter_option} ${starterFormStyles[option.id]}`}
+                    className={`${starterFormStyles.starter_option} ${starterFormStyles[option.id]} clickable`}
                     onClick={handleClick}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
@@ -195,7 +195,7 @@ const StarterForm = (props) => {
                 </div>
             )}
 
-            <img className={starterFormStyles.starter} src={StarterSelection} alt="Choose Your Starter!" />
+            <img className={`${starterFormStyles.starter} w-100`} src={StarterSelection} alt="Choose Your Starter!" />
         </div>
     )
 }

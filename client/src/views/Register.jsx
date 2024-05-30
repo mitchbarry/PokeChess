@@ -230,13 +230,13 @@ const Register = () => {
 	return (
         <div className={`${registerStyles.register} flex-center`}>
             <div className={`${registerStyles.register_form}`}>
-                <div className={`${registerStyles.register_page} flex-center`}>
-                    <div className={`${registerStyles.page_container}`}>
-                        <div className={`${registerStyles.page_button} ${step === 0 ? registerStyles.page_button__active : registerStyles.page_button__disabled}`} onClick={() => step !== 0 && setStep(0)}>
+                <div className={`${registerStyles.register_step} flex-center w-100`}>
+                    <div className={`${registerStyles.step_container}`}>
+                        <div className={`${registerStyles.step_button} ${step === 0 ? registerStyles.step_button__active : registerStyles.step_button__disabled} clickable transition-default`} onClick={() => step !== 0 && setStep(0)}>
                         </div>
                     </div>
-                    <div className={`${registerStyles.page_container}`}>
-                        <div className={`${registerStyles.page_button} ${step === 1 ? registerStyles.page_button__active : registerStyles.page_button__disabled}`} onClick={() => (formErrors.validated && step !== 1) && setStep(1)}>
+                    <div className={`${registerStyles.step_container}`}>
+                        <div className={`${registerStyles.step_button} ${step === 1 ? registerStyles.step_button__active : registerStyles.step_button__disabled} clickable transition-default`} onClick={() => (formErrors.validated && step !== 1) && setStep(1)}>
                         </div>
                     </div>
                 </div>
@@ -282,7 +282,7 @@ const Register = () => {
                                     formErrors.password.passwordCharacters
                                 )) ? registerStyles.form_submit__disabled : registerStyles.form_submit__active
                             }
-                            flex-center`
+                            flex-center w-100 transition-default`
                         }
                         disabled={
                             !Object.entries(formErrors).every(([key, value]) => {
@@ -303,7 +303,7 @@ const Register = () => {
 
                 {step === 0 && (
                     <div className={`${registerStyles.form_links} flex-col`}>
-                        <Link className={registerStyles.form_link} to='/login'>
+                        <Link className={`${registerStyles.form_link} transition-default`} to='/login'>
                             <span className={registerStyles.primary_text__shrink}>Already have an account?</span>
                         </Link>
                     </div>

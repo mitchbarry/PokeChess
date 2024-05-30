@@ -68,7 +68,7 @@ const RegisterForm = (props) => {
 
     return (
         <>
-            <div className={`${registerFormStyles.form_input} ${(Object.keys(error).length !== 0 && error.message) || (formErrors.username !== '') ? registerFormStyles.form_input__error : ''}`}
+            <div className={`${registerFormStyles.form_input} ${(Object.keys(error).length !== 0 && error.message) || (formErrors.username !== '') ? registerFormStyles.form_input__error : ''} w-100`}
                 onFocus={() => handleFocus('username')}
                 onBlur={() => handleBlur('username')}
             >
@@ -76,14 +76,14 @@ const RegisterForm = (props) => {
                     type='text'
                     id='username'
                     name='username'
-                    className={`${registerFormStyles.input} ${registerFormStyles.primary_text} ${(focus.username) ? registerFormStyles.input__focus : ''} ${formErrors.username ? registerFormStyles.input__error : ''}`}
+                    className={`${registerFormStyles.input} ${registerFormStyles.primary_text} ${(focus.username) ? registerFormStyles.input__focus : ''} ${formErrors.username ? registerFormStyles.input__error : ''} w-100 transition-default`}
                     value={username}
                     onChange={(e) => handleInput(e)}
                 />
                 <label htmlFor='username' className={`${registerFormStyles.input_label}
                     ${(focus.username || username) ? registerFormStyles.input_label__shrink : ''}
-                    ${formErrors.username ? registerFormStyles.input_label__error : ''}`}>
-                    <span className={`${registerFormStyles.label} ${(focus.username || username) ? registerFormStyles.primary_text__shrink : registerFormStyles.primary_text}`}>Username</span>
+                    ${formErrors.username ? registerFormStyles.input_label__error : ''} transition-default`}>
+                    <span className={`${registerFormStyles.label} ${(focus.username || username) ? registerFormStyles.primary_text__shrink : registerFormStyles.primary_text} transition-default`}>Username</span>
                 </label>
             </div>
 
@@ -103,7 +103,7 @@ const RegisterForm = (props) => {
                 )
             )}
 
-            <div className={`${registerFormStyles.form_input} ${(Object.keys(error).length !== 0 && error.message) || (formErrors.email !== '')? registerFormStyles.form_input__error : ''}`}
+            <div className={`${registerFormStyles.form_input} ${(Object.keys(error).length !== 0 && error.message) || (formErrors.email !== '')? registerFormStyles.form_input__error : ''} w-100`}
                 onFocus={() => handleFocus('email')}
                 onBlur={() => handleBlur('email')}
             >
@@ -111,14 +111,14 @@ const RegisterForm = (props) => {
                     type='text'
                     id='email'
                     name='email'
-                    className={`${registerFormStyles.input} ${registerFormStyles.primary_text} ${(focus.email) ? registerFormStyles.input__focus : ''} ${formErrors.email ? registerFormStyles.input__error : ''}`}
+                    className={`${registerFormStyles.input} ${registerFormStyles.primary_text} ${(focus.email) ? registerFormStyles.input__focus : ''} ${formErrors.email ? registerFormStyles.input__error : ''} w-100 transition-default`}
                     value={email}
                     onChange={(e) => handleInput(e)}
                 />
                 <label htmlFor='email' className={`${registerFormStyles.input_label}
                     ${(focus.email || email) ? registerFormStyles.input_label__shrink : ''}
-                    ${formErrors.email ? registerFormStyles.input_label__error : ''}`}>
-                    <span className={`${registerFormStyles.label} ${(focus.email || email) ? registerFormStyles.primary_text__shrink : registerFormStyles.primary_text}`}>Email</span>
+                    ${formErrors.email ? registerFormStyles.input_label__error : ''} transition-default`}>
+                    <span className={`${registerFormStyles.label} ${(focus.email || email) ? registerFormStyles.primary_text__shrink : registerFormStyles.primary_text} transition-default`}>Email</span>
                 </label>
             </div>
 
@@ -138,7 +138,7 @@ const RegisterForm = (props) => {
                 )
             )}
 
-            <div className={`${registerFormStyles.form_password} ${(Object.keys(error).length !== 0 && error.message) ? registerFormStyles.form_input__error : ''}`}
+            <div className={`${registerFormStyles.form_password} ${(Object.keys(error).length !== 0 && error.message) ? registerFormStyles.form_input__error : ''} w-100`}
                 onFocus={() => handleFocus('password')}
                 onBlur={() => handleBlur('password')}
             >
@@ -146,23 +146,23 @@ const RegisterForm = (props) => {
                     type={showPassword ? 'text' : 'password'}
                     id='password'
                     name='password'
-                    className={`${registerFormStyles.input_password} ${registerFormStyles.primary_text} ${(focus.password) ? registerFormStyles.input_password__focus : ''} ${(Object.values(formErrors.password).some(value => value) && !formErrors.initialRender) ? registerFormStyles.input__error : ''}`}
+                    className={`${registerFormStyles.input_password} ${registerFormStyles.primary_text} ${(focus.password) ? registerFormStyles.input_password__focus : ''} ${(Object.values(formErrors.password).some(value => value) && !formErrors.initialRender) ? registerFormStyles.input__error : ''} w-100 transition-default`}
                     value={password}
                     onChange={(e) => handleInput(e)}
                 />
                 {(focus.password) && (
-                    <button type='button' className={`${registerFormStyles.input_password_icon} ${showPassword ? registerFormStyles.input_password_icon__active : ''}`} tabIndex="-1" onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
+                    <button type='button' className={`${registerFormStyles.input_password_icon} ${showPassword ? registerFormStyles.input_password_icon__active : ''} transition-default clickable`} tabIndex="-1" onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
                         {showPassword ? (
-                            <RevealIcon className={`${registerFormStyles.icon_default} clickable`}/>
+                            <RevealIcon className={`${registerFormStyles.icon_default}`}/>
                         ) : (
-                            <HiddenIcon className={`${registerFormStyles.icon_default} clickable`}/>
+                            <HiddenIcon className={`${registerFormStyles.icon_default}`}/>
                         )}
                     </button>
                 )}
                 <label htmlFor='password' className={`${registerFormStyles.input_label}
                     ${(focus.password || password) ? registerFormStyles.input_label__shrink : ''}
-                    ${(Object.values(formErrors.password).some(value => value) && !formErrors.initialRender ) ? registerFormStyles.input_label__error : ''}`}>
-                    <span className={`${registerFormStyles.label} ${(focus.password || password) ? registerFormStyles.primary_text__shrink : registerFormStyles.primary_text}`}>Password</span>
+                    ${(Object.values(formErrors.password).some(value => value) && !formErrors.initialRender ) ? registerFormStyles.input_label__error : ''} transition-default`}>
+                    <span className={`${registerFormStyles.label} ${(focus.password || password) ? registerFormStyles.primary_text__shrink : registerFormStyles.primary_text} transition-default`}>Password</span>
                 </label>
             </div>
 

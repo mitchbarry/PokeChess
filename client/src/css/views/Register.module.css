@@ -34,16 +34,12 @@
     box-shadow: 0 0 0 var(--size-025) var(--color-000), 0 0 0 var(--size-050) var(--color-800);
 }
 
-.form_submit, .register_page {
-    width: 100%;
-}
-
 .form_submit {
     border-radius: 4px;
     height: var(--size-600);
 }
 
-.input_password_icon, .form_submit__active {
+.form_submit__active {
     cursor: pointer;
 }
 
@@ -80,29 +76,28 @@
     color: var(--color-800);
 }
 
-.register_page {
+.register_step {
     margin-bottom: var(--size-100);
 }
 
-.page_container {
+.step_container {
     margin: 0 var(--size-075);
 }
 
-.page_button {
+.step_button {
     width: var(--size-325);
     height: var(--size-050);
-    cursor: pointer;
 }
 
-.page_button__disabled {
+.step_button__disabled {
     background-color: var(--color-200);
 }
 
-.page_button__disabled:hover {
+.step_button__disabled:hover {
     background-color: var(--color-300);
 }
 
-.page_button__active {
+.step_button__active {
     background-color: var(--color-teal);
 }
 

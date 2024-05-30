@@ -28,10 +28,6 @@
 }
 
 /* * Form Inputs */
-.form_input, .form_password, .input, .input_password {
-    width: 100%;
-}
-
 .form_input, .form_password_check {
     margin-bottom: var(--size-350);
 }
@@ -46,10 +42,6 @@
 
 .form_input__error {
     margin-bottom: var(--size-200);
-}
-
-.input, .input_password, .input_label, .label, .input_password_icon {
-    transition: var(--transition-hover);
 }
 
 .input, .input_password {
