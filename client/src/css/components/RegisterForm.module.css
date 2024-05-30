@@ -54,7 +54,7 @@
 
 .input, .input_password {
     height: var(--size-600);
-    padding: var(--size-250) var(--size-150) var(--size-075) var(--size-150);
+    padding: var(--size-250) var(--size-150) var(--size-075) var(--size-125);
     color: var(--color-800);
     background-color: var(--color-060);
     border: 2px solid transparent;
@@ -70,12 +70,8 @@
     border: 2px solid var(--color-800);
 }
 
-.input {
-    padding: var(--size-250) var(--size-150) var(--size-075) var(--size-150);
-}
-
 .input_password {
-    padding: var(--size-250) var(--size-600) var(--size-075) var(--size-150);
+    padding: var(--size-250) var(--size-600) var(--size-075) var(--size-125);
 }
 
 .input__error {

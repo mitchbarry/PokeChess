@@ -49,17 +49,17 @@ const RegisterForm = (props) => {
     }
 
     const handleBlur = (input) => {
-        if (input === 'username' && !username.trim()) {
+        if (input === 'username') {
             return setFocus((prevFocus) => ({
                 ...prevFocus, username: false
             }))
         }
-        if (input === 'email' && !email.trim()) {
+        if (input === 'email') {
             return setFocus((prevFocus) => ({
                 ...prevFocus, email: false
             }))
         }
-        if (input === 'password' && !password.trim()) {
+        if (input === 'password') {
             return setFocus((prevFocus) => ({
                 ...prevFocus, password: false
             }))
@@ -76,7 +76,7 @@ const RegisterForm = (props) => {
                     type='text'
                     id='username'
                     name='username'
-                    className={`${registerFormStyles.input} ${registerFormStyles.primary_text} ${(focus.username || username) ? registerFormStyles.input__focus : ''} ${formErrors.username ? registerFormStyles.input__error : ''}`}
+                    className={`${registerFormStyles.input} ${registerFormStyles.primary_text} ${(focus.username) ? registerFormStyles.input__focus : ''} ${formErrors.username ? registerFormStyles.input__error : ''}`}
                     value={username}
                     onChange={(e) => handleInput(e)}
                 />
@@ -111,7 +111,7 @@ const RegisterForm = (props) => {
                     type='text'
                     id='email'
                     name='email'
-                    className={`${registerFormStyles.input} ${registerFormStyles.primary_text} ${(focus.email || email) ? registerFormStyles.input__focus : ''} ${formErrors.email ? registerFormStyles.input__error : ''}`}
+                    className={`${registerFormStyles.input} ${registerFormStyles.primary_text} ${(focus.email) ? registerFormStyles.input__focus : ''} ${formErrors.email ? registerFormStyles.input__error : ''}`}
                     value={email}
                     onChange={(e) => handleInput(e)}
                 />
@@ -146,16 +146,16 @@ const RegisterForm = (props) => {
                     type={showPassword ? 'text' : 'password'}
                     id='password'
                     name='password'
-                    className={`${registerFormStyles.input_password} ${registerFormStyles.primary_text} ${(focus.password || password) ? registerFormStyles.input_password__focus : ''} ${(Object.values(formErrors.password).some(value => value) && !formErrors.initialRender) ? registerFormStyles.input__error : ''}`}
+                    className={`${registerFormStyles.input_password} ${registerFormStyles.primary_text} ${(focus.password) ? registerFormStyles.input_password__focus : ''} ${(Object.values(formErrors.password).some(value => value) && !formErrors.initialRender) ? registerFormStyles.input__error : ''}`}
                     value={password}
                     onChange={(e) => handleInput(e)}
                 />
-                {(focus.password || password) && (
-                    <button type='button' className={`${registerFormStyles.input_password_icon} ${showPassword ? registerFormStyles.input_password_icon__active : ''}`} onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
+                {(focus.password) && (
+                    <button type='button' className={`${registerFormStyles.input_password_icon} ${showPassword ? registerFormStyles.input_password_icon__active : ''}`} tabIndex="-1" onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
                         {showPassword ? (
-                            <RevealIcon className={registerFormStyles.icon_default}/>
+                            <RevealIcon className={`${registerFormStyles.icon_default} clickable`}/>
                         ) : (
-                            <HiddenIcon className={registerFormStyles.icon_default}/>
+                            <HiddenIcon className={`${registerFormStyles.icon_default} clickable`}/>
                         )}
                     </button>
                 )}

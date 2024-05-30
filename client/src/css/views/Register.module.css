@@ -29,6 +29,11 @@
 }
 
 /* * Form Inputs */
+.form_submit:focus, .form_link:focus {
+    border-radius: 4px;
+    box-shadow: 0 0 0 var(--size-025) var(--color-000), 0 0 0 var(--size-050) var(--color-800);
+}
+
 .form_submit, .register_page {
     width: 100%;
 }
@@ -66,6 +71,7 @@
 }
 
 .form_link {
+    line-height: var(--line-height);
     text-decoration: none;
     color: var(--color-500);
 }
