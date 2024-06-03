@@ -27,9 +27,9 @@ const Register = () => {
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const [starter, setStarter] = useState(0)
+    const [validated, setValidated] = useState(false)
+    const [initialRender, setInitialRender] = useState(true)
     const [formErrors, setFormErrors] = useState({
-        validated: false,
-        initialRender: true,
         username: '',
         email: '',
         password: {
@@ -40,8 +40,8 @@ const Register = () => {
     const [error, setError] = useState({})
 
     const handleUsername = (value) => {
+        setValidated(false)
         setFormErrors((prevErrors) => {
-            prevErrors.validated = false
             switch (prevErrors.username) {
                 case `Your username is required.`:
                     if (value) {
@@ -75,8 +75,8 @@ const Register = () => {
     }
     
     const handleEmail = (value) => {
+        setValidated(false)
         setFormErrors((prevErrors) => {
-            prevErrors.validated = false
             switch (prevErrors.email) {
                 case `Your email is required.`:
                     if (value) {
@@ -95,9 +95,9 @@ const Register = () => {
     }
     
     const handlePassword = (value) => {
+        setValidated(false)
         setFormErrors((prevErrors) => {
             const updatedErrors = { ...prevErrors }
-            updatedErrors.validated = false
             if (value.length >= 8 && value.length <= 255) { // Check length
                 updatedErrors.password.passwordLength = false
             } 
@@ -125,7 +125,7 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (formErrors.validated) {
+        if (validated) {
             setStep(step + 1)
         }
         else {
@@ -138,6 +138,7 @@ const Register = () => {
         const usernameTrim = username.trim()
         const emailTrim = email.trim()
         let hasError = false
+        setInitialRender(false)
 
         if (!usernameTrim) { // Check username on submit
             newFormErrors.username = `Your username is required.`
@@ -171,7 +172,6 @@ const Register = () => {
 
         if (newFormErrors.password.passwordLength === true ||
             newFormErrors.password.passwordCharacters === true) {
-                newFormErrors.initialRender = false
                 hasError = true
         }
 
@@ -199,9 +199,9 @@ const Register = () => {
                 email: email.trim(),
                 password
             })
-            formErrors.validated = response.isValid
+            setValidated(response.isValid)
             setStep(step + 1)
-            formErrors.initialRender = true
+            setInitialRender(true)
         }
         catch (error) {
             const newError = errorUtilities.catchError(error)
@@ -231,7 +231,7 @@ const Register = () => {
             <div className={`${registerStyles.register}`}>
                 <div className={`flex-center w-100`}>
                     <div className={`${registerStyles.step_button} ${step === 0 ? registerStyles.step_button__active : registerStyles.step_button__disabled} clickable transition-default`} onClick={() => step !== 0 && setStep(0)} />
-                    <div className={`${registerStyles.step_button} ${step === 1 ? registerStyles.step_button__active : registerStyles.step_button__disabled} clickable transition-default`} onClick={() => (formErrors.validated && step !== 1) && setStep(1)} />
+                    <div className={`${registerStyles.step_button} ${step === 1 ? registerStyles.step_button__active : registerStyles.step_button__disabled} clickable transition-default`} onClick={() => (validated && step !== 1) && setStep(1)} />
                 </div>
 
                 <h1 className={registerStyles.form_title}>
@@ -249,6 +249,7 @@ const Register = () => {
                             handlePassword={handlePassword}
                             showPassword={showPassword}
                             handleShowPassword={handleShowPassword}
+                            initialRender={initialRender}
                             formErrors={formErrors}
                             error={error}
                         />
@@ -264,13 +265,13 @@ const Register = () => {
                         className={
                             `${registerStyles.form_submit}
                             ${
-                                (!Object.entries(formErrors).every(([key, value]) => {
-                                    if (key === 'password' || key === 'validated' || key === 'initialRender') {
+                                (!Object.values(formErrors).every((value) => {
+                                    if (typeof value === 'object') {
                                         return true
                                     }
                                     return value === ''
                                 }) ||
-                                !formErrors.initialRender && (
+                                !initialRender && (
                                     formErrors.password.passwordLength ||
                                     formErrors.password.passwordCharacters
                                 )) ? registerStyles.form_submit__disabled : registerStyles.form_submit__active
@@ -278,13 +279,13 @@ const Register = () => {
                             flex-center w-100 transition-default`
                         }
                         disabled={
-                            !Object.entries(formErrors).every(([key, value]) => {
-                                if (key === 'password' || key === 'validated' || key === 'initialRender') {
+                            !Object.values(formErrors).every((value) => {
+                                if (typeof value === 'object') {
                                     return true
                                 }
                                 return value === ''
                             }) ||
-                            !formErrors.initialRender && (
+                            !initialRender && (
                                 formErrors.password.passwordLength ||
                                 formErrors.password.passwordCharacters
                             )
@@ -295,7 +296,7 @@ const Register = () => {
                 </form>
 
                 {step === 0 && (
-                    <div className={`${registerStyles.form_links} flex-col`}>
+                    <div className={`${registerStyles.form_links} flex-col w-100`}>
                         <Link className={`${registerStyles.form_link} transition-default`} to='/login'>
                             <span className={registerStyles.primary_text__shrink}>Already have an account?</span>
                         </Link>

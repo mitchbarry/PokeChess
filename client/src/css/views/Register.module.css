@@ -1,5 +1,4 @@
 /* * use BEM (Block, Entity, Modifier) for all css classes */
-
 /* * Typography */
 .primary_text {
     font: var(--font-400);
@@ -9,7 +8,7 @@
     font: var(--font-200);
 }
 
-/* * Register */
+/* * Form Structure */
 .container {
     display: flex;
     flex-direction: column;
@@ -23,53 +22,25 @@
     background-color: var(--color-000);
 }
 
+/* * Form Components */
+
+/* * Common Styles */
+.form_submit, .form_link {
+    border-radius: 4px;
+}
+
+/* * Other Styles */
 .form_title {
     margin: var(--size-350) 0;
     color: var(--color-800);
 }
 
-/* * Form Inputs */
-.form_submit:focus {
-    border-radius: 4px;
-    box-shadow: 0 0 0 var(--size-025) var(--color-000), 0 0 0 var(--size-050) var(--color-800);
-}
-
-/* Base styles for form inputs */
-.form_link {
-    position: relative;
-    z-index: 1; /* Ensure the pseudo-element is behind */
-    border-radius: 4px; /* Match the border-radius */
-}
-
-/* Focus styles for form inputs */
-.form_link:focus {
-    outline: none; /* Remove default outline */
-}
-
-/* Pseudo-element for gap and outline */
-.form_link:focus::before {
-    content: '';
-    position: absolute;
-    top: 0px; /* Adjust according to the gap size */
-    left: 0px; /* Adjust according to the gap size */
-    right: 0px; /* Adjust according to the gap size */
-    bottom: 0px; /* Adjust according to the gap size */
-    z-index: -1; /* Ensure it is behind the element */
-    border-radius: 4px; /* Match the element's border-radius */
-    background: white; /* Color of the gap */
-    box-shadow: 0 0 0 2px black; /* Outer black outline */
-}
-
 .form_submit {
-    border-radius: 4px;
     height: var(--size-600);
 }
 
 .form_submit__active {
     cursor: pointer;
-}
-
-.form_submit__active {
     background-color: var(--color-teal);
     fill: var(--color-000);
     stroke: var(--color-000);
@@ -86,21 +57,42 @@
     cursor: not-allowed;
 }
 
-/* * Links */
+.form_submit:focus {
+    box-shadow: 0 0 0 var(--size-025) var(--color-000), 0 0 0 var(--size-050) var(--color-800);
+}
+
+/* * Form Links */
 .form_links {
-    align-items: center;
     margin-top: var(--size-250);
+    align-items: center;
 }
 
 .form_link {
     line-height: var(--line-height);
     text-decoration: none;
     color: var(--color-500);
+    position: relative;
+    z-index: 1;
 }
 
 .form_link:hover {
     color: var(--color-800);
 }
+
+.form_link:focus::before {
+    content: '';
+    position: absolute;
+    top: 0px; /* Adjust according to the gap size */
+    left: 0px; /* Adjust according to the gap size */
+    right: 0px; /* Adjust according to the gap size */
+    bottom: 0px; /* Adjust according to the gap size */
+    z-index: -1; /* Ensure it is behind the element */
+    border-radius: 4px; /* Match the element's border-radius */
+    background: white; /* Color of the gap */
+    box-shadow: 0 0 0 2px black; /* Outer black outline */
+}
+
+/* * Form Navigation */
 
 .step_button {
     width: var(--size-325);
