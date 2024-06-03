@@ -10,13 +10,13 @@
 }
 
 /* * Register */
-.register {
+.container {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 
-.register_form {
+.register {
     width: 512px;
     padding: var(--size-200) var(--size-400) var(--size-400) var(--size-400);
     text-align: center;
@@ -29,9 +29,35 @@
 }
 
 /* * Form Inputs */
-.form_submit:focus, .form_link:focus {
+.form_submit:focus {
     border-radius: 4px;
     box-shadow: 0 0 0 var(--size-025) var(--color-000), 0 0 0 var(--size-050) var(--color-800);
+}
+
+/* Base styles for form inputs */
+.form_link {
+    position: relative;
+    z-index: 1; /* Ensure the pseudo-element is behind */
+    border-radius: 4px; /* Match the border-radius */
+}
+
+/* Focus styles for form inputs */
+.form_link:focus {
+    outline: none; /* Remove default outline */
+}
+
+/* Pseudo-element for gap and outline */
+.form_link:focus::before {
+    content: '';
+    position: absolute;
+    top: 0px; /* Adjust according to the gap size */
+    left: 0px; /* Adjust according to the gap size */
+    right: 0px; /* Adjust according to the gap size */
+    bottom: 0px; /* Adjust according to the gap size */
+    z-index: -1; /* Ensure it is behind the element */
+    border-radius: 4px; /* Match the element's border-radius */
+    background: white; /* Color of the gap */
+    box-shadow: 0 0 0 2px black; /* Outer black outline */
 }
 
 .form_submit {
@@ -76,17 +102,14 @@
     color: var(--color-800);
 }
 
-.register_step {
-    margin-bottom: var(--size-100);
-}
-
-.step_container {
-    margin: 0 var(--size-075);
-}
-
 .step_button {
     width: var(--size-325);
     height: var(--size-050);
+    margin: 0 var(--size-075) var(--size-100);
+}
+
+.step_button__active {
+    background-color: var(--color-teal);
 }
 
 .step_button__disabled {
@@ -95,10 +118,6 @@
 
 .step_button__disabled:hover {
     background-color: var(--color-300);
-}
-
-.step_button__active {
-    background-color: var(--color-teal);
 }
 
 /* * Icons */

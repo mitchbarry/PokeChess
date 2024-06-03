@@ -124,7 +124,6 @@ const Register = () => {
     }
 
     const handleSubmit = (e) => {
-        
         e.preventDefault()
         if (formErrors.validated) {
             setStep(step + 1)
@@ -228,17 +227,11 @@ const Register = () => {
     }
 
 	return (
-        <div className={`${registerStyles.register} flex-center`}>
-            <div className={`${registerStyles.register_form}`}>
-                <div className={`${registerStyles.register_step} flex-center w-100`}>
-                    <div className={`${registerStyles.step_container}`}>
-                        <div className={`${registerStyles.step_button} ${step === 0 ? registerStyles.step_button__active : registerStyles.step_button__disabled} clickable transition-default`} onClick={() => step !== 0 && setStep(0)}>
-                        </div>
-                    </div>
-                    <div className={`${registerStyles.step_container}`}>
-                        <div className={`${registerStyles.step_button} ${step === 1 ? registerStyles.step_button__active : registerStyles.step_button__disabled} clickable transition-default`} onClick={() => (formErrors.validated && step !== 1) && setStep(1)}>
-                        </div>
-                    </div>
+        <div className={`${registerStyles.container} flex-center`}>
+            <div className={`${registerStyles.register}`}>
+                <div className={`flex-center w-100`}>
+                    <div className={`${registerStyles.step_button} ${step === 0 ? registerStyles.step_button__active : registerStyles.step_button__disabled} clickable transition-default`} onClick={() => step !== 0 && setStep(0)} />
+                    <div className={`${registerStyles.step_button} ${step === 1 ? registerStyles.step_button__active : registerStyles.step_button__disabled} clickable transition-default`} onClick={() => (formErrors.validated && step !== 1) && setStep(1)} />
                 </div>
 
                 <h1 className={registerStyles.form_title}>
