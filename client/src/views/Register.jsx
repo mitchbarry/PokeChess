@@ -137,39 +137,35 @@ const Register = () => {
         const emailTrim = email.trim()
         setInitialRender(false)
         const newFormErrors = { ...formErrors }
-        setFormErrors((prevErrors) => {
-            if (!usernameTrim) { // Check username on submit
-                prevErrors.username = `Your username is required.`
-            }
-            else if (hasBadWords(usernameTrim)) {
-                prevErrors.username = `Your username must be appropriate.`
-            }
-            else if (!/^[a-zA-Z0-9\s]+$/.test(usernameTrim)) {
-                prevErrors.username = `Your username can't contain special characters.`
-            }
-            else if (usernameTrim.length < 3) {
-                prevErrors.username = `Your username must be at least 3 characters.`
-            }
-            else if (usernameTrim.length > 16) {
-                prevErrors.username = `Your username can't be more than 16 characters.`
-            }
-            
-            if (!emailTrim) { // Check email on submit
-                prevErrors.email = `Your email is required.`
-            }
-            else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(emailTrim)) {
-                prevErrors.email = `Please enter a valid email.`
-            }
-            return prevErrors
-        })
-        if (hasError) {
+        if (!usernameTrim) { // Check username on submit
+            newFormErrors.username = `Your username is required.`
+        }
+        else if (hasBadWords(usernameTrim)) {
+            newFormErrors.username = `Your username must be appropriate.`
+        }
+        else if (!/^[a-zA-Z0-9\s]+$/.test(usernameTrim)) {
+            newFormErrors.username = `Your username can't contain special characters.`
+        }
+        else if (usernameTrim.length < 3) {
+            newFormErrors.username = `Your username must be at least 3 characters.`
+        }
+        else if (usernameTrim.length > 16) {
+            newFormErrors.username = `Your username can't be more than 16 characters.`
+        }
+        
+        if (!emailTrim) { // Check email on submit
+            newFormErrors.email = `Your email is required.`
+        }
+        else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(emailTrim)) {
+            newFormErrors.email = `Please enter a valid email.`
+        }
+        if (!Object.values(newFormErrors).every(value => typeof value === 'object' ? Object.values(value).every(val => val === false) : value === false)) {
             setFormErrors(prevErrors => ({ ...prevErrors, ...newFormErrors }))
             if (step !== 0) {
                 setStep(0)
             }
         }
         else {
-            
             if (step === 0) {
                 sendValidationRequest()
             }
