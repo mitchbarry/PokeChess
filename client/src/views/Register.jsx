@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { hasBadWords } from 'expletives'
 
-
 import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
 import errorUtilities from '../utilities/error.utilities'
@@ -30,8 +29,8 @@ const Register = () => {
     const [validated, setValidated] = useState(false)
     const [initialRender, setInitialRender] = useState(true)
     const [formErrors, setFormErrors] = useState({
-        username: '',
-        email: '',
+        username: false,
+        email: false,
         password: {
             passwordLength: true,
             passwordCharacters: true
@@ -41,84 +40,84 @@ const Register = () => {
 
     const handleUsername = (value) => {
         setValidated(false)
-        setFormErrors((prevErrors) => {
-            switch (prevErrors.username) {
-                case `Your username is required.`:
-                    if (value) {
-                        return { ...prevErrors, username: '' }
-                    }
-                    break
-                case `Your username must be at least 3 characters.`:
-                    if (value.length >= 3) {
-                        return { ...prevErrors, username: '' }
-                    }
-                    break
-                case `Your username can't be more than 16 characters.`:
-                    if (value.length <= 16) {
-                        return { ...prevErrors, username: '' }
-                    }
-                    break
-                case `Your username can't contain special characters.`:
-                    if (/^[a-zA-Z0-9\s]+$/.test(value)) {
-                        return { ...prevErrors, username: '' }
-                    }
-                    break
-                case `Your username must be appropriate.`:
-                    if (!hasBadWords(value)) {
-                        return { ...prevErrors, username: '' }
-                    }
-                    break
-            }
-            return prevErrors
-        })
+        const newFormErrors = { ...formErrors }
+        switch (newFormErrors.username) {
+            case 'Your username is required.':
+                if (value) {
+                    newFormErrors.username = false
+                }
+                break
+            case 'Your username must be at least 3 characters.':
+                if (value.length >= 3) {
+                    newFormErrors.username = false
+                }
+                break
+            case `Your username can't be more than 16 characters.`:
+                if (value.length <= 16) {
+                    newFormErrors.username = false
+                }
+                break
+            case `Your username can't contain special characters.`:
+                if (/^[a-zA-Z0-9\s]+$/.test(value)) {
+                    newFormErrors.username = false
+                }
+                break
+            case 'Your username must be appropriate.':
+                if (!hasBadWords(value)) {
+                    newFormErrors.username = false
+                }
+                break
+            default:
+                break
+        }
+        setFormErrors(newFormErrors)
         setUsername(value)
     }
-    
+
     const handleEmail = (value) => {
         setValidated(false)
-        setFormErrors((prevErrors) => {
-            switch (prevErrors.email) {
-                case `Your email is required.`:
-                    if (value) {
-                        return { ...prevErrors, email: '' }
-                    }
-                    break
-                case `Please enter a valid email.`:
-                    if (/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value)) {
-                        return { ...prevErrors, email: '' }
-                    }
-                    break
-            }
-            return prevErrors
-        })
+        const newFormErrors = { ...formErrors }
+        switch (newFormErrors.email) {
+            case 'Your email is required.':
+                if (value) {
+                    newFormErrors.email = false
+                }
+                break
+            case 'Please enter a valid email.':
+                if (/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value)) {
+                    newFormErrors.email = false
+                }
+                break
+            default:
+                break
+        }
+        setFormErrors(newFormErrors)
         setEmail(value)
     }
-    
+
     const handlePassword = (value) => {
         setValidated(false)
-        setFormErrors((prevErrors) => {
-            const updatedErrors = { ...prevErrors }
-            if (value.length >= 8 && value.length <= 255) { // Check length
-                updatedErrors.password.passwordLength = false
-            } 
-            else {
-                updatedErrors.password.passwordLength = true
-            }
-            if (/^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(value)) {
-                updatedErrors.password.passwordCharacters = false
-            }
-            else {
-                updatedErrors.password.passwordCharacters = true
-            }
-            return updatedErrors
-        })
+        const newFormErrors = { ...formErrors }
+        if (value.length >= 8 && value.length <= 255) {
+            newFormErrors.password.passwordLength = false
+        }
+        else {
+            newFormErrors.password.passwordLength = true
+        }
+        if (/^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(value)) {
+            newFormErrors.password.passwordCharacters = false
+        }
+        else {
+            newFormErrors.password.passwordCharacters = true
+        }
+        setFormErrors(newFormErrors)
         setPassword(value)
     }
 
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
     }
-    
+
     const handleStarter = (starter) => {
         setStarter(starter)
     }
@@ -134,47 +133,35 @@ const Register = () => {
 	}
 
     const checkForm = () => {
-        const newFormErrors = { ...formErrors }
         const usernameTrim = username.trim()
         const emailTrim = email.trim()
-        let hasError = false
         setInitialRender(false)
-
-        if (!usernameTrim) { // Check username on submit
-            newFormErrors.username = `Your username is required.`
-            hasError = true
-        }
-        else if (hasBadWords(usernameTrim)) {
-            newFormErrors.username = `Your username must be appropriate.`
-            hasError = true
-        }
-        else if (!/^[a-zA-Z0-9\s]+$/.test(usernameTrim)) {
-            newFormErrors.username = `Your username can't contain special characters.`
-            hasError = true
-        }
-        else if (usernameTrim.length < 3) {
-            newFormErrors.username = `Your username must be at least 3 characters.`
-            hasError = true
-        }
-        else if (usernameTrim.length > 16) {
-            newFormErrors.username = `Your username can't be more than 16 characters.`
-            hasError = true
-        }
-
-        if (!emailTrim) { // Check email on submit
-            newFormErrors.email = `Your email is required.`
-            hasError = true
-        }
-        else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(emailTrim)) {
-            newFormErrors.email = `Please enter a valid email.`
-            hasError = true
-        }
-
-        if (newFormErrors.password.passwordLength === true ||
-            newFormErrors.password.passwordCharacters === true) {
-                hasError = true
-        }
-
+        const newFormErrors = { ...formErrors }
+        setFormErrors((prevErrors) => {
+            if (!usernameTrim) { // Check username on submit
+                prevErrors.username = `Your username is required.`
+            }
+            else if (hasBadWords(usernameTrim)) {
+                prevErrors.username = `Your username must be appropriate.`
+            }
+            else if (!/^[a-zA-Z0-9\s]+$/.test(usernameTrim)) {
+                prevErrors.username = `Your username can't contain special characters.`
+            }
+            else if (usernameTrim.length < 3) {
+                prevErrors.username = `Your username must be at least 3 characters.`
+            }
+            else if (usernameTrim.length > 16) {
+                prevErrors.username = `Your username can't be more than 16 characters.`
+            }
+            
+            if (!emailTrim) { // Check email on submit
+                prevErrors.email = `Your email is required.`
+            }
+            else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(emailTrim)) {
+                prevErrors.email = `Please enter a valid email.`
+            }
+            return prevErrors
+        })
         if (hasError) {
             setFormErrors(prevErrors => ({ ...prevErrors, ...newFormErrors }))
             if (step !== 0) {
@@ -233,11 +220,9 @@ const Register = () => {
                     <div className={`${registerStyles.step_button} ${step === 0 ? registerStyles.step_button__active : registerStyles.step_button__disabled} clickable transition-default`} onClick={() => step !== 0 && setStep(0)} />
                     <div className={`${registerStyles.step_button} ${step === 1 ? registerStyles.step_button__active : registerStyles.step_button__disabled} clickable transition-default`} onClick={() => (validated && step !== 1) && setStep(1)} />
                 </div>
-
                 <h1 className={registerStyles.form_title}>
                     <span className={registerStyles.primary_text}>{step === 0 ? 'Register' : 'Choose Your Starter'}</span>
                 </h1>
-
                 <form onSubmit={handleSubmit} className={registerStyles.form}>
                     {step === 0 ? (
                         <RegisterForm
@@ -261,19 +246,16 @@ const Register = () => {
                         />
                     ))}
                     <button 
-                        type="submit"
+                        type='submit'
                         className={
                             `${registerStyles.form_submit}
                             ${
-                                (!Object.values(formErrors).every((value) => {
-                                    if (typeof value === 'object') {
-                                        return true
-                                    }
-                                    return value === ''
+                                (Object.values(formErrors).every((value) => {
+                                    return (!value || value !== '')
                                 }) ||
-                                !initialRender && (
-                                    formErrors.password.passwordLength ||
-                                    formErrors.password.passwordCharacters
+                                initialRender && (
+                                    formErrors.passwordLength ||
+                                    formErrors.passwordCharacters
                                 )) ? registerStyles.form_submit__disabled : registerStyles.form_submit__active
                             }
                             flex-center w-100 transition-default`
@@ -286,15 +268,14 @@ const Register = () => {
                                 return value === ''
                             }) ||
                             !initialRender && (
-                                formErrors.password.passwordLength ||
-                                formErrors.password.passwordCharacters
+                                formErrors.passwordLength ||
+                                formErrors.passwordCharacters
                             )
                         }
                     >
                         <ArrowIcon className={registerStyles.icon_default}/>
                     </button>
                 </form>
-
                 {step === 0 && (
                     <div className={`${registerStyles.form_links} flex-col w-100`}>
                         <Link className={`${registerStyles.form_link} transition-default`} to='/login'>
