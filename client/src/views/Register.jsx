@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { hasBadWords } from 'expletives'
@@ -7,8 +7,8 @@ import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
 import errorUtilities from '../utilities/error.utilities'
 
-import CredentialsForm from '../components/CredentialsForm'
-import StarterForm from '../components/StarterForm'
+import CredentialsForm from '../components/form/CredentialsForm'
+import StarterForm from '../components/form/StarterForm'
 
 import ArrowIcon from '../components/svgs/ArrowSvg'
 
@@ -37,6 +37,13 @@ const Register = () => {
         }
     })
     const [error, setError] = useState({})
+    const [isReady, setIsReady] = useState(false)
+    const lastSubmitTime = useRef(0)
+
+    useEffect(() => {
+        const timer = setTimeout(() => setIsReady(true), 1000)
+        return () => clearTimeout(timer)
+    }, [])
 
     const handleUsername = (value) => {
         setValidated(false)
@@ -124,6 +131,16 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        const now = Date.now()
+        if (!isReady || now - lastSubmitTime.current < 1000) {
+            setError({
+                statusCode: 400,
+                message: 'Form submission failed: Please wait before submitting again.',
+                name: 'FormSubmissionError',
+                validationErrors: {}
+            })
+            return
+        }
         if (validated) {
             setStep(step + 1)
         }
@@ -219,6 +236,7 @@ const Register = () => {
                 <h1 className={registerStyles.form_title}>
                     <span className={registerStyles.primary_text}>{step === 0 ? 'Register' : 'Choose Your Starter'}</span>
                 </h1>
+                
                 <form onSubmit={handleSubmit} className={registerStyles.form}>
                     {step === 0 ? (
                         <CredentialsForm
@@ -250,12 +268,10 @@ const Register = () => {
                                     if (typeof value === 'object') {
                                         return true
                                     }
-                                    return value === ''
+                                    return !value
                                 }) ||
-                                !initialRender && (
-                                    formErrors.password.passwordLength ||
-                                    formErrors.password.passwordCharacters
-                                )) ? registerStyles.form_submit__disabled : registerStyles.form_submit__active
+                                ((!initialRender) && (formErrors.password.passwordLength || formErrors.password.passwordCharacters))) ? 
+                                registerStyles.form_submit__disabled : registerStyles.form_submit__active
                             }
                             flex-center w-100 transition-default`
                         }
@@ -264,12 +280,9 @@ const Register = () => {
                                 if (typeof value === 'object') {
                                     return true
                                 }
-                                return value === ''
+                                return !value
                             }) ||
-                            !initialRender && (
-                                formErrors.password.passwordLength ||
-                                formErrors.password.passwordCharacters
-                            )
+                            ((!initialRender) && (formErrors.password.passwordLength || formErrors.password.passwordCharacters))
                         }
                     >
                         <ArrowIcon className={registerStyles.icon_default}/>

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 
-import StarterSelection from '../assets/starterSelection.png'
-import Pointer from '../assets/pointer.png'
-import Bulbasaur from '../assets/pokemonGifs/ani_bw_001.gif'
-import Charmander from '../assets/pokemonGifs/ani_bw_004.gif'
-import Squirtle from '../assets/pokemonGifs/ani_bw_007.gif'
+import StarterSelection from '../../assets/starterSelection.png'
+import Pointer from '../../assets/pointer.png'
+import Bulbasaur from '../../assets/pokemonGifs/ani_bw_001.gif'
+import Charmander from '../../assets/pokemonGifs/ani_bw_004.gif'
+import Squirtle from '../../assets/pokemonGifs/ani_bw_007.gif'
 
-import starterFormStyles from '../css/components/StarterForm.module.css'
+import starterFormStyles from '../../css/components/form/StarterForm.module.css'
 
 const starterData = [
     { id: 'option1', name: 'bulbasaur', image: Bulbasaur, pokedexNumber: 1 },

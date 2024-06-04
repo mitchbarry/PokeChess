@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-import Input from './form/Input'
-import InputErrors from './form/InputErrors'
-import InputPassword from './form/InputPassword'
-import PasswordCheck from './form/PasswordCheck'
+import Input from './Input'
+import InputErrors from './InputErrors'
+import InputPassword from './InputPassword'
+import PasswordCheck from './PasswordCheck'
 
 const CredentialsForm = (props) => {
 

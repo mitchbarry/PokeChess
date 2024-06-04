@@ -29,13 +29,13 @@ const InputPassword = (props) => {
                 type={showPassword ? ' text' : 'password'}
                 id='password'
                 name='password'
-                className={`${inputPasswordStyles.input} ${inputPasswordStyles.primary_text} ${focus.password && inputPasswordStyles.input__focus} ${(Object.values(formErrors.password).some(value => value) && !initialRender) && inputPasswordStyles.input__error} w-100 transition-default`}
+                className={`${inputPasswordStyles.input} ${inputPasswordStyles.primary_text} ${focus.password && inputPasswordStyles.input__focus} ${((Object.values(formErrors.password).some(value => value) && !initialRender) || (error.validationErrors && error.validationErrors.password)) && inputPasswordStyles.input__error} w-100 transition-default`}
                 value={value}
                 onChange={(e) => handleInput(e)}
             />
             <label htmlFor='password' className={`${inputPasswordStyles.input_label}
                 ${(focus.password || value) && inputPasswordStyles.input_label__shrink}
-                ${(Object.values(formErrors.password).some(value => value) && !initialRender) && inputPasswordStyles.input_label__error} transition-default`}>
+                ${((Object.values(formErrors.password).some(value => value) && !initialRender) || (error.validationErrors && error.validationErrors.password)) && inputPasswordStyles.input_label__error} transition-default`}>
                 <span className={`${inputPasswordStyles.label} ${(focus.password || value) ? inputPasswordStyles.primary_text__shrink : inputPasswordStyles.primary_text} transition-default`}>Password</span>
             </label>
             {(focus.password) && (

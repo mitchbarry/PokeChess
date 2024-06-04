@@ -14,20 +14,18 @@ const InputErrors = (props) => {
 
     return (
         <>
-            {formErrors[name] !== '' && (
+            {formErrors[name] && (
                 <div className={inputErrorsStyles.error_container}>
                     <WarningIcon className={inputErrorsStyles.icon_warning}/>
                     <span className={inputErrorsStyles.secondary_text_accent}>{formErrors[name]}</span>
                 </div>
             )}
 
-            {Object.keys(error).length !== 0 && (
-                error.validationErrors[name] && (
-                    <div className={inputErrorsStyles.error_container}>
-                        <WarningIcon className={inputErrorsStyles.icon_warning}/>
-                        <span className={inputErrorsStyles.secondary_text_accent}>{error.validationErrors[name]}</span>
-                    </div>
-                )
+            {(error.validationErrors && error.validationErrors[name]) && (
+                <div className={inputErrorsStyles.error_container}>
+                    <WarningIcon className={inputErrorsStyles.icon_warning}/>
+                    <span className={inputErrorsStyles.secondary_text_accent}>{error.validationErrors[name]}</span>
+                </div>
             )}
         </>
 	)
