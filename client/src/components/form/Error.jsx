@@ -7,14 +7,12 @@ import errorStyles from '../../css/components/form/Error.module.css'
 const Error = (props) => {
 
     const {
-        formErrors,
-        error,
-        name
+        error
     } = props
 
     return (
         <>
-            {((error.validationErrors) && (Object.keys(error.validationErrors).length === 0)) && (
+            {((error.validationErrors) && (error.validationErrors === {})) && (
                 <div className={errorStyles.error_container}>
                     <WarningIcon className={errorStyles.icon_warning}/>
                     <span className={errorStyles.secondary_text_accent}>{error.message}</span>

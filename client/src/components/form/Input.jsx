@@ -24,7 +24,7 @@ const Input = (props) => {
                 type={name !== 'password' ? 'text' : showPassword ? ' text' : 'password'}
                 id={name}
                 name={name}
-                className={`${inputStyles.input} ${inputStyles.primary_text} ${focus[name] && inputStyles.input__focus} ${((formErrors[name]) || (error.validationErrors && error.validationErrors[name])) && inputStyles.input__error} w-100 transition-default`}
+                className={`${inputStyles.input} ${inputStyles.primary_text} ${((formErrors[name]) || (error.validationErrors && error.validationErrors[name])) && inputStyles.input__error} w-100 transition-default`}
                 value={value}
                 onChange={(e) => handleInput(e)}
             />
