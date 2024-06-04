@@ -7,6 +7,7 @@ import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
 import errorUtilities from '../utilities/error.utilities'
 
+import Error from '../components/form/Error'
 import CredentialsForm from '../components/form/CredentialsForm'
 import StarterForm from '../components/form/StarterForm'
 
@@ -141,6 +142,10 @@ const Register = () => {
             })
             return
         }
+        else {
+            setError({})
+        }
+        lastSubmitTime.current = now;
         if (validated) {
             setStep(step + 1)
         }
@@ -236,7 +241,9 @@ const Register = () => {
                 <h1 className={registerStyles.form_title}>
                     <span className={registerStyles.primary_text}>{step === 0 ? 'Register' : 'Choose Your Starter'}</span>
                 </h1>
-                
+                <Error
+                    error={error}
+                />
                 <form onSubmit={handleSubmit} className={registerStyles.form}>
                     {step === 0 ? (
                         <CredentialsForm

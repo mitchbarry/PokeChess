@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import Input from './Input'
-import InputErrors from './InputErrors'
+import InputError from './InputError'
 import InputPassword from './InputPassword'
 import PasswordCheck from './PasswordCheck'
 
@@ -77,7 +77,7 @@ const CredentialsForm = (props) => {
                 name='username'
             />
 
-            <InputErrors
+            <InputError
                 formErrors={formErrors}
                 error={error}
                 name='username'
@@ -94,7 +94,7 @@ const CredentialsForm = (props) => {
                 name='email'
             />
 
-            <InputErrors
+            <InputError
                 formErrors={formErrors}
                 error={error}
                 name='email'
