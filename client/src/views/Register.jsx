@@ -7,7 +7,7 @@ import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
 import errorUtilities from '../utilities/error.utilities'
 
-import RegisterForm from '../components/RegisterForm'
+import CredentialsForm from '../components/CredentialsForm'
 import StarterForm from '../components/StarterForm'
 
 import ArrowIcon from '../components/svgs/ArrowSvg'
@@ -29,8 +29,8 @@ const Register = () => {
     const [validated, setValidated] = useState(false)
     const [initialRender, setInitialRender] = useState(true)
     const [formErrors, setFormErrors] = useState({
-        username: false,
-        email: false,
+        username: '',
+        email: '',
         password: {
             passwordLength: true,
             passwordCharacters: true
@@ -221,7 +221,7 @@ const Register = () => {
                 </h1>
                 <form onSubmit={handleSubmit} className={registerStyles.form}>
                     {step === 0 ? (
-                        <RegisterForm
+                        <CredentialsForm
                             username={username}
                             handleUsername={handleUsername}
                             email={email}
@@ -246,12 +246,15 @@ const Register = () => {
                         className={
                             `${registerStyles.form_submit}
                             ${
-                                (Object.values(formErrors).every((value) => {
-                                    return (!value || value !== '')
+                                (!Object.values(formErrors).every((value) => {
+                                    if (typeof value === 'object') {
+                                        return true
+                                    }
+                                    return value === ''
                                 }) ||
-                                initialRender && (
-                                    formErrors.passwordLength ||
-                                    formErrors.passwordCharacters
+                                !initialRender && (
+                                    formErrors.password.passwordLength ||
+                                    formErrors.password.passwordCharacters
                                 )) ? registerStyles.form_submit__disabled : registerStyles.form_submit__active
                             }
                             flex-center w-100 transition-default`
@@ -264,8 +267,8 @@ const Register = () => {
                                 return value === ''
                             }) ||
                             !initialRender && (
-                                formErrors.passwordLength ||
-                                formErrors.passwordCharacters
+                                formErrors.password.passwordLength ||
+                                formErrors.password.passwordCharacters
                             )
                         }
                     >

@@ -28,7 +28,7 @@
 
 /* * Form Inputs */
 .form_input, .form_password_check {
-    margin-bottom: var(--size-200);
+    margin-bottom: var(--size-350);
 }
 
 .input, .input_password {
@@ -37,6 +37,10 @@
 
 .form_input, .form_password {
     position: relative;
+}
+
+.form_input__error {
+    margin-bottom: var(--size-200);
 }
 
 .input, .input_password {

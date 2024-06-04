@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 
 import Input from './form/Input'
+import InputErrors from './form/InputErrors'
 import InputPassword from './form/InputPassword'
+import PasswordCheck from './form/PasswordCheck'
 
-const RegisterForm = (props) => {
+const CredentialsForm = (props) => {
 
     const {
         username,
@@ -67,8 +69,6 @@ const RegisterForm = (props) => {
             <Input
                 value={username}
                 handleInput={handleInput}
-                showPassword={showPassword}
-                handleShowPassword={handleShowPassword}
                 formErrors={formErrors}
                 error={error}
                 focus={focus}
@@ -77,33 +77,50 @@ const RegisterForm = (props) => {
                 name='username'
             />
 
+            <InputErrors
+                formErrors={formErrors}
+                error={error}
+                name='username'
+            />
+
             <Input
+                value={email}
+                handleInput={handleInput}
                 formErrors={formErrors}
                 error={error}
                 focus={focus}
                 handleFocus={handleFocus}
                 handleBlur={handleBlur}
-                type='text'
                 name='email'
-                value={email}
-                handleInput={handleInput}
+            />
+
+            <InputErrors
+                formErrors={formErrors}
+                error={error}
+                name='email'
             />
 
             <InputPassword
+                value={password}
+                handleInput={handleInput}
+                showPassword={showPassword}
+                handleShowPassword={handleShowPassword}
+                initialRender={initialRender}
                 formErrors={formErrors}
                 error={error}
                 focus={focus}
                 handleFocus={handleFocus}
                 handleBlur={handleBlur}
-                handleShowPassword={handleShowPassword}
-                initialRender={initialRender}
-                type={showPassword ? 'text' : 'password'}
                 name='password'
-                value={password}
-                handleInput={handleInput}
+            />
+
+            <PasswordCheck
+                formErrors={formErrors}
+                error={error}
+                initialRender={initialRender}
             />
         </>
 	)
 }
 
-export default RegisterForm
+export default CredentialsForm
