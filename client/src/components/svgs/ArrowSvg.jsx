@@ -1,6 +1,3 @@
-import loginStyles from '../../css/views/Login.module.css'
-import returnStyles from '../../css/components/Return.module.css'
-
 const ArrowSvg = (props) => {
 
     const {className} = props

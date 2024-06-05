@@ -11,7 +11,7 @@ import WarningIcon from '../components/svgs/WarningSvg'
 import ArrowIcon from '../components/svgs/ArrowSvg'
 import CheckIcon from '../components/svgs/CheckSvg'
 
-import loginStyles from '../css/views/Login.module.css'
+import styles from '../css/views/Login.module.css'
 
 const LoginForm = () => {
 
@@ -120,13 +120,13 @@ const LoginForm = () => {
     }
 
 	return (
-        <div className={`${loginStyles.login} flex-center`}>
-            <div className={`${loginStyles.login_form} flex-col`}>
-                <h1 className={loginStyles.form_title}>
-                    <span className={loginStyles.primary_text}>Login</span>
+        <div className={`${styles.login} flex-center`}>
+            <div className={`${styles.login_form} flex-col`}>
+                <h1 className={styles.form_title}>
+                    <span className={styles.primary_text}>Login</span>
                 </h1>
-                <form onSubmit={handleSubmit} className={loginStyles.form}>
-                    <div className={`${loginStyles.form_input} ${(Object.keys(errors).length !== 0 && errors.message === 'InvalidAccountName') ? loginStyles.form_input__error : ''}`}
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <div className={`${styles.form_input} ${(Object.keys(errors).length !== 0 && errors.message === 'InvalidAccountName') ? styles.form_input__error : ''}`}
                         onFocus={() => handleFocus('accountName')}
                         onBlur={() => handleBlur('accountName')}
                     >
@@ -134,25 +134,25 @@ const LoginForm = () => {
                             type='text'
                             id='accountName'
                             name='email'
-                            className={`${loginStyles.input} ${loginStyles.primary_text} ${(focus.accountName || accountName) ? loginStyles.input__focus : ''} ${formErrors.accountName ? loginStyles.input__error : ''}`}
+                            className={`${styles.input} ${styles.primary_text} ${(focus.accountName || accountName) ? styles.input__focus : ''} ${formErrors.accountName ? styles.input__error : ''}`}
                             value={accountName}
                             onChange={(e) => handleInput(e)}
                         />
-                        <label htmlFor='accountName' className={`${loginStyles.input_label}
-                            ${(focus.accountName || accountName) ? loginStyles.input_label__shrink : ''}
-                            ${formErrors.accountName ? loginStyles.input_label__error : ''}`}>
-                            <span className={`${loginStyles.label} ${(focus.accountName || accountName) ? loginStyles.primary_text__shrink : loginStyles.primary_text}`}>Email or Username</span>
+                        <label htmlFor='accountName' className={`${styles.input_label}
+                            ${(focus.accountName || accountName) ? styles.input_label__shrink : ''}
+                            ${formErrors.accountName ? styles.input_label__error : ''}`}>
+                            <span className={`${styles.label} ${(focus.accountName || accountName) ? styles.primary_text__shrink : styles.primary_text}`}>Email or Username</span>
                         </label>
                     </div>
                     {Object.keys(errors).length !== 0 && (
                         errors.message === 'InvalidAccountName' && (
-                            <div className={loginStyles.input_error}>
-                                <WarningIcon className={loginStyles.icon_warning}/>
-                                <span className={loginStyles.secondary_text_accent}>Please enter a valid account name</span>
+                            <div className={styles.input_error}>
+                                <WarningIcon className={styles.icon_warning}/>
+                                <span className={styles.secondary_text_accent}>Please enter a valid account name</span>
                             </div>
                         )
                     )}
-                    <div className={`${loginStyles.form_input} ${(Object.keys(errors).length !== 0 && errors.message === 'InvalidPassword') ? loginStyles.form_input__error : ''}`}
+                    <div className={`${styles.form_input} ${(Object.keys(errors).length !== 0 && errors.message === 'InvalidPassword') ? styles.form_input__error : ''}`}
                         onFocus={() => handleFocus('password')}
                         onBlur={() => handleBlur('password')}
                     >
@@ -160,52 +160,52 @@ const LoginForm = () => {
                             type={showPassword ? 'text' : 'password'}
                             id='password'
                             name='password'
-                            className={`${loginStyles.input_password} ${loginStyles.primary_text} ${(focus.password || password) ? loginStyles.input_password__focus : ''} ${formErrors.password ? loginStyles.input__error : ''}`}
+                            className={`${styles.input_password} ${styles.primary_text} ${(focus.password || password) ? styles.input_password__focus : ''} ${formErrors.password ? styles.input__error : ''}`}
                             value={password}
                             onChange={(e) => handleInput(e)}
                         />
                         {(focus.password || password) && (
-                            <button type='button' className={`${loginStyles.input_password_icon} ${showPassword ? loginStyles.input_password_icon__active : ''}`} onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
+                            <button type='button' className={`${styles.input_password_icon} ${showPassword ? styles.input_password_icon__active : ''}`} onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
                                 {showPassword ? (
-                                    <RevealIcon className={loginStyles.icon_default}/>
+                                    <RevealIcon className={styles.icon_default}/>
                                 ) : (
-                                    <HiddenIcon className={loginStyles.icon_default}/>
+                                    <HiddenIcon className={styles.icon_default}/>
                                 )}
                             </button>
                         )}
-                        <label htmlFor='password' className={`${loginStyles.input_label}
-                            ${(focus.password || password) ? loginStyles.input_label__shrink : ''}
-                            ${formErrors.password ? loginStyles.input_label__error : ''}`}>
-                            <span className={`${loginStyles.label} ${(focus.password || password) ? loginStyles.primary_text__shrink : loginStyles.primary_text}`}>Password</span>
+                        <label htmlFor='password' className={`${styles.input_label}
+                            ${(focus.password || password) ? styles.input_label__shrink : ''}
+                            ${formErrors.password ? styles.input_label__error : ''}`}>
+                            <span className={`${styles.label} ${(focus.password || password) ? styles.primary_text__shrink : styles.primary_text}`}>Password</span>
                         </label>
                     </div>
                     {Object.keys(errors).length !== 0 && (
                         errors.message === 'InvalidPassword' && (
-                            <div className={loginStyles.input_error}>
-                                <WarningIcon className={loginStyles.icon_warning}/>
-                                <span className={loginStyles.secondary_text_accent}>Please enter your password</span>
+                            <div className={styles.input_error}>
+                                <WarningIcon className={styles.icon_warning}/>
+                                <span className={styles.secondary_text_accent}>Please enter your password</span>
                             </div>
                         )
                     )}
-                    <div className={`${loginStyles.form_checkbox}`}>
-                        <div className={`${loginStyles.checkbox} flex-center`}>
-                            <input type='checkbox' className={`${loginStyles.box}`} checked={stayLogged} onChange={handleStayLogged}/>
+                    <div className={`${styles.form_checkbox}`}>
+                        <div className={`${styles.checkbox} flex-center`}>
+                            <input type='checkbox' className={`${styles.box}`} checked={stayLogged} onChange={handleStayLogged}/>
                             {stayLogged && (
-                                <CheckIcon className={loginStyles.icon_check}/>
+                                <CheckIcon className={styles.icon_check}/>
                             )}
                         </div>
-                        <span className={`${loginStyles.primary_text_accent__shrink} flex-center`}>Stay logged in</span>
+                        <span className={`${styles.primary_text_accent__shrink} flex-center`}>Stay logged in</span>
                     </div>
-                    <button type='submit' className={`${loginStyles.form_submit} flex-center`}>
-                        <ArrowIcon className={loginStyles.icon_default}/>
+                    <button type='submit' className={`${styles.form_submit} flex-center`}>
+                        <ArrowIcon className={styles.icon_default}/>
                     </button>
                 </form>
-                <div className={`${loginStyles.form_links} flex-col`}>
-                    <Link className={loginStyles.form_link} to='/register'>
-                        <span className={loginStyles.primary_text__shrink}>Create an Account</span>
+                <div className={`${styles.form_links} flex-col`}>
+                    <Link className={styles.form_link} to='/register'>
+                        <span className={styles.primary_text__shrink}>Create an Account</span>
                     </Link>
-                    <Link className={loginStyles.form_link} to='/contact'>
-                        <span className={loginStyles.primary_text__shrink}>Can't log in?</span>
+                    <Link className={styles.form_link} to='/contact'>
+                        <span className={styles.primary_text__shrink}>Can't log in?</span>
                     </Link>
                 </div>
             </div>

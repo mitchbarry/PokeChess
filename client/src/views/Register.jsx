@@ -7,13 +7,12 @@ import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
 import errorUtilities from '../utilities/error.utilities'
 
-import Error from '../components/form/Error'
 import CredentialsForm from '../components/form/CredentialsForm'
 import StarterForm from '../components/form/StarterForm'
 
 import ArrowIcon from '../components/svgs/ArrowSvg'
 
-import registerStyles from '../css/views/Register.module.css'
+import styles from '../css/views/Register.module.css'
 
 const Register = () => {
 
@@ -202,8 +201,7 @@ const Register = () => {
                 sendValidationRequest()
             }
             else {
-                console.log(' ------------------------------------------------------------- All validations passed ------------------------------------------------------------- ')
-                // sendCreateRequest()
+                sendCreateRequest()
             }
         }
     }
@@ -227,7 +225,7 @@ const Register = () => {
 
     const sendCreateRequest = async () => {
         try {
-            const response = await AuthService.validateUser({
+            const response = await AuthService.register({
                 username: username.trim(),
                 email: email.trim(),
                 password,
@@ -251,19 +249,16 @@ const Register = () => {
     }
 
 	return (
-        <div className={`${registerStyles.container} flex-center flex-col`}>
-            <div className={`${registerStyles.register}`}>
+        <div className={`${styles.container} flex-center flex-col`}>
+            <div className={`${styles.register}`}>
                 <div className={`flex-center w-100`}>
-                    <div className={`${registerStyles.step_button} ${step === 0 ? registerStyles.step_button__active : registerStyles.step_button__disabled} clickable transition-default`} onClick={() => step !== 0 && setStep(0)} />
-                    <div className={`${registerStyles.step_button} ${step === 1 ? registerStyles.step_button__active : registerStyles.step_button__disabled} clickable transition-default`} onClick={() => (validated && step !== 1) && setStep(1)} />
+                    <div className={`${styles.step_button} ${step === 0 ? styles.step_button__active : styles.step_button__disabled} clickable transition-default`} onClick={() => step !== 0 && setStep(0)} />
+                    <div className={`${styles.step_button} ${step === 1 ? styles.step_button__active : styles.step_button__disabled} clickable transition-default`} onClick={() => (validated && step !== 1) && setStep(1)} />
                 </div>
-                <h1 className={registerStyles.form_title}>
-                    <span className={registerStyles.primary_text}>{step === 0 ? 'Register' : 'Choose Your Starter'}</span>
+                <h1 className={styles.form_title}>
+                    <span className={styles.primary_text}>{step === 0 ? 'Register' : 'Choose Your Starter'}</span>
                 </h1>
-                <Error
-                    error={error}
-                />
-                <form onSubmit={handleSubmit} className={registerStyles.form}>
+                <form onSubmit={handleSubmit} className={styles.form}>
                     {step === 0 ? (
                         <CredentialsForm
                             username={username}
@@ -293,7 +288,7 @@ const Register = () => {
                     <button 
                         type='submit'
                         className={
-                            `${registerStyles.form_submit}
+                            `${styles.form_submit}
                             ${
                                 (!Object.values(formErrors).every((value) => {
                                     if (typeof value === 'object') {
@@ -302,7 +297,7 @@ const Register = () => {
                                     return !value
                                 }) ||
                                 ((!initialRender) && (formErrors.password.passwordLength || formErrors.password.passwordCharacters))) ?
-                                registerStyles.form_submit__disabled : registerStyles.form_submit__active
+                                styles.form_submit__disabled : styles.form_submit__active
                             }
                             flex-center w-100 transition-default`
                         }
@@ -316,13 +311,13 @@ const Register = () => {
                             ((!initialRender) && (formErrors.password.passwordLength || formErrors.password.passwordCharacters))
                         }
                     >
-                        <ArrowIcon className={registerStyles.icon_default}/>
+                        <ArrowIcon className={styles.icon_default}/>
                     </button>
                 </form>
                 {step === 0 && (
-                    <div className={`${registerStyles.form_links} flex-col w-100`}>
-                        <Link className={`${registerStyles.form_link} transition-default`} to='/login'>
-                            <span className={registerStyles.primary_text__shrink}>Already have an account?</span>
+                    <div className={`${styles.form_links} flex-col w-100`}>
+                        <Link className={`${styles.form_link} transition-default`} to='/login'>
+                            <span className={styles.primary_text__shrink}>Already have an account?</span>
                         </Link>
                     </div>
                 )}

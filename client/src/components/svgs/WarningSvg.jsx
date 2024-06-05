@@ -1,5 +1,3 @@
-import loginStyles from '../../css/views/Login.module.css'
-
 const WarningSvg = (props) => {
 
     const {className} = props

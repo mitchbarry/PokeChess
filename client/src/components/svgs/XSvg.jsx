@@ -1,5 +1,3 @@
-import registerStyles from '../../css/views/Register.module.css'
-
 const XSvg = (props) => {
 
     const {className} = props

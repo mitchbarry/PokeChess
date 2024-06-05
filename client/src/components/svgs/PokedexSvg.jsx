@@ -1,5 +1,3 @@
-import headerStyles from '../../css/components/Header.module.css'
-
 const PokedexSvg = (props) => {
 
     const {className} = props

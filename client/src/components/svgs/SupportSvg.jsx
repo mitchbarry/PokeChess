@@ -1,5 +1,3 @@
-import headerStyles from '../../css/components/Header.module.css'
-
 const SupportSvg = (props) => {
 
     const {className} = props
