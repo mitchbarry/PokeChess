@@ -26,21 +26,6 @@
     }
 }
 
-/* ! TEST CLASS */
-.test_class {
-    display: inline-block;
-    font-size: 16px; /* Standardize font size */
-    font-family: inherit; /* Inherit font family */
-    padding: 10px 20px; /* Standardize padding */
-    background-color: #007bff; /* Standardize background color */
-    color: white; /* Standardize text color */
-    border: none; /* Remove border */
-    border-radius: 4px; /* Standardize border radius */
-    text-align: center; /* Center text */
-    text-decoration: none; /* Remove underline for <Link> */
-    cursor: pointer; /* Standardize cursor */
-}
-
 /* * Typography */
 .primary_text {
     font: var(--font-800);
@@ -50,28 +35,37 @@
     font: var(--font-600);
 }
 
-.accent_text {
-    font: var(--font-accent-600);
-}
-
-.detail_text {
-    font: var(--font-accent-200);
-    color: var(--color-100);
-}
-
 .dropdown_text {
     line-height: var(--line-height-slack);
 }
 
-.account_info_text {
-    line-height: var(--line-height-relaxed);
-}
-
 .account_info {
+    display: flex;
+    align-items: center;
     width: calc(100% - (var(--size-400) * 2));
-    color: var(--color-teal-lighten);
     margin: var(--size-100) var(--size-400) var(--size-200) var(--size-400);
     text-overflow: ellipsis;
+}
+
+.avatar {
+    width: var(--size-600);
+    aspect-ratio: 1/1;
+    background-color: var(--color-100);
+    border-radius: 5px;
+    margin-right: var(--size-150);
+}
+
+.info_username {
+    color: var(--color-teal-lighten);
+    font: var(--font-500);
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--size-050);
+}
+
+.info_email {
+    color: var(--color-400);
+    font: var(--font-accent-400);
+    line-height: var(--line-height-tight);
 }
 
 /* * Header */
@@ -128,6 +122,8 @@
 
 .dropdown_link {
     width: calc(100% - 2 * (var(--size-200)));
+    font: var(--font-accent-600);
+    background-color: transparent;
     margin: 0 var(--size-200);
     display: flex;
     align-items: center;

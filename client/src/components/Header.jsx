@@ -50,13 +50,13 @@ const Header = () => {
 					<div className={styles.dropdown_bridge}/>
 					<div className={`${styles.dropdown_menu} flex-col`}>
 						<Link className={`${styles.dropdown_link}`} to='/pokedex'>
-							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Pokedex</span>
+							<span className={`${styles.dropdown_text}`}>Pokedex</span>
 						</Link>
 						<Link className={`${styles.dropdown_link}`} to='/patch'>
-							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Patch Notes</span>
+							<span className={`${styles.dropdown_text}`}>Patch Notes</span>
 						</Link>
 						<Link className={`${styles.dropdown_link}`} to='/about'>
-							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>About</span>
+							<span className={`${styles.dropdown_text}`}>About</span>
 						</Link>
 					</div>
 				</div>
@@ -69,13 +69,13 @@ const Header = () => {
 					<div className={styles.dropdown_bridge}/>
 					<div className={`${styles.dropdown_menu} flex-col`}>
 						<Link className={`${styles.dropdown_link}`} to='/forums'>
-							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Forums</span>
+							<span className={`${styles.dropdown_text}`}>Forums</span>
 						</Link>
 						<Link className={`${styles.dropdown_link}`} to='/leaderboards'>
-							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Leaderboards</span>
+							<span className={`${styles.dropdown_text}`}>Leaderboards</span>
 						</Link>
 						<Link className={`${styles.dropdown_link}`}> {/* EXTERNAL LINK NEEDS IMPLEMENTATION !!!!! */}
-							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Discord</span>
+							<span className={`${styles.dropdown_text}`}>Discord</span>
 							<ExternalLinkIcon className={styles.icon_externalLink}/>
 						</Link>
 					</div>
@@ -93,9 +93,12 @@ const Header = () => {
 					<div className={styles.dropdown_bridge}/>
 					<div className={`${styles.dropdown_menu} ${styles.menu_primary} flex-col`}>
 						{authToken ? (
-							<div className={`${styles.account_info} flex-col`}>
-								<span className={`${styles.accent_text} ${styles.account_info_text}`}>{loggedUser.username}</span>
-								<span className={`${styles.detail_text} ${styles.account_info_text}`}>{loggedUser.email}</span>
+							<div className={`${styles.account_info}`}>
+								<div className={styles.avatar}/>
+								<div className='flex-col'>
+									<span className={`${styles.info_username}`}>{loggedUser.username}</span>
+									<span className={`${styles.info_email}`}>{loggedUser.email}</span>
+								</div>
 							</div>
 						) : (
 							<Link className={`${styles.login} flex-center`} to='/login'>
@@ -105,23 +108,23 @@ const Header = () => {
 						)}
 						<Link className={`${styles.dropdown_link}`} to={authToken ? '/account' : '/login'}>
 							<SettingsIcon className={styles.icon_default}/>
-							<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Account Settings</span>
+							<span className={`${styles.dropdown_text}`}>Account Settings</span>
 						</Link>
 						{authToken ? (
 							<button className={`${styles.dropdown_link}`} onClick={handleLogout}>
 								<LogoutIcon className={styles.icon_default}/>
-								<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Logout</span>
+								<span className={`${styles.dropdown_text}`}>Logout</span>
 							</button>
 						) : (
 							<Link className={`${styles.dropdown_link}`} to='/register'>
 								<RegisterIcon className={styles.icon_default}/>
-								<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Sign Up</span>
+								<span className={`${styles.dropdown_text}`}>Sign Up</span>
 							</Link>
 						)}
 						<div className={`${styles.menu_secondary} flex-col`}>
 							<Link className={styles.dropdown_link} to='/contact'>
 								<SupportIcon className={styles.icon_default}/>
-								<span className={`${styles.accent_text} ${styles.dropdown_text}`}>Support</span>
+								<span className={`${styles.dropdown_text}`}>Support</span>
 							</Link>
 						</div>
 					</div>
