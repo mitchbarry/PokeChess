@@ -679,7 +679,7 @@ const Play = (props) => {
 
     return (
         <div className={styles.flexBox}>
-            <canvas ref={canvasRef}width={canvasWidth} height={canvasHeight} className={styles.canvas}>
+            <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight} className={styles.canvas}>
             </canvas>
         </div>
     )

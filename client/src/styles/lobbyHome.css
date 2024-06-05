@@ -1,8 +1,8 @@
-/* ------------------------------------------------------------------------------------ containers > */
+/* 
 .container-main {
 	height: 60vh;
 	position: relative;
-	margin-top: calc((100vh - 90px) / 8); /* calc determines the top margin which will start the container 1/8 of the way down the page after the bottom of the header */
+	margin-top: calc((100vh - 90px) / 8);
 	border: 2px solid #FFCC01;
 	border-radius: 5px;
 	background: linear-gradient(teal,rgba(51, 103, 153, 0.9),rgb(138,18,0));
@@ -23,25 +23,25 @@
 	border-radius: 5px;
 	color: #FFCC01;
 }
-/* ------------------------------------------------------------------------------------ fonts > */
+
 @font-face {
 	font-family: "digitalPixel";
 	src: url("../assets/text/fonts/digitalPixel.ttf") format("truetype");
 }
-/* ------------------------------------------------------------------------------------ images > */
+
 .lobbies-img {
 	height: 120px;
 	position: absolute;
-	top: -65px; /* 1/2 the height of the img with a 5px offset */
+	top: -65px;
 	left: calc(width / 2);
 }
-/* -------------------------------------------------------------------------- icons > */
+
 .icon {
 	fill: #FFCC01;
 	stroke: #FFCC01;
 	margin-left: 2px;
 }
-/* ------------------------------------------------------------------------------------ text > */
+
 .table-head {
 	width: 34%;
 	font-size: 120%;
@@ -74,4 +74,4 @@
 	th {
 		font-size: 3vw;
 	}
-}
+} */

@@ -1,17 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 import { useAuth } from "../context/AuthContext"
 
-import "../styles/error.css";
-
 const Error = (props) => {
 
-    const { authToken } = useAuth();
+    const { authToken } = useAuth()
 
     const { errors } = props
 
     return (
-        <div>
+        <>
             {/* <div className={mainItem}>
                 {Object.keys(errors).length !== 0 && showNotification && (
                     <ul className="alert alert-danger">
@@ -41,8 +39,8 @@ const Error = (props) => {
                     <Link to="/login" className={blueButton}>Home</Link>
                 )}
             </div> */}
-        </div>
-    );
+        </>
+    )
 }
 
-export default Error;
+export default Error

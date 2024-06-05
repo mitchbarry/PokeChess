@@ -1,4 +1,4 @@
-/* ------------------------------------------------------------------------------------ div items > */
+/* 
 .flexBox {
     display: flex;
     justify-content: center;
@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
 }
-/* ------------------------------------------------------------------------------------ button items > */
+
 .blueButton, .greenButton, .purpleButton, .goldButton, .blueButtonMarginLeft, .blueButtonMarginTop {
     color: whitesmoke;
     border-radius: 5px;
@@ -33,7 +33,7 @@
 .blueButtonMarginTop {
     margin-top: 20px;
 }
-/* ------------------------------------------------------------------------------------ flash box items > */
+
 .flash-box-li {
     font-size: 120%;
     display: flex;
@@ -48,7 +48,7 @@
     cursor: pointer;
 	color: #752026;
 }
-/* ------------------------------------------------------------------------------------ simple styling items > */
+
 .heading2 {
     font-size: 240%;
     margin-bottom: 30px;
@@ -58,4 +58,4 @@
 }
 .paragraphTag {
     font-size: 130%;
-}
+} */

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react"
 
 import pokeNewsImg from "../assets/text/pokeNews.png"
-import "../styles/pokeNews.css"
 
 const News = () => {
 	useEffect(() => {
@@ -14,14 +13,14 @@ const News = () => {
 
 	return (
 		<div className="title">
-			<img src={pokeNewsImg} alt="PokéNews" />
+			{/* <img src={pokeNewsImg} alt="PokéNews" />
 			<div className="poke-twitter-container">
 				<a
 					className="twitter-timeline"
 					data-theme="dark"
 					href="https://twitter.com/Pokemon?ref_src=twsrc%5Etfw"
 				></a>
-			</div>
+			</div> */}
 		</div>
 	)
 }

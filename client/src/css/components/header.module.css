@@ -26,6 +26,21 @@
     }
 }
 
+/* ! TEST CLASS */
+.test_class {
+    display: inline-block;
+    font-size: 16px; /* Standardize font size */
+    font-family: inherit; /* Inherit font family */
+    padding: 10px 20px; /* Standardize padding */
+    background-color: #007bff; /* Standardize background color */
+    color: white; /* Standardize text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Standardize border radius */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline for <Link> */
+    cursor: pointer; /* Standardize cursor */
+}
+
 /* * Typography */
 .primary_text {
     font: var(--font-800);

@@ -1,33 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react"
+import { useNavigate, Link } from "react-router-dom"
 
-import { useAuth } from "../context/AuthContext";
-import lobbiesImg from "../assets/text/lobbies.png";
-import LobbyService from "../services/LobbyService";
-
-import "../styles/lobbyHome.css"
+import { useAuth } from "../context/AuthContext"
+import lobbiesImg from "../assets/text/lobbies.png"
+import LobbyService from "../services/LobbyService"
 
 const Lobbies = () => {
 
-    const { authToken, loggedUser, handleLoginResponse, updateLoggedUser, updateAuthToken, pathParamValidator, handleLoginToken } = useAuth();
+    const { authToken, loggedUser, handleLoginResponse, updateLoggedUser, updateAuthToken, pathParamValidator, handleLoginToken } = useAuth()
 
-    const [lobbies, setLobbies] = useState([]);
+    const [lobbies, setLobbies] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const lobbies = await LobbyService.getAllLobbies();
-                setLobbies(lobbies);
+                const lobbies = await LobbyService.getAllLobbies()
+                setLobbies(lobbies)
             } catch (error) {
-                console.error(error);
+                console.error(error)
             }
-        };
-        fetchData();
-    }, []);
+        }
+        fetchData()
+    }, [])
 
     return (
         <div className="container-main">
-            <img src={lobbiesImg} alt="Lobbies" className="lobbies-img"/>
+            {/* <img src={lobbiesImg} alt="Lobbies" className="lobbies-img"/>
             <div className="container-content">
                 <div className="content-main">
                     <h2>
@@ -40,9 +38,9 @@ const Lobbies = () => {
                                     <th className="table-head">Name</th>
                                     <th className="table-head">Description</th>
                                     <th className="table-head">Actions
-                                        {/* <svg className="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet">
+                                        <svg className="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet">
                                             <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                                        </svg> */}
+                                        </svg>
                                     </th>
                                 </tr>
                             </thead>
@@ -128,9 +126,9 @@ const Lobbies = () => {
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div> */}
         </div>
-    );
-};
+    )
+}
 
-    export default Lobbies;
+    export default Lobbies

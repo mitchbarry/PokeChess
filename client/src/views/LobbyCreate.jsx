@@ -1,79 +1,77 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react"
+import { useNavigate, Link } from 'react-router-dom'
 
-import { useAuth } from "../context/AuthContext";
-import LobbyService from '../services/LobbyService';
-import errorUtilities from '../utilities/error.utilities';
-import gameStateUtilities from '../utilities/gameState.utilities';
-
-import"../styles/createLobby.css";
+import { useAuth } from "../context/AuthContext"
+import LobbyService from '../services/LobbyService'
+import errorUtilities from '../utilities/error.utilities'
+import gameStateUtilities from '../utilities/gameState.utilities'
 
 const CreateLobby = () => {
 
-    const { authToken, loggedUser, handleLoginResponse, updateLoggedUser, updateAuthToken, pathParamValidator, handleLoginToken } = useAuth();
+    const { authToken, loggedUser, handleLoginResponse, updateLoggedUser, updateAuthToken, pathParamValidator, handleLoginToken } = useAuth()
 
     const navigate = useNavigate()
 
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [password, setPassword] = useState("");
+    const [name, setName] = useState("")
+    const [description, setDescription] = useState("")
+    const [password, setPassword] = useState("")
     const [lobbies, setLobbies] = useState([])
     const [errors, setErrors] = useState({})
-    const [showNotification, setShowNotification] = useState(false);
+    const [showNotification, setShowNotification] = useState(false)
 
     useEffect(() => {
         if (loggedUser) {
             console.log(loggedUser)
-            getUserLobbies();
+            getUserLobbies()
         }
-    }, [loggedUser]);
+    }, [loggedUser])
 
     const getUserLobbies = async () => {
-        let response;
+        let response
         try {
-            response = await LobbyService.getUserLobbies(loggedUser._id);
+            response = await LobbyService.getUserLobbies(loggedUser._id)
         }
         catch (error) {
-            setErrors(errorUtilities.catchError(error));
-            setShowNotification(true);
+            setErrors(errorUtilities.catchError(error))
+            setShowNotification(true)
         }
         finally {
-            setLobbies(response);
+            setLobbies(response)
         }
-    };
+    }
 
     const handleInput = (e) => {
         switch(e.target.id) {
             case "name":
-                return handleName(e);
+                return handleName(e)
             case "description":
-                return handleDescription(e);
+                return handleDescription(e)
             case "password":
-                return handlePassword(e);
+                return handlePassword(e)
             default:
-                return;
+                return
         }
-    };
+    }
 
     const handleName = (e) => {
-        setName(e.target.value);
+        setName(e.target.value)
     }
 
     const handleDescription = (e) => {
-        setDescription(e.target.value);
+        setDescription(e.target.value)
     }
 
     const handlePassword = (e) => {
-        setPassword(e.target.value);
+        setPassword(e.target.value)
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        sendRequest();
-    };
+        e.preventDefault()
+        sendRequest()
+    }
 
     const sendRequest = async () => {
-        const newGameState = gameStateUtilities.newGameState();
+        const newGameState = gameStateUtilities.newGameState()
         try {
             await LobbyService.createOneLobby({
                 name: name.trim() ? name : loggedUser.username + "'s Lobby",
@@ -81,40 +79,40 @@ const CreateLobby = () => {
                 password: password.trim(),
                 creator: loggedUser._id,
                 gameState: newGameState
-            });
+            })
         }
         catch (error) {
-            setErrors(errorUtilities.catchError(error));
-            setShowNotification(true);
+            setErrors(errorUtilities.catchError(error))
+            setShowNotification(true)
         }
         finally {
-            navigate("/lobbies/new");
+            navigate("/lobbies/new")
         }
     }
 
     const handleDelete = async(id) => {
         try {
-            await LobbyService.deleteOneLobby(id);
+            await LobbyService.deleteOneLobby(id)
         }
         catch (error) {
-            setErrors(errorUtilities.catchError(error));
-            setShowNotification(true);
+            setErrors(errorUtilities.catchError(error))
+            setShowNotification(true)
         }
         finally {
-            getUserLobbies();
+            getUserLobbies()
         }
     }
 
     const closeNotification = () => {
-        setShowNotification(false);
+        setShowNotification(false)
     }
 
     return (
         <div className="d-flex flex-row col-12">
-            <div className="container d-flex flex-row col-12 " style={{backgroundColor:'rgb(51, 103, 153, 0.9)'}}>
+            {/* <div className="container d-flex flex-row col-12 " style={{backgroundColor:'rgb(51, 103, 153, 0.9)'}}>
                 <div>
                     <h2 className='text-warning'>Create Lobby</h2>
-                    {/* {Object.keys(errors).length !== 0 && showNotification && (
+                    {Object.keys(errors).length !== 0 && showNotification && (
                         <ul className="alert alert-danger">
                             <button type="button" className="btn-close close-button-red" aria-label="Close" onClick={closeNotification}></button>
                             {errors.statusCode && errors.name && (
@@ -135,7 +133,7 @@ const CreateLobby = () => {
                                 ))
                             )}
                         </ul>
-                    )} */}
+                    )}
                     <form onSubmit={handleSubmit} className="form-control mt-3 d-flex flex-column" style={{background:'radial-gradient(silver,slategrey)',width:'45vh'}}>
                         <label className='form-label my-1 text-warning' htmlFor="name">
                             <h5>Lobby</h5>
@@ -195,9 +193,9 @@ const CreateLobby = () => {
                         </tbody>
                     </Table>
                 </Container>
-            </div>
+            </div> */}
         </div>
     )
 }
 
-export default CreateLobby;
+export default CreateLobby
