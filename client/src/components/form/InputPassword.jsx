@@ -29,7 +29,7 @@ const InputPassword = (props) => {
                 type={showPassword ? ' text' : 'password'}
                 id='password'
                 name='password'
-                className={`${inputPasswordStyles.input} ${inputPasswordStyles.primary_text} ${focus.password && inputPasswordStyles.input__focus} ${((Object.values(formErrors.password).some(value => value) && !initialRender) || (error.validationErrors && error.validationErrors.password)) && inputPasswordStyles.input__error} w-100 transition-default`}
+                className={`${inputPasswordStyles.input} ${inputPasswordStyles.primary_text} ${((Object.values(formErrors.password).some(value => value) && !initialRender) || (error.validationErrors && error.validationErrors.password)) && inputPasswordStyles.input__error} w-100 transition-default`}
                 value={value}
                 onChange={(e) => handleInput(e)}
             />
@@ -39,7 +39,7 @@ const InputPassword = (props) => {
                 <span className={`${inputPasswordStyles.label} ${(focus.password || value) ? inputPasswordStyles.primary_text__shrink : inputPasswordStyles.primary_text} transition-default`}>Password</span>
             </label>
             {(focus.password) && (
-                <button type='button' className={`${inputPasswordStyles.input_password_icon} ${showPassword && inputPasswordStyles.input_password_icon__active} transition-default clickable`} tabIndex="-1" onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
+                <button type='button' className={`${inputPasswordStyles.input_password_icon} transition-default clickable`} tabIndex="-1" onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
                     {showPassword ? (
                         <RevealIcon className={`${inputPasswordStyles.icon_default}`}/>
                     ) : (

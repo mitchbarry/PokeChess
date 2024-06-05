@@ -1,4 +1,13 @@
 /* * use BEM (Block, Entity, Modifier) for all css classes */
+/* * Structure */
+.form_input {
+    margin-bottom: var(--size-350);
+    position: relative;
+}
+.form_input__error {
+    margin-bottom: var(--size-200);
+}
+
 /* * Typography */
 .primary_text {
     font: var(--font-400);
@@ -6,15 +15,6 @@
 
 .primary_text__shrink {
     font: var(--font-200);
-}
-
-/* * Container */
-.form_input {
-    margin-bottom: var(--size-350);
-    position: relative;
-}
-.form_input__error {
-    margin-bottom: var(--size-200);
 }
 
 /* * Inputs */
@@ -36,10 +36,11 @@
     border: 2px solid var(--color-800);
 }
 
-.input__error {
+.input__error, .input__error:focus, .input__error:hover {
     border: 2px solid var(--color-alert-red);
 }
 
+/* * Labels */
 .input_label {
     line-height: var(--line-height);
     text-shadow: var(--shadow-xs);

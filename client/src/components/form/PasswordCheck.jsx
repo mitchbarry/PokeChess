@@ -4,6 +4,7 @@ import WarningIcon from '../svgs/WarningSvg'
 import CheckIcon from '../svgs/CheckSvg'
 import XIcon from '../svgs/XSvg'
 
+import errorStyles from '../../css/components/form/Error.module.css'
 import passwordCheckStyles from '../../css/components/form/PasswordCheck.module.css'
 
 const PasswordCheck = (props) => {
@@ -18,9 +19,9 @@ const PasswordCheck = (props) => {
         <>
             {Object.keys(error).length !== 0 && (
                 error.validationErrors.password && (
-                    <div className={passwordCheckStyles.error_container}>
-                        <WarningIcon className={passwordCheckStyles.icon_warning}/>
-                        <span className={passwordCheckStyles.secondary_text_accent}>FFFFFFFFFFFFFFFFF{error.validationErrors.password}</span>
+                    <div className={errorStyles.error_container}>
+                        <WarningIcon className={errorStyles.icon_warning}/>
+                        <span className={errorStyles.secondary_text_accent}>{error.validationErrors.password}</span>
                     </div>
                 )
             )}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import WarningIcon from '../svgs/WarningSvg'
 
@@ -12,7 +12,7 @@ const Error = (props) => {
 
     return (
         <>
-            {((error.validationErrors) && (error.validationErrors === {})) && (
+            {((error.validationErrors) && (Object.keys(error.validationErrors).length === 0)) && (
                 <div className={errorStyles.error_container}>
                     <WarningIcon className={errorStyles.icon_warning}/>
                     <span className={errorStyles.secondary_text_accent}>{error.message}</span>

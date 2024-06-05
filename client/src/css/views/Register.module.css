@@ -1,8 +1,6 @@
 /* * use BEM (Block, Entity, Modifier) for all css classes */
 /* * Structure */
 .container {
-    display: flex;
-    flex-direction: column;
     flex-grow: 1;
 }
 
@@ -28,11 +26,6 @@
     fill: inherit;
     stroke: inherit;
     width: var(--size-350);
-}
-
-/* * Common Styles */
-.form_submit, .form_link {
-    border-radius: 4px;
 }
 
 /* * Navigation */
@@ -63,6 +56,7 @@
 /* * Submit */
 .form_submit {
     height: var(--size-600);
+    border-radius: 4px;
 }
 
 .form_submit__active {
@@ -87,7 +81,7 @@
     box-shadow: 0 0 0 var(--size-025) var(--color-000), 0 0 0 var(--size-050) var(--color-800);
 }
 
-/* * Form Links */
+/* * Links */
 .form_links {
     margin-top: var(--size-250);
     align-items: center;
@@ -97,6 +91,7 @@
     line-height: var(--line-height);
     text-decoration: none;
     color: var(--color-500);
+    border-radius: 4px;
     position: relative;
     z-index: 1;
 }

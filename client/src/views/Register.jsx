@@ -232,7 +232,7 @@ const Register = () => {
     }
 
 	return (
-        <div className={`${registerStyles.container} flex-center`}>
+        <div className={`${registerStyles.container} flex-center flex-col`}>
             <div className={`${registerStyles.register}`}>
                 <div className={`flex-center w-100`}>
                     <div className={`${registerStyles.step_button} ${step === 0 ? registerStyles.step_button__active : registerStyles.step_button__disabled} clickable transition-default`} onClick={() => step !== 0 && setStep(0)} />

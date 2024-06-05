@@ -2,7 +2,7 @@ import React from 'react'
 
 import WarningIcon from '../svgs/WarningSvg'
 
-import inputErrorStyles from '../../css/components/form/InputError.module.css'
+import errorStyles from '../../css/components/form/Error.module.css'
 
 const InputErrors = (props) => {
 
@@ -15,16 +15,16 @@ const InputErrors = (props) => {
     return (
         <>
             {formErrors[name] && (
-                <div className={inputErrorStyles.error_container}>
-                    <WarningIcon className={inputErrorStyles.icon_warning}/>
-                    <span className={inputErrorStyles.secondary_text_accent}>{formErrors[name]}</span>
+                <div className={errorStyles.error_container}>
+                    <WarningIcon className={errorStyles.icon_warning}/>
+                    <span className={errorStyles.secondary_text_accent}>{formErrors[name]}</span>
                 </div>
             )}
 
             {(error.validationErrors && error.validationErrors[name]) && (
-                <div className={inputErrorStyles.error_container}>
-                    <WarningIcon className={inputErrorStyles.icon_warning}/>
-                    <span className={inputErrorStyles.secondary_text_accent}>{error.validationErrors[name]}</span>
+                <div className={errorStyles.error_container}>
+                    <WarningIcon className={errorStyles.icon_warning}/>
+                    <span className={errorStyles.secondary_text_accent}>{error.validationErrors[name]}</span>
                 </div>
             )}
         </>
