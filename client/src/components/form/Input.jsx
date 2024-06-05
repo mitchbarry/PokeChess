@@ -16,9 +16,9 @@ const Input = (props) => {
     } = props
 
     return (
-        <div className={`${inputStyles.form_input} ${((error.validationErrors && error.validationErrors[name]) || (formErrors[name])) && inputStyles.form_input__error} w-100`}
-            onFocus={() => handleFocus(name)}
-            onBlur={() => handleBlur(name)}
+        <div id={name} className={`${inputStyles.form_input} ${((error.validationErrors && error.validationErrors[name]) || (formErrors[name])) && inputStyles.form_input__error} w-100`}
+            onFocus={(e) => handleFocus(e)}
+            onBlur={(e) => handleBlur(e)}
         >
             <input
                 type={name !== 'password' ? 'text' : showPassword ? ' text' : 'password'}

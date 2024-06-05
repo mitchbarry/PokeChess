@@ -15,145 +15,55 @@ const starterData = [
 ]
 
 const StarterForm = (props) => {
-    const { starter, handleStarter } = props
+    const {
+		starter,
+		handleStarter
+	} = props
 
-    const [focus, setFocus] = useState({
-        option1: false,
-        option2: false,
-        option3: false
-    })
+	const [focus, setFocus] = useState('')
 
 	useEffect(() => {
-		const handleKeyDown = (event) => {
-			switch (event.key) {
-				case 'ArrowRight':
-				case 'd':
-				case 's':
-					if (focus.option1) {
-						setFocus({
-							option1: false,
-							option2: true,
-							option3: false
-						})
-					}
-					else if (focus.option2) {
-						setFocus({
-							option1: false,
-							option2: false,
-							option3: true
-						})
-					}
-					else if (focus.option3) {
-						setFocus({
-							option1: true,
-							option2: false,
-							option3: false
-						})
-					}
-					else {
-						setFocus({
-							option1: true,
-							option2: false,
-							option3: false
-						})
-					}
-					break
-				case 'ArrowLeft':
-				case 'a':
-				case 'w':
-					if (focus.option1) {
-						setFocus({
-							option1: false,
-							option2: false,
-							option3: true
-						})
-					}
-					else if (focus.option2) {
-						setFocus({
-							option1: true,
-							option2: false,
-							option3: false
-						})
-					}
-					else if (focus.option3) {
-						setFocus({
-							option1: false,
-							option2: true,
-							option3: false
-						})
-					}
-					else {
-						setFocus({
-							option1: false,
-							option2: false,
-							option3: true
-						})
-					}
-					break
-				case 'Enter':
-					starterData.forEach((option) => {
-						if (focus[option.name]) {
-							handleStarter(option.pokedexNumber)
-						}
-					})
-					break
-				default:
-					break
-			}
-		}
-	
+        const handleKeyDown = (event) => {
+            if (event.key === 'Enter') {
+                const selectedOption = starterData.find(option => option.id === focus)
+                if (selectedOption) {
+                    handleStarter(selectedOption.pokedexNumber)
+                }
+            }
+        }
 		document.addEventListener('keydown', handleKeyDown)
-	
 		return () => {
 			document.removeEventListener('keydown', handleKeyDown)
 		}
 	}, [focus])
 
-	const handleClick = (e) => {
-		const { id } = e.target
-		const selectedOption = starterData.find(option => option.id === id)
-	
-		if (selectedOption) {
-			if (starter === selectedOption.pokedexNumber) {
-				setFocus({
-					option1: false,
-					option2: false,
-					option3: false
-				})
-				handleStarter(0)
-			}
-			else {
-				setFocus({
-					option1: false,
-					option2: false,
-					option3: false,
-					[id]: true
-				})
-				handleStarter(selectedOption.pokedexNumber)
-			}
-		}
-	}
+    const handleClick = (e) => {
+        const { id } = e.target
+        const selectedOption = starterData.find(option => option.id === id)
+        if (selectedOption) {
+            if (starter === selectedOption.pokedexNumber) {
+                setFocus('')
+                handleStarter(0)
+            } else {
+                setFocus(id)
+                handleStarter(selectedOption.pokedexNumber)
+            }
+        }
+    }
 
     const handleFocus = (e) => {
         const { id } = e.target
-        setFocus(prevFocus => ({
-            ...prevFocus,
-            [id]: true
-        }))
+        setFocus(id)
     }
 
-    const handleBlur = (e) => {
-        const { id } = e.target
-        setFocus(prevFocus => ({
-            ...prevFocus,
-            [id]: false
-        }))
+    const handleBlur = () => {
+        setFocus('')
     }
 
     return (
         <div className={`${starterFormStyles.input_starter} w-100`}>
             {starterData.map((option) => {
-                const isFocused = focus[option.id] || starter === option.pokedexNumber
+                const isFocused = focus === option.id
                 const pointerClass = starterFormStyles[`pointer_${option.id}`]
                 return (
                     isFocused && (
@@ -174,9 +84,9 @@ const StarterForm = (props) => {
                     tabIndex="0"
                     role="button"
                     className={`${starterFormStyles.starter_option} ${starterFormStyles[option.id]} clickable`}
-                    onClick={handleClick}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
+                    onClick={(e) => handleClick(e)}
+					onFocus={(e) => handleFocus(e)}
+					onBlur={(e) => handleBlur(e)}
                 />
             ))}
 

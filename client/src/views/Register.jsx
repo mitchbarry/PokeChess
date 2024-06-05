@@ -146,7 +146,7 @@ const Register = () => {
             setError({})
         }
         lastSubmitTime.current = now;
-        if (validated) {
+        if (validated && step === 0) {
             setStep(step + 1)
         }
         else {
@@ -192,7 +192,8 @@ const Register = () => {
                 sendValidationRequest()
             }
             else {
-                sendCreateRequest()
+                console.log('AAAAAAAAA')
+                // sendCreateRequest()
             }
         }
     }
@@ -211,6 +212,7 @@ const Register = () => {
         catch (error) {
             const newError = errorUtilities.catchError(error)
             setError(newError)
+            console.log(error)
         }
     }
 
@@ -259,8 +261,7 @@ const Register = () => {
                             formErrors={formErrors}
                             error={error}
                         />
-                    ) : (
-                    step === 1 && (
+                    ) : ( step === 1 && (
                         <StarterForm
                             starter={starter}
                             handleStarter={handleStarter}
@@ -277,7 +278,7 @@ const Register = () => {
                                     }
                                     return !value
                                 }) ||
-                                ((!initialRender) && (formErrors.password.passwordLength || formErrors.password.passwordCharacters))) ? 
+                                ((!initialRender) && (formErrors.password.passwordLength || formErrors.password.passwordCharacters))) ?
                                 registerStyles.form_submit__disabled : registerStyles.form_submit__active
                             }
                             flex-center w-100 transition-default`

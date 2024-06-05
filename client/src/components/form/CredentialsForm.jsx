@@ -40,28 +40,18 @@ const CredentialsForm = (props) => {
         }
     }
 
-    const handleFocus = (input) => {
+    const handleFocus = (e) => {
+        const { id } = e.target
         setFocus((prevFocus) => ({
-            ...prevFocus, [input]: true,
+            ...prevFocus, [id]: true,
         }))
     }
 
-    const handleBlur = (input) => {
-        if (input === 'username') {
-            return setFocus((prevFocus) => ({
-                ...prevFocus, username: false
-            }))
-        }
-        if (input === 'email') {
-            return setFocus((prevFocus) => ({
-                ...prevFocus, email: false
-            }))
-        }
-        if (input === 'password') {
-            return setFocus((prevFocus) => ({
-                ...prevFocus, password: false
-            }))
-        }
+    const handleBlur = (e) => {
+        const { id } = e.target
+        setFocus((prevFocus) => ({
+            ...prevFocus, [id]: false
+        }))
     }
 
     return (

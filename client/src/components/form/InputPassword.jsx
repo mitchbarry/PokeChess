@@ -21,9 +21,9 @@ const InputPassword = (props) => {
     } = props
 
     return (
-        <div className={`${inputPasswordStyles.form_input} w-100`}
-            onFocus={() => handleFocus('password')}
-            onBlur={() => handleBlur('password')}
+        <div id='password' className={`${inputPasswordStyles.form_input} w-100`}
+            onFocus={(e) => handleFocus(e)}
+            onBlur={(e) => handleBlur(e)}
         >
             <input
                 type={showPassword ? ' text' : 'password'}
