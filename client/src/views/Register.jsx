@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { hasBadWords } from 'expletives'
@@ -145,7 +145,7 @@ const Register = () => {
         else {
             setError({})
         }
-        lastSubmitTime.current = now;
+        lastSubmitTime.current = now
         if (validated && step === 0) {
             setStep(step + 1)
         }
@@ -159,6 +159,12 @@ const Register = () => {
         const emailTrim = email.trim()
         setInitialRender(false)
         const newFormErrors = { ...formErrors }
+        const hasErrors = Object.values(newFormErrors).some(value => {
+            if (typeof value === 'object') {
+                return Object.values(value).some(val => val !== false)
+            }
+            return value !== ''
+        })
         if (!usernameTrim) { // Check username on submit
             newFormErrors.username = `Your username is required.`
         }
@@ -181,7 +187,7 @@ const Register = () => {
         else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(emailTrim)) {
             newFormErrors.email = `Please enter a valid email.`
         }
-        if (!Object.values(newFormErrors).every(value => typeof value === 'object' ? Object.values(value).every(val => val === false) : value === false)) {
+        if (hasErrors) {
             setFormErrors(prevErrors => ({ ...prevErrors, ...newFormErrors }))
             if (step !== 0) {
                 setStep(0)
@@ -190,9 +196,8 @@ const Register = () => {
         else {
             if (step === 0) {
                 sendValidationRequest()
-            }
-            else {
-                console.log('AAAAAAAAA')
+            } else {
+                console.log('All validations passed')
                 // sendCreateRequest()
             }
         }
