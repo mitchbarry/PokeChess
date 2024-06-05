@@ -39,6 +39,8 @@ const Register = () => {
     })
     const [error, setError] = useState({})
     const [isReady, setIsReady] = useState(false)
+    const [focus, setFocus] = useState('')
+
     const lastSubmitTime = useRef(0)
 
     useEffect(() => {
@@ -217,7 +219,6 @@ const Register = () => {
         catch (error) {
             const newError = errorUtilities.catchError(error)
             setError(newError)
-            console.log(error)
         }
     }
 
@@ -236,6 +237,14 @@ const Register = () => {
             const newError = errorUtilities.catchError(error)
             setError(newError)
         }
+    }
+
+    const handleFocus = (newFocus) => {
+        setFocus(newFocus)
+    }
+
+    const handleBlur = () => {
+        setFocus('')
     }
 
 	return (
@@ -265,11 +274,17 @@ const Register = () => {
                             initialRender={initialRender}
                             formErrors={formErrors}
                             error={error}
+                            focus={focus}
+                            handleFocus={handleFocus}
+                            handleBlur={handleBlur}
                         />
                     ) : ( step === 1 && (
                         <StarterForm
                             starter={starter}
                             handleStarter={handleStarter}
+                            focus={focus}
+                            handleFocus={handleFocus}
+                            handleBlur={handleBlur}
                         />
                     ))}
                     <button 

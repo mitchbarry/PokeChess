@@ -18,14 +18,11 @@ const CredentialsForm = (props) => {
         handleShowPassword,
         initialRender,
         formErrors,
-        error
+        error,
+        focus,
+        handleFocus,
+        handleBlur
     } = props
-
-	const [focus, setFocus] = useState({
-		username: false,
-		email: false,
-		password: false
-	})
 
     const handleInput = (e) => {
         switch(e.target.id) {
@@ -38,20 +35,6 @@ const CredentialsForm = (props) => {
             default:
                 return
         }
-    }
-
-    const handleFocus = (e) => {
-        const { id } = e.target
-        setFocus((prevFocus) => ({
-            ...prevFocus, [id]: true,
-        }))
-    }
-
-    const handleBlur = (e) => {
-        const { id } = e.target
-        setFocus((prevFocus) => ({
-            ...prevFocus, [id]: false
-        }))
     }
 
     return (

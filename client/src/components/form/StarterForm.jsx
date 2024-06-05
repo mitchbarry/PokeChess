@@ -17,10 +17,11 @@ const starterData = [
 const StarterForm = (props) => {
     const {
 		starter,
-		handleStarter
+		handleStarter,
+        focus,
+        handleFocus,
+        handleBlur
 	} = props
-
-	const [focus, setFocus] = useState('')
 
 	useEffect(() => {
         const handleKeyDown = (event) => {
@@ -37,27 +38,26 @@ const StarterForm = (props) => {
 		}
 	}, [focus])
 
+	useEffect(() => {
+		if (starter !== 0) {
+			const selectedPokemon = starterData.find(pokemon => pokemon.pokedexNumber === starter)
+            handleFocus(selectedPokemon.id)
+		}
+	}, [])
+
     const handleClick = (e) => {
         const { id } = e.target
         const selectedOption = starterData.find(option => option.id === id)
         if (selectedOption) {
             if (starter === selectedOption.pokedexNumber) {
-                setFocus('')
+                handleFocus('')
                 handleStarter(0)
-            } else {
-                setFocus(id)
+            }
+            else {
+                handleFocus(id)
                 handleStarter(selectedOption.pokedexNumber)
             }
         }
-    }
-
-    const handleFocus = (e) => {
-        const { id } = e.target
-        setFocus(id)
-    }
-
-    const handleBlur = () => {
-        setFocus('')
     }
 
     return (
@@ -85,8 +85,8 @@ const StarterForm = (props) => {
                     role="button"
                     className={`${starterFormStyles.starter_option} ${starterFormStyles[option.id]} clickable`}
                     onClick={(e) => handleClick(e)}
-					onFocus={(e) => handleFocus(e)}
-					onBlur={(e) => handleBlur(e)}
+					onFocus={(e) => handleFocus(e.target.id)}
+					onBlur={(e) => handleBlur(e.target.id)}
                 />
             ))}
 
