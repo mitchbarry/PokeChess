@@ -47,7 +47,7 @@ const PasswordCheck = (props) => {
                             <XIcon className={`${passwordCheckStyles.icon_check}`}/>
                         )}
                     </div>
-                    <span className={`${passwordCheckStyles.primary_text_accent__shrink} flex-center`}>Password includes two of the following letter, number, or symbol.</span>
+                    <span className={`${passwordCheckStyles.primary_text_accent__shrink} flex-center`}>Password includes two of the following; letter, number, or symbol.</span>
                 </div>
             </div>
         </>

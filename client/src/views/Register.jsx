@@ -54,27 +54,27 @@ const Register = () => {
         switch (newFormErrors.username) {
             case 'Your username is required.':
                 if (value) {
-                    newFormErrors.username = false
+                    newFormErrors.username = ''
                 }
                 break
             case 'Your username must be at least 3 characters.':
                 if (value.length >= 3) {
-                    newFormErrors.username = false
+                    newFormErrors.username = ''
                 }
                 break
             case `Your username can't be more than 16 characters.`:
                 if (value.length <= 16) {
-                    newFormErrors.username = false
+                    newFormErrors.username = ''
                 }
                 break
             case `Your username can't contain special characters.`:
                 if (/^[a-zA-Z0-9\s]+$/.test(value)) {
-                    newFormErrors.username = false
+                    newFormErrors.username = ''
                 }
                 break
             case 'Your username must be appropriate.':
                 if (!hasBadWords(value)) {
-                    newFormErrors.username = false
+                    newFormErrors.username = ''
                 }
                 break
             default:
@@ -90,12 +90,12 @@ const Register = () => {
         switch (newFormErrors.email) {
             case 'Your email is required.':
                 if (value) {
-                    newFormErrors.email = false
+                    newFormErrors.email = ''
                 }
                 break
             case 'Please enter a valid email.':
                 if (/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value)) {
-                    newFormErrors.email = false
+                    newFormErrors.email = ''
                 }
                 break
             default:
@@ -136,12 +136,14 @@ const Register = () => {
         e.preventDefault()
         const now = Date.now()
         if (!isReady || now - lastSubmitTime.current < 1000) {
-            setError({
+            const newError = {
                 statusCode: 400,
                 message: 'Form submission failed: Please wait before submitting again.',
                 name: 'FormSubmissionError',
                 validationErrors: {}
-            })
+            }
+            console.error(newError)
+            setError(newError)
             return
         }
         else {
@@ -198,8 +200,9 @@ const Register = () => {
         else {
             if (step === 0) {
                 sendValidationRequest()
-            } else {
-                console.log('All validations passed')
+            }
+            else {
+                console.log(' ------------------------------------------------------------- All validations passed ------------------------------------------------------------- ')
                 // sendCreateRequest()
             }
         }
