@@ -111,20 +111,24 @@ const authController = {
             }
             if (!user) {
                 const normalizedError = {
-                    statusCode: 401,
-                    message: 'InvalidAccountName',
-                    name: 'AuthenticationError',
-                    validationErrors: {}
+                    statusCode: 400,
+                    message: 'User validation failed: accountName: Invalid account name.',
+                    name: 'ValidationError',
+                    validationErrors: {
+                        accountName: 'Invalid account name.'
+                    }
                 }
                 return res.status(401).json(normalizedError)
             }
             const passwordMatch = await bcrypt.compare(password, user.password)
             if (!passwordMatch) {
                 const normalizedError = {
-                    statusCode: 401,
-                    message: 'InvalidPassword',
-                    name: 'AuthenticationError',
-                    validationErrors: {}
+                    statusCode: 400,
+                    message: 'User validation failed: password: Incorrect password.',
+                    name: 'ValidationError',
+                    validationErrors: {
+                        password: 'Incorrect password.'
+                    }
                 }
                 return res.status(401).json(normalizedError)
             }

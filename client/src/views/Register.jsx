@@ -160,12 +160,6 @@ const Register = () => {
     const checkForm = () => {
         setInitialRender(false)
         const newFormErrors = { ...formErrors }
-        const hasErrors = Object.values(newFormErrors).some(value => {
-            if (typeof value === 'object') {
-                return Object.values(value).some(val => val !== false)
-            }
-            return value !== ''
-        })
         const usernameTrim = username.trim()
         const emailTrim = email.trim()
         if (!usernameTrim) { // Check username on submit
@@ -190,6 +184,12 @@ const Register = () => {
         else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(emailTrim)) {
             newFormErrors.email = `Please enter a valid email.`
         }
+        const hasErrors = Object.values(newFormErrors).some(value => {
+            if (typeof value === 'object') {
+                return Object.values(value).some(val => val !== false)
+            }
+            return value !== ''
+        })
         if (hasErrors) {
             setFormErrors(prevErrors => ({ ...prevErrors, ...newFormErrors }))
             if (step !== 0) {

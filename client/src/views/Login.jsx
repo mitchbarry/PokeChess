@@ -94,13 +94,13 @@ const Login = () => {
 
     const checkForm = () => {
         const newFormErrors = {...formErrors}
-        const hasErrors = Object.values(newFormErrors).some(value => value !== '')
         if (!accountName.trim()) {
             newFormErrors.accountName = `Please enter your email or username.`
         }
         if (!password.trim()) {
             newFormErrors.password = `Please enter your password.`
         }
+        const hasErrors = Object.values(newFormErrors).some(value => value !== '')
         if (hasErrors) {
             setFormErrors(prevErrors => ({ ...prevErrors, ...newFormErrors }))
         }
