@@ -77,7 +77,7 @@
     cursor: not-allowed;
 }
 
-.form_submit:focus {
+.form_submit:focus-visible {
     box-shadow: 0 0 0 var(--size-025) var(--color-000), 0 0 0 var(--size-050) var(--color-800);
 }
 
@@ -100,7 +100,7 @@
     color: var(--color-800);
 }
 
-.form_link:focus::before {
+.form_link:focus-visible::before {
     content: '';
     position: absolute;
     top: 0px;
