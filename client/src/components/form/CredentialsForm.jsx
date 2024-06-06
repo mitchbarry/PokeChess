@@ -1,6 +1,6 @@
 import React from 'react'
 
-import OtherError from '../../components/form/OtherError'
+import OtherError from './OtherError'
 import Input from './Input'
 import FormError from './FormError'
 import ValidationError from './ValidationError'
@@ -52,19 +52,18 @@ const CredentialsForm = (props) => {
                 focus={focus}
                 handleFocus={handleFocus}
                 handleBlur={handleBlur}
+                type='text'
                 name='username'
+                placeholder='Username'
             />
-
             <FormError
                 formErrors={formErrors}
                 name='username'
             />
-
             <ValidationError
                 error={error}
                 name='username'
             />
-
             <Input
                 value={email}
                 handleInput={handleInput}
@@ -73,19 +72,18 @@ const CredentialsForm = (props) => {
                 focus={focus}
                 handleFocus={handleFocus}
                 handleBlur={handleBlur}
+                type='email'
                 name='email'
+                placeholder='Email'
             />
-
             <FormError
                 formErrors={formErrors}
                 name='email'
             />
-
             <ValidationError
                 error={error}
                 name='email'
             />
-
             <InputPassword
                 value={password}
                 handleInput={handleInput}
@@ -98,13 +96,12 @@ const CredentialsForm = (props) => {
                 handleFocus={handleFocus}
                 handleBlur={handleBlur}
                 name='password'
+                placeholder='Password'
             />
-
             <ValidationError
                 error={error}
                 name='password'
             />
-
             <PasswordCheck
                 formErrors={formErrors}
                 error={error}

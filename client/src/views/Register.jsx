@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import { hasBadWords } from 'expletives'
 
 import { useAuth } from '../context/AuthContext'
@@ -26,6 +25,7 @@ const Register = () => {
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const [starter, setStarter] = useState(0)
+    const [stayLogged, setStayLogged] = useState(false) // NEEDS TO BE IMPLEMENTED
     const [validated, setValidated] = useState(false)
     const [initialRender, setInitialRender] = useState(true)
     const [formErrors, setFormErrors] = useState({
@@ -158,8 +158,6 @@ const Register = () => {
 	}
 
     const checkForm = () => {
-        const usernameTrim = username.trim()
-        const emailTrim = email.trim()
         setInitialRender(false)
         const newFormErrors = { ...formErrors }
         const hasErrors = Object.values(newFormErrors).some(value => {
@@ -168,6 +166,8 @@ const Register = () => {
             }
             return value !== ''
         })
+        const usernameTrim = username.trim()
+        const emailTrim = email.trim()
         if (!usernameTrim) { // Check username on submit
             newFormErrors.username = `Your username is required.`
         }
@@ -201,7 +201,7 @@ const Register = () => {
                 sendValidationRequest()
             }
             else {
-                sendCreateRequest()
+                sendRegisterRequest()
             }
         }
     }
@@ -223,7 +223,7 @@ const Register = () => {
         }
     }
 
-    const sendCreateRequest = async () => {
+    const sendRegisterRequest = async () => {
         try {
             const response = await AuthService.register({
                 username: username.trim(),

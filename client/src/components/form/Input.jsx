@@ -12,7 +12,10 @@ const Input = (props) => {
         focus,
         handleFocus,
         handleBlur,
-        name
+        type,
+        name,
+        placeholder,
+        children
     } = props
 
     return (
@@ -21,7 +24,7 @@ const Input = (props) => {
             onBlur={(e) => handleBlur(e.target.id)}
         >
             <input
-                type={name !== 'password' ? 'text' : showPassword ? ' text' : 'password'}
+                type={type}
                 id={name}
                 name={name}
                 className={`${styles.input} ${styles.primary_text} ${((formErrors[name]) || (error.validationErrors && error.validationErrors[name])) && styles.input__error} w-100 transition-default`}
@@ -31,8 +34,9 @@ const Input = (props) => {
             <label htmlFor={name} className={`${styles.input_label}
                 ${(focus === name || value) && styles.input_label__shrink}
                 ${((formErrors[name]) || (error.validationErrors && error.validationErrors[name])) && styles.input_label__error} transition-default`}>
-                <span className={`${styles.label} ${(focus === name || value) ? styles.primary_text__shrink : styles.primary_text} transition-default`}>{name.charAt(0).toUpperCase() + name.slice(1)}</span>
+                <span className={`${styles.label} ${(focus === name || value) ? styles.primary_text__shrink : styles.primary_text} transition-default`}>{placeholder}</span>
             </label>
+            {children}
         </div>
 	)
 }

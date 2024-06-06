@@ -42,19 +42,19 @@
 
 /* * Labels */
 .input_label {
+    left: var(--size-150);
     line-height: var(--line-height);
     text-shadow: var(--shadow-xs);
     color: var(--color-500);
     position: absolute;
     top: 50%;
-    left: var(--size-150);
     transform: translateY(-50%);
     pointer-events: none;
 }
 
 .input_label__shrink {
-    color: var(--color-600);
     top: var(--size-150);
+    color: var(--color-600);
 }
 
 .input_label__error {

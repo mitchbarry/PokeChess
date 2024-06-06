@@ -18,7 +18,8 @@ const InputPassword = (props) => {
         focus,
         handleFocus,
         handleBlur,
-        name
+        name,
+        placeholder
     } = props
 
     return (
@@ -37,7 +38,7 @@ const InputPassword = (props) => {
             <label htmlFor={name} className={`${styles.input_label}
                 ${(focus === name || value) && styles.input_label__shrink}
                 ${((Object.values(formErrors.password).some(value => value) && !initialRender) || (error.validationErrors && error.validationErrors.password)) && styles.input_label__error} transition-default`}>
-                <span className={`${styles.label} ${(focus === name || value) ? styles.primary_text__shrink : styles.primary_text} transition-default`}>Password</span>
+                <span className={`${styles.label} ${(focus === name || value) ? styles.primary_text__shrink : styles.primary_text} transition-default`}>{placeholder}</span>
             </label>
             {(focus === name) && (
                 <button type='button' className={`${styles.input_password_icon} transition-default clickable`} tabIndex="-1" onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
