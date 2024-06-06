@@ -26,7 +26,6 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [starter, setStarter] = useState(0)
     const [stayLogged, setStayLogged] = useState(false) // NEEDS TO BE IMPLEMENTED
-    const [validated, setValidated] = useState(false)
     const [initialRender, setInitialRender] = useState(true)
     const [formErrors, setFormErrors] = useState({
         username: '',
@@ -37,6 +36,7 @@ const Register = () => {
         }
     })
     const [error, setError] = useState({})
+    const [validated, setValidated] = useState(false)
     const [isReady, setIsReady] = useState(false)
     const [focus, setFocus] = useState('')
 
@@ -145,16 +145,8 @@ const Register = () => {
             setError(newError)
             return
         }
-        else {
-            setError({})
-        }
         lastSubmitTime.current = now
-        if (validated && step === 0) {
-            setStep(step + 1)
-        }
-        else {
-            checkForm()
-        }
+        checkForm()
 	}
 
     const checkForm = () => {
@@ -192,17 +184,10 @@ const Register = () => {
         })
         if (hasErrors) {
             setFormErrors(prevErrors => ({ ...prevErrors, ...newFormErrors }))
-            if (step !== 0) {
-                setStep(0)
-            }
+            setStep(0)
         }
         else {
-            if (step === 0) {
-                sendValidationRequest()
-            }
-            else {
-                sendRegisterRequest()
-            }
+            step === 0 ? sendValidationRequest() : sendRegisterRequest()
         }
     }
 
@@ -211,11 +196,11 @@ const Register = () => {
             const response = await AuthService.validateUser({
                 username: username.trim(),
                 email: email.trim(),
-                password
+                password,
+                starter
             })
-            setValidated(response.isValid)
-            setStep(step + 1)
-            setInitialRender(true)
+            setStep(1)
+            setValidated(true)
         }
         catch (error) {
             const newError = errorUtilities.catchError(error)
@@ -252,8 +237,8 @@ const Register = () => {
         <div className={`${styles.container} flex-center flex-col`}>
             <div className={`${styles.register}`}>
                 <div className={`flex-center w-100`}>
-                    <div className={`${styles.step_button} ${step === 0 ? styles.step_button__active : styles.step_button__disabled} clickable transition-default`} onClick={() => step !== 0 && setStep(0)} />
-                    <div className={`${styles.step_button} ${step === 1 ? styles.step_button__active : styles.step_button__disabled} clickable transition-default`} onClick={() => (validated && step !== 1) && setStep(1)} />
+                    <div className={`${styles.step_button} ${step === 0 ? styles.step_button__active : styles.step_button__disabled} clickable transition-default`} onClick={() => setStep(0)} />
+                    <div className={`${styles.step_button} ${step === 1 ? styles.step_button__active : styles.step_button__disabled} clickable transition-default`} onClick={() => validated && setStep(1)} />
                 </div>
                 <h1 className={styles.form_title}>
                     <span className={styles.primary_text}>{step === 0 ? 'Register' : 'Choose Your Starter'}</span>

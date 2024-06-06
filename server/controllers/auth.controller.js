@@ -9,70 +9,78 @@ const generateAuthToken = (user) => {
     return jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' })
 }
 
+const checkUser = async (user) => {
+    const { username, email, password, starter } = user
+    let normalizedError = {
+        statusCode: 400,
+        message: 'User validation failed: ',
+        name: 'ValidationError',
+        validationErrors: {}
+    }
+
+    const [existingUsername, existingEmail] = await Promise.all([
+        User.findOne({ username }),
+        User.findOne({ email })
+    ])
+
+    const isPasswordValid = password.length >= 8 &&
+        password.length <= 255 &&
+        (/^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(password))
+
+    const newUser = new User({ username, email, password, starter })
+
+    try {
+        await newUser.validate()
+    }
+    catch (error) {
+        normalizedError = errorUtilities.normalizeError(error)
+    }
+
+    if (existingUsername) {
+        const usernameError = 'Username already in use.'
+        normalizedError.message += `username: ${usernameError} `
+        normalizedError.validationErrors.username = usernameError
+    }
+
+    if (existingEmail) {
+        const emailError = 'Email already in use.'
+        normalizedError.message += `email: ${emailError} `
+        normalizedError.validationErrors.email = emailError
+    }
+
+    if (!isPasswordValid) {
+        let passwordError
+        if (password.length === 0) {
+            passwordError = 'Your password is required.'
+        }
+        else if (password.length < 8) {
+            passwordError = 'Your password must be at least 8 characters.'
+        }
+        else if (password.length > 255) {
+            passwordError = 'Your password can\'t be more than 255 characters.'
+        }
+        else if (!/^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(password)) {
+            passwordError = 'Your password must include at least two of the following; letter, number, or symbol.'
+        }
+        normalizedError.message += `password: ${passwordError} `
+        normalizedError.validationErrors.password = passwordError
+    }
+
+    if (Object.keys(normalizedError.validationErrors).length > 0) {
+        return { isValid: false, error: normalizedError }
+    }
+
+    return { isValid: true, user: newUser }
+}
+
 const authController = {
     async validateUser(req, res, next) {
         try {
-            const { username, email, password } = req.body
-            let normalizedError = {
-                statusCode: 400,
-                message: 'User validation failed: ',
-                name: 'ValidationError',
-                validationErrors: {}
+            const result = await checkUser(req.body)
+            if (!result.isValid) {
+                return res.status(400).json(result.error)
             }
-
-            const [existingUsername, existingEmail] = await Promise.all([
-                User.findOne({ username }),
-                User.findOne({ email })
-            ])
-
-            const isPasswordValid = password.length >= 8 &&
-                password.length <= 255 &&
-                (/^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(password))
-
-            const newUser = new User({ username, email, password })
-
-            try {
-                await newUser.validate()
-            }
-            catch (error) {
-                normalizedError = errorUtilities.normalizeError(error)
-            }
-
-            if (existingUsername) {
-                const usernameError = 'Username already in use.'
-                normalizedError.message += `username: ${usernameError} `
-                normalizedError.validationErrors.username = usernameError
-            }
-
-            if (existingEmail) {
-                const emailError = 'Email already in use.'
-                normalizedError.message += `email: ${emailError} `
-                normalizedError.validationErrors.email = emailError
-            }
-
-            if (!isPasswordValid) {
-                let passwordError
-                if (password.length === 0) {
-                    passwordError = 'Your password is required.'
-                }
-                else if (password.length < 8) {
-                    passwordError = 'Your password must be at least 8 characters.'
-                }
-                else if (password.length > 255) {
-                    passwordError = 'Your password can\'t be more than 255 characters.'
-                }
-                else if (!/^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(password)) {
-                    passwordError = 'Your password must include at least two of the following: letter, number, or symbol.'
-                }
-                normalizedError.message += `password: ${passwordError} `
-                normalizedError.validationErrors.password = passwordError
-            }
-
-            if (Object.keys(normalizedError.validationErrors).length > 0) {
-                return res.status(400).json(normalizedError)
-            }
-
-            return res.status(200).json({ isValid: true })
+            return res.status(200).json(result.isValid)
         }
         catch (error) {
             next(error)
@@ -81,17 +89,16 @@ const authController = {
 
     async registerUser(req, res, next) {
         try {
-            const { username, email, password, starter } = req.body
-            const hashedPassword = await bcrypt.hash(password, 10)
-            const newUser = new User({
-                username,
-                email,
-                password: hashedPassword,
-                starter
-            })
-            await newUser.save()
-            const token = generateAuthToken(newUser)
-            res.json({ user: newUser, token })
+            const result = await checkUser(req.body)
+            if (!result.isValid) {
+                return res.status(400).json(result.error)
+            }
+
+            const { user } = result
+            user.password = await bcrypt.hash(user.password, 10)
+            await user.save()
+            const token = generateAuthToken(user)
+            res.json({ user, token })
         }
         catch (error) {
             next(error)

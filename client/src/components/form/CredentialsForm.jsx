@@ -72,7 +72,7 @@ const CredentialsForm = (props) => {
                 focus={focus}
                 handleFocus={handleFocus}
                 handleBlur={handleBlur}
-                type='email'
+                type='text' // opted to not use email type because of browser default styling
                 name='email'
                 placeholder='Email'
             />
