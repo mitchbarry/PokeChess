@@ -48,9 +48,9 @@
 }
 
 .avatar {
-    width: var(--size-600);
-    aspect-ratio: 1/1;
-    background-color: var(--color-100);
+    width: var(--size-700);
+    height: auto;
+    border: 2px solid var(--color-900);
     border-radius: 5px;
     margin-right: var(--size-150);
 }

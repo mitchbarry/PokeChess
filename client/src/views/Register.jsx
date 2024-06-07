@@ -193,7 +193,7 @@ const Register = () => {
 
     const sendValidationRequest = async () => {
         try {
-            const response = await AuthService.validateUser({
+            await AuthService.validateUser({
                 username: username.trim(),
                 email: email.trim(),
                 password,
@@ -209,12 +209,14 @@ const Register = () => {
     }
 
     const sendRegisterRequest = async () => {
+        const randomNumber = Math.floor(Math.random() * 9) + 1
         try {
             const response = await AuthService.register({
                 username: username.trim(),
                 email: email.trim(),
                 password,
-                starter
+                starter,
+                avatar: `avatar${randomNumber}`
             })
             handleLoginResponse(response)
             navigate('/')

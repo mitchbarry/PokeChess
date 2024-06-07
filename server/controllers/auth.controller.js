@@ -10,44 +10,37 @@ const generateAuthToken = (user) => {
 }
 
 const checkUser = async (user) => {
-    const { username, email, password, starter } = user
+    const { username, email, password, starter, avatar } = user
     let normalizedError = {
         statusCode: 400,
         message: 'User validation failed: ',
         name: 'ValidationError',
         validationErrors: {}
     }
-
     const [existingUsername, existingEmail] = await Promise.all([
         User.findOne({ username }),
         User.findOne({ email })
     ])
-
     const isPasswordValid = password.length >= 8 &&
         password.length <= 255 &&
         (/^(?=.*[a-zA-Z])(?=.*\d).+$|^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9\s]).+$|^(?=.*[0-9])(?=.*[^a-zA-Z0-9\s]).+$/.test(password))
-
-    const newUser = new User({ username, email, password, starter })
-
+    const newUser = new User({ username, email, password, starter, avatar })
     try {
         await newUser.validate()
     }
     catch (error) {
         normalizedError = errorUtilities.normalizeError(error)
     }
-
     if (existingUsername) {
         const usernameError = 'Username already in use.'
         normalizedError.message += `username: ${usernameError} `
         normalizedError.validationErrors.username = usernameError
     }
-
     if (existingEmail) {
         const emailError = 'Email already in use.'
         normalizedError.message += `email: ${emailError} `
         normalizedError.validationErrors.email = emailError
     }
-
     if (!isPasswordValid) {
         let passwordError
         if (password.length === 0) {
@@ -65,11 +58,9 @@ const checkUser = async (user) => {
         normalizedError.message += `password: ${passwordError} `
         normalizedError.validationErrors.password = passwordError
     }
-
     if (Object.keys(normalizedError.validationErrors).length > 0) {
         return { isValid: false, error: normalizedError }
     }
-
     return { isValid: true, user: newUser }
 }
 
@@ -93,7 +84,6 @@ const authController = {
             if (!result.isValid) {
                 return res.status(400).json(result.error)
             }
-
             const { user } = result
             user.password = await bcrypt.hash(user.password, 10)
             await user.save()

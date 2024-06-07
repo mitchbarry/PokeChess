@@ -38,8 +38,11 @@ const UserSchema = new Schema(
 		},
 		starter: {
 			type: Number,
-			required: false,
-			default: 0
+			required: false
+		},
+		avatar: {
+			type: String,
+			required: false
 		}
 	},
 	{ timestamps: true }

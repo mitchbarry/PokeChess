@@ -6,7 +6,17 @@ import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
 
 import pokeChess from '../assets/text/pokeChess.png'
-import favicon from '../assets/favicon126px.png'
+import favicon from '../assets/pokeball128px.png'
+
+import avatar1 from '../assets/avatars/avatar1.jpg'
+import avatar2 from '../assets/avatars/avatar2.jpg'
+import avatar3 from '../assets/avatars/avatar3.jpg'
+import avatar4 from '../assets/avatars/avatar4.jpg'
+import avatar5 from '../assets/avatars/avatar5.jpg'
+import avatar6 from '../assets/avatars/avatar6.jpg'
+import avatar7 from '../assets/avatars/avatar7.jpg'
+import avatar8 from '../assets/avatars/avatar8.jpg'
+import avatar9 from '../assets/avatars/avatar9.jpg'
 
 import DropdownArrowIcon from './svgs/DropdownArrowSvg'
 import ExternalLinkIcon from './svgs/ExternalLinkSvg'
@@ -35,6 +45,31 @@ const Header = () => {
         catch (error) {
             console.error('Logout failed:', error)
         }
+	}
+
+	const findAvatar = (avatar) => {
+		switch (avatar) {
+			case 'avatar1':
+				return avatar1;
+			case 'avatar2':
+				return avatar2;
+			case 'avatar3':
+				return avatar3;
+			case 'avatar4':
+				return avatar4;
+			case 'avatar5':
+				return avatar5;
+			case 'avatar6':
+				return avatar6;
+			case 'avatar7':
+				return avatar7;
+			case 'avatar8':
+				return avatar8;
+			case 'avatar9':
+				return avatar9;
+			default:
+				return avatar1;
+		}
 	}
 
     return (
@@ -94,7 +129,7 @@ const Header = () => {
 					<div className={`${styles.dropdown_menu} ${styles.menu_primary} flex-col`}>
 						{authToken ? (
 							<div className={`${styles.account_info}`}>
-								<div className={styles.avatar}/>
+								<img src={findAvatar(loggedUser.avatar)} alt={loggedUser.avatar} className={styles.avatar}/>
 								<div className='flex-col'>
 									<span className={`${styles.info_username}`}>{loggedUser.username}</span>
 									<span className={`${styles.info_email}`}>{loggedUser.email}</span>
