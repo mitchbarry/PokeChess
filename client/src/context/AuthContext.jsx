@@ -21,26 +21,24 @@ export const AuthProvider = ({ children }) => {
 	}
 	
 	const handleLoginResponse = (response, stayLogged = false) => {
-		setAuthToken(response.token)
-		setLoggedUser(response.user)
+		const { password, ...userWithoutPassword } = response.user;
+		setAuthToken(response.token);
+		setLoggedUser(userWithoutPassword);
 		if (stayLogged) {
-			Cookies.set('authToken', response.token, { expires: 7 }) // Set the token as a browser cookie with an expiry time (1 week)
+			Cookies.set('authToken', response.token, { expires: 7 });
 		}
 	}
 
 	const handleLoginToken = async (cookieToken) => {
-		let userResponse
 		try {
-            userResponse = await AuthService.getUserInfo(cookieToken)
+            const userResponse = await AuthService.getUserInfo(cookieToken)
+			setAuthToken(cookieToken) // Set the token and user information in state
+            setLoggedUser(userResponse)
         }
         catch (error) {
             console.error('Login failed:', error) // Handle login error
             Cookies.remove('authToken')
         }
-		finally {
-			setAuthToken(cookieToken) // Set the token and user information in state
-            setLoggedUser(userResponse)
-		}
 	}
 
 	const pathParamValidator = (path) => { // this should be included in a otherwise empty useEffect that runs on component mount for components that contain a :id param
