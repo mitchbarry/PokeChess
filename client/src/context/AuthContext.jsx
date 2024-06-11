@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState } from 'react'
 import Cookies from 'js-cookie'
 
 import AuthService from '../services/AuthService'
+import ErrorUtilities from '../utilities/error.utilities'
 
 const AuthContext = createContext()
 
@@ -9,19 +10,21 @@ export const useAuth = () => useContext(AuthContext)
 
 export const AuthProvider = ({ children }) => {
 
-	const [loggedUser, setLoggedUser] = useState(null) // State to store user information
+	const [loggedUser, setLoggedUser] = useState(null)
 	
 	const handleLoginResponse = (response) => {
 		setLoggedUser(response.user)
 	}
 
-	const handleLoginToken = async (cookieToken) => {
+	const checkAuthCookie = async () => {
 		try {
-            const { user } = await AuthService.getUserInfo(cookieToken)
-            setLoggedUser(user)
+            const response = await AuthService.checkAuthCookie()
+            if (response.user) {
+				setLoggedUser(response.user)
+			}
         }
         catch (error) {
-            console.error('Login failed.', error)
+            ErrorUtilities.catchError(error)
             Cookies.remove('authToken')
         }
 	}
@@ -45,7 +48,7 @@ export const AuthProvider = ({ children }) => {
 	}
 
 	return (
-		<AuthContext.Provider value={{ loggedUser, handleLoginResponse, pathParamValidator, handleLoginToken }}>
+		<AuthContext.Provider value={{ loggedUser, handleLoginResponse, pathParamValidator, checkAuthCookie }}>
 			{children}
 		</AuthContext.Provider>
 	)

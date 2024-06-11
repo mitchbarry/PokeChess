@@ -1,0 +1,24 @@
+/*  * Use BEM (Block, Entity, Modifier) for all CSS classes */
+
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cookie-banner button, .cookie-banner a {
+    margin: 0 10px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.cookie-banner button:hover, .cookie-banner a:hover {
+    background-color: #333;
+}

@@ -9,12 +9,14 @@ router.route('/auth/register')
 
 router.route('/auth/login')
     .post(authController.loginUser)
-    .get(authController.getUserInfo)
 
 router.route('/auth/logout')
     .post(authController.logoutUser)
 
 router.route('/auth/validate')
     .post(authController.validateUser)
+
+router.route('/auth/checkAuthCookie')
+    .get(authController.checkAuthCookie)
 
 export default router

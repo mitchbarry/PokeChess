@@ -35,14 +35,9 @@ const AuthService = {
         }
     },
 
-    async getUserInfo (token) {
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}` // Include the token in the Authorization header
-            }
-        }
+    async validateUser (user) {
         try {
-            const response = await http.get('/auth/login', config)
+            const response = await http.post('/auth/validate', user)
             return response.data
         }
         catch (error) {
@@ -50,9 +45,9 @@ const AuthService = {
         }
     },
 
-    async validateUser (user) {
+    async checkAuthCookie () {
         try {
-            const response = await http.post('/auth/validate', user)
+            const response = await http.get('/auth/checkAuthCookie')
             return response.data
         }
         catch (error) {
