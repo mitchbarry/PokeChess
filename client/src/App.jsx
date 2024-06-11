@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 
 import { useAuth } from './context/AuthContext'
+import errorUtilities from './utilities/error.utilities'
 
 import Header from './components/Header'
 import Return from './components/Return'
@@ -33,25 +34,30 @@ const App = () => {
 
 	const location = useLocation()
 
-	const { authToken, handleLoginToken } = useAuth()
+	const { loggedUser, checkAuthCookie } = useAuth()
 
 	const [error, setError] = useState({})
 
-	const updateError = (newError) => {
+	const handleError = (newError) => {
 		setError(newError)
 	}
 
 	useEffect(() => {
 		const checkCookieToken = async () => {
-			const cookieToken = Cookies.get('authToken')
-			if (cookieToken) {
-				if (!authToken) {
-					await handleLoginToken(cookieToken)
+			const cookieToken = Cookies.get('cookieAgreement')
+			if (cookieToken && !loggedUser) {
+				try {
+					await checkAuthCookie()
+				}
+				catch (error) {
+					const newError = errorUtilities.catchError(error)
+					setError(newError)
+					Cookies.remove('authToken')
 				}
 			}
 		}
 		checkCookieToken()
-	}, [authToken])
+	}, [loggedUser])
 
 	return (
 		<div id='background'>
@@ -67,21 +73,21 @@ const App = () => {
 					<Route path='/news' element={<News/>} />
 					<Route path='/about' element={<About />} />
 					<Route path='/contact' element={<Contact />} />
+					<Route path='/lobbies' element={<Lobbies />} />
+					<Route path='/play/:id' element={<Play />} />
 
 					{/* Login Routes */}
-					<Route path='/login' element={Cookies.get('authToken') || authToken ? <Navigate to='/' /> : <Login />} />
-					<Route path='/register' element={Cookies.get('authToken') || authToken ? <Navigate to='/' /> : <Register />} />
+					<Route path='/login' element={loggedUser ? <Navigate to='/' /> : <Login />} />
+					<Route path='/register' element={loggedUser ? <Navigate to='/' /> : <Register />} />
 				
 					{/* Auth Routes */}
-					<Route path='/account' element={Cookies.get('authToken') || authToken ? <Account /> : <ErrorNavigator error={401} updateError={updateError} />} />
-					<Route path='/account/settings' element={Cookies.get('authToken') || authToken ? <AccountEdit /> : <ErrorNavigator error={401} updateError={updateError} />} />
-					<Route path='/lobbies' element={Cookies.get('authToken') || authToken ? <Lobbies /> : <ErrorNavigator error={401} updateError={updateError} />} />
-					<Route path='/lobbies/new' element={Cookies.get('authToken') || authToken ? <LobbyCreate /> : <ErrorNavigator error={401} updateError={updateError} />} />
-					<Route path='/lobbies/:id/edit' element={Cookies.get('authToken') || authToken ? <LobbyEdit /> : <ErrorNavigator error={401} updateError={updateError} />} />
-					<Route path='/play/:id' element={Cookies.get('authToken') || authToken ? <Play /> : <ErrorNavigator error={401} updateError={updateError} />} />
+					<Route path='/account' element={loggedUser ? <Account /> : <ErrorNavigator error={401} handleError={handleError} />} />
+					<Route path='/account/settings' element={loggedUser ? <AccountEdit /> : <ErrorNavigator error={401} handleError={handleError} />} />
+					<Route path='/lobbies/new' element={loggedUser ? <LobbyCreate /> : <ErrorNavigator error={401} handleError={handleError} />} />
+					<Route path='/lobbies/:id/edit' element={loggedUser ? <LobbyEdit /> : <ErrorNavigator error={401} handleError={handleError} />} />
 
 					{/* Catch All Route */}
-					<Route path='*' element={<ErrorNavigator error={404} updateError={updateError} />} />
+					<Route path='*' element={<ErrorNavigator error={404} handleError={handleError} />} />
 				</Routes>
 				<Footer />
 			</div>

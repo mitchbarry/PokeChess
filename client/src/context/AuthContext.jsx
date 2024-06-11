@@ -9,31 +9,16 @@ export const useAuth = () => useContext(AuthContext)
 
 export const AuthProvider = ({ children }) => {
 
-	const [authToken, setAuthToken] = useState(null) // State to store authentication token
 	const [loggedUser, setLoggedUser] = useState(null) // State to store user information
-
-	const updateAuthToken = (newToken) => {
-		setAuthToken(newToken)
-	}
-
-	const updateLoggedUser = (newUser) => {
-		setLoggedUser(newUser)
-	}
 	
-	const handleLoginResponse = (response, stayLogged = false) => {
-		setAuthToken(response.token);
-		setLoggedUser(response.user);
-		if (stayLogged) {
-			Cookies.set('authToken', response.token, { expires: 7 })
-		}
+	const handleLoginResponse = (response) => {
+		setLoggedUser(response.user)
 	}
 
 	const handleLoginToken = async (cookieToken) => {
 		try {
-            const response = await AuthService.getUserInfo(cookieToken)
-			const {password, ...userWithoutPassword} = response.user
-			setAuthToken(cookieToken)
-            setLoggedUser(userWithoutPassword)
+            const { user } = await AuthService.getUserInfo(cookieToken)
+            setLoggedUser(user)
         }
         catch (error) {
             console.error('Login failed.', error)
@@ -60,7 +45,7 @@ export const AuthProvider = ({ children }) => {
 	}
 
 	return (
-		<AuthContext.Provider value={{ authToken, loggedUser, handleLoginResponse, updateLoggedUser, updateAuthToken, pathParamValidator, handleLoginToken }}>
+		<AuthContext.Provider value={{ loggedUser, handleLoginResponse, pathParamValidator, handleLoginToken }}>
 			{children}
 		</AuthContext.Provider>
 	)
