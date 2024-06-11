@@ -28,6 +28,51 @@
     width: var(--size-350);
 }
 
+.icon_loadingSpinner {
+    height: auto;
+    fill: inherit;
+    stroke: inherit;
+    width: var(--size-400);
+    animation: rotate 2.5s linear infinite;
+}
+
+/* * Keyframes */
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    10% {
+        transform: rotate(90deg);
+    }
+    20% {
+        transform: rotate(270deg);
+    }
+    30% {
+        transform: rotate(540deg);
+    }
+    40% {
+        transform: rotate(900deg);
+    }
+    50% {
+        transform: rotate(1350deg);
+    }
+    60% {
+        transform: rotate(1900deg);
+    }
+    70% {
+        transform: rotate(2270deg);
+    }
+    80% {
+        transform: rotate(2550deg);
+    }
+    90% {
+        transform: rotate(2740deg);
+    }
+    100% {
+        transform: rotate(2880deg);
+    }
+}
+
 /* * Navigation */
 .step_button {
     width: var(--size-325);

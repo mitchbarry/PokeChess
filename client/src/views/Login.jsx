@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Spinner } from "flowbite-react";
 
 import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
@@ -15,6 +14,7 @@ import StayLogged from '../components/form/StayLogged'
 import HiddenIcon from '../components/svgs/HiddenSvg'
 import RevealIcon from '../components/svgs/RevealSvg'
 import ArrowIcon from '../components/svgs/ArrowSvg'
+import LoadingSpinner from '../components/svgs/LoadingSpinnerSvg'
 
 import styles from '../css/views/Login.module.css'
 
@@ -181,7 +181,7 @@ const Login = () => {
                         placeholder='Password'
                     >
                         {focus === 'password' && (
-                            <button type='button' className={`${styles.input_password_icon} transition-default clickable`} tabIndex="-1" onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
+                            <button type='button' className={`${styles.input_password_icon} transition-default clickable`} tabIndex='-1' onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
                                 {showPassword ? (
                                     <RevealIcon className={`${styles.icon_default}`}/>
                                 ) : (
@@ -204,7 +204,11 @@ const Login = () => {
                         placeholder='Stay logged in?'
                     />
                     <button type='submit' className={`${styles.form_submit} flex-center w-100 clickable transition-default`}>
-                        <ArrowIcon className={styles.icon_default}/>
+                        {isLoading ? (
+                            <LoadingSpinner className={`${styles.icon_loadingSpinner}`}/>
+                        ) : (
+                            <ArrowIcon className={styles.icon_default}/>
+                        )}
                     </button>
                 </form>
                 <div className={`${styles.form_links} flex-col w-100`}>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import { hasBadWords } from 'expletives'
-import { Spinner } from "flowbite-react";
 
 import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
@@ -11,6 +10,7 @@ import CredentialsForm from '../components/form/CredentialsForm'
 import StarterForm from '../components/form/StarterForm'
 
 import ArrowIcon from '../components/svgs/ArrowSvg'
+import LoadingSpinner from '../components/svgs/LoadingSpinnerSvg'
 
 import styles from '../css/views/Register.module.css'
 
@@ -308,7 +308,11 @@ const Register = () => {
                             ((!initialRender) && (formErrors.password.passwordLength || formErrors.password.passwordCharacters))
                         }
                     >
-                        <ArrowIcon className={styles.icon_default}/>
+                        {isLoading ? (
+                            <LoadingSpinner className={`${styles.icon_loadingSpinner}`}/>
+                        ) : (
+                            <ArrowIcon className={styles.icon_default}/>
+                        )}
                     </button>
                 </form>
                 {step === 0 && (
