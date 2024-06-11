@@ -21,22 +21,23 @@ export const AuthProvider = ({ children }) => {
 	}
 	
 	const handleLoginResponse = (response, stayLogged = false) => {
-		const { password, ...userWithoutPassword } = response.user;
+		const {password, ...userWithoutPassword} = response.user
 		setAuthToken(response.token);
 		setLoggedUser(userWithoutPassword);
 		if (stayLogged) {
-			Cookies.set('authToken', response.token, { expires: 7 });
+			Cookies.set('authToken', response.token, { expires: 7 })
 		}
 	}
 
 	const handleLoginToken = async (cookieToken) => {
 		try {
-            const userResponse = await AuthService.getUserInfo(cookieToken)
-			setAuthToken(cookieToken) // Set the token and user information in state
-            setLoggedUser(userResponse)
+            const response = await AuthService.getUserInfo(cookieToken)
+			const {password, ...userWithoutPassword} = response.user
+			setAuthToken(cookieToken)
+            setLoggedUser(userWithoutPassword)
         }
         catch (error) {
-            console.error('Login failed:', error) // Handle login error
+            console.error('Login failed.', error)
             Cookies.remove('authToken')
         }
 	}
