@@ -61,7 +61,7 @@ const checkUser = async (user) => {
     if (Object.keys(normalizedError.validationErrors).length > 0) {
         return { isValid: false, error: normalizedError }
     }
-    return { isValid: true, user: newUser }
+    return { isValid: true, error: null, user: newUser }
 }
 
 const authController = {
@@ -87,8 +87,9 @@ const authController = {
             const { user } = result
             user.password = await bcrypt.hash(user.password, 10)
             await user.save()
+            const { hashedPassword, userWithoutPassword } = user
             const token = generateAuthToken(user)
-            res.json({ user, token })
+            res.json({ user: userWithoutPassword, token })
         }
         catch (error) {
             next(error)
@@ -129,8 +130,9 @@ const authController = {
                 }
                 return res.status(401).json(normalizedError)
             }
+            const { hashedPassword, userWithoutPassword } = user
             const token = generateAuthToken(user)
-            res.json({ user, token })
+            res.json({ user: userWithoutPassword, token })
         }
         catch (error) {
             next(error)
@@ -164,7 +166,8 @@ const authController = {
                 }
                 return res.status(404).json(normalizedError)
             }
-            res.json({user}) // Send the user information as a response
+            const { hashedPassword, userWithoutPassword } = user
+            res.json({ user: userWithoutPassword })
         }
         catch (error) {
             next(error)

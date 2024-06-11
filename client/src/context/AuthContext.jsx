@@ -21,9 +21,8 @@ export const AuthProvider = ({ children }) => {
 	}
 	
 	const handleLoginResponse = (response, stayLogged = false) => {
-		const {password, ...userWithoutPassword} = response.user
 		setAuthToken(response.token);
-		setLoggedUser(userWithoutPassword);
+		setLoggedUser(response.user);
 		if (stayLogged) {
 			Cookies.set('authToken', response.token, { expires: 7 })
 		}
