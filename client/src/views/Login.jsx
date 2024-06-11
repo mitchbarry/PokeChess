@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { Spinner } from "flowbite-react";
 
 import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
@@ -34,6 +35,7 @@ const Login = () => {
 	const [error, setError] = useState({})
     const [isReady, setIsReady] = useState(false)
     const [focus, setFocus] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     const lastSubmitTime = useRef(0)
 
@@ -110,6 +112,7 @@ const Login = () => {
     }
 
 	const sendLoginRequest = async () => {
+        setIsLoading(true)
         try {
             const response = await AuthService.login({
                 accountName: accountName.trim(),
@@ -121,6 +124,9 @@ const Login = () => {
         catch (error) {
             const newError = errorUtilities.catchError(error)
             setError(newError)
+        }
+        finally {
+            setIsLoading(false)
         }
     }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import { hasBadWords } from 'expletives'
+import { Spinner } from "flowbite-react";
 
 import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
@@ -39,6 +40,7 @@ const Register = () => {
     const [validated, setValidated] = useState(false)
     const [isReady, setIsReady] = useState(false)
     const [focus, setFocus] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     const lastSubmitTime = useRef(0)
 
@@ -192,6 +194,7 @@ const Register = () => {
     }
 
     const sendValidationRequest = async () => {
+        setIsLoading(true)
         try {
             await AuthService.validateUser({
                 username: username.trim(),
@@ -206,10 +209,14 @@ const Register = () => {
             const newError = errorUtilities.catchError(error)
             setError(newError)
         }
+        finally {
+            setIsLoading(false)
+        }
     }
 
     const sendRegisterRequest = async () => {
         const randomNumber = Math.floor(Math.random() * 9) + 1
+        setIsLoading(true)
         try {
             const response = await AuthService.register({
                 username: username.trim(),
@@ -224,6 +231,9 @@ const Register = () => {
         catch (error) {
             const newError = errorUtilities.catchError(error)
             setError(newError)
+        }
+        finally {
+            setIsLoading(false)
         }
     }
 
