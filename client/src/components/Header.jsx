@@ -6,8 +6,7 @@ import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
 
 import pokeChess from '../assets/text/pokeChess.png'
-import favicon from '../assets/pokeball128px.png'
-
+import pokeLogo from '../assets/misc/pokeballs/timerBall-128px.png'
 import avatar1 from '../assets/avatars/avatar1.jpg'
 import avatar2 from '../assets/avatars/avatar2.jpg'
 import avatar3 from '../assets/avatars/avatar3.jpg'
@@ -76,7 +75,7 @@ const Header = () => {
 		<nav className={`${styles.header} flex-between`}>
 			<div className={`${styles.nav_primary} flex-center`}>
 				<Link className={`${styles.primary_logo} flex-center`} to='/'>
-					<img src={favicon} className={`${styles.logo}`} alt='Pokeball Logo'/>
+					<img src={pokeLogo} className={`${styles.logo}`} alt='Timer Ball Logo'/>
 					<img src={pokeChess} className={`${styles.title}`} alt='PokeChess'/>
 				</Link>
 				<div className={`${styles.dropdown} flex-center`}>

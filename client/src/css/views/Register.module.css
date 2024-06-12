@@ -22,17 +22,17 @@
 
 /* * Icons */
 .icon_default {
+    width: var(--size-350);
     height: auto;
     fill: inherit;
     stroke: inherit;
-    width: var(--size-350);
 }
 
 .icon_loadingSpinner {
+    width: var(--size-400);
     height: auto;
     fill: inherit;
     stroke: inherit;
-    width: var(--size-400);
     animation: rotate 2.5s linear infinite;
 }
 

@@ -169,6 +169,8 @@
         border var(--transition-hover-speed) ease,
         color var(--transition-hover-speed) ease,
         background-color var(--transition-hover-speed) ease,
+        fill var(--transition-hover-speed) ease,
+        stroke var(--transition-hover-speed) ease,
         transform var(--transition-hover-speed) ease,
         top var(--transition-hover-speed) ease,
         left var(--transition-hover-speed) ease,

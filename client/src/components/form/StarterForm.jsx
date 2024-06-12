@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
-import StarterSelection from '../../assets/starterSelection.png'
-import Pointer from '../../assets/pointer.png'
+import StarterSelection from '../../assets/misc/starterForm/starterSelection.png'
+import Pointer from '../../assets/misc/starterForm/pointer.png'
 import Bulbasaur from '../../assets/pokemonGifs/ani_bw_001.gif'
 import Charmander from '../../assets/pokemonGifs/ani_bw_004.gif'
 import Squirtle from '../../assets/pokemonGifs/ani_bw_007.gif'

@@ -1,24 +1,127 @@
-/*  * Use BEM (Block, Entity, Modifier) for all CSS classes */
-
-.cookie-banner {
+/* * Use BEM (Block, Entity, Modifier) for all CSS classes */
+/* * Structure */
+.banner {
+    width: 70%;
+    color: var(--color-000);
+    background-color: var(--color-000);
+    padding: var(--size-175);
+    margin-bottom: var(--size-300);
     position: fixed;
     bottom: 0;
-    width: 100%;
-    background-color: #000;
-    color: #fff;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    left: 15%;
+    z-index: 1000;
+    animation: slideUp 0.5s ease;
 }
 
-.cookie-banner button, .cookie-banner a {
-    margin: 0 10px;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
+.content_primary {
+    width: 50%;
+    color: var(--color-800);
+    margin-left: var(--size-300);
 }
 
-.cookie-banner button:hover, .cookie-banner a:hover {
-    background-color: #333;
+.content_secondary {
+    width: 30%;
+    color: var(--color-800);
+    margin: var(--size-150) var(--size-150) 0 var(--size-150);
+}
+
+.secondary_buttons {
+    gap: var(--size-125);
+}
+
+/* * Buttons */
+.button_close {
+    fill: var(--color-darken-600);
+    stroke: var(--color-darken-600);
+    position: absolute;
+    top: var(--size-100);
+    right: var(--size-100);
+    background-color: transparent;
+}
+
+.button_close:hover {
+    fill: var(--color-darken-700);
+    stroke: var(--color-darken-700);
+}
+
+.button_primary {
+    color: var(--color-000);
+    background-color: var(--color-teal);
+    padding: var(--size-150);
+    margin-top: var(--size-125);
+    border-radius: 5px;
+}
+
+.button_primary:hover {
+    background-color: var(--color-teal-lighten);
+}
+
+.button_secondary {
+    color: var(--color-teal);
+    background-color: var(--color-000);
+    border: 2px solid var(--color-teal);
+    border-radius: 5px;
+    padding: var(--size-150);
+    flex-grow: 1;
+}
+
+.button_secondary:hover {
+    color: var(--color-000);
+    background-color: var(--color-teal);
+}
+
+/* * Content */
+.primary_heading {
+    margin-bottom: var(--size-100);
+}
+
+.primary_body {
+    line-height: var(--line-height-tight);
+}
+
+/* * Icons */
+.icon_default {
+    width: var(--size-150);
+    height: auto;
+    fill: inherit;
+    stroke: inherit;
+}
+
+/* * Images */
+.img_default {
+    width: calc(var(--size-1000) + var(--size-300)); /* Adjust size as needed */
+    height: auto;
+}
+
+/* * Keyframes */
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* * Links */
+.content_link {
+    color: var(--color-blue);
+    text-decoration: underline;
+}
+
+.content_link:hover {
+    color: var(--color-blue-darken);
+}
+
+/* * Typography */
+.primary_text {
+    font: var(--font-accent-700);
+}
+
+.secondary_text {
+    font: var(--font-accent-400);
+}
+
+.accent_text {
+    font: var(--font-300);
 }
