@@ -15,13 +15,15 @@ const CookieConsent = (props) => {
 	const { isCookieBannerVisible, handleIsCookieBannerVisible } = props
 
 	const handleNecessaryOnly = () => {
-		Cookies.set('cookieConsent', {
+		const consentData = {
 			necessary: true,
 			preferences: false,
 			statistics: false,
 			marketing: false,
 			functionality: false
-		}, { expires: 365 })
+		}
+		const consentString = JSON.stringify(consentData)
+		Cookies.set('cookieConsent', consentString, { expires: 365 })
 		handleIsCookieBannerVisible(false)
 	}
 
@@ -31,13 +33,15 @@ const CookieConsent = (props) => {
 	}
 
 	const handleAcceptAll = () => {
-		Cookies.set('cookieConsent', {
+		const consentData = {
 			necessary: true,
 			preferences: true,
 			statistics: true,
 			marketing: true,
 			functionality: true
-		}, { expires: 365 })
+		}
+		const consentString = JSON.stringify(consentData)
+		Cookies.set('cookieConsent', consentString, { expires: 365 })
 		handleIsCookieBannerVisible(false)
 	}
 
@@ -58,7 +62,11 @@ const CookieConsent = (props) => {
 							<b>Your privacy</b>
 						</h1>
 						<p className={`${styles.primary_body} ${styles.secondary_text}`}>
-							We use cookies to ensure you get the best experience. By clicking "Accept all cookies", you agree PokeChess can store cookies on your device and disclose information in accordance with our <Link className={`${styles.content_link} clickable transition-default`} to='/cookies/policy' onClick={(e) => handleIsCookieBannerVisible(false)}>Cookie Policy</Link>.
+							We use cookies to ensure you get the best experience. 
+							By clicking "Accept all cookies", you agree PokeChess can store cookies on your device and disclose information in accordance with our 
+							<Link className={`${styles.content_link} clickable transition-default`} to='/cookies/policy' onClick={(e) => handleIsCookieBannerVisible(false)}>
+								Cookie Policy
+							</Link>.
 						</p>
 					</div>
 				</div>

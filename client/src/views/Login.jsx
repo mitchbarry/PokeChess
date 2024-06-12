@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
@@ -38,6 +39,9 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false)
 
     const lastSubmitTime = useRef(0)
+
+    const cookieConsent = Cookies.get('cookieConsent')
+    const parsedCookieConsent = cookieConsent ? JSON.parse(cookieConsent) : null
 
     useEffect(() => {
         const timer = setTimeout(() => setIsReady(true), 1000)
@@ -198,11 +202,13 @@ const Login = () => {
                         error={error}
                         name='password'
                     />
-                    <StayLogged
-                        stayLogged={stayLogged}
-                        handleStayLogged={handleStayLogged}
-                        placeholder='Stay logged in?'
-                    />
+                    {parsedCookieConsent && parsedCookieConsent.necessary && (
+                        <StayLogged
+                            stayLogged={stayLogged}
+                            handleStayLogged={handleStayLogged}
+                            placeholder='Stay logged in'
+                        />
+                    )}
                     <button type='submit' className={`${styles.form_submit} flex-center w-100 clickable transition-default`}>
                         {isLoading ? (
                             <LoadingSpinner className={`${styles.icon_loadingSpinner}`}/>

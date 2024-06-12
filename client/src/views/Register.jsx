@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { hasBadWords } from 'expletives'
+import Cookies from 'js-cookie'
 
 import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
@@ -8,6 +9,7 @@ import errorUtilities from '../utilities/error.utilities'
 
 import CredentialsForm from '../components/form/CredentialsForm'
 import StarterForm from '../components/form/StarterForm'
+import StayLogged from '../components/form/StayLogged'
 
 import ArrowIcon from '../components/svgs/ArrowSvg'
 import LoadingSpinner from '../components/svgs/LoadingSpinnerSvg'
@@ -26,7 +28,6 @@ const Register = () => {
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const [starter, setStarter] = useState(0)
-    const [stayLogged, setStayLogged] = useState(false) // NEEDS TO BE IMPLEMENTED
     const [initialRender, setInitialRender] = useState(true)
     const [formErrors, setFormErrors] = useState({
         username: '',

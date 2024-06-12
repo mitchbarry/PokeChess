@@ -12,6 +12,7 @@ const Error = (props) => {
 
     return (
         <div className={styles.mainItem}>
+            {/*
             {Object.keys(error).length !== 0 && showNotification && (
                 <ul className="alert alert-danger">
                     <button type="button" className="btn-close close-button-red" aria-label="Close" onClick={closeNotification}></button>
@@ -39,6 +40,7 @@ const Error = (props) => {
             ) : (
                 <Link to="/login" className={blueButton}>Home</Link>
             )}
+            */}
         </div>
     )
 }
