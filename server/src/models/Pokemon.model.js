@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose"
+import { model, Schema } from 'mongoose'
 
 const PokemonSchema = new Schema(
     {
@@ -61,6 +61,6 @@ const PokemonSchema = new Schema(
     { timestamps: true }
 )
 
-const Pokemon = model("Pokemon", PokemonSchema)
+const Pokemon = model('Pokemon', PokemonSchema)
 
-export default Pokemon;
+export default Pokemon

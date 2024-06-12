@@ -154,7 +154,7 @@ const authController = {
 
     async checkAuthCookie(req, res, next) {
         
-    }
+    },
 
     async getUserInfo(req, res, next) {
         try {

@@ -4,15 +4,15 @@ import dotenv from 'dotenv'
 
 import { Server } from 'socket.io'
 
-import dbConnect from './config/mongoose.config.js'
+import dbConnect from './src/config/mongoose.config.js'
 
-import userRouter from './routes/user.routes.js'
-import authRouter from './routes/auth.routes.js'
-import lobbyRouter from './routes/lobby.routes.js'
-import pokemonRouter from './routes/pokemon.routes.js'
+import userRouter from './src/routes/user.routes.js'
+import authRouter from './src/routes/auth.routes.js'
+import lobbyRouter from './src/routes/lobby.routes.js'
+import pokemonRouter from './src/routes/pokemon.routes.js'
 
-import errorUtilities from './utilities/error.utilities.js'
-import sockets from './sockets/socket.js'
+import errorUtilities from './src/utilities/error.utilities.js'
+import sockets from './src/sockets/socket.js'
 
 dbConnect()
 

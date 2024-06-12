@@ -12,9 +12,9 @@ const UserSchema = new Schema(
 				{
 					validator: async (username) => {
 						if (hasBadWords(username)) {
-							return false;
+							return false
 						}
-						return true;
+						return true
 					},
 					message: 'Your username must be appropriate.'
 				},

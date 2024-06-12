@@ -1,4 +1,4 @@
-import User from "../models/User.model.js"
+import User from '../models/User.model.js'
 
 const userController = {
 	async getAllUsers(req, res, next) {
@@ -49,4 +49,4 @@ const userController = {
 	},
 }
 
-export default userController;
+export default userController

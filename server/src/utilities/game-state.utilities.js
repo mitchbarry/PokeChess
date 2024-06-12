@@ -1,5 +1,5 @@
-import Lobby from "../models/lobby.model.js";
-import Pokemon from "../models/Pokemon.model.js";
+import Lobby from '../models/Lobby.model.js'
+import Pokemon from '../models/Pokemon.model.js'
 
 const gameStateUtilities = {
     async addUserToLobby(lobby, user) {
@@ -13,69 +13,69 @@ const gameStateUtilities = {
             experience: 0,
             shop: []
         }) */
-        let updatedLobby;
+        let updatedLobby
         const options = {
             new: true,
             runValidators: true,
-        };
+        }
         try {
-            console.log("Adding user to players list...");
-            updatedLobby = await Lobby.findByIdAndUpdate(lobby._id, lobby, options);
+            console.log('Adding user to players list...')
+            updatedLobby = await Lobby.findByIdAndUpdate(lobby._id, lobby, options)
         }
         catch (error) {
             throw(error)
         }
-        return updatedLobby;
+        return updatedLobby
     },
 
     async removeUserFromLobby(socketInfo) {
-        let updatedLobby;
+        let updatedLobby
         try {
-            updatedLobby = await Lobby.findById(socketInfo.lobbyId);
+            updatedLobby = await Lobby.findById(socketInfo.lobbyId)
         }
         catch (error) {
-            throw(error);
+            throw(error)
         }
-        const userIndex = updatedLobby.gameState.players.findIndex(player => player.userId === socketInfo.userId);
+        const userIndex = updatedLobby.gameState.players.findIndex(player => player.userId === socketInfo.userId)
         if (userIndex !== -1) {
-            updatedLobby.gameState.players.splice(userIndex, 1); // Remove user from players array
+            updatedLobby.gameState.players.splice(userIndex, 1) // Remove user from players array
             try {
                 const options = {
                     new: true,
                     runValidators: true,
-                };
-                console.log("Attempting to remove user from players list...")
-                await Lobby.findByIdAndUpdate(updatedLobby._id, updatedLobby, options);
+                }
+                console.log('Attempting to remove user from players list...')
+                await Lobby.findByIdAndUpdate(updatedLobby._id, updatedLobby, options)
             }
             catch (error) {
-                throw(error);
+                throw(error)
             }
         }
-        return updatedLobby;
+        return updatedLobby
     },
 
     async refreshShop(gameState, experience) {
-        const shopRarities = gameStateUtilities.getShopRarities(experience);
-        let newShop = [];
+        const shopRarities = gameStateUtilities.getShopRarities(experience)
+        let newShop = []
         for (let i = 0; i < 5; i++) {
-            const randomRarity = Math.floor(Math.random() * 100); // returns a number 0-99
-            let rarity = 0;
+            const randomRarity = Math.floor(Math.random() * 100) // returns a number 0-99
+            let rarity = 0
             for (let i = 1; i < 6; i++) {
                 if (randomRarity < shopRarities[i]) {
-                    rarity = i;
-                    break;
+                    rarity = i
+                    break
                 }
             }
-            console.log("rarity: "+ rarity)
-            const randomPokemon = Math.floor(Math.random() * gameState.pool[rarity][0]); // returns a number 0 - the total number of pokemon in the pool of that rarity
-            console.log("randomPokemon: "+ randomPokemon)
-            const pokemonNumber = gameStateUtilities.getKeyFromNumber(randomPokemon, gameState.pool[rarity]);
-            console.log("pokemonNumber: "+ pokemonNumber)
-            gameState.pool[rarity][0] -= 1;
-            gameState.pool[rarity][pokemonNumber] -= 1;
-            newShop.push(gameStateUtilities.getPokemonObject(pokemonNumber));
+            console.log('rarity: '+ rarity)
+            const randomPokemon = Math.floor(Math.random() * gameState.pool[rarity][0]) // returns a number 0 - the total number of pokemon in the pool of that rarity
+            console.log('randomPokemon: '+ randomPokemon)
+            const pokemonNumber = gameStateUtilities.getKeyFromNumber(randomPokemon, gameState.pool[rarity])
+            console.log('pokemonNumber: '+ pokemonNumber)
+            gameState.pool[rarity][0] -= 1
+            gameState.pool[rarity][pokemonNumber] -= 1
+            newShop.push(gameStateUtilities.getPokemonObject(pokemonNumber))
         }try{
-            newShop = await Promise.all(newShop);
+            newShop = await Promise.all(newShop)
         }
         catch(errors){
             console.log(errors)
@@ -93,13 +93,13 @@ const gameStateUtilities = {
             3: 0,
             4: 0,
             5: 0
-        };
+        }
         if (experience < 4) { // we are level 1 or level 2 (shop rarities are the same)
-            shopRarities[1] = 100;
+            shopRarities[1] = 100
         }
         else if (experience < 10) { // we are level 3
-            shopRarities[1] = 75; // 75% chance of a common
-            shopRarities[2] = 100; // 25% chance of an uncommon
+            shopRarities[1] = 75 // 75% chance of a common
+            shopRarities[2] = 100 // 25% chance of an uncommon
         }
         else if (experience < 20) { // we are level 4
             shopRarities[1] = 55 // 55% chance of a common
@@ -146,36 +146,36 @@ const gameStateUtilities = {
             shopRarities[4] = 75 // 40% chance of an epic
             shopRarities[5] = 100 // 25% chance of a legendary
         }
-        return shopRarities;
+        return shopRarities
     },
 
     getKeyFromNumber(randomPokemon, rarityPool) {
-        let sum = 0;
+        let sum = 0
         for (const key in rarityPool) {
             if (key !== '0') {
-                sum += rarityPool[key];
+                sum += rarityPool[key]
                 if (sum >= randomPokemon) {
-                    return parseInt(key);
+                    return parseInt(key)
                 }
             }
         }
     },
 
     async getPokemonObject(pokedexNum) {
-        let pokemon;
-        console.log("we made it bois")
+        let pokemon
+        console.log('we made it bois')
         try {
-            pokemon = await Pokemon.findOne({ pokedexNumber : pokedexNum });
+            pokemon = await Pokemon.findOne({ pokedexNumber : pokedexNum })
         }
         catch (error) {
-            console.error('Error fetching Pokemon:', error);
-            throw(error);
+            console.error('Error fetching Pokemon:', error)
+            throw(error)
         }
         finally {
-            return pokemon;
+            return pokemon
         }
 
     }
 }
 
-export default gameStateUtilities;
+export default gameStateUtilities
