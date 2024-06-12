@@ -31,7 +31,7 @@ import AccountEdit from './views/AccountEdit'
 import LobbyCreate from './views/LobbyCreate'
 import LobbyEdit from './views/LobbyEdit'
 
-import './App.css'
+import './app.css'
 import './css/utility.css'
 
 const App = () => {
