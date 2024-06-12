@@ -51,14 +51,16 @@ const CookieConsent = (props) => {
 				<button className={`${styles.button_close} clickable transition-default`} onClick={closeBanner}>
 					<XIcon className={`${styles.icon_default}`}/>
 				</button>
-				<img className={styles.img_default} src={squirtleSquad}/>
-				<div className={`${styles.content_primary} flex-col`}>
-					<h1 className={`${styles.primary_heading} ${styles.primary_text}`}>
-						<b>Your privacy</b>
-					</h1>
-					<p className={`${styles.primary_body} ${styles.secondary_text}`}>
-						We use cookies to ensure you get the best experience. By clicking "Accept all cookies", you agree PokeChess can store cookies on your device and disclose information in accordance with our <Link className={`${styles.content_link} clickable transition-default`} to='/cookies/policy' onClick={(e) => handleIsCookieBannerVisible(false)}>Cookie Policy</Link>.
-					</p>
+				<div className={styles.content_primary}>
+					<img className={styles.img_default} src={squirtleSquad}/>
+					<div className={`${styles.primary} flex-col`}>
+						<h1 className={`${styles.primary_heading} ${styles.primary_text}`}>
+							<b>Your privacy</b>
+						</h1>
+						<p className={`${styles.primary_body} ${styles.secondary_text}`}>
+							We use cookies to ensure you get the best experience. By clicking "Accept all cookies", you agree PokeChess can store cookies on your device and disclose information in accordance with our <Link className={`${styles.content_link} clickable transition-default`} to='/cookies/policy' onClick={(e) => handleIsCookieBannerVisible(false)}>Cookie Policy</Link>.
+						</p>
+					</div>
 				</div>
 				<div className={`${styles.content_secondary} flex-col`}>
 					<div className={`${styles.secondary_buttons} flex-center`}>

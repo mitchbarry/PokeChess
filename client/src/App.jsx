@@ -110,7 +110,7 @@ const App = () => {
 					{/* Catch All Route */}
 					<Route path='*' element={<ErrorNavigator error={404} handleError={handleError} />} />
 				</Routes>
-				<CookieConsent isCookieBannerVisible={isCookieBannerVisible} handleIsCookieBannerVisible={handleIsCookieBannerVisible} />
+				{location.pathname !== '/cookies/settings' && <CookieConsent isCookieBannerVisible={isCookieBannerVisible} handleIsCookieBannerVisible={handleIsCookieBannerVisible} />}
 				<Footer />
 			</div>
 		</div>
