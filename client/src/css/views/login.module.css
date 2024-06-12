@@ -1,5 +1,5 @@
 /* * use BEM (Block, Entity, Modifier) for all css classes */
-/* * Structure */
+/* * Blocks */
 .container {
     flex-grow: 1;
 }
@@ -11,13 +11,10 @@
     background-color: var(--color-000);
 }
 
-/* * Typography */
-.primary_text {
-    font: var(--font-400);
-}
-
-.primary_text__shrink {
-    font: var(--font-200);
+/* * Heading */
+.form_title {
+    margin-bottom: var(--size-350);
+    color: var(--color-800);
 }
 
 /* * Icons */
@@ -88,29 +85,6 @@
     }
 }
 
-/* * Heading */
-.form_title {
-    margin-bottom: var(--size-350);
-    color: var(--color-800);
-}
-
-/* * Submit */
-.form_submit {
-    height: var(--size-600);
-    background-color: var(--color-teal);
-    fill: var(--color-100);
-    stroke: var(--color-100);
-    border-radius: 4px;
-}
-
-.form_submit:hover {
-    background-color: var(--color-teal-lighten);
-}
-
-.form_submit:focus-visible {
-    box-shadow: 0 0 0 var(--size-025) var(--color-000), 0 0 0 var(--size-050) var(--color-800);
-}
-
 /* * Links */
 .form_links {
     margin-top: var(--size-250);
@@ -142,4 +116,30 @@
     border-radius: 4px;
     background: var(--color-000);
     box-shadow: 0 0 0 2px var(--color-800);
+}
+
+/* * Submit */
+.form_submit {
+    height: var(--size-600);
+    background-color: var(--color-teal);
+    fill: var(--color-100);
+    stroke: var(--color-100);
+    border-radius: 4px;
+}
+
+.form_submit:hover {
+    background-color: var(--color-teal-lighten);
+}
+
+.form_submit:focus-visible {
+    box-shadow: 0 0 0 var(--size-025) var(--color-000), 0 0 0 var(--size-050) var(--color-800);
+}
+
+/* * Typography */
+.primary_text {
+    font: var(--font-400);
+}
+
+.primary_text__shrink {
+    font: var(--font-200);
 }

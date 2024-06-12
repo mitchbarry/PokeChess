@@ -1,5 +1,5 @@
 /* * use BEM (Block, Entity, Modifier) for all css classes */
-/* * Structure */
+/* * Blocks */
 .container {
     flex-grow: 1;
 }
@@ -11,13 +11,10 @@
     background-color: var(--color-000);
 }
 
-/* * Typography */
-.primary_text {
-    font: var(--font-400);
-}
-
-.primary_text__shrink {
-    font: var(--font-200);
+/* * Heading */
+.form_title {
+    margin: var(--size-350) 0;
+    color: var(--color-800);
 }
 
 /* * Icons */
@@ -73,59 +70,6 @@
     }
 }
 
-/* * Navigation */
-.step_button {
-    width: var(--size-325);
-    height: var(--size-050);
-    margin: 0 var(--size-075) var(--size-100);
-}
-
-.step_button__active {
-    background-color: var(--color-teal);
-}
-
-.step_button__disabled {
-    background-color: var(--color-200);
-}
-
-.step_button__disabled:hover {
-    background-color: var(--color-300);
-}
-
-/* * Heading */
-.form_title {
-    margin: var(--size-350) 0;
-    color: var(--color-800);
-}
-
-/* * Submit */
-.form_submit {
-    height: var(--size-600);
-    border-radius: 4px;
-}
-
-.form_submit__active {
-    cursor: pointer;
-    background-color: var(--color-teal);
-    fill: var(--color-000);
-    stroke: var(--color-000);
-}
-
-.form_submit__active:hover {
-    background-color: var(--color-teal-lighten);
-}
-
-.form_submit__disabled {
-    background-color: var(--color-100);
-    fill: var(--color-300);
-    stroke: var(--color-300);
-    cursor: not-allowed;
-}
-
-.form_submit:focus-visible {
-    box-shadow: 0 0 0 var(--size-025) var(--color-000), 0 0 0 var(--size-050) var(--color-800);
-}
-
 /* * Links */
 .form_links {
     margin-top: var(--size-250);
@@ -156,4 +100,60 @@
     border-radius: 4px;
     background: var(--color-000);
     box-shadow: 0 0 0 2px var(--color-800);
+}
+
+/* * Navigation */
+.step_button {
+    width: var(--size-325);
+    height: var(--size-050);
+    margin: 0 var(--size-075) var(--size-100);
+}
+
+.step_button__active {
+    background-color: var(--color-teal);
+}
+
+.step_button__disabled {
+    background-color: var(--color-200);
+}
+
+.step_button__disabled:hover {
+    background-color: var(--color-300);
+}
+
+/* * Submit */
+.form_submit {
+    height: var(--size-600);
+    border-radius: 4px;
+}
+
+.form_submit__active {
+    cursor: pointer;
+    background-color: var(--color-teal);
+    fill: var(--color-000);
+    stroke: var(--color-000);
+}
+
+.form_submit__active:hover {
+    background-color: var(--color-teal-lighten);
+}
+
+.form_submit__disabled {
+    background-color: var(--color-100);
+    fill: var(--color-300);
+    stroke: var(--color-300);
+    cursor: not-allowed;
+}
+
+.form_submit:focus-visible {
+    box-shadow: 0 0 0 var(--size-025) var(--color-000), 0 0 0 var(--size-050) var(--color-800);
+}
+
+/* * Typography */
+.primary_text {
+    font: var(--font-400);
+}
+
+.primary_text__shrink {
+    font: var(--font-200);
 }
