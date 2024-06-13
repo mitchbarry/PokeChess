@@ -120,9 +120,10 @@ const Login = () => {
         try {
             const response = await AuthService.login({
                 accountName: accountName.trim(),
-                password: password.trim()
+                password: password.trim(),
+                stayLogged: stayLogged && parsedCookieConsent && parsedCookieConsent.necessary
             })
-            handleLoginResponse(response ,stayLogged)
+            handleLoginResponse(response)
             navigate('/')
         }
         catch (error) {

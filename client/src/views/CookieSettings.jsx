@@ -1,5 +1,5 @@
 import React from 'react'
-import Cookies from 'js-cookies'
+import Cookies from 'js-cookie'
 
 import styles from '../css/views/CookieSettings.module.css'
 
