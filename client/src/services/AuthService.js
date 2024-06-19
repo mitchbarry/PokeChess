@@ -7,7 +7,7 @@ const http = axios.create({
 const AuthService = {
     async register (user) {
         try {
-            const response = await http.post('/auth/register', user)
+            const response = await http.post('/register', user)
             return response.data
         }
         catch (error) {
@@ -17,7 +17,7 @@ const AuthService = {
 
     async login (user) {
         try {
-            const response = await http.post('/auth/login', user)
+            const response = await http.post('/login', user)
             return response.data
         }
         catch (error) {
@@ -27,7 +27,7 @@ const AuthService = {
 
     async logout () {
         try {
-            const response = await http.post('/auth/logout')
+            const response = await http.post('/logout')
             return response.data
         }
         catch (error) {
@@ -37,7 +37,7 @@ const AuthService = {
 
     async validateUser (user) {
         try {
-            const response = await http.post('/auth/validate', user)
+            const response = await http.post('/validate', user)
             return response.data
         }
         catch (error) {
@@ -45,9 +45,9 @@ const AuthService = {
         }
     },
 
-    async checkAuthCookie () {
+    async validateCookie () {
         try {
-            const response = await http.get('/auth/checkAuthCookie')
+            const response = await http.get('/validate')
             return response.data
         }
         catch (error) {

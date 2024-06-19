@@ -7,7 +7,7 @@ const http = axios.create({
 const pokemonService = {
     async getAllPokemon() {
         try {
-            const response = await http.get('/pokemon')
+            const response = await http.get('/all')
             return response.data
         }
         catch (error) {
@@ -17,7 +17,7 @@ const pokemonService = {
 
     async getSomePokemon(lowLimit, filterType) {
         try {
-            const response = await http.get(`/pokemon/some?lowLimit=${lowLimit}&filterType=${filterType}`)
+            const response = await http.get(`/some?lowLimit=${lowLimit}&filterType=${filterType}`)
             return response.data
         }
         catch (error) {
@@ -27,7 +27,7 @@ const pokemonService = {
 
     async getOnePokemon(id) {
         try {
-            const response = await http.get(`/pokemon/${id}`)
+            const response = await http.get(`/${id}`)
             return response.data
         }
         catch (error) {
@@ -37,7 +37,7 @@ const pokemonService = {
 
     async createPokemon(pokemon) {
         try {
-            const response = await http.post('/pokemon', pokemon)
+            const response = await http.post('/create', pokemon)
             return response.data
         }
         catch (error) {
@@ -47,7 +47,7 @@ const pokemonService = {
 
     async updateOnePokemon(pokemon) {
         try {
-            const response = await http.put(`/pokemon/${pokemon._id}`, pokemon)
+            const response = await http.put(`/${pokemon._id}`, pokemon)
             return response.data
         }
         catch (error) {
@@ -57,7 +57,7 @@ const pokemonService = {
 
     async deleteOnePokemon(id) {
         try {
-            const response = await http.delete(`/pokemon/${id}`)
+            const response = await http.delete(`/${id}`)
             return response.data
         }
         catch (error) {
@@ -67,7 +67,7 @@ const pokemonService = {
 
     async fetchPokemon() {
         try {
-            await http.post('/pokemon/fetch')
+            await http.post('/fetch')
         }
         catch (error) {
             throw error

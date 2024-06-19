@@ -7,7 +7,7 @@ const http = axios.create({
 const LobbyService = {
     async getAllLobbies() {
         try {
-            const response = await http.get('/lobbies')
+            const response = await http.get('/all')
             return response.data
         }
         catch (error) {
@@ -17,7 +17,7 @@ const LobbyService = {
 
     async getUserLobbies(userId) {
         try {
-            const response = await http.get(`/lobbies/user/${userId}`)
+            const response = await http.get(`/user/${userId}`)
             return response.data
         }
         catch (error) {
@@ -27,7 +27,7 @@ const LobbyService = {
 
     async getOneLobby(id) {
         try {
-            const response = await http.get(`/lobbies/${id}`)
+            const response = await http.get(`/${id}`)
             return response.data
         }
         catch (error) {
@@ -37,7 +37,7 @@ const LobbyService = {
 
     async createOneLobby(lobby) {
         try {
-            const response = await http.post('/lobbies', lobby)
+            const response = await http.post('/create', lobby)
             return response.data
         }
         catch (error) {
@@ -47,7 +47,7 @@ const LobbyService = {
 
     async updateOneLobby(lobby) {
         try {
-            const response = await http.put(`/lobbies/${lobby._id}`, lobby)
+            const response = await http.put(`/${lobby._id}`, lobby)
             return response.data
         }
         catch (error) {
@@ -57,7 +57,7 @@ const LobbyService = {
 
     async deleteOneLobby(id) {
         try {
-            const response = await http.delete(`/lobbies/${id}`)
+            const response = await http.delete(`/${id}`)
             return response.data
         }
         catch (error) {

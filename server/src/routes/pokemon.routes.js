@@ -1,20 +1,23 @@
-import { Router } from 'express'
+import { Router } from 'express';
 
-import pokemonController from '../controllers/pokemon.controller.js'
+import pokemonController from '../controllers/pokemon.controller.js';
 
-const router = Router()
+const router = Router();
 
-router.route('/pokemon/fetch')
-    .get(pokemonController.fetchPokemon)
+router.route('/all')
+    .get(pokemonController.getAllPokemon);
 
-router.route('/pokemon')
-    .get(pokemonController.getAllPokemon)
+router.route('/some')
+    .get(pokemonController.getSomePokemon);
 
-router.route('/pokemon/some')
-    .get(pokemonController.getSomePokemon)
-
-router.route('/pokemon/:id')
+router.route('/:id')
     .get(pokemonController.getOnePokemon)
-    .put(pokemonController.updateOnePokemon)
+    .put(pokemonController.updateOnePokemon);
 
-export default router
+// router.route('/create')
+//     .post(pokemonController.createOnePokemon);
+
+router.route('/fetch')
+    .get(pokemonController.fetchPokemon);
+
+export default router;

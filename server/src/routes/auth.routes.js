@@ -4,19 +4,17 @@ import authController from '../controllers/auth.controller.js'
 
 const router = Router()
 
-router.route('/auth/register')
+router.route('/register')
     .post(authController.registerUser)
 
-router.route('/auth/login')
+router.route('/login')
     .post(authController.loginUser)
 
-router.route('/auth/logout')
+router.route('/logout')
     .post(authController.logoutUser)
 
-router.route('/auth/validate')
+router.route('/validate')
     .post(authController.validateUser)
-
-router.route('/auth/checkAuthCookie')
     .get(authController.checkAuthCookie)
 
 export default router

@@ -1,15 +1,15 @@
-import { Router } from 'express'
+import { Router } from 'express';
 
-import userController from '../controllers/user.controller.js'
+import userController from '../controllers/user.controller.js';
 
-const router = Router()
+const router = Router();
 
 router.route('/users')
-    .get(userController.getAllUsers)
+    .get(userController.getAllUsers);
 
 router.route('/users/:id')
     .get(userController.getOneUser)
     .put(userController.updateOneUser)
-    .delete(userController.deleteOneUser)
+    .delete(userController.deleteOneUser);
 
-export default router
+export default router;

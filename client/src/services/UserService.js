@@ -7,7 +7,7 @@ const http = axios.create({
 const UserService = {
     async getOneUser(id) {
         try {
-            const response = await http.get(`/users/${id}`)
+            const response = await http.get(`/${id}`)
             return response.data
         }
         catch (error) {
@@ -17,7 +17,7 @@ const UserService = {
 
     async updateOneUser(user) {
         try {
-            const response = await http.put(`/users/${user._id}`, user)
+            const response = await http.put(`/${user._id}`, user)
             return response.data
         }
         catch (error) {
@@ -27,7 +27,7 @@ const UserService = {
 
     async deleteOneUser(id) {
         try {
-            const response = await http.delete(`/users/${id}`)
+            const response = await http.delete(`/${id}`)
             return response.data
         }
         catch (error) {

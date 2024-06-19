@@ -16,9 +16,9 @@ export const AuthProvider = ({ children }) => {
 		setLoggedUser(response.user)
 	}
 
-	const checkAuthCookie = async () => {
+	const validateCookie = async () => {
 		try {
-            const response = await AuthService.checkAuthCookie()
+            const response = await AuthService.validateCookie()
             if (response.user) {
 				setLoggedUser(response.user)
 			}
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
 	}
 
 	return (
-		<AuthContext.Provider value={{ loggedUser, handleLoginResponse, pathParamValidator, checkAuthCookie }}>
+		<AuthContext.Provider value={{ loggedUser, handleLoginResponse, pathParamValidator, validateCookie }}>
 			{children}
 		</AuthContext.Provider>
 	)

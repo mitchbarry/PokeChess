@@ -1,19 +1,19 @@
-import { Router } from 'express'
+import { Router } from 'express';
 
-import lobbyController from '../controllers/lobby.controller.js'
+import lobbyController from '../controllers/lobby.controller.js';
 
-const router = Router()
+const router = Router();
 
 router.route('/lobbies')
     .get(lobbyController.getAllLobbies)
-    .post(lobbyController.createOneLobby)
+    .post(lobbyController.createOneLobby);
 
 router.route('/lobbies/user/:userId')
-    .get(lobbyController.getUserLobbies)
+    .get(lobbyController.getUserLobbies);
 
 router.route('/lobbies/:id')
     .get(lobbyController.getOneLobby)
     .put(lobbyController.updateOneLobby)
-    .delete(lobbyController.deleteOneLobby)
+    .delete(lobbyController.deleteOneLobby);
 
-export default router
+export default router;

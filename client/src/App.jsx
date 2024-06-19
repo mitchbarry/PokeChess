@@ -38,7 +38,7 @@ const App = () => {
 
 	const location = useLocation()
 
-	const { loggedUser, checkAuthCookie } = useAuth()
+	const { loggedUser, validateCookie } = useAuth()
 
 	const [error, setError] = useState({})
 	const [isCookieBannerVisible, setIsCookieBannerVisible] = useState(false)
@@ -66,7 +66,7 @@ const App = () => {
 			const cookieToken = Cookies.get('cookieAgreement')
 			if (cookieToken && !loggedUser) {
 				try {
-					await checkAuthCookie()
+					await validateCookie()
 				}
 				catch (error) {
 					const newError = ErrorUtilities.catchError(error)
