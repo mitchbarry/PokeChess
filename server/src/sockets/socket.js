@@ -1,4 +1,4 @@
-import gameStateUtilities from '../utilities/game-state.utilities.js';
+import gameStateUtilities from '../utilities/gameState.utilities.js';
 
 const socket = {
     listen(io) {

@@ -1,5 +1,5 @@
-import { model, Schema } from 'mongoose'
-import { hasBadWords } from 'expletives'
+import { model, Schema } from 'mongoose';
+import { hasBadWords } from 'expletives';
 
 const UserSchema = new Schema(
 	{
@@ -7,14 +7,14 @@ const UserSchema = new Schema(
 			type: String,
 			required: [true, 'Your username is required.'],
 			minlength: [3, 'Your username must be at least 3 characters.'],
-			maxlength: [16, 'Your username can\'t be more than 16 characters.'],
+			maxlength: [16, `Your username can't be more than 16 characters.`],
 			validate: [
 				{
 					validator: async (username) => {
 						if (hasBadWords(username)) {
-							return false
+							return false;
 						}
-						return true
+						return true;
 					},
 					message: 'Your username must be appropriate.'
 				},
@@ -46,8 +46,8 @@ const UserSchema = new Schema(
 		}
 	},
 	{ timestamps: true }
-)
+);
 
-const User = model('User', UserSchema)
+const User = model('User', UserSchema);
 
-export default User
+export default User;

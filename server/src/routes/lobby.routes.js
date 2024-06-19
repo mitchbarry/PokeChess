@@ -4,7 +4,7 @@ import lobbyController from '../controllers/lobby.controller.js';
 
 const router = Router();
 
-router.route('/all')
+router.route('/')
     .get(lobbyController.getAllLobbies)
     .post(lobbyController.createOneLobby);
 

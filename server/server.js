@@ -42,6 +42,19 @@ app.use((error, req, res, next) => {
     res.status(normalizedError.statusCode).json(normalizedError);
 });
 
+app.use((req, res, next) => {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (token) {
+        res.cookie('authToken', token, {
+            httpOnly: true,
+            secure: true, // Ensure this is only true in production
+            sameSite: 'strict',
+            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+        });
+    }
+    next();
+});
+
 const server = app.listen(PORT, () =>
     console.log(`Listening on port: ${PORT}`)
 );
