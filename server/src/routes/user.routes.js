@@ -4,10 +4,10 @@ import userController from '../controllers/user.controller.js';
 
 const router = Router();
 
-router.route('/users')
+router.route('/')
     .get(userController.getAllUsers);
 
-router.route('/users/:id')
+router.route('/:id')
     .get(userController.getOneUser)
     .put(userController.updateOneUser)
     .delete(userController.deleteOneUser);

@@ -15,6 +15,15 @@ const UserService = {
         }
     },
 
+    async getAllUsers() {
+        try {
+            const response = await http.get('/')
+            return response.data
+        } catch (error) {
+            throw error
+        }
+    },
+
     async updateOneUser(user) {
         try {
             const response = await http.put(`/${user._id}`, user)

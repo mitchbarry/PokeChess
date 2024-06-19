@@ -4,14 +4,14 @@ import lobbyController from '../controllers/lobby.controller.js';
 
 const router = Router();
 
-router.route('/lobbies')
+router.route('/all')
     .get(lobbyController.getAllLobbies)
     .post(lobbyController.createOneLobby);
 
-router.route('/lobbies/user/:userId')
+router.route('/user/:userId')
     .get(lobbyController.getUserLobbies);
 
-router.route('/lobbies/:id')
+router.route('/:id')
     .get(lobbyController.getOneLobby)
     .put(lobbyController.updateOneLobby)
     .delete(lobbyController.deleteOneLobby);
