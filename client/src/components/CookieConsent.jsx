@@ -63,7 +63,7 @@ const CookieConsent = (props) => {
 						</h1>
 						<p className={`${styles.primary_body} ${styles.secondary_text}`}>
 							We use cookies to ensure you get the best experience. 
-							By clicking "Accept all cookies", you agree PokeChess can store cookies on your device and disclose information in accordance with our 
+							By clicking "Accept all cookies", you agree PokeChess can store cookies on your device and disclose information in accordance with our{' '}
 							<Link className={`${styles.content_link} clickable transition-default`} to='/cookies/policy' onClick={(e) => handleIsCookieBannerVisible(false)}>
 								Cookie Policy
 							</Link>.
