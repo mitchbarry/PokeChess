@@ -3,11 +3,50 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <!-- Title -->
+        <title>PokeChess</title>
+
+        <!-- Favicon -->
         <link rel="icon" type="image/png" sizes="16x16" href="./src/assets/misc/pokeballs/timerBall-16px.png">
         <link rel="icon" type="image/png" sizes="32x32" href="./src/assets/misc/pokeballs/timerBall-32px.png">
         <link rel="icon" href="./src/assets/misc/pokeballs/timerBall-128px.png" type="image/x-icon">
-        <title>PokeChess</title>
-        <meta http-equiv="Content-Security-Policy" content="img-src 'self' data: *">
+        
+        <!-- Description for SEO -->
+        <meta name="description" content="PokeChess - Dive into the electrifying world of Pokémon with PokeChess! Inspired by popular titles like Teamfight Tactics and Hearthstone's Battlegrounds, PokeChess delivers an immersive gaming experience right in your web browser.">
+
+        <!-- Open Graph Meta Tags for Social Media -->
+        <meta property="og:title" content="PokeChess">
+        <meta property="og:description" content="PokeChess - Dive into the electrifying world of Pokémon with PokeChess! Inspired by popular titles like Teamfight Tactics and Hearthstone's Battlegrounds, PokeChess delivers an immersive gaming experience right in your web browser.">
+        <meta property="og:image" content="./src/assets/misc/pokeballs/timerBall-128px.png">
+        <meta property="og:url" content="https://yourwebsite.com">
+        <meta property="og:type" content="website">
+
+        <!-- Twitter Card Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="PokeChess">
+        <meta name="twitter:description" content="PokeChess - Dive into the electrifying world of Pokémon with PokeChess! Inspired by popular titles like Teamfight Tactics and Hearthstone's Battlegrounds, PokeChess delivers an immersive gaming experience right in your web browser.">
+        <meta name="twitter:image" content="./src/assets/misc/pokeballs/timerBall-128px.png">
+
+        <!-- Content Security Policy -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: *; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'">
+
+        <!-- Referrer Policy -->
+        <meta name="referrer" content="no-referrer-when-downgrade">
+
+        <!-- Preload Google Fonts -->
+        <link rel="preload" href="https://fonts.gstatic.com/s/archivo/v10/K2FxfZ1rQ8nyLAaRlkpK1w.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2" as="font" type="font/woff2" crossorigin>
+
+        <!-- Preconnect for Performance (optional but recommended) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <!-- Import Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- Apple Touch Icon for iOS -->
+        <link rel="apple-touch-icon" href="./src/assets/misc/pokeballs/timerBall-128px.png">
     </head>
     <body>
         <div id="root"></div>

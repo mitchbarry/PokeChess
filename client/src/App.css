@@ -1,8 +1,4 @@
 /* * use BEM (Block, Entity, Modifier) for all css classes */
-
-/* * Imports */
-@import url('https://fonts.googleapis.com/css2?family=fantasy:wght@200&display=swap');
-
 /* * Media Queries */
 @media screen and (width > 2600px) {
     #background {
