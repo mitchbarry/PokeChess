@@ -3,7 +3,7 @@ const AccountEdit = () => {
     return (
         <>
         </>
-    )
-}
+    );
+};
 
-export default AccountEdit
+export default AccountEdit;

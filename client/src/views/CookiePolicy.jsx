@@ -3,7 +3,7 @@ const CookiePolicy = () => {
     return (
         <>
         </>
-    )
-}
+    );
+};
 
-export default CookiePolicy
+export default CookiePolicy;

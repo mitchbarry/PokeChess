@@ -3,7 +3,7 @@ const Contact = () => {
     return (
         <>
         </>
-    )
-}
+    );
+};
 
-export default Contact
+export default Contact;

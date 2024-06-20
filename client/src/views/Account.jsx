@@ -3,7 +3,7 @@ const Account = () => {
     return (
         <>
         </>
-    )
-}
+    );
+};
 
-export default Account
+export default Account;
