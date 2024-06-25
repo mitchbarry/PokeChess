@@ -1,28 +1,14 @@
-/*  * Use BEM (Block, Entity, Modifier) for all CSS classes
+/*  * Use BEM (Block, Element, Modifier) for all CSS classes
     * Properties listed roughly in this order:
-    *   width/height
-    *   margin/padding/position/transform
-    *   text
-    *   color
-    *   border
-    *   display/opacity/filter
-    *   transition/cursor/other
+    *    width/height
+    *    margin/padding/position/transform
+    *    text
+    *    color
+    *    border
+    *    display/opacity/filter
+    *    transition/cursor/other
 */
-/* * --------------------[ pre load properties ]-------------------- */
-@font-face {
-    font-family: 'Poppins';
-    src: url('https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2') format('woff2');
-    font-weight: 400;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Archivo';
-    src: url('https://fonts.gstatic.com/s/archivo/v10/K2FxfZ1rQ8nyLAaRlkpK1w.woff2') format('woff2');
-    font-weight: 400;
-    font-display: swap;
-}
-/* * --------------------[ custom properties ]-------------------- */
+/* * Custom Properties */
 :root {
     --view-min: 320px;
     --view-xs: 480px;
@@ -190,7 +176,8 @@
         bottom var(--transition-hover-speed) ease,
         font-size var(--transition-hover-speed) ease;
 }
-/* * --------------------[ containers ]-------------------- */
+
+/* * Generic Properties */
 .flex-center, .flex-between, .flex-around, .flex-col {
     display: flex;
 }
@@ -215,7 +202,6 @@
     justify-content: space-around;
 }
 
-/* * --------------------[ frequently used ]-------------------- */
 .w-100 {
     width: 100%;
 }
@@ -226,4 +212,19 @@
 
 .transition-default {
     transition: var(--transition-hover);
+}
+
+/* * Pre-Loading */
+@font-face {
+    font-family: 'Poppins';
+    src: url('https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archivo';
+    src: url('https://fonts.gstatic.com/s/archivo/v10/K2FxfZ1rQ8nyLAaRlkpK1w.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
 }

@@ -26,7 +26,7 @@ const Input = (props) => {
     const hasError = formErrors[name] || (error && error.validationErrors[name]);
 
     return (
-        <div id={name} className={`${styles.form_input} w-100`}
+        <div id={name} className={`${styles.container} w-100`}
             onFocus={(e) => handleFocus(e.target.id)}
             onBlur={(e) => handleBlur(e.target.id)}
         >
@@ -36,8 +36,9 @@ const Input = (props) => {
                 name={name}
                 className={`
                     ${styles.input}
+                    ${name === 'password' && styles.input__password}
                     ${styles.primary_text}
-                    ${initialRender === null ? (hasError ? styles.input__error : '') : (!initialRender && hasError ? styles.input__error : '')}
+                    ${initialRender === null ? (hasError ? styles.input_error : '') : (!initialRender && hasError ? styles.input__error : '')}
                     w-100
                     transition-default
                 `}
