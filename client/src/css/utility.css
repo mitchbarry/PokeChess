@@ -8,6 +8,20 @@
     *   display/opacity/filter
     *   transition/cursor/other
 */
+/* * --------------------[ pre load properties ]-------------------- */
+@font-face {
+    font-family: 'Poppins';
+    src: url('https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archivo';
+    src: url('https://fonts.gstatic.com/s/archivo/v10/K2FxfZ1rQ8nyLAaRlkpK1w.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
 /* * --------------------[ custom properties ]-------------------- */
 :root {
     --view-min: 320px;

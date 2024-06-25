@@ -45,7 +45,7 @@ const AuthService = {
         }
     },
 
-    async validateCookie () {
+    async validateAuthCookie () {
         try {
             const response = await http.get('/validate')
             return response.data

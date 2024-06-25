@@ -1,9 +1,8 @@
 import React from 'react'
 
-import OtherError from './OtherError'
 import Input from './Input'
 import FormError from './FormError'
-import ValidationError from './ValidationError'
+import ServerError from './ServerError'
 import InputPassword from './InputPassword'
 import PasswordCheck from './PasswordCheck'
 
@@ -41,8 +40,8 @@ const CredentialsForm = (props) => {
 
     return (
         <>
-            <OtherError
-                    error={error}
+            <ServerError
+                error={error}
             />
             <Input
                 value={username}
@@ -60,7 +59,7 @@ const CredentialsForm = (props) => {
                 formErrors={formErrors}
                 name='username'
             />
-            <ValidationError
+            <ServerError
                 error={error}
                 name='username'
             />
@@ -80,7 +79,7 @@ const CredentialsForm = (props) => {
                 formErrors={formErrors}
                 name='email'
             />
-            <ValidationError
+            <ServerError
                 error={error}
                 name='email'
             />
@@ -98,7 +97,7 @@ const CredentialsForm = (props) => {
                 name='password'
                 placeholder='Password'
             />
-            <ValidationError
+            <ServerError
                 error={error}
                 name='password'
             />

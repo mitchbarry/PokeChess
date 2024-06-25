@@ -6,10 +6,9 @@ import { useAuth } from '../context/AuthContext'
 import AuthService from '../services/AuthService'
 import errorUtilities from '../utilities/error.utilities'
 
-import OtherError from '../components/form/OtherError'
 import Input from '../components/form/Input'
 import FormError from '../components/form/FormError'
-import ValidationError from '../components/form/ValidationError'
+import ServerError from '../components/form/ServerError'
 import StayLogged from '../components/form/StayLogged'
 
 import HiddenIcon from '../components/svgs/HiddenSvg'
@@ -33,7 +32,7 @@ const Login = () => {
         accountName: '',
         password: ''
     })
-	const [error, setError] = useState({})
+	const [error, setError] = useState(null)
     const [isReady, setIsReady] = useState(false)
     const [focus, setFocus] = useState('')
     const [isLoading, setIsLoading] = useState(false)
@@ -92,7 +91,7 @@ const Login = () => {
             return
         }
         else {
-            setError({})
+            setError(null)
         }
         lastSubmitTime.current = now
         checkForm()
@@ -150,9 +149,6 @@ const Login = () => {
                     <span className={styles.primary_text}>Login</span>
                 </h1>
                 <form onSubmit={handleSubmit} className={styles.form}>
-                    <OtherError
-                        error={error}
-                    />
                     <Input
                         value={accountName}
                         handleInput={handleInput}
@@ -167,10 +163,6 @@ const Login = () => {
                     />
                     <FormError
                         formErrors={formErrors}
-                        name='accountName'
-                    />
-                    <ValidationError
-                        error={error}
                         name='accountName'
                     />
                     <Input
@@ -199,9 +191,8 @@ const Login = () => {
                         formErrors={formErrors}
                         name='password'
                     />
-                    <ValidationError
+                    <ServerError
                         error={error}
-                        name='password'
                     />
                     {parsedCookieConsent && parsedCookieConsent.necessary && (
                         <StayLogged

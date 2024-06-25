@@ -15,6 +15,6 @@ router.route('/logout')
 
 router.route('/validate')
     .post(authController.validateUser)
-    .get(authController.checkAuthCookie);
+    .get(authController.validateAuthCookie);
 
 export default router;

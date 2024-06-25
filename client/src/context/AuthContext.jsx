@@ -16,16 +16,15 @@ export const AuthProvider = ({ children }) => {
 		setLoggedUser(response.user)
 	}
 
-	const validateCookie = async () => {
+	const validateAuthCookie = async () => {
 		try {
-            const response = await AuthService.validateCookie()
+            const response = await AuthService.validateAuthCookie()
             if (response.user) {
 				setLoggedUser(response.user)
 			}
         }
         catch (error) {
             ErrorUtilities.catchError(error)
-            Cookies.remove('authToken')
         }
 	}
 
@@ -47,8 +46,19 @@ export const AuthProvider = ({ children }) => {
 		return valid
 	}
 
+	const handleLogout = async () => {
+        try {
+            const serverResponse = await AuthService.logout(/*token*/) // token may be passed through to invalidate it via a blacklist (have not yet implemented)
+			setLoggedUser(null)
+			console.log(serverResponse)
+        }
+        catch (error) {
+            console.error('Logout failed:', error)
+        }
+	}
+
 	return (
-		<AuthContext.Provider value={{ loggedUser, handleLoginResponse, pathParamValidator, validateCookie }}>
+		<AuthContext.Provider value={{ loggedUser, handleLoginResponse, pathParamValidator, validateAuthCookie, handleLogout }}>
 			{children}
 		</AuthContext.Provider>
 	)

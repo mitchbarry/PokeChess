@@ -3,10 +3,10 @@
 .error_container {
     margin-bottom: var(--size-200);
     display: flex;
-    align-items: center;
     color: var(--color-alert-red);
     fill: var(--color-alert-red);
     stroke: var(--color-alert-red);
+    text-align: left;
 }
 
 /* * Typography */
@@ -17,8 +17,9 @@
 /* * Icons */
 .icon_warning {
     width: var(--size-200);
+    min-width: var(--size-200);
     height: auto;
     fill: inherit;
     stroke: inherit;
-    margin-right: var(--size-075);
+    margin-right: var(--size-150);
 }

@@ -35,7 +35,7 @@ const Register = () => {
             passwordCharacters: true
         }
     })
-    const [error, setError] = useState({})
+    const [error, setError] = useState(null)
     const [validated, setValidated] = useState(false)
     const [isReady, setIsReady] = useState(false)
     const [focus, setFocus] = useState('')

@@ -1,9 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Cookies from 'js-cookie'
 
 import { useAuth } from '../context/AuthContext'
-import AuthService from '../services/AuthService'
 
 import pokeChess from '../assets/text/pokeChess.png'
 import pokeLogo from '../assets/misc/pokeballs/timerBall-128px.png'
@@ -30,21 +28,7 @@ import styles from '../css/components/Header.module.css'
 
 const Header = () => {
 
-    const { authToken, loggedUser, updateLoggedUser, updateAuthToken } = useAuth()
-
-	const handleLogout = async () => {
-		let serverResponse
-        try {
-            serverResponse = await AuthService.logout(/*token*/) // token may be passed through to invalidate it via a blacklist (have not yet implemented)
-			updateAuthToken(null)
-			updateLoggedUser(null)
-			Cookies.remove('authToken')
-			console.log(serverResponse)
-        }
-        catch (error) {
-            console.error('Logout failed:', error)
-        }
-	}
+    const { loggedUser, handleLogout } = useAuth()
 
 	const findAvatar = (avatar) => {
 		switch (avatar) {
@@ -118,7 +102,7 @@ const Header = () => {
 			<div className={`${styles.nav_secondary} flex-center`}> 
 				<div className={`${styles.dropdown} flex-center`}>
 					<AccountIcon className={styles.icon_default}/>
-					{authToken ? (
+					{loggedUser ? (
 						<span className={`${styles.secondary_text}`}>{loggedUser.username}</span>
 					) : (
 						<span className={`${styles.secondary_text}`}>Account</span>
@@ -126,7 +110,7 @@ const Header = () => {
 					<DropdownArrowIcon className={styles.icon_dropdownArrow}/>
 					<div className={styles.dropdown_bridge}/>
 					<div className={`${styles.dropdown_menu} ${styles.menu_primary} flex-col`}>
-						{authToken ? (
+						{loggedUser ? (
 							<div className={`${styles.account_info}`}>
 								<img src={findAvatar(loggedUser.avatar)} alt={loggedUser.avatar} className={styles.avatar}/>
 								<div className='flex-col'>
@@ -140,11 +124,11 @@ const Header = () => {
 								<span className={`${styles.secondary_text} ${styles.dropdown_text}`}>Login</span>
 							</Link>
 						)}
-						<Link className={`${styles.dropdown_link}`} to={authToken ? '/account' : '/login'}>
+						<Link className={`${styles.dropdown_link}`} to={loggedUser ? '/account' : '/login'}>
 							<SettingsIcon className={styles.icon_default}/>
 							<span className={`${styles.dropdown_text}`}>Account Settings</span>
 						</Link>
-						{authToken ? (
+						{loggedUser ? (
 							<button className={`${styles.dropdown_link}`} onClick={handleLogout}>
 								<LogoutIcon className={styles.icon_default}/>
 								<span className={`${styles.dropdown_text}`}>Logout</span>

@@ -11,7 +11,7 @@ const generateAuthToken = (user) => {
 const checkUser = async (user) => {
     const { username, email, password, starter, avatar } = user;
     let normalizedError = {
-        statusCode: 400,
+        statusCode: 401,
         message: 'User validation failed: ',
         name: 'ValidationError',
         validationErrors: {}
@@ -73,7 +73,7 @@ const authController = {
         try {
             const result = await checkUser(req.body);
             if (!result.isValid) {
-                return res.status(400).json(result.error);
+                return res.status(401).json(result.error);
             }
             return res.status(200).json(result.isValid);
         } catch (error) {
@@ -85,14 +85,13 @@ const authController = {
         try {
             const result = await checkUser(req.body);
             if (!result.isValid) {
-                return res.status(400).json(result.error);
+                return res.status(401).json(result.error);
             }
             const { user } = result;
             user.password = await bcrypt.hash(user.password, 10);
             await user.save();
             const { password, ...userWithoutPassword } = user.toObject();
-            const token = generateAuthToken(user);
-            res.json({ user: userWithoutPassword, token });
+            return res.json({ user: userWithoutPassword });
         } catch (error) {
             next(error);
         }
@@ -103,6 +102,7 @@ const authController = {
             const { accountName, password, stayLogged } = req.body;
             const isEmail = accountName.includes('@');
             let user;
+
             if (isEmail) {
                 user = await User.findOne({ email: accountName });
             } else {
@@ -110,32 +110,26 @@ const authController = {
             }
 
             if (!user) {
-                const normalizedError = {
-                    statusCode: 400,
-                    message: 'User validation failed: accountName: Invalid account name.',
-                    name: 'ValidationError',
-                    validationErrors: {
-                        accountName: 'Invalid account name.'
-                    }
-                };
-                return res.status(401).json(normalizedError);
+                return res.status(401).json({
+                    statusCode: 401,
+                    message: 'Invalid account name or password.',
+                    name: 'AuthenticationError',
+                    validationErrors: {}
+                });
             }
 
             const passwordMatch = await bcrypt.compare(password, user.password);
             if (!passwordMatch) {
-                const normalizedError = {
-                    statusCode: 400,
-                    message: 'User validation failed: password: Incorrect password.',
-                    name: 'ValidationError',
-                    validationErrors: {
-                        password: 'Incorrect password.'
-                    }
-                };
-                return res.status(401).json(normalizedError);
+                return res.status(401).json({
+                    statusCode: 401,
+                    message: 'Invalid account name or password.',
+                    name: 'AuthenticationError',
+                    validationErrors: {}
+                });
             }
 
-            const { password: hashedPassword, ...userWithoutPassword } = user.toObject();
-            const token = generateAuthToken(user);
+            const { hashedPassword, ...userWithoutPassword } = user.toObject();
+            const token = generateAuthToken(userWithoutPassword);
 
             if (stayLogged) {
                 res.cookie('authToken', token, {
@@ -146,7 +140,7 @@ const authController = {
                 });
             }
 
-            res.json({ user: userWithoutPassword, token });
+            return res.json({ user: userWithoutPassword });
         } catch (error) {
             next(error);
         }
@@ -154,32 +148,36 @@ const authController = {
 
     async logoutUser(req, res, next) {
         try {
-            // Handle token blacklist or other logout mechanisms here.
-            res.json({ message: 'Logout Successful!' });
+            res.clearCookie('authToken');
+            // Handle additional logout mechanisms here if needed,
+            // such as token blacklisting or clearing session data.
+            return res.json({ message: 'Logout Successful!' });
         } catch (error) {
             next(error);
         }
     },
 
-    async checkAuthCookie(req, res, next) {
-        // Implementation for checking auth token from cookies can be added here.
-    },
-
-    async getUserInfo(req, res, next) {
+    async validateAuthCookie(req, res, next) {
         try {
-            const token = req.headers.authorization.split(' ')[1]; // Extract the token from the request headers.
+            const token = req.cookies.authToken;
+            if (!token) {
+                return res.json({ user: null });
+            }
+
             const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-            const user = await User.findById(decodedToken._id); // Retrieve user information associated with the token.
+            const user = await User.findById(decodedToken._id);
+
             if (!user) {
                 const normalizedError = {
                     statusCode: 404,
                     message: 'User not found',
                     name: 'NotFoundError',
+                    validationErrors: {}
                 };
                 return res.status(404).json(normalizedError);
             }
             const { password, ...userWithoutPassword } = user.toObject();
-            res.json({ user: userWithoutPassword });
+            return res.json({ user: userWithoutPassword });
         } catch (error) {
             next(error);
         }

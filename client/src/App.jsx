@@ -36,7 +36,7 @@ import './css/utility.css';
 
 const App = () => {
     const location = useLocation();
-    const { loggedUser, validateCookie } = useAuth();
+    const { loggedUser, validateAuthCookie } = useAuth();
 
     const [error, setError] = useState({});
     const [isCookieBannerVisible, setIsCookieBannerVisible] = useState(false);
@@ -61,19 +61,18 @@ const App = () => {
 
     useEffect(() => {
         const checkCookieToken = async () => {
-            const cookieToken = Cookies.get('cookieAgreement');
-            if (cookieToken && !loggedUser) {
+            const cookieConsent = Cookies.get('cookieConsent');
+            if (cookieConsent && cookieConsent.necessary && !loggedUser) {
                 try {
-                    await validateCookie();
+                    await validateAuthCookie();
                 } catch (error) {
                     const newError = ErrorUtilities.catchError(error);
                     setError(newError);
-                    Cookies.remove('authToken');
                 }
             }
         };
         checkCookieToken();
-    }, [loggedUser]);
+    }, []);
 
     return (
         <div id='background'>
