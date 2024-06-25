@@ -5,7 +5,7 @@ import XIcon from '../svgs/XSvg'
 
 import styles from '../../css/components/form/PasswordCheck.module.css'
 
-const PasswordCheck = (props) => {
+const PasswordValidation = (props) => {
 
     const {
         formErrors,
@@ -40,4 +40,4 @@ const PasswordCheck = (props) => {
 	)
 }
 
-export default PasswordCheck
+export default PasswordValidation

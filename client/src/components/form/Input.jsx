@@ -1,5 +1,8 @@
 import React from 'react'
 
+import HiddenIcon from '../svgs/HiddenSvg'
+import RevealIcon from '../svgs/RevealSvg'
+
 import styles from '../../css/components/form/Input.module.css'
 
 const Input = (props) => {
@@ -7,6 +10,9 @@ const Input = (props) => {
     const {
         value,
         handleInput,
+        initialRender = null,
+        showPassword = null,
+        handleShowPassword = null,
         formErrors,
         error,
         focus,
@@ -14,12 +20,13 @@ const Input = (props) => {
         handleBlur,
         type,
         name,
-        placeholder,
-        children
+        placeholder
     } = props
 
+    const hasError = formErrors[name] || (error && error.validationErrors[name]);
+
     return (
-        <div id={name} className={`${styles.form_input} ${((error && error.validationErrors[name]) || (formErrors[name])) && styles.form_input__error} w-100`}
+        <div id={name} className={`${styles.form_input} w-100`}
             onFocus={(e) => handleFocus(e.target.id)}
             onBlur={(e) => handleBlur(e.target.id)}
         >
@@ -27,16 +34,39 @@ const Input = (props) => {
                 type={type}
                 id={name}
                 name={name}
-                className={`${styles.input} ${styles.primary_text} ${((formErrors[name]) || (error  && error.validationErrors[name])) && styles.input__error} w-100 transition-default`}
+                className={`
+                    ${styles.input}
+                    ${styles.primary_text}
+                    ${initialRender === null ? (hasError ? styles.input__error : '') : (!initialRender && hasError ? styles.input__error : '')}
+                    w-100
+                    transition-default
+                `}
                 value={value}
                 onChange={(e) => handleInput(e)}
             />
-            <label htmlFor={name} className={`${styles.input_label}
+            <label htmlFor={name} className={`
+                ${styles.input_label}
                 ${(focus === name || value) && styles.input_label__shrink}
-                ${((formErrors[name]) || (error  && error.validationErrors[name])) && styles.input_label__error} transition-default`}>
-                <span className={`${styles.label} ${(focus === name || value) ? styles.primary_text__shrink : styles.primary_text} transition-default`}>{placeholder}</span>
+                ${initialRender === null ? (hasError ? styles.input_label__error : '') : (!initialRender && hasError ? styles.input_label__error : '')}
+                transition-default
+            `}>
+                <span className={`
+                    ${styles.label}
+                    ${(focus === name || value) ? styles.primary_text__shrink : styles.primary_text}
+                    transition-default
+                `}>
+                    {placeholder}
+                </span>
             </label>
-            {children}
+            {name === 'password' && focus === 'password' && (
+                <button type='button' className={`${styles.input_password_icon} transition-default clickable`} tabIndex='-1' onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
+                    {showPassword ? (
+                        <RevealIcon className={`${styles.icon_default}`}/>
+                    ) : (
+                        <HiddenIcon className={`${styles.icon_default}`}/>
+                    )}
+                </button>
+            )}
         </div>
 	)
 }

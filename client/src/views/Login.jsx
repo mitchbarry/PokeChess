@@ -11,8 +11,6 @@ import FormError from '../components/form/FormError'
 import ServerError from '../components/form/ServerError'
 import StayLogged from '../components/form/StayLogged'
 
-import HiddenIcon from '../components/svgs/HiddenSvg'
-import RevealIcon from '../components/svgs/RevealSvg'
 import ArrowIcon from '../components/svgs/ArrowSvg'
 import LoadingSpinner from '../components/svgs/LoadingSpinnerSvg'
 
@@ -168,6 +166,8 @@ const Login = () => {
                     <Input
                         value={password}
                         handleInput={handleInput}
+                        showPassword={showPassword}
+                        handleShowPassword={handleShowPassword}
                         formErrors={formErrors}
                         error={error}
                         focus={focus}
@@ -176,17 +176,7 @@ const Login = () => {
                         type={showPassword ? ' text' : 'password'}
                         name='password'
                         placeholder='Password'
-                    >
-                        {focus === 'password' && (
-                            <button type='button' className={`${styles.input_password_icon} transition-default clickable`} tabIndex='-1' onMouseDown={(e) => e.preventDefault()} onClick={handleShowPassword}>
-                                {showPassword ? (
-                                    <RevealIcon className={`${styles.icon_default}`}/>
-                                ) : (
-                                    <HiddenIcon className={`${styles.icon_default}`}/>
-                                )}
-                            </button>
-                        )}
-                    </Input>
+                    />
                     <FormError
                         formErrors={formErrors}
                         name='password'

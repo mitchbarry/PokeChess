@@ -25,21 +25,6 @@
     stroke: inherit;
 }
 
-.input_password_icon {
-    right: var(--size-150);
-    fill: var(--color-400);
-    stroke: var(--color-400);
-    background-color: transparent;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.input_password_icon:hover {
-    fill: var(--color-500);
-    stroke: var(--color-500);
-}
-
 .icon_loadingSpinner {
     height: auto;
     fill: inherit;

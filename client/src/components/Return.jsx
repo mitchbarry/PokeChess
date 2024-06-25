@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import ArrowIcon from './svgs/ArrowSvg'
 
@@ -8,16 +8,10 @@ import styles from '../css/components/Return.module.css'
 const Return = () => {
 
 	const navigate = useNavigate()
-	const location = useLocation()
 
     const handleClick = (e) => {
         e.preventDefault()
-        if (location.key !== 'default') {
-            navigate(-1)
-        }
-		else {
-            navigate('/')
-        }
+        navigate('/')
     }
 
     return (

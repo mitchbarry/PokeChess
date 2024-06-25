@@ -3,8 +3,7 @@ import React from 'react'
 import Input from './Input'
 import FormError from './FormError'
 import ServerError from './ServerError'
-import InputPassword from './InputPassword'
-import PasswordCheck from './PasswordCheck'
+import PasswordValidation from './PasswordValidation'
 
 const CredentialsForm = (props) => {
 
@@ -83,25 +82,27 @@ const CredentialsForm = (props) => {
                 error={error}
                 name='email'
             />
-            <InputPassword
+            <Input
                 value={password}
                 handleInput={handleInput}
+                initialRender={initialRender}
                 showPassword={showPassword}
                 handleShowPassword={handleShowPassword}
-                initialRender={initialRender}
                 formErrors={formErrors}
                 error={error}
                 focus={focus}
                 handleFocus={handleFocus}
                 handleBlur={handleBlur}
+                type={showPassword ? ' text' : 'password'}
                 name='password'
                 placeholder='Password'
-            />
+            >
+            </Input>
             <ServerError
                 error={error}
                 name='password'
             />
-            <PasswordCheck
+            <PasswordValidation
                 formErrors={formErrors}
                 error={error}
                 initialRender={initialRender}

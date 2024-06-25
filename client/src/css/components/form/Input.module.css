@@ -1,5 +1,5 @@
 /* * use BEM (Block, Entity, Modifier) for all css classes */
-/* * Structure */
+/* * Blocks */
 .form_input {
     margin-bottom: var(--size-350);
     position: relative;
@@ -8,16 +8,7 @@
     margin-bottom: var(--size-200);
 }
 
-/* * Typography */
-.primary_text {
-    font: var(--font-400);
-}
-
-.primary_text__shrink {
-    font: var(--font-200);
-}
-
-/* * Inputs */
+/* * Block - Input */
 .input {
     height: var(--size-600);
     color: var(--color-800);
@@ -40,7 +31,7 @@
     border: 2px solid var(--color-alert-red);
 }
 
-/* * Labels */
+/* * Block - Label */
 .input_label {
     left: var(--size-150);
     line-height: var(--line-height);
@@ -59,4 +50,36 @@
 
 .input_label__error {
     color: var(--color-alert-red);
+}
+
+/* * Icons */
+.icon_default {
+    width: var(--size-350);
+    height: auto;
+    fill: inherit;
+    stroke: inherit;
+}
+
+.input_password_icon {
+    right: var(--size-150);
+    fill: var(--color-400);
+    stroke: var(--color-400);
+    background-color: transparent;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.input_password_icon:hover {
+    fill: var(--color-500);
+    stroke: var(--color-500);
+}
+
+/* * Typography */
+.primary_text {
+    font: var(--font-400);
+}
+
+.primary_text__shrink {
+    font: var(--font-200);
 }
