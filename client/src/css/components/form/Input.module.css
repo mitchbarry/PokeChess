@@ -1,8 +1,9 @@
 /* * use BEM (Block, Element, Modifier) for all css classes */
 /* * Blocks */
 .container {
-    margin: var(--size-350) 0;
+    margin: var(--size-175) 0;
     position: relative;
+    display: inline-block;
 }
 
 /* * Block - Input */
