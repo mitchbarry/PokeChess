@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../../context/AuthContext'
 
-import pokeChess from '../assets/text/pokeChess.png'
-import pokeLogo from '../assets/misc/pokeballs/timerBall-128px.png'
+import pokeChess from '../../assets/text/pokeChess.png'
+import pokeLogo from '../../assets/misc/pokeballs/timerBall-128px.png'
 import avatar1 from '../assets/avatars/avatar1.jpg'
 import avatar2 from '../assets/avatars/avatar2.jpg'
 import avatar3 from '../assets/avatars/avatar3.jpg'
@@ -15,14 +15,14 @@ import avatar7 from '../assets/avatars/avatar7.jpg'
 import avatar8 from '../assets/avatars/avatar8.jpg'
 import avatar9 from '../assets/avatars/avatar9.jpg'
 
-import DropdownArrowIcon from './svgs/DropdownArrowSvg'
-import ExternalLinkIcon from './svgs/ExternalLinkSvg'
-import AccountIcon from './svgs/AccountSvg'
-import LoginIcon from './svgs/LoginSvg'
-import LogoutIcon from './svgs/LogoutSvg'
-import RegisterIcon from './svgs/RegisterSvg'
-import SettingsIcon from './svgs/SettingsSvg'
-import SupportIcon from './svgs/SupportSvg'
+import DropdownArrowIcon from '../svgs/DropdownArrowSvg'
+import ExternalLinkIcon from '../svgs/ExternalLinkSvg'
+import AccountIcon from '../svgs/AccountSvg'
+import LoginIcon from '../svgs/LoginSvg'
+import LogoutIcon from '../svgs/LogoutSvg'
+import RegisterIcon from '../svgs/RegisterSvg'
+import SettingsIcon from '../svgs/SettingsSvg'
+import SupportIcon from '../svgs/SupportSvg'
 
 import styles from '../css/components/Header.module.css'
 
@@ -56,8 +56,8 @@ const Header = () => {
 	}
 
     return (
-		<nav className={`${styles.header} flex-between`}>
-			<div className={`${styles.nav_primary} flex-center`}>
+		<nav className={`${styles.container} flex-between`}>
+			<div className={`${styles.navPrimary} flex-center`}>
 				<Link className={`${styles.primary_logo} flex-center`} to='/'>
 					<img src={pokeLogo} className={`${styles.logo}`} alt='Timer Ball Logo'/>
 					<img src={pokeChess} className={`${styles.title}`} alt='PokeChess'/>

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
-import squirtleSquad from '../assets/misc/pokemon/squirtleSquad.png'
+import squirtleSquad from '../../assets/misc/pokemon/squirtleSquad.png'
 
-import XIcon from '../components/svgs/XSvg'
+import XIcon from '../svgs/XSvg'
 
-import styles from '../css/components/CookieConsent.module.css'
+import styles from '../../css/components/CookieConsent.module.css'
 
 const CookieConsent = (props) => {
 

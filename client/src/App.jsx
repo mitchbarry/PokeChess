@@ -5,11 +5,11 @@ import Cookies from 'js-cookie';
 import { useAuth } from './context/AuthContext';
 import ErrorUtilities from './utilities/error.utilities';
 
-import Header from './components/Header';
-import Return from './components/Return';
-import ErrorNavigator from './components/ErrorNavigator';
-import CookieConsent from './components/CookieConsent';
-import Footer from './components/Footer';
+import Header from './components/header/Header';
+import Return from './components/header/Return';
+import ErrorNavigator from './components/functional/ErrorNavigator';
+import CookieConsent from './components/banner/CookieConsent';
+import Footer from './components/footer/Footer';
 
 import Landing from './views/Landing';
 
