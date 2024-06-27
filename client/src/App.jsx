@@ -50,7 +50,7 @@ const App = () => {
     };
 
     useEffect(() => {
-        const cookieConsent = Cookies.get('cookieConsent');
+        const cookieConsent = JSON.parse(Cookies.get('cookieConsent'));
         if (!cookieConsent) {
             const timer = setTimeout(() => {
                 setIsCookieBannerVisible(true);
@@ -61,7 +61,7 @@ const App = () => {
 
     useEffect(() => {
         const checkCookieToken = async () => {
-            const cookieConsent = Cookies.get('cookieConsent');
+            const cookieConsent = JSON.parse(Cookies.get('cookieConsent'));
             if (cookieConsent && cookieConsent.necessary && !loggedUser) {
                 try {
                     await validateAuthCookie();

@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
+import cookieParser from 'cookie-parser'; // Import cookie-parser
 import { Server } from 'socket.io';
 import dbConnect from './src/config/mongoose.config.js';
 import userRouter from './src/routes/user.routes.js';
@@ -36,6 +37,9 @@ app.use(helmet({
         },
     },
 }));
+
+// Use cookie-parser middleware
+app.use(cookieParser());
 
 const PORT = process.env.PORT || 8000; // Default to 8000 if PORT is not set
 
