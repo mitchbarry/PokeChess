@@ -1,0 +1,137 @@
+/*  * Use BEM (Block, Element, Modifier) for all CSS classes */
+/* * Blocks */
+
+/* * Block - navPrimary */
+.navPrimary {
+    height: 100%;
+}
+
+/* * Block - navSecondary */
+
+/* * Typography */
+.primary_text {
+    font: var(--font-800);
+}
+
+/* * Links */
+.container {
+    height: var(--size-600);
+    text-decoration: none;
+    color: inherit;
+    border-radius: 8px;
+    padding: 0 var(--size-200);
+    position: relative;
+    transition: var(--transition-hover);
+    cursor: pointer;
+}
+
+.container:hover {
+    background-color: var(--color-lighten-400);
+}
+
+
+/* * Dropdown Styles */
+
+
+.dropdown_bridge, .dropdown_menu, .dropdown_bridge::before {
+    position: absolute;
+    pointer-events: none;
+    cursor: auto;
+    opacity: 0;
+    transition: var(--transition-hover);
+}
+
+.dropdown_bridge {
+    height: var(--size-200);
+    top: 100%;
+}
+
+.dropdown_bridge, .dropdown_menu {
+    width: 312px;
+}
+
+.dropdown_bridge::before {
+    content: '';
+    width: var(--size-250);
+    height: var(--size-250);
+    top: calc(100% - var(--size-200) / 2);
+    left: calc(50% + (var(--size-250) / 3.5)); /* quick approximation of a^2 + b^2 = c^2 babbyyyyyy */
+    transform: translateX(-50%) rotate(45deg);
+    background: linear-gradient(135deg, var(--color-background-700) 50%, transparent 50%);
+    border-radius: 4px;
+}
+
+.dropdown_menu, .menu_secondary {
+    padding: var(--size-200) 0;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    transform: perspective(var(--view-md)) rotateX(-10deg); /* Initially rotate the menu */
+    transform-origin: top center;
+}
+
+.dropdown_menu {
+    background-color: var(--color-background-700);
+    top: calc(100% + var(--size-200));
+}
+
+.menu_primary {
+    border-radius: 8px 8px 0 0;
+}
+
+.menu_secondary {
+    top: 100%;
+    background-color: var(--color-background-800);
+    border-radius: 0 0 8px 8px;
+}
+
+.dropdown:hover {
+    .dropdown_bridge, .dropdown_bridge::before, .dropdown_menu, .menu_secondary {
+        pointer-events: auto;
+        opacity: 1;
+    }
+    .dropdown_menu, .menu_secondary {
+        transform: perspective(var(--view-md)) rotateX(0deg);
+    }
+}
+
+/* * Icons */
+.icon_default, .icon_arrow, .icon_externalLink {
+    width: auto;
+}
+
+.icon_default {
+    height: var(--size-250);
+    margin-right: var(--size-150);
+    fill: var(--color-100);
+    stroke: var(--color-100);
+}
+
+.icon_dropdownArrow {
+    margin-left: var(--size-075);
+    height: var(--size-075);
+    fill: var(--color-100);
+    stroke: var(--color-100);
+}
+
+.icon_externalLink {
+    height: var(--size-100);
+    margin-left: var(--size-100);
+    fill: var(--color-lighten-500);
+    stroke: var(--color-lighten-500);
+}
+
+/* * Keyframes */
+@keyframes wiggle {
+    0%, 100% {
+        transform: translateX(0) rotate(0deg);
+    }
+    25% {
+        transform: translateX(-3px) rotate(-5deg);
+    }
+    50% {
+        transform: translateX(3px) rotate(5deg);
+    }
+    75% {
+        transform: translateX(-3px) rotate(-5deg);
+    }
+}
