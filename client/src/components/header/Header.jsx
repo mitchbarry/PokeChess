@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 
 import { useAuth } from '../../context/AuthContext'
 
+import Dropdown from './Dropdown'
+
 import pokeChess from '../../assets/text/pokeChess.png'
 import pokeLogo from '../../assets/misc/pokeballs/timerBall-128px.png'
 import avatar1 from '../assets/avatars/avatar1.jpg'
@@ -62,6 +64,17 @@ const Header = () => {
 					<img src={pokeLogo} className={`${styles.logo}`} alt='Timer Ball Logo'/>
 					<img src={pokeChess} className={`${styles.title}`} alt='PokeChess'/>
 				</Link>
+				<Dropdown>
+					<Link className={`${styles.dropdown_link}`} to='/pokedex'>
+						<span className={`${styles.dropdown_text}`}>Pokedex</span>
+					</Link>
+					<Link className={`${styles.dropdown_link}`} to='/patch'>
+						<span className={`${styles.dropdown_text}`}>Patch Notes</span>
+					</Link>
+					<Link className={`${styles.dropdown_link}`} to='/about'>
+						<span className={`${styles.dropdown_text}`}>About</span>
+					</Link>
+				</Dropdown>
 				<div className={`${styles.dropdown} flex-center`}>
 					<span className={`${styles.primary_text}`}>Game Info</span>
 					<DropdownArrowIcon className={styles.icon_dropdownArrow}/>
