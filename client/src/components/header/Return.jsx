@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import ArrowIcon from '../svgs/ArrowSvg'
 
-import styles from '../../css/components/Return.module.css'
+import styles from '../../css/components/header/Return.module.css'
 
 const Return = () => {
 

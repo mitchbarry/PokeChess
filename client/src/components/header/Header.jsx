@@ -24,7 +24,7 @@ import RegisterIcon from '../svgs/RegisterSvg'
 import SettingsIcon from '../svgs/SettingsSvg'
 import SupportIcon from '../svgs/SupportSvg'
 
-import styles from '../css/components/Header.module.css'
+import styles from '../css/components/header/Header.module.css'
 
 const Header = () => {
 
@@ -58,7 +58,7 @@ const Header = () => {
     return (
 		<nav className={`${styles.container} flex-between`}>
 			<div className={`${styles.navPrimary} flex-center`}>
-				<Link className={`${styles.primary_logo} flex-center`} to='/'>
+				<Link className={`${styles.navPrimary_logo} flex-center`} to='/'>
 					<img src={pokeLogo} className={`${styles.logo}`} alt='Timer Ball Logo'/>
 					<img src={pokeChess} className={`${styles.title}`} alt='PokeChess'/>
 				</Link>
